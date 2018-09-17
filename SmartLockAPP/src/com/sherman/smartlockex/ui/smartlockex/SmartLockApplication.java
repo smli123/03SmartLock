@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 
+import com.sherman.smartlockex.processhandler.SmartLockEventHandler;
 import com.sherman.smartlockex.ui.login.LoginActivity;
 import com.sherman.smartlockex.ui.util.AppTimeoutTask;
 import com.sherman.smartlockex.R;
@@ -43,6 +44,8 @@ public class SmartLockApplication extends Application {
     	sMe = this;
     	mCheckTimer = new Timer();
     	mFirstUse = false;
+    	
+    	SmartLockEventHandler.getInstance().init();
     	
     	mSharedPreferences = getSharedPreferences("SmartPlug", Activity.MODE_PRIVATE);
 		loadAPPConfig();

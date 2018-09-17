@@ -115,8 +115,10 @@ public class PubDefine {
 	public static Socket global_tcp_socket = null;
 	public static String global_local_ip = "";
 
-	public static int SERVER_PORT = 5000;
+	public static int SERVER_PORT = 6000;
 	public static int LOCAL_PORT = 5002;
 	public static int MODULE_PORT = 5003;
+	
+	public static boolean g_First_Login = false;
 
 }
