@@ -1,0 +1,23 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/remotecontrol_frament"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"> 
+    
+    <TextView
+         android:id="@+id/tv_setting"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="Setting 设置"/>
+    
+    <ListView
+          android:id="@+id/setting_list"
+          android:layout_width="match_parent"
+	      android:layout_height="wrap_content"
+	      android:layout_below="@id/tv_message"
+          android:divider="@drawable/list_item_diliver_left10_right0"
+          android:dividerHeight="1px">
+    </ListView>
+	   
+</RelativeLayout>

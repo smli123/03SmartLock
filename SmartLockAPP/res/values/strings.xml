@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SmartLockEx</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="app_version_unknown">Unknown version</string>
+    
+    <string name="smartlock_title_dev">设备</string>
+    <string name="smartlock_title_message">消息</string>
+    <string name="smartlock_title_settings">我的</string>
+    
+    <string name="smartlock_goback">返回</string>  
+    <string name="smartlock_exit">退出</string>
+    <string name="smartlock_ok">确认</string>
+    <string name="smartlock_cancel">取消</string>
+    <string name="smartlock_confirm">确定</string>
+    <string name="register_title_register">注册</string>
+    <string name="register_title_modify">编辑注册信息</string>
+    <string name="register_username">用 户 名</string>
+    <string name="register_appphonenumber">手机号码</string>
+    <string name="register_pwd">密 码</string>
+    <string name="register_confirmpwd">密码确认</string>
+    <string name="register_email">电子邮箱</string>
+    <string name="register_pwdfindSIM">密保号码</string>
+    
+    <string name="app_input_information">请输入信息</string>
+    
+    <string name="smartlock_nosharp_email">邮箱中不能包含#符号</string>
+    <string name="smartlock_nosharp_username">用户名中不能包含#符号</string>
+    <string name="smartlock_nosharp_pwd">密码中不能包含#符号</string>
+    <string name="pull_to_refresh">下拉可以刷新</string>  
+    <string name="release_to_refresh">释放立即刷新</string>  
+    <string name="refreshing">正在刷新…</string>  
+    <string name="not_updated_yet">暂未更新过</string>  
+    <string name="updated_at">上次更新于 %s 前</string>  
+    <string name="updated_just_now">刚刚更新</string>  
+    <string name="time_error">时间有问题</string> 
+    
+    <string name="update_minute">分钟</string>
+    <string name="update_hour">小时</string>
+    <string name="update_day">天</string>
+    <string name="update_month">月</string>
+    <string name="update_year">年</string>
+    
+    <string name="login_register">注册</string>
+    <string name="login_login">登录</string> 
+    <string name="login_logining">正在登录...</string>
+    <string name="login_wellcome">欢迎%s, </string> 
+    <string name="login_inputuser">请填写用户名</string>
+    <string name="login_inputpwd">请填写密码</string>
+    <string name="login_savepwd">记住密码</string>
+    <string name="login_pwd_error">密码错误</string>  
+    <string name="login_pwd_findback">忘记密码?</string> 
+    <string name="login_pwd_sent">密码已发送到 </string>
+    <string name="login_pwd_findconfirm_sms">确定发送密码短信？</string> 
+    <string name="login_pwd_findconfirm_email">确定发送密码邮件？</string>
+    <string name="login_pwd_network_invalid">请打开WiFi或数据连接</string>
+    <string name="login_pwd_wifi_notopen">请打开WiFi连接</string>
+    <string name="login_pwd_network_connect">打开WiFi或数据连接</string>
+    <string name="login_pwd_sendemail">邮件</string>
+    <string name="login_pwd_sendsms">短信</string>
+    <string name="login_info_no_internet">没有数据网络</string>
+    <string name="login_info_no_email">没有邮件地址</string>    
+    <string name="login_info_no_phone">没有电话号码</string>
+    <string name="login_timeout_devices">连接智能插座超时</string>
+    <string name="login_cmd_socket_timeout">连接智慧家居中心失败，请确认已经连接上互联网</string>
+    <string name="login_cmd_socket_timeout_devices">连接智能插座超时</string>
+    <string name="login_input_email">请填写您注册时使用的邮箱</string>
+    <string name="login_pwd_send_email_ok">密码已发送到邮件</string>
+    <string name="login_logout">退出登录</string>
+    
+    <string name="login_timeout">连接服务器超时，请确认已经连接上互联网</string>
+    <string name="oper_error">操作失败，请重试</string>
+    <string name="oper_success">操作成功</string>
+    
+    <string name="register_info_nousername">用户名不能为空</string>
+    <string name="register_info_noappphone">手机号码不能为空</string>
+    <string name="register_info_nopwd">密码不能为空</string>
+    <string name="register_info_noconfirmpwd">请输入确认密码</string>
+    <string name="register_info_noemail">电子邮箱不能为空</string>
+    <string name="register_info_invalidemail">非有效的电子邮箱</string>
+    <string name="register_info_pwdconfirmerror">两次密码不一致，请重新输入</string>
+    <string name="register_info_nomodulephone">请输入模块的电话号码</string>
+    <string name="register_info_nofindpwdandemail">没有找到密码和Email</string>
+    <string name="register_info_nofindpwdphoneandemail">请输入找回密码Email</string>
+    <string name="register_info_nocarnumber">请输入车牌号</string>
+    <string name="register_info_lessthansixchar">密码长度不能小于6个字符</string>
+    <string name="register_info_morethantwentychar">密码长度不能大于20个字符</string>
+    <string name="register_info_pwdinvalid">密码只能是数字或英文字母</string>
+    <string name="register_info_selectoption">请选择</string>
+    <string name="register_info_modify">编辑</string>
+    <string name="register_info_delete">删除</string>
+    <string name="register_photo_by_camera">拍照</string>
+    <string name="register_photo_by_gallery">选择图片</string> 
+    <string name="register_photo_del">删除</string>   
+    <string name="register_network_vaild">请先打开WiFi或数据连接</string>
+    <string name="register_no_moduleid">模块ID为空</string>
+    <string name="register_no_right">无权限操作</string>
+    <string name="register_register_now">正在注册...</string>
+    
+    <string name="smartlock_login_findpwd">"找回密码..."</string>
+    <string name="smartlock_login_getpwd">"请到邮箱查看密码"</string>
+    
+    <string name="common_timeout">时间超时</string>
+	<string name="smartlock_add_fail">"增加门锁失败"</string>
+	
+	<!-- 错误码 -->
+	<string name="app_response_not_register">用户尚未注册</string>
+	<string name="app_response_password_error">登录密码错误</string>
+	<string name="app_response_lock_noresponse">门锁未响应命令</string>
+	<string name="app_response_user_exist">用户已注册过</string>
+	<string name="app_response_invalid_string">发送给服务器的操作无效</string>
+	<string name="app_response_user_logined">用户已登录</string>
+	<string name="app_response_lock_not_exist">门锁不存在</string>
+	<string name="app_response_lock_been_assigned">门锁已经配置给其他用户</string>
+	<string name="app_response_user_no_plug">您名下无此门锁</string>
+	<string name="app_response_lock_name_exist">您名下已有同名门锁</string>
+	<string name="app_response_lock_offline">门锁不在线</string>
+	<string name="app_response_pwd_email_error">密码邮箱错误</string>
+	<string name="app_response_login_fail">"登录服务器失败"</string>
+	<string name="app_response_email_registered">邮箱已注册过</string>
+	<string name="app_response_unknown_error">未知错误</string>
+	<string name="app_response_login_fail_devices">"登录智能门锁失败了"</string>
+	<string name="app_response_device_online">"门锁上线"</string>
+	<string name="app_response_device_offline">"门锁离线"</string>
+	
+	<string name="server_response_fail_to_insert_db">服务器写数据库失败</string>	
+	<string name="server_response_fail_to_update_db">服务器更新数据库失败</string>		
+	<string name="server_response_fail_to_send_pwd_email">服务器重置邮件发送失败</string>
+	
+	<string name="smartlock_oper_back2ap_fail">"复位设备失败"</string>
+
+	<string name="smartlock_ctrl_modifyplugname_fail">"修改门锁名称失败"</string>
+	<string name="smartlock_ctrl_modifypwd_fail">"修改密码失败"</string>
+	<string name="smartlock_ctrl_delete_fail">"删除门锁失败"</string>
+	<string name="smartlock_oper_light_fail">"操作夜灯失败"</string>
+	<string name="smartlock_oper_power_fail">"操作电源失败"</string>
+	<string name="smartlock_oper_usb_fail">"操作USB失败"</string>
+	
+    <string name="smartlock_ctrl_userregister_fail">"用户注册失败"</string>
+    <string name="smartlock_ctrl_resetpwd_fail">"重置密码失败"</string>
+	    
+</resources>

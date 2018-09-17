@@ -1,0 +1,25 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/remotecontrol_frament"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"> 
+    
+     
+    <com.sherman.smartlockex.ui.util.RefreshableView  
+        android:id="@+id/refreshable_view"  
+        android:layout_width="match_parent"  
+        android:layout_height="match_parent" >  
+     
+	    <ListView
+	          android:id="@+id/dev_list"
+	          android:layout_width="match_parent"
+	          android:layout_height="match_parent"
+
+	          android:divider="@drawable/list_item_diliver_left10_right0"
+	          android:dividerHeight="1px">
+	    </ListView>    
+	 
+	</com.sherman.smartlockex.ui.util.RefreshableView>
+    
+</RelativeLayout>

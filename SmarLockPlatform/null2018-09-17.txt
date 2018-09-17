@@ -1,0 +1,352 @@
+10:53:51 [EXCEPT]	 null <DataSourcePool.java: Line 50>	com.mysql.jdbc.CommunicationsException: Communications link failure due to underlying exception: 
+
+** BEGIN NESTED EXCEPTION ** 
+
+java.net.ConnectException
+MESSAGE: Connection refused: connect
+
+STACKTRACE:
+
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:79)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:244)
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:256)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:271)
+	at com.mysql.jdbc.Connection.createNewIO(Connection.java:2771)
+	at com.mysql.jdbc.Connection.<init>(Connection.java:1555)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:285)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:270)
+	at com.thingzdo.platform.DBTool.DataSourcePool.Init(DataSourcePool.java:45)
+	at com.thingzdo.platform.DBTool.DBTool.main(DBTool.java:337)
+
+
+** END NESTED EXCEPTION **
+
+
+
+Last packet sent to the server was 2 ms ago.
+	at com.mysql.jdbc.Connection.createNewIO(Connection.java:2847)
+	at com.mysql.jdbc.Connection.<init>(Connection.java:1555)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:285)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:270)
+	at com.thingzdo.platform.DBTool.DataSourcePool.Init(DataSourcePool.java:45)
+	at com.thingzdo.platform.DBTool.DBTool.main(DBTool.java:337)
+10:53:51 [EXCEPT]	 null <DataSourcePool.java: Line 50>	com.mysql.jdbc.CommunicationsException: Communications link failure due to underlying exception: 
+
+** BEGIN NESTED EXCEPTION ** 
+
+java.net.ConnectException
+MESSAGE: Connection refused: connect
+
+STACKTRACE:
+
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:79)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:244)
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:256)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:271)
+	at com.mysql.jdbc.Connection.createNewIO(Connection.java:2771)
+	at com.mysql.jdbc.Connection.<init>(Connection.java:1555)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:285)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:270)
+	at com.thingzdo.platform.DBTool.DataSourcePool.Init(DataSourcePool.java:45)
+	at com.thingzdo.platform.DBTool.DBTool.main(DBTool.java:337)
+
+
+** END NESTED EXCEPTION **
+
+
+
+Last packet sent to the server was 2 ms ago.
+	at com.mysql.jdbc.Connection.createNewIO(Connection.java:2847)
+	at com.mysql.jdbc.Connection.<init>(Connection.java:1555)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:285)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:270)
+	at com.thingzdo.platform.DBTool.DataSourcePool.Init(DataSourcePool.java:45)
+	at com.thingzdo.platform.DBTool.DBTool.main(DBTool.java:337)
+10:53:52 [EXCEPT]	 null <DataSourcePool.java: Line 50>	com.mysql.jdbc.CommunicationsException: Communications link failure due to underlying exception: 
+
+** BEGIN NESTED EXCEPTION ** 
+
+java.net.ConnectException
+MESSAGE: Connection refused: connect
+
+STACKTRACE:
+
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:79)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:244)
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:256)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:271)
+	at com.mysql.jdbc.Connection.createNewIO(Connection.java:2771)
+	at com.mysql.jdbc.Connection.<init>(Connection.java:1555)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:285)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:270)
+	at com.thingzdo.platform.DBTool.DataSourcePool.Init(DataSourcePool.java:45)
+	at com.thingzdo.platform.DBTool.DBTool.main(DBTool.java:337)
+
+
+** END NESTED EXCEPTION **
+
+
+
+Last packet sent to the server was 0 ms ago.
+	at com.mysql.jdbc.Connection.createNewIO(Connection.java:2847)
+	at com.mysql.jdbc.Connection.<init>(Connection.java:1555)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:285)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:270)
+	at com.thingzdo.platform.DBTool.DataSourcePool.Init(DataSourcePool.java:45)
+	at com.thingzdo.platform.DBTool.DBTool.main(DBTool.java:337)
+10:53:52 [EXCEPT]	 null <DataSourcePool.java: Line 50>	com.mysql.jdbc.CommunicationsException: Communications link failure due to underlying exception: 
+
+** BEGIN NESTED EXCEPTION ** 
+
+java.net.ConnectException
+MESSAGE: Connection refused: connect
+
+STACKTRACE:
+
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:79)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:244)
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:256)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:271)
+	at com.mysql.jdbc.Connection.createNewIO(Connection.java:2771)
+	at com.mysql.jdbc.Connection.<init>(Connection.java:1555)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:285)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:270)
+	at com.thingzdo.platform.DBTool.DataSourcePool.Init(DataSourcePool.java:45)
+	at com.thingzdo.platform.DBTool.DBTool.main(DBTool.java:337)
+
+
+** END NESTED EXCEPTION **
+
+
+
+Last packet sent to the server was 0 ms ago.
+	at com.mysql.jdbc.Connection.createNewIO(Connection.java:2847)
+	at com.mysql.jdbc.Connection.<init>(Connection.java:1555)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:285)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:270)
+	at com.thingzdo.platform.DBTool.DataSourcePool.Init(DataSourcePool.java:45)
+	at com.thingzdo.platform.DBTool.DBTool.main(DBTool.java:337)
+10:53:53 [EXCEPT]	 null <DataSourcePool.java: Line 50>	com.mysql.jdbc.CommunicationsException: Communications link failure due to underlying exception: 
+
+** BEGIN NESTED EXCEPTION ** 
+
+java.net.ConnectException
+MESSAGE: Connection refused: connect
+
+STACKTRACE:
+
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:79)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:244)
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:256)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:271)
+	at com.mysql.jdbc.Connection.createNewIO(Connection.java:2771)
+	at com.mysql.jdbc.Connection.<init>(Connection.java:1555)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:285)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:270)
+	at com.thingzdo.platform.DBTool.DataSourcePool.Init(DataSourcePool.java:45)
+	at com.thingzdo.platform.DBTool.DBTool.main(DBTool.java:337)
+
+
+** END NESTED EXCEPTION **
+
+
+
+Last packet sent to the server was 0 ms ago.
+	at com.mysql.jdbc.Connection.createNewIO(Connection.java:2847)
+	at com.mysql.jdbc.Connection.<init>(Connection.java:1555)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:285)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:270)
+	at com.thingzdo.platform.DBTool.DataSourcePool.Init(DataSourcePool.java:45)
+	at com.thingzdo.platform.DBTool.DBTool.main(DBTool.java:337)
+10:53:53 [EXCEPT]	 null <DataSourcePool.java: Line 50>	com.mysql.jdbc.CommunicationsException: Communications link failure due to underlying exception: 
+
+** BEGIN NESTED EXCEPTION ** 
+
+java.net.ConnectException
+MESSAGE: Connection refused: connect
+
+STACKTRACE:
+
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:79)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:244)
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:256)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:271)
+	at com.mysql.jdbc.Connection.createNewIO(Connection.java:2771)
+	at com.mysql.jdbc.Connection.<init>(Connection.java:1555)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:285)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:270)
+	at com.thingzdo.platform.DBTool.DataSourcePool.Init(DataSourcePool.java:45)
+	at com.thingzdo.platform.DBTool.DBTool.main(DBTool.java:337)
+
+
+** END NESTED EXCEPTION **
+
+
+
+Last packet sent to the server was 0 ms ago.
+	at com.mysql.jdbc.Connection.createNewIO(Connection.java:2847)
+	at com.mysql.jdbc.Connection.<init>(Connection.java:1555)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:285)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:270)
+	at com.thingzdo.platform.DBTool.DataSourcePool.Init(DataSourcePool.java:45)
+	at com.thingzdo.platform.DBTool.DBTool.main(DBTool.java:337)
+10:53:54 [EXCEPT]	 null <DataSourcePool.java: Line 50>	com.mysql.jdbc.CommunicationsException: Communications link failure due to underlying exception: 
+
+** BEGIN NESTED EXCEPTION ** 
+
+java.net.ConnectException
+MESSAGE: Connection refused: connect
+
+STACKTRACE:
+
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:79)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:244)
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:256)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:271)
+	at com.mysql.jdbc.Connection.createNewIO(Connection.java:2771)
+	at com.mysql.jdbc.Connection.<init>(Connection.java:1555)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:285)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:270)
+	at com.thingzdo.platform.DBTool.DataSourcePool.Init(DataSourcePool.java:45)
+	at com.thingzdo.platform.DBTool.DBTool.main(DBTool.java:337)
+
+
+** END NESTED EXCEPTION **
+
+
+
+Last packet sent to the server was 0 ms ago.
+	at com.mysql.jdbc.Connection.createNewIO(Connection.java:2847)
+	at com.mysql.jdbc.Connection.<init>(Connection.java:1555)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:285)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:270)
+	at com.thingzdo.platform.DBTool.DataSourcePool.Init(DataSourcePool.java:45)
+	at com.thingzdo.platform.DBTool.DBTool.main(DBTool.java:337)
+10:53:54 [EXCEPT]	 null <DataSourcePool.java: Line 50>	com.mysql.jdbc.CommunicationsException: Communications link failure due to underlying exception: 
+
+** BEGIN NESTED EXCEPTION ** 
+
+java.net.ConnectException
+MESSAGE: Connection refused: connect
+
+STACKTRACE:
+
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:79)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at java.net.Socket.connect(Socket.java:538)
+	at java.net.Socket.<init>(Socket.java:434)
+	at java.net.Socket.<init>(Socket.java:244)
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:256)
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:271)
+	at com.mysql.jdbc.Connection.createNewIO(Connection.java:2771)
+	at com.mysql.jdbc.Connection.<init>(Connection.java:1555)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:285)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:270)
+	at com.thingzdo.platform.DBTool.DataSourcePool.Init(DataSourcePool.java:45)
+	at com.thingzdo.platform.DBTool.DBTool.main(DBTool.java:337)
+
+
+** END NESTED EXCEPTION **
+
+
+
+Last packet sent to the server was 0 ms ago.
+	at com.mysql.jdbc.Connection.createNewIO(Connection.java:2847)
+	at com.mysql.jdbc.Connection.<init>(Connection.java:1555)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:285)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:270)
+	at com.thingzdo.platform.DBTool.DataSourcePool.Init(DataSourcePool.java:45)
+	at com.thingzdo.platform.DBTool.DBTool.main(DBTool.java:337)

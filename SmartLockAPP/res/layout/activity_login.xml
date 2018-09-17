@@ -1,0 +1,232 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.sherman.smartlockex.ui.login.WelcomeActivity" 
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <RelativeLayout 
+        android:id="@+id/rl_col_1"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content" 
+    	android:orientation="horizontal">
+    	
+        <TextView
+            android:id="@+id/tv_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@null"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/version_font_size" />
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/rl_col_2"
+        android:layout_width="match_parent"
+    	android:layout_height="20dp"
+    	android:layout_below="@id/rl_col_1"
+    	android:orientation="horizontal">
+    	
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/rl_col_3"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content" 
+    	android:layout_below="@id/rl_col_2">
+    	
+	    <ImageView
+	        android:id="@+id/iv_head_pic"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="0dp"
+	        android:src="@drawable/smp_head_pic_default" />
+        
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/rl_col_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_col_3"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical" >
+	    
+	    <RelativeLayout
+	        android:id="@+id/rl_col_4_1"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" >
+	    	
+		    <ImageView
+		        android:id="@+id/iv_username"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerVertical="true"
+		        android:layout_marginTop="0dp"
+		        android:src="@drawable/smp_username" />
+		    
+	        <EditText
+	            android:id="@+id/et_username"
+	            android:layout_width="250dp"
+	            android:layout_height="wrap_content"
+	            android:layout_centerVertical="true"
+	            android:layout_marginLeft="5dp"
+	            android:layout_toRightOf="@id/iv_username"
+	            android:background="@null"
+	            android:singleLine="true"
+	            android:hint="输入用户名"
+	            android:text="@null"
+	            android:textColor="@color/black"
+	            android:textSize="@dimen/version_font_size" />
+	        
+	        <ImageView
+			    android:id="@+id/iv_delete_username"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_centerVertical="true"
+			    android:contentDescription="@null"
+			    android:src="@drawable/smp_input_delete"
+			    android:layout_alignParentRight="true"
+			    android:visibility="visible" />      
+
+		</RelativeLayout>
+    	
+	    <RelativeLayout 
+	        android:id="@+id/rl_col_4_2"
+	        android:layout_width="match_parent"
+	    	android:layout_height="0.5px"
+	    	android:layout_marginTop="5dp"
+    		android:layout_below="@id/rl_col_4_1"
+    		android:background="@color/login_seperator"
+    		android:orientation="horizontal">
+	    	
+		</RelativeLayout>
+		
+	    
+	    <RelativeLayout 
+	        android:id="@+id/rl_col_4_3"
+	        android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+    		android:layout_below="@id/rl_col_4_2"
+    		android:orientation="horizontal">
+	        
+		    <ImageView
+		        android:id="@+id/iv_password"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="0dp"
+		        android:src="@drawable/smp_password" />
+		    
+	        <EditText
+	            android:id="@+id/et_password"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_centerVertical="true"
+	            android:layout_marginLeft="5dp"
+	            android:layout_toRightOf="@id/iv_password"
+	            android:background="@null"
+	            android:inputType="textPassword"
+	            android:singleLine="true"
+	            android:hint="输入密码"
+	            android:text="@null"
+	            android:textColor="@color/black"
+	            android:textSize="@dimen/version_font_size" />
+	        
+	        <ImageView
+			    android:id="@+id/iv_delete_password"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_centerVertical="true"
+			    android:contentDescription="@null"
+			    android:src="@drawable/smp_input_delete"
+			    android:layout_alignParentRight="true"
+			    android:visibility="visible" />      
+
+	    </RelativeLayout>
+	    
+	    <RelativeLayout 
+	        android:id="@+id/rl_col_4_4"
+	        android:layout_width="match_parent"
+	    	android:layout_height="0.5px"
+	    	android:layout_marginTop="5dp"
+    		android:layout_below="@id/rl_col_4_3"
+    		android:background="@color/login_seperator"
+    		android:orientation="horizontal">
+	        
+	    </RelativeLayout>    
+    	
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/rl_col_5"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content" 
+    	android:layout_marginTop="20dp"
+    	android:layout_below="@id/rl_col_4">
+	    
+        <Button
+            android:id="@+id/btn_login"
+	        android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	    	android:background="@drawable/button_selector"
+	    	android:layout_marginLeft="10dp"
+	    	android:layout_marginRight="10dp"
+	    	android:textColor="@color/white"
+	    	android:textSize="24dp"
+	    	android:text="登 录"/>
+    	
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/rl_col_6"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_marginTop="10dp"
+    	android:layout_marginLeft="5dp"
+    	android:layout_marginRight="5dp"
+    	android:layout_below="@id/rl_col_5">
+        
+        <TextView 
+            android:id="@+id/tv_register"
+	        android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:layout_alignParentLeft="true"
+	    	android:textColor="@color/text_selector"
+        	android:clickable="true"
+        	android:focusable="true"
+	    	android:textSize="15dp"
+	    	android:text="新用户注册"/>
+    	
+        <TextView 
+            android:id="@+id/tv_forget_password"
+	        android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:layout_alignParentRight="true"
+	    	android:textColor="@color/text_selector"
+        	android:clickable="true"
+        	android:focusable="true"
+	    	android:textSize="15dp"
+	    	android:text="忘记密码"/>
+    	
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/rl_col_7"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content" 
+    	android:layout_below="@id/rl_col_6">
+    	
+    </RelativeLayout>
+    
+    
+</RelativeLayout>
