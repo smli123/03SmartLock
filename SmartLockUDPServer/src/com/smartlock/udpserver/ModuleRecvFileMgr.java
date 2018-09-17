@@ -48,7 +48,7 @@ public class ModuleRecvFileMgr {
 		m_iBlockCrcCode 	= 0;
 		m_iTotalCrcCode 	= 0;
 		
-		// 保存的文件绝对目录名字： /root/thingzdo/smartplugudp/snap/xxxxxx/snap_00000001.jpg
+		// 保存的文件绝对目录名字： /root/smartlock/smartlockudp/snap/xxxxxx/snap_00000001.jpg
 		String filename = String.format("snap_%08d.jpg", m_iFileNO);
 		JudeFileExist(m_strDevId);
 		String str_outputfilename = ServerParamConfiger.getRecvFilePath() + "/" + m_strDevId + "/" + filename;

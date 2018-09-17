@@ -53,7 +53,7 @@ public class ModuleUpgradeOnLineMgr {
 		m_upgrade_send_cmd_send = new byte[iBlockSize + 100];
 		
 		try {
-			//reader = new FileInputStream("G:\\thingzdo\\CODE\\Server\\SmartPlugServer\\user1.512.new.bin");
+			//reader = new FileInputStream("D:\\03smartlock\\smartlockUDPServer\\user1.512.new.bin");
 			
 			int i_real_FileBinNo = iFileBinNo;
 			if (m_iAuxFileBinNo == 512) {

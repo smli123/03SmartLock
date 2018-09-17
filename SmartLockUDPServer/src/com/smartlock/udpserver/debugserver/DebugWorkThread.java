@@ -251,7 +251,7 @@ public class DebugWorkThread  implements Runnable{
 		String strHelp = "=============help cmd list================\n"
 								+ "ShowUser\t->show all user  info\n"
 								+ "DeleteUser,<username>\t-> delete user\n"
-								+ "ShowHeartPackNum,<module_id>\t-> show how many packs server received from smartplug with module_id\n"
+								+ "ShowHeartPackNum,<module_id>\t-> show how many packs server received from smartlock with module_id\n"
 								+ "ShowModule\t->show all module info.\n"
 								+ "ShowTimer,<module_id>\t->show all timer info of device(module_id)\n"
 //								+ "Passthroughtxt,<module_id>,<module_command>\t->pass throug module text command to device(module_id)\n"

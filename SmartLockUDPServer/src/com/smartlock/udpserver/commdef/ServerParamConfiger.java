@@ -11,7 +11,7 @@ import com.smartlock.platform.LogTool.LogWriter;
 import com.smartlock.platform.commdefine.PlatformCommDefine;
 
 public class ServerParamConfiger {
-	public final static String PRODUCT_NAME		= "smartplugudp";	//产品名称
+	public final static String PRODUCT_NAME		= "smartlockudp";	//产品名称
 	
 	private static int iTimeoutModuleRespose		= 70000;		//APP等待模块响应的超时时间
 	private static int iAppReceivedBufferSize		= 128;			//APP缓冲区大小
@@ -23,14 +23,14 @@ public class ServerParamConfiger {
 	private static int iModuleRgbFreq				= 1000;			//RGB三色频率
 	private static int iMaxConnectNum				= 150;			//数据库最大连接池数目
 	private static boolean iRecordModuleData        = true;			// true： 记录模块在线/离线数据； false： 不记录
-	private static String strUpgradeBinPath			= "/root/thingzdo/smartplugudp";
+	private static String strUpgradeBinPath			= "/root/smartlock/smartlockudp";
 	private static String strUpgradeBinFileName		= "";
-	private static String[] strUserBinPath = new String[]{"/root/thingzdo/smartplugudp/uerbin0.bin", "/root/thingzdo/smartplugudp/uerbin1.bin", "/root/thingzdo/smartplugudp/uerbin2.bin", "/root/thingzdo/smartplugudp/uerbin3.bin"};
-	public static String strIRFileName		= "/root/thingzdo/smartplugudp/IR_AirCon.json";	//红外数据库文件
-	public static String strTVIRFileName		= "/root/thingzdo/smartplugudp/IR_TV.json";	//红外数据库文件
+	private static String[] strUserBinPath = new String[]{"/root/smartlock/smartlockudp/uerbin0.bin", "/root/smartlock/smartlockudp/uerbin1.bin", "/root/smartlock/smartlockudp/uerbin2.bin", "/root/smartlock/smartlockudp/uerbin3.bin"};
+	public static String strIRFileName		= "/root/smartlock/smartlockudp/IR_AirCon.json";	//红外数据库文件
+	public static String strTVIRFileName		= "/root/smartlock/smartlockudp/IR_TV.json";	//红外数据库文件
 
-	public static String strRecvFilePath	= "/root/thingzdo/smartplugudp/snap";	//接收图片文件目录
-	public static String strLogFilePath		= "/root/thingzdo/smartplugudp/modulelog";	//接收模块日志文件目录
+	public static String strRecvFilePath	= "/root/smartlock/smartlockudp/snap";	//接收图片文件目录
+	public static String strLogFilePath		= "/root/smartlock/smartlockudp/modulelog";	//接收模块日志文件目录
 	
 	
 	//参数名称字符串

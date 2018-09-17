@@ -1,0 +1,66 @@
+14:43:04 [TRACE]	 null 	 Succeed to load server parameter.<ServerParamConfiger.java: Line 160>
+14:43:04 [DEBUG]	 null 	 Succeed to load server parameter.<ServerParamConfiger.java: Line 160>
+14:43:04 [DEBUG]	 null 	 --------------param list begin------------<ServerParamConfiger.java: Line 179>
+14:43:04 [DEBUG]	 null 	 	 iAppReceivedBufferSize=512 byte<ServerParamConfiger.java: Line 180>
+14:43:04 [DEBUG]	 null 	 	 iModuleReceivedBufferSize=1024 byte<ServerParamConfiger.java: Line 181>
+14:43:04 [DEBUG]	 null 	 	 iTimeoutAdjustTime=43200000 ms<ServerParamConfiger.java: Line 182>
+14:43:04 [DEBUG]	 null 	 	 iTimeoutModuleLogin=60000 ms<ServerParamConfiger.java: Line 183>
+14:43:04 [DEBUG]	 null 	 	 iTimeoutModuleRespose=5000 ms<ServerParamConfiger.java: Line 184>
+14:43:04 [DEBUG]	 null 	 	 iTimeOutHeartBeat=55000 ms<ServerParamConfiger.java: Line 185>
+14:43:04 [DEBUG]	 null 	 	 iTimeOutUpdate=10000 ms<ServerParamConfiger.java: Line 186>
+14:43:04 [DEBUG]	 null 	 	 iModuleRgbFreq=1000<ServerParamConfiger.java: Line 187>
+14:43:04 [DEBUG]	 null 	 	 iMaxConnectNum=150<ServerParamConfiger.java: Line 188>
+14:43:04 [DEBUG]	 null 	 	 strRecvFilePath=D:/03smartlock/SmartLockUDPServer/output/snap<ServerParamConfiger.java: Line 189>
+14:43:04 [DEBUG]	 null 	 	 strLogFilePath=D:/03smartlock/SmartLockUDPServer/output/modulelog<ServerParamConfiger.java: Line 190>
+14:43:04 [DEBUG]	 null 	 	 strIRFileName=D:/03smartlock/SmartLockUDPServer/IR_AirCon.json<ServerParamConfiger.java: Line 191>
+14:43:04 [DEBUG]	 null 	 	 strTVIRFileName=D:/03smartlock/SmartLockUDPServer/IR_TV.json<ServerParamConfiger.java: Line 192>
+14:43:04 [DEBUG]	 null 	 	 strUpgradeBinPath=D:/03smartlock/SmartLockUDPServer/output<ServerParamConfiger.java: Line 193>
+14:43:04 [DEBUG]	 null 	 	 userbin0=D:/03smartlock/SmartLockUDPServer/output/user1.512.new.bin<ServerParamConfiger.java: Line 194>
+14:43:04 [DEBUG]	 null 	 	 userbin1=D:/03smartlock/SmartLockUDPServer/output/user2.512.new.bin<ServerParamConfiger.java: Line 195>
+14:43:04 [DEBUG]	 null 	 	 userbin2=D:/03smartlock/SmartLockUDPServer/output/user1.1024.new.bin<ServerParamConfiger.java: Line 196>
+14:43:04 [DEBUG]	 null 	 	 userbin3=D:/03smartlock/SmartLockUDPServer/output/user2.1024.new.bin<ServerParamConfiger.java: Line 197>
+14:43:04 [DEBUG]	 null 	 --------------param list end------------<ServerParamConfiger.java: Line 198>
+14:48:57 [TRACE]	 null 	 Succeed to load server parameter.<ServerParamConfiger.java: Line 160>
+14:48:57 [DEBUG]	 null 	 Succeed to load server parameter.<ServerParamConfiger.java: Line 160>
+14:48:57 [DEBUG]	 null 	 --------------param list begin------------<ServerParamConfiger.java: Line 179>
+14:48:57 [DEBUG]	 null 	 	 iAppReceivedBufferSize=512 byte<ServerParamConfiger.java: Line 180>
+14:48:57 [DEBUG]	 null 	 	 iModuleReceivedBufferSize=1024 byte<ServerParamConfiger.java: Line 181>
+14:48:57 [DEBUG]	 null 	 	 iTimeoutAdjustTime=43200000 ms<ServerParamConfiger.java: Line 182>
+14:48:57 [DEBUG]	 null 	 	 iTimeoutModuleLogin=60000 ms<ServerParamConfiger.java: Line 183>
+14:48:57 [DEBUG]	 null 	 	 iTimeoutModuleRespose=5000 ms<ServerParamConfiger.java: Line 184>
+14:48:57 [DEBUG]	 null 	 	 iTimeOutHeartBeat=55000 ms<ServerParamConfiger.java: Line 185>
+14:48:57 [DEBUG]	 null 	 	 iTimeOutUpdate=10000 ms<ServerParamConfiger.java: Line 186>
+14:48:57 [DEBUG]	 null 	 	 iModuleRgbFreq=1000<ServerParamConfiger.java: Line 187>
+14:48:57 [DEBUG]	 null 	 	 iMaxConnectNum=150<ServerParamConfiger.java: Line 188>
+14:48:57 [DEBUG]	 null 	 	 strRecvFilePath=D:/03smartlock/SmartLockUDPServer/output/snap<ServerParamConfiger.java: Line 189>
+14:48:57 [DEBUG]	 null 	 	 strLogFilePath=D:/03smartlock/SmartLockUDPServer/output/modulelog<ServerParamConfiger.java: Line 190>
+14:48:57 [DEBUG]	 null 	 	 strIRFileName=D:/03smartlock/SmartLockUDPServer/IR_AirCon.json<ServerParamConfiger.java: Line 191>
+14:48:57 [DEBUG]	 null 	 	 strTVIRFileName=D:/03smartlock/SmartLockUDPServer/IR_TV.json<ServerParamConfiger.java: Line 192>
+14:48:57 [DEBUG]	 null 	 	 strUpgradeBinPath=D:/03smartlock/SmartLockUDPServer/output<ServerParamConfiger.java: Line 193>
+14:48:57 [DEBUG]	 null 	 	 userbin0=D:/03smartlock/SmartLockUDPServer/output/user1.512.new.bin<ServerParamConfiger.java: Line 194>
+14:48:57 [DEBUG]	 null 	 	 userbin1=D:/03smartlock/SmartLockUDPServer/output/user2.512.new.bin<ServerParamConfiger.java: Line 195>
+14:48:57 [DEBUG]	 null 	 	 userbin2=D:/03smartlock/SmartLockUDPServer/output/user1.1024.new.bin<ServerParamConfiger.java: Line 196>
+14:48:57 [DEBUG]	 null 	 	 userbin3=D:/03smartlock/SmartLockUDPServer/output/user2.1024.new.bin<ServerParamConfiger.java: Line 197>
+14:48:57 [DEBUG]	 null 	 --------------param list end------------<ServerParamConfiger.java: Line 198>
+14:49:40 [TRACE]	 null 	 Succeed to load server parameter.<ServerParamConfiger.java: Line 160>
+14:49:40 [DEBUG]	 null 	 Succeed to load server parameter.<ServerParamConfiger.java: Line 160>
+14:49:40 [DEBUG]	 null 	 --------------param list begin------------<ServerParamConfiger.java: Line 179>
+14:49:40 [DEBUG]	 null 	 	 iAppReceivedBufferSize=512 byte<ServerParamConfiger.java: Line 180>
+14:49:40 [DEBUG]	 null 	 	 iModuleReceivedBufferSize=1024 byte<ServerParamConfiger.java: Line 181>
+14:49:40 [DEBUG]	 null 	 	 iTimeoutAdjustTime=43200000 ms<ServerParamConfiger.java: Line 182>
+14:49:40 [DEBUG]	 null 	 	 iTimeoutModuleLogin=60000 ms<ServerParamConfiger.java: Line 183>
+14:49:40 [DEBUG]	 null 	 	 iTimeoutModuleRespose=5000 ms<ServerParamConfiger.java: Line 184>
+14:49:40 [DEBUG]	 null 	 	 iTimeOutHeartBeat=55000 ms<ServerParamConfiger.java: Line 185>
+14:49:40 [DEBUG]	 null 	 	 iTimeOutUpdate=10000 ms<ServerParamConfiger.java: Line 186>
+14:49:40 [DEBUG]	 null 	 	 iModuleRgbFreq=1000<ServerParamConfiger.java: Line 187>
+14:49:40 [DEBUG]	 null 	 	 iMaxConnectNum=150<ServerParamConfiger.java: Line 188>
+14:49:40 [DEBUG]	 null 	 	 strRecvFilePath=D:/03smartlock/SmartLockUDPServer/output/snap<ServerParamConfiger.java: Line 189>
+14:49:40 [DEBUG]	 null 	 	 strLogFilePath=D:/03smartlock/SmartLockUDPServer/output/modulelog<ServerParamConfiger.java: Line 190>
+14:49:40 [DEBUG]	 null 	 	 strIRFileName=D:/03smartlock/SmartLockUDPServer/IR_AirCon.json<ServerParamConfiger.java: Line 191>
+14:49:40 [DEBUG]	 null 	 	 strTVIRFileName=D:/03smartlock/SmartLockUDPServer/IR_TV.json<ServerParamConfiger.java: Line 192>
+14:49:40 [DEBUG]	 null 	 	 strUpgradeBinPath=D:/03smartlock/SmartLockUDPServer/output<ServerParamConfiger.java: Line 193>
+14:49:40 [DEBUG]	 null 	 	 userbin0=D:/03smartlock/SmartLockUDPServer/output/user1.512.new.bin<ServerParamConfiger.java: Line 194>
+14:49:40 [DEBUG]	 null 	 	 userbin1=D:/03smartlock/SmartLockUDPServer/output/user2.512.new.bin<ServerParamConfiger.java: Line 195>
+14:49:40 [DEBUG]	 null 	 	 userbin2=D:/03smartlock/SmartLockUDPServer/output/user1.1024.new.bin<ServerParamConfiger.java: Line 196>
+14:49:40 [DEBUG]	 null 	 	 userbin3=D:/03smartlock/SmartLockUDPServer/output/user2.1024.new.bin<ServerParamConfiger.java: Line 197>
+14:49:40 [DEBUG]	 null 	 --------------param list end------------<ServerParamConfiger.java: Line 198>

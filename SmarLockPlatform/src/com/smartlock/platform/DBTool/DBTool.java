@@ -334,7 +334,7 @@ public class DBTool {
 
 	public static void main(String[] str)
 	{
-		DataSourcePool.Init("smartplug", "root", "2681b009");
+		DataSourcePool.Init("smartlock", "root", "2681b009");
 		DBTool db_tool = new DBTool();
 		try {
 			/*

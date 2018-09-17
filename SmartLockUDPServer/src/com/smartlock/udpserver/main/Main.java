@@ -13,7 +13,7 @@ public class Main {
 		try {	
 			//STEP1 初始化日志服务 
 			LogWriter.Init(ServerParamConfiger.PRODUCT_NAME);
-			LogWriter.WriteTraceLog(LogWriter.SELF,"==========SmartPlugServer Begin============");
+			LogWriter.WriteTraceLog(LogWriter.SELF,"==========SmartLockServer Begin============");
 			
 			//STEP2 读取配置参数
 			ServerParamConfiger.Do();
@@ -26,7 +26,7 @@ public class Main {
 			
 			//STEP4 创建APP服务器线程
 			Thread app_server = new ServerMainThread();
-			LogWriter.WriteTraceLog(LogWriter.SELF,"SmartPlugServer App Server started successfully.");
+			LogWriter.WriteTraceLog(LogWriter.SELF,"SmartLockServer App Server started successfully.");
 			
 			//STEP4 创建远程调试服务器
 			Thread debug_server = new DebugServerThread();
@@ -45,7 +45,7 @@ public class Main {
 			e.printStackTrace();
 			LogWriter.WriteExceptionLog(LogWriter.SELF,e);
 		} 
-		LogWriter.WriteTraceLog(LogWriter.SELF,"==========SmartPlugServer Terminate============");
+		LogWriter.WriteTraceLog(LogWriter.SELF,"==========SmartLockServer Terminate============");
 	}
 	
 	private static void ServerDBMgr_InitModuleData() {

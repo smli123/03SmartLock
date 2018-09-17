@@ -29,7 +29,7 @@ public class ModuleLogFileMgr {
 	{
 		m_strDevId = strDevId;
 		
-		// 保存的文件绝对目录名字： /root/thingzdo/smartplugudp/modulelog/moduleid.log
+		// 保存的文件绝对目录名字： /root/smartlock/smartlockudp/modulelog/moduleid.log
 		String filename = String.format("%s.log", strDevId);
 		JudeFileExist(m_strDevId);
 		
