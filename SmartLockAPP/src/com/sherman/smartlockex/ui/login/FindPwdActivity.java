@@ -52,7 +52,6 @@ public class FindPwdActivity extends TitledActivity {
 					PubFunc.thinzdoToast(FindPwdActivity.this, 
 							SmartLockApplication.getContext().getString(R.string.smartlock_login_getpwd));
 					
-					
 					break;
 				default:
 					PubFunc.thinzdoToast(SmartLockApplication.getContext(), message);

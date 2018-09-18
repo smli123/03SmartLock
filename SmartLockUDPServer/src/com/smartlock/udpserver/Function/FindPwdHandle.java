@@ -65,7 +65,7 @@ public class FindPwdHandle implements ICallFunction{
 			String strContent = String.format("亲爱的%s:\r\n"
 					+ "\t您好，您重置后的密码为%s,为保证您的用户安全，建议您立即登录并修改密码。\r\n"
 					+ "\t非常感谢您使用本公司产品，谢谢。\r\n"
-					+ "\t\t\t\t From 鑫思度科技股份有限公司", user_info.getUserName(),strRandomPwd);
+					+ "\t\t\t\t From Sherman科技股份有限公司", user_info.getUserName(),strRandomPwd);
 			sender.SetContent(strContent);
 		
 			//回复服务器
