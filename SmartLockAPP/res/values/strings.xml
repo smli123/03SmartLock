@@ -99,6 +99,8 @@
     <string name="register_no_right">无权限操作</string>
     <string name="register_register_now">正在注册...</string>
     
+    <string name="smartlock_modify_name">"修改名字"</string>
+    
     <string name="smartlock_login_findpwd">"找回密码..."</string>
     <string name="smartlock_login_getpwd">"请到邮箱查看密码"</string>
     
@@ -131,6 +133,8 @@
 	
 	<string name="smartlock_oper_back2ap_fail">"复位设备失败"</string>
 
+	<string name="smartlock_ctrl_delete">"删除门锁"</string>
+	
 	<string name="smartlock_ctrl_modifyplugname_fail">"修改门锁名称失败"</string>
 	<string name="smartlock_ctrl_modifypwd_fail">"修改密码失败"</string>
 	<string name="smartlock_ctrl_delete_fail">"删除门锁失败"</string>
@@ -140,5 +144,8 @@
 	
     <string name="smartlock_ctrl_userregister_fail">"用户注册失败"</string>
     <string name="smartlock_ctrl_resetpwd_fail">"重置密码失败"</string>
+    
+    <string name="smartlock_ctrl_samename_exist">"同名插座已经存在"</string>
+    <string name="smartlock_ctrl_mod_plugname_length_too_long">"插座名字长度超过20，请减少名字长度。1个汉字会占用多个字节"</string>
 	    
 </resources>

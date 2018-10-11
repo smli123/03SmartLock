@@ -26,7 +26,7 @@
 	
 	<dimen name="login_pass_et_margin_top">20dp</dimen>
 	
-	    <!-- 文本大小  设计公司参考部分，上部分的设置将取消 -->
+	<!-- 文本大小  设计公司参考部分，上部分的设置将取消 -->
     <dimen name="text_size_minisamll">12sp</dimen>
     <dimen name="text_size_midsamll">15sp</dimen>	
     <dimen name="text_size_norsamll">16sp</dimen>
@@ -37,5 +37,13 @@
     <dimen name="text_size_largemedium">26sp</dimen> 
     <dimen name="text_size_xlargemedium">27sp</dimen>
     <dimen name="text_size_norlarge">33sp</dimen> 
-    <dimen name="text_size_xxxlarge">60sp</dimen>  
+    <dimen name="text_size_xxxlarge">60sp</dimen>
+    
+	<!-- 文本大小  设计公司参考部分，上部分的设置将取消 -->
+    <dimen name="list_item_top_padding">10dp</dimen>
+    <dimen name="list_item_bottom_padding">10dp</dimen>
+    <dimen name="list_item_left_padding">10dp</dimen>
+    <dimen name="list_item_right_padding">10dp</dimen>
+    
+    
 </resources>
