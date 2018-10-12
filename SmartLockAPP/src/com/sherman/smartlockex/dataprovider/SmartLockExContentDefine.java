@@ -25,7 +25,7 @@ public class SmartLockExContentDefine {
 		public static final String LOCK_NAME = "LockName";
 		public static final String LOCK_STATUS = "Lock_Status";
 		public static final String LOCK_ONLINE = "Online";
-		public static final String LOCK_MAC = "MAC";
+		public static final String LOCK_ADDRESS = "Address";
 		public static final String LOCK_TYPE = "DeviceType";
 		public static final String LOCK_CHARGE = "Charge";
 
@@ -36,7 +36,7 @@ public class SmartLockExContentDefine {
 		public static final int LOCK_NAME_COLUMN = 3;
 		public static final int LOCK_STATUS_COLUMN = 4;
 		public static final int LOCK_ONLINE_COLUMN = 5;
-		public static final int LOCK_MAC_COLUMN = 6;
+		public static final int LOCK_ADDRESS_COLUMN = 6;
 		public static final int LOCK_TYPE_COLUMN = 7;
 		public static final int LOCK_CHARGE_COLUMN = 8;
 
@@ -47,8 +47,8 @@ public class SmartLockExContentDefine {
 				+ " text default '', " + LOCK_NAME
 				+ " text default ''," + LOCK_STATUS + " integer default 0, "
 				+ LOCK_ONLINE + " integer default 0, "
-				+ LOCK_MAC + " text default '',"
-				+ LOCK_TYPE + " text default '', "
+				+ LOCK_ADDRESS + " text default '',"
+				+ LOCK_TYPE + " text default '',"
 				+ LOCK_CHARGE + " integer default 0);";
 
 		public static final String TRIGGER_LOCK_DELETE = "Trigger_Locks";
