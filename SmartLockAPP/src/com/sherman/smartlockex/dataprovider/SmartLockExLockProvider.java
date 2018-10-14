@@ -114,7 +114,8 @@ public class SmartLockExLockProvider extends ContentProvider {
 		
 		dbHelper = DBHelper.getInstance(getContext());
 		gotaDB = dbHelper.getWritableDatabase();
-		return (gotaDB == null)? false : true;
+		boolean result = (gotaDB == null)? false : true;
+		return result;
 	}
 
 	@Override
@@ -131,14 +132,23 @@ public class SmartLockExLockProvider extends ContentProvider {
 		switch (uriMatcher.match(uri)) {
 			case ACTIONS:
 				cursor = gotaDB.query(true, 
-						              SmartLockExContentDefine.Lock.TABLE_NAME.toLowerCase(), 
-						              projection, 
-						              selection, 
-						              selectionArgs, 
-						              groupBy,
-						              null, 
-						              sortOrder, 
-						              null);
+			              SmartLockExContentDefine.Lock.TABLE_NAME.toLowerCase(), 
+			              projection, 
+			              null, 
+			              selectionArgs, 
+			              groupBy,
+			              null, 
+			              sortOrder, 
+			              null);
+//				cursor = gotaDB.query(true, 
+//			              SmartLockExContentDefine.Lock.TABLE_NAME.toLowerCase(), 
+//			              projection, 
+//			              selection, 
+//			              selectionArgs, 
+//			              groupBy,
+//			              null, 
+//			              sortOrder, 
+//			              null);
 				break;
 			case ACTION:
 				long id = ContentUris.parseId(uri);

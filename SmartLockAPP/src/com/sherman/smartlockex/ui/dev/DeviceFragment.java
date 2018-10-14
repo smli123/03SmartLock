@@ -224,8 +224,24 @@ public class DeviceFragment extends SmartLockFragment
 				qryLocksFromServer();
 			}
 		}, 0);
-
+		
+		// Test for all
+		testInsertInfo();
+		
 		return mFragmentView;
+	}
+	
+	private void testInsertInfo() {
+		SmartLockDefine item = new SmartLockDefine();
+		item.mLockID = "642001";
+		item.mUserName = "lishimin";
+		item.mName = "TestOK1";
+		item.mStatus = 1;
+		item.mOnline = true;
+		item.mAddress = "33:44:65:00:FF";
+		item.mType = "1";
+		item.mCharge = 81;
+		mLockHelper.addSmartLock(item);
 	}
 
 	@Override

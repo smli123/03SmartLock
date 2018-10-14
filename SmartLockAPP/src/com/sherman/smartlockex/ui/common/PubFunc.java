@@ -18,12 +18,12 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
+//import org.apache.http.HttpEntity;
+//import org.apache.http.HttpResponse;
+//import org.apache.http.client.HttpClient;
+//import org.apache.http.client.methods.HttpGet;
+//import org.apache.http.impl.client.DefaultHttpClient;
+//import org.apache.http.util.EntityUtils;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
@@ -634,87 +634,4 @@ public class PubFunc {
 		return value;
 	}
 
-	// 从网络中获取当前的天气
-	public static void getWeatherWithHTTP(String city, Handler mHandler) {
-		String str_output = "";
-		try {
-			if (city.isEmpty()) {
-				str_output = "未设置所属的城市，请设置。";
-			} else {
-				String t_city = URLEncoder.encode(city, "utf-8");
-				String url = "http://www.sojson.com/open/api/weather/json.shtml?city="
-						+ t_city;
-
-				HttpClient httpClient = new DefaultHttpClient();
-				HttpGet httpGet = new HttpGet(url);
-				HttpResponse httpResponse = httpClient.execute(httpGet);
-				if (httpResponse.getStatusLine().getStatusCode() == 200) { // 访问服务器成功
-					HttpEntity entity = httpResponse.getEntity();
-					String response = EntityUtils.toString(entity, "utf-8");
-					str_output = parseJSONWithGSON(response);
-				} else {
-					str_output = "获取的网络数据错误";
-				}
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			str_output = "网络访问失败";
-		}
-
-		Message msg = new Message();
-		msg.what = 12; // MSG_READ_CITY_WEATHER
-		msg.obj = str_output;
-
-		mHandler.sendMessage(msg);
-	}
-
-	private static String parseJSONWithGSON(String jsonData) {
-		JSONObject jsonObject = JSONObject.parseObject(jsonData);
-
-		int status = jsonObject.getInteger("status");
-		String date = jsonObject.getString("date");
-		int count = jsonObject.getInteger("count");
-		String message = jsonObject.getString("message");
-		String city = jsonObject.getString("city");
-		JSONObject data = jsonObject.getJSONObject("data");
-
-		if (status != 200)
-			return "获取天气数据失败";
-
-		String wendu = data.getString("wendu");
-		String ganmao = data.getString("ganmao");
-		String quality = data.getString("quality");
-		String pm25 = data.getString("pm25");
-		String pm10 = data.getString("pm10");
-		String shidu = data.getString("shidu");
-
-		JSONArray forecast = data.getJSONArray("forecast");
-		for (int i = 0; i < forecast.size(); i++) {
-			// String o_item = String.valueOf(data.get(i));
-			// JSONObject item = JSONObject.parseObject(o_item);
-			// String fengxiang = item.getString("fengxiang");
-			// String fengli = item.getString("fengli");
-			// String high = item.getString("high");
-			// String type = item.getString("type");
-			// String low = item.getString("low");
-			// String date = item.getString("date");
-		}
-
-		return String.valueOf(city + "温度" + wendu + ",湿度" + shidu + ",空气质量"
-				+ quality + ",PM二点五为" + pm25 + ",总结" + ganmao);
-	}
-
-	public static String getWeatherCity(String cmd) {
-		ArrayList<String> WEATHER_CITY = new ArrayList<String>(Arrays.asList(
-				"北京", "上海", "深圳", "武汉", "济南", "青岛", "厦门"));
-
-		for (int i = 0; i < WEATHER_CITY.size(); i++) {
-			if (cmd.contains(WEATHER_CITY.get(i))) {
-				return WEATHER_CITY.get(i);
-			}
-		}
-
-		return "";
-	}
 }

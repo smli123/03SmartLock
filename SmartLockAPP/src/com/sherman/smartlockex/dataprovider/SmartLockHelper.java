@@ -37,13 +37,15 @@ public class SmartLockHelper {
 					.getInt(SmartLockExContentDefine.Lock.ID_COLUMN);
 			item.mLockID = cur
 					.getString(SmartLockExContentDefine.Lock.LOCK_ID_COLUMN);
+			item.mUserName = cur
+					.getString(SmartLockExContentDefine.Lock.USER_NAME_COLUMN);
 			item.mName = cur
 					.getString(SmartLockExContentDefine.Lock.LOCK_NAME_COLUMN);
 			item.mStatus = cur
 					.getInt(SmartLockExContentDefine.Lock.LOCK_STATUS_COLUMN);
 			item.mOnline = cur
 					.getInt(SmartLockExContentDefine.Lock.LOCK_ONLINE_COLUMN) == 1 ? true : false;
-			item.mMac = cur
+			item.mAddress = cur
 					.getString(SmartLockExContentDefine.Lock.LOCK_ADDRESS_COLUMN);
 			item.mType = cur
 					.getString(SmartLockExContentDefine.Lock.LOCK_TYPE_COLUMN);
@@ -104,7 +106,7 @@ public class SmartLockHelper {
 						.getInt(SmartLockExContentDefine.Lock.LOCK_STATUS_COLUMN);
 				device.mOnline = cur
 						.getInt(SmartLockExContentDefine.Lock.LOCK_ONLINE_COLUMN) == 1 ? true : false;
-				device.mMac = cur
+				device.mAddress = cur
 						.getString(SmartLockExContentDefine.Lock.LOCK_ADDRESS_COLUMN);
 				device.mType = cur
 						.getString(SmartLockExContentDefine.Lock.LOCK_TYPE_COLUMN);
@@ -138,9 +140,9 @@ public class SmartLockHelper {
 		values.put(SmartLockExContentDefine.Lock.LOCK_STATUS,
 				device.mStatus);
 		values.put(SmartLockExContentDefine.Lock.LOCK_ONLINE,
-				device.mOnline);
+				device.mOnline == true ? 1 : 0);
 		values.put(SmartLockExContentDefine.Lock.LOCK_ADDRESS,
-				device.mMac);
+				device.mAddress);
 		values.put(SmartLockExContentDefine.Lock.LOCK_TYPE,
 				device.mType);
 		values.put(SmartLockExContentDefine.Lock.LOCK_CHARGE,
@@ -207,7 +209,7 @@ public class SmartLockHelper {
 		values.put(SmartLockExContentDefine.Lock.LOCK_ONLINE,
 				device.mOnline);
 		values.put(SmartLockExContentDefine.Lock.LOCK_ADDRESS,
-				device.mMac);
+				device.mAddress);
 		values.put(SmartLockExContentDefine.Lock.LOCK_TYPE,
 				device.mType);
 		values.put(SmartLockExContentDefine.Lock.LOCK_CHARGE,

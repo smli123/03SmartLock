@@ -41,14 +41,27 @@ public class SmartLockExContentDefine {
 		public static final int LOCK_CHARGE_COLUMN = 8;
 
 		// create table
+//		public final static String TABLE_CREATE = "CREATE TABLE IF NOT EXISTS "
+//				+ TABLE_NAME + " (" 
+//				+ _ID + " integer primary key autoincrement, " 
+//				+ LOCK_ID + " text, " 
+//				+ USER_NAME + " text, " 
+//				+ LOCK_NAME + " text, " 
+//				+ LOCK_STATUS + " integer, "
+//				+ LOCK_ONLINE + " integer, "
+//				+ LOCK_ADDRESS + " text, "
+//				+ LOCK_TYPE + " text, "
+//				+ LOCK_CHARGE + " integer);";
 		public final static String TABLE_CREATE = "CREATE TABLE IF NOT EXISTS "
-				+ TABLE_NAME + " (" + _ID
-				+ " integer primary key autoincrement, " + LOCK_ID
-				+ " text default '', " + LOCK_NAME
-				+ " text default ''," + LOCK_STATUS + " integer default 0, "
+				+ TABLE_NAME + " (" 
+				+ _ID + " integer primary key autoincrement, " 
+				+ LOCK_ID + " text default '', "  
+				+ USER_NAME + " text default '', " 
+				+ LOCK_NAME + " text default '', " 
+				+ LOCK_STATUS + " integer default 0, "
 				+ LOCK_ONLINE + " integer default 0, "
-				+ LOCK_ADDRESS + " text default '',"
-				+ LOCK_TYPE + " text default '',"
+				+ LOCK_ADDRESS + " text default '', "
+				+ LOCK_TYPE + " text default '', "
 				+ LOCK_CHARGE + " integer default 0);";
 
 		public static final String TRIGGER_LOCK_DELETE = "Trigger_Locks";

@@ -34,7 +34,7 @@ public class SmartLockExLockHelper {
     		user.mName = cur.getString(SmartLockExContentDefine.Lock.LOCK_NAME_COLUMN);
     		user.mStatus = cur.getInt(SmartLockExContentDefine.Lock.LOCK_STATUS_COLUMN);
     		user.mOnline = cur.getInt(SmartLockExContentDefine.Lock.LOCK_ONLINE_COLUMN) == 1 ? true : false;
-    		user.mMac = cur.getString(SmartLockExContentDefine.Lock.LOCK_ADDRESS_COLUMN);
+    		user.mAddress = cur.getString(SmartLockExContentDefine.Lock.LOCK_ADDRESS_COLUMN);
     		user.mType = cur.getString(SmartLockExContentDefine.Lock.LOCK_TYPE_COLUMN);
     		user.mCharge = cur.getInt(SmartLockExContentDefine.Lock.LOCK_CHARGE_COLUMN);
     	}		
@@ -87,7 +87,7 @@ public class SmartLockExLockHelper {
     		user.mName = cur.getString(SmartLockExContentDefine.Lock.LOCK_NAME_COLUMN);
     		user.mStatus = cur.getInt(SmartLockExContentDefine.Lock.LOCK_STATUS_COLUMN);
     		user.mOnline = cur.getInt(SmartLockExContentDefine.Lock.LOCK_ONLINE_COLUMN) == 1 ? true : false;
-    		user.mMac = cur.getString(SmartLockExContentDefine.Lock.LOCK_ADDRESS_COLUMN);
+    		user.mAddress = cur.getString(SmartLockExContentDefine.Lock.LOCK_ADDRESS_COLUMN);
     		user.mType = cur.getString(SmartLockExContentDefine.Lock.LOCK_TYPE_COLUMN);
     		user.mCharge = cur.getInt(SmartLockExContentDefine.Lock.LOCK_CHARGE_COLUMN);
         	cur.close();
@@ -113,7 +113,7 @@ public class SmartLockExLockHelper {
     	values.put(SmartLockExContentDefine.Lock.LOCK_NAME, item.mName);
     	values.put(SmartLockExContentDefine.Lock.LOCK_STATUS, item.mStatus);
     	values.put(SmartLockExContentDefine.Lock.LOCK_ONLINE, item.mOnline ? "1" : "0");
-    	values.put(SmartLockExContentDefine.Lock.LOCK_ADDRESS, item.mMac);
+    	values.put(SmartLockExContentDefine.Lock.LOCK_ADDRESS, item.mAddress);
     	values.put(SmartLockExContentDefine.Lock.LOCK_TYPE, item.mType);
     	values.put(SmartLockExContentDefine.Lock.LOCK_CHARGE, item.mCharge);
     	
@@ -162,7 +162,7 @@ public class SmartLockExLockHelper {
     	values.put(SmartLockExContentDefine.Lock.LOCK_NAME, item.mName);
     	values.put(SmartLockExContentDefine.Lock.LOCK_STATUS, item.mStatus);
     	values.put(SmartLockExContentDefine.Lock.LOCK_ONLINE, item.mOnline ? "1" : "0");
-    	values.put(SmartLockExContentDefine.Lock.LOCK_ADDRESS, item.mMac);
+    	values.put(SmartLockExContentDefine.Lock.LOCK_ADDRESS, item.mAddress);
     	values.put(SmartLockExContentDefine.Lock.LOCK_TYPE, item.mType);
     	values.put(SmartLockExContentDefine.Lock.LOCK_CHARGE, item.mCharge);
     	
