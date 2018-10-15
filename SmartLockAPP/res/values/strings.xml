@@ -152,5 +152,9 @@
     <string name="smartlock_oper_lock_close_fail">"关锁失败"</string>
     <string name="smartlock_oper_lock_open">"开锁"</string>
     <string name="smartlock_oper_lock_close">"关锁"</string>
-    
+
+    <string name="app_update">"检查更新"</string>
+    <string name="app_feedback">"意见反馈"</string>
+    <string name="app_help">"帮助中心"</string>
+    <string name="app_about">"关于"</string>
 </resources>
