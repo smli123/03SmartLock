@@ -31,13 +31,16 @@
 	        android:id="@+id/rl_lock_total"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
 	        android:layout_toRightOf="@id/iv_lock_icon"
-	        android:orientation="vertical">
+	        android:orientation="vertical" >
 	        
 		    <RelativeLayout
 		        android:id="@+id/rl_lock_name"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
+		        android:layout_alignParentTop="true"
+		        android:layout_marginTop="0dp"
 		        android:orientation="horizontal" >
 	        
 		        <TextView
@@ -46,7 +49,9 @@
 			        android:layout_height="wrap_content"
 			        android:layout_marginLeft="@dimen/list_item_left_padding"
 			        android:layout_marginRight="@dimen/list_item_right_padding" 
-			        android:text="Lock Name"/> 
+			        android:textColor="@color/black"
+			        android:textSize="20dp"
+			        android:text="@null"/> 
 	
 		    </RelativeLayout>
 		    
@@ -54,35 +59,39 @@
 		        android:id="@+id/rl_lock_status"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
-		        android:layout_below="@id/rl_lock_name"
-		        android:orientation="horizontal" >
+				android:layout_below="@id/rl_lock_name"
+		        android:orientation="horizontal"
+		        android:layout_marginTop="10dp" >
 	        
 		        <ImageView
 		            android:id="@+id/iv_lock_online"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-		        	android:layout_alignParentLeft="true"
-		        	android:src="@drawable/smp_online"
-			        android:layout_marginLeft="@dimen/list_item_left_padding"
-			        android:layout_marginRight="@dimen/list_item_right_padding" /> 
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentLeft="true"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="@dimen/list_item_left_padding"
+		            android:layout_marginRight="@dimen/list_item_right_padding"
+		            android:src="@drawable/smp_online" />
 	
 		        <ImageView
 		            android:id="@+id/iv_lock_status"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-		        	android:layout_toRightOf="@id/iv_lock_online"
-		        	android:src="@drawable/smp_lock_close"
-			        android:layout_marginLeft="@dimen/list_item_left_padding"
-			        android:layout_marginRight="@dimen/list_item_right_padding" /> 
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="@dimen/list_item_left_padding"
+		            android:layout_marginRight="@dimen/list_item_right_padding"
+		            android:layout_toRightOf="@id/iv_lock_online"
+		            android:src="@drawable/smp_lock_close" />
 	
 		        <ImageView
 		            android:id="@+id/iv_lock_charge"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-		        	android:layout_toRightOf="@id/iv_lock_status"
-		        	android:src="@drawable/smp_lock_charge"
-			        android:layout_marginLeft="@dimen/list_item_left_padding"
-			        android:layout_marginRight="@dimen/list_item_right_padding" /> 
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="@dimen/list_item_left_padding"
+		            android:layout_marginRight="@dimen/list_item_right_padding"
+		            android:layout_toRightOf="@id/iv_lock_status"
+		            android:src="@drawable/smp_lock_charge" />
 	
 		        <TextView
 		            android:id="@+id/tv_lock_charge"
@@ -95,40 +104,44 @@
 	
 		    </RelativeLayout>
 		    
-		    
 		    <RelativeLayout
 		        android:id="@+id/rl_lock_operator"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
-		        android:layout_below="@id/rl_lock_status"
-		        android:orientation="horizontal" >
+				android:layout_below="@id/rl_lock_status"
+		        android:orientation="horizontal"
+		        android:layout_marginTop="10dp"
+		        android:layout_marginBottom="0dp" >
 	        
 		        <ImageView
 		            android:id="@+id/iv_lock_open"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-		        	android:layout_alignParentLeft="true"
-		        	android:src="@drawable/smp_lock_open"
-			        android:layout_marginLeft="@dimen/list_item_left_padding"
-			        android:layout_marginRight="@dimen/list_item_right_padding" /> 
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentLeft="true"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="@dimen/list_item_left_padding"
+		            android:layout_marginRight="@dimen/list_item_right_padding"
+		            android:src="@drawable/smp_lock_open" />
 	
 		        <ImageView
 		            android:id="@+id/iv_lock_close"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-		        	android:layout_toRightOf="@id/iv_lock_open"
-		        	android:src="@drawable/smp_lock_close"
-			        android:layout_marginLeft="@dimen/list_item_left_padding"
-			        android:layout_marginRight="@dimen/list_item_right_padding" /> 
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="@dimen/list_item_left_padding"
+		            android:layout_marginRight="@dimen/list_item_right_padding"
+		            android:layout_toRightOf="@id/iv_lock_open"
+		            android:src="@drawable/smp_lock_close" />
 	
 		        <ImageView
 		            android:id="@+id/iv_lock_authorize"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-		        	android:layout_toRightOf="@id/iv_lock_close"
-		        	android:src="@drawable/smp_lock_authorize"
-			        android:layout_marginLeft="@dimen/list_item_left_padding"
-			        android:layout_marginRight="@dimen/list_item_right_padding" /> 
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="@dimen/list_item_left_padding"
+		            android:layout_marginRight="@dimen/list_item_right_padding"
+		            android:layout_toRightOf="@id/iv_lock_close"
+		            android:src="@drawable/smp_lock_authorize" />
 	
 		    </RelativeLayout>
 		    

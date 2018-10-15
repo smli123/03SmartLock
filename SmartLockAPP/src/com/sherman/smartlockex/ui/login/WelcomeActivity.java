@@ -21,11 +21,6 @@ public class WelcomeActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        //��title
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);    
-//        //ȫ��    
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN ,      
-//                       WindowManager.LayoutParams. FLAG_FULLSCREEN);
         setContentView(R.layout.activity_welcome);
         
         mHandler = new Handler();
@@ -43,8 +38,6 @@ public class WelcomeActivity extends Activity {
      
      private void start() {
  		Intent it = new Intent();
-// 		it.putExtra("AUTO_LOGIN", DEFAULT_AUTOLOGIN);
-// 		it.putExtra("LOGIN_SHOW", "true");
  		it.setClass(WelcomeActivity.this, LoginActivity.class);
  		startActivity(it);
  		finish();

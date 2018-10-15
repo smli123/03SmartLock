@@ -25,6 +25,9 @@ public class SmartLockMessage {
 	public static final String CMD_SP_LIGHT = "APPLIGHT";
 	public static final String CMD_SP_USB = "APPUSB";
 	public static final String CMD_SP_BACK2AP = "APPBACK2AP";
+	
+
+	public static final String CMD_SP_OPER_LOCK = "APPOPERLOCK";
 
 	// 服务器主动通知的命令
 	public static final String CMD_SP_NOTIFYONLINE = "APPNOTIFYONLINE";
@@ -33,6 +36,9 @@ public class SmartLockMessage {
 	public static final String CMD_SP_NOTIFYUSB = "APPNOTIFYUSB";
 
 	public static final String CMD_SP_NOTIFYUPGRADEAP = "APPNOTIFYUPGRADEAP";
+	
+	// SMart LOCK
+	public static final String CMD_SP_NOTIFYLOCKSTATUS = "APPNOTIFYLOCKSTATUS";
 
 	// -------------------------------------------------------
 	public static final int EVT_SP_REGISTER = 10;
@@ -57,8 +63,10 @@ public class SmartLockMessage {
 	public static final int EVT_SP_NOTIFYPOWER = 201;
 	public static final int EVT_SP_NOTIFYLIGHT = 202;
 	public static final int EVT_SP_NOTIFYUSB = 203;
-	
+
 	public static final int EVT_SP_NOTIFYUPGRADEAP = 204;
+	
+	public static final int EVT_SP_NOTIFYLOCKSTATUS = 300;
 
 	public static Map<String, Integer> mEventCommand = new HashMap<String, Integer>();
 	static {
@@ -80,6 +88,9 @@ public class SmartLockMessage {
 		mEventCommand.put(CMD_SP_NOTIFYPOWER, EVT_SP_NOTIFYPOWER);
 		mEventCommand.put(CMD_SP_NOTIFYLIGHT, EVT_SP_NOTIFYLIGHT);
 		mEventCommand.put(CMD_SP_NOTIFYUPGRADEAP, EVT_SP_NOTIFYUPGRADEAP);
+		
+		// SmartLock
+		mEventCommand.put(CMD_SP_NOTIFYLOCKSTATUS, EVT_SP_NOTIFYLOCKSTATUS);
 
 	};
 
@@ -124,6 +135,9 @@ public class SmartLockMessage {
 		mCommandAction.put(CMD_SP_NOTIFYONLINE, PubDefine.PLUG_NOTIFY_ONLINE);
 		mCommandAction.put(CMD_SP_NOTIFYPOWER, PubDefine.PLUG_NOTIFY_POWER);
 		mCommandAction.put(CMD_SP_NOTIFYLIGHT, PubDefine.PLUG_NOTIFY_LIGHT);
+		
+		// SmartLock
+		mCommandAction.put(CMD_SP_NOTIFYLOCKSTATUS, PubDefine.LOCK_NOTIFY_STATUS);
 
 	};
 

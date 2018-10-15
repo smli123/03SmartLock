@@ -148,4 +148,9 @@
     <string name="smartlock_ctrl_samename_exist">"同名插座已经存在"</string>
     <string name="smartlock_ctrl_mod_plugname_length_too_long">"插座名字长度超过20，请减少名字长度。1个汉字会占用多个字节"</string>
 	    
+    <string name="smartlock_oper_lock_open_fail">"开锁失败"</string>
+    <string name="smartlock_oper_lock_close_fail">"关锁失败"</string>
+    <string name="smartlock_oper_lock_open">"开锁"</string>
+    <string name="smartlock_oper_lock_close">"关锁"</string>
+    
 </resources>

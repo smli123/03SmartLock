@@ -104,6 +104,9 @@ public class PubDefine {
 	public static final String PLUG_NOTIFY_UPGRADEAP = "com.thingzdo.smartplug.notifyupgradeap";
 
 	public static final String CONFIG_MODIFY_SPEEK_TIMER = "com.thingzdo.smartplug.config.speek";
+	
+	// SmartLock
+	public static final String LOCK_NOTIFY_STATUS = "com.sherman.smartlockex.lock.status";
 
 	// 设备类型
 	public static final String DEVICE_UNKNOWN = "UNKNOWN"; // 0_

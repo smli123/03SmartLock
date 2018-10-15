@@ -144,6 +144,11 @@ public class SmartLockEventHandler extends Handler {
 				SmartLockMessage.EVT_SP_NOTIFYUPGRADEAP,
 				new SmartLockEventHandlerNotifyUpgradeAP()));
 
+		// SmartLock
+		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
+				SmartLockMessage.EVT_SP_NOTIFYLOCKSTATUS,
+				new SmartLockEventHandlerNotifyLockStatus()));
+
 	}
 
 	protected void log(String logString) {

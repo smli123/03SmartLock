@@ -79,11 +79,13 @@ public class DevlistAdapter extends BaseAdapter {
 
 				if (!TextUtils.isEmpty(device.mLockID)) {
 					tv_lock_name.setText(device.mName);
+
+					rl_lock_item.setOnClickListener(selectPlugClick);
 					
 					iv_lock_icon.setImageResource(R.drawable.smp_lock_big);
 					iv_lock_online.setImageResource(device.mOnline == true ? R.drawable.smp_online : R.drawable.smp_offline);
 					iv_lock_status.setImageResource(device.mStatus == 0 ? R.drawable.smp_lock_close : R.drawable.smp_lock_open);
-					tv_lock_charge.setText(device.mCharge);
+					tv_lock_charge.setText(String.valueOf(device.mCharge));
 
 					rl_lock_item.setContentDescription(String
 							.valueOf(device.mLockID));
@@ -130,6 +132,7 @@ public class DevlistAdapter extends BaseAdapter {
 					.findViewById(R.id.iv_lock_close);
 			holder.iv_lock_authorize = (ImageView) convertView
 					.findViewById(R.id.iv_lock_authorize);
+			
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();

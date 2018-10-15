@@ -61,6 +61,11 @@
             android:theme="@android:style/Theme.Holo.NoActionBar"
             android:label="@string/app_name" />
             
+        <activity 
+            android:name="com.sherman.smartlockex.ui.dev.LockDetailActivity"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:label="@string/app_name" />
+            
         
     </application>
 

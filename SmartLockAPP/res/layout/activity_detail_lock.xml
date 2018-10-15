@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+    
+    <include
+          android:id="@+id/commontitlebar"  
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          layout="@layout/view_common_titlebar"
+          android:layout_alignParentTop="true" />   
+
+
+    <RelativeLayout
+        android:id="@+id/rl_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/commontitlebar"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal" >
+    	
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@null"
+            android:textColor="@color/black"
+            android:textSize="@dimen/version_font_size" />
+    </RelativeLayout>
+    
+    <LinearLayout 
+        android:id="@+id/ll_control_area"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content" 
+        android:layout_below="@id/rl_status"
+        android:layout_marginTop="20dp"
+    	android:orientation="horizontal">
+    	
+        <TextView
+            android:id="@+id/tv_lock_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:drawableTop="@drawable/smp_lock_open_big"
+            android:text="@string/smartlock_oper_lock_open"
+            android:textColor="@color/black"
+            android:textSize="@dimen/version_font_size" />
+        
+        <TextView
+            android:id="@+id/tv_lock_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:drawableTop="@drawable/smp_lock_close_big"
+            android:text="@string/smartlock_oper_lock_close"
+            android:textColor="@color/black"
+            android:textSize="@dimen/version_font_size" />
+    </LinearLayout>
+    
+    <RelativeLayout
+        android:id="@+id/rl_log"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+    	
+        <TextView
+            android:id="@+id/tv_log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@null"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/version_font_size" />
+    </RelativeLayout>
+    
+    
+</RelativeLayout>

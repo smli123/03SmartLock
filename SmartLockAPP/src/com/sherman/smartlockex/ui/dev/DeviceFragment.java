@@ -34,7 +34,7 @@ public class DeviceFragment extends SmartLockFragment
 		implements
 			View.OnClickListener {
 	private SmartLockHelper mLockHelper = null;
-	private String mFocusPlugId = "0";
+	private String mFocusLockId = "0";
 	
 	private ListView mDevList = null;
 	private RefreshableView mRefreshableView = null;
@@ -72,7 +72,7 @@ public class DeviceFragment extends SmartLockFragment
 				switch (code) {
 					case 0 :
 						SmartLockDefine plug = mLockHelper
-								.getSmartLock(mFocusPlugId);
+								.getSmartLock(mFocusLockId);
 						if (null != plug) {
 							plug.mStatus = status;
 							if (0 < mLockHelper.modifySmartLock(plug)) {
@@ -101,16 +101,12 @@ public class DeviceFragment extends SmartLockFragment
 			}
 
 			if (intent.getAction().equals(PubDefine.PLUG_NOTIFY_POWER)) {
-//				if (true == NotifyProcessor.powerNotify(mContext, intent)) {
-					doBackgroundLoad();
-//				}
+				doBackgroundLoad();
 			}
 
 			if (intent.getAction().equals(PubDefine.PLUG_NOTIFY_ONLINE)) {
-//				if (true == NotifyProcessor.onlineNotify(mContext, intent)) {
-					qryLocksFromServer();
-					// doBackgroundLoad();
-//				}
+				qryLocksFromServer();
+				// doBackgroundLoad();
 			}
 			if (intent.getAction().equals(PubDefine.PLUG_DELETE)) {
 				timeoutHandler.removeCallbacks(timeoutProcess);
@@ -118,7 +114,7 @@ public class DeviceFragment extends SmartLockFragment
 				String message = intent.getStringExtra("MESSAGE");
 				switch (ret) {
 					case 0 :
-						if (true == mLockHelper.deleteSmartLock(mFocusPlugId)) {
+						if (true == mLockHelper.deleteSmartLock(mFocusLockId)) {
 							doBackgroundLoad();
 						}
 
@@ -135,7 +131,7 @@ public class DeviceFragment extends SmartLockFragment
 				int ret = intent.getIntExtra("RESULT", 0);
 				String message = intent.getStringExtra("MESSAGE");
 				timeoutHandler.removeCallbacks(timeoutProcess);
-				SmartLockDefine plug = mLockHelper.getSmartLock(mFocusPlugId);
+				SmartLockDefine plug = mLockHelper.getSmartLock(mFocusLockId);
 				switch (ret) {
 					case 0 :
 						plug.mName = mNewPlugName;
@@ -304,9 +300,9 @@ public class DeviceFragment extends SmartLockFragment
 
 	private Handler mPressHandler = new Handler() {
 		public void handleMessage(Message msg) {
-			mFocusPlugId = (String) msg.obj;
-			SmartLockDefine plug = mLockHelper.getSmartLock(mFocusPlugId);
-			PubFunc.log("mFocusPlugId=" + mFocusPlugId);
+			mFocusLockId = (String) msg.obj;
+			SmartLockDefine plug = mLockHelper.getSmartLock(mFocusLockId);
+			PubFunc.log("mFocusLockId=" + mFocusLockId);
 			if (0 == msg.what) { 		// 修改模块名字
 				if (null != plug) {
 					modifyName(plug.mName);
@@ -328,7 +324,7 @@ public class DeviceFragment extends SmartLockFragment
 					dialog.setPositiveButton(str_ok, new OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							deletePlug(mFocusPlugId);
+							deletePlug(mFocusLockId);
 						}
 					});
 					dialog.show();
@@ -374,7 +370,7 @@ public class DeviceFragment extends SmartLockFragment
 						.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 						.append(PubStatus.g_CurUserName)
 						.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
-						.append(mFocusPlugId)
+						.append(mFocusLockId)
 						.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 						.append(mNewPlugName);
 				sendMsg(true, sb.toString(), true);
@@ -408,7 +404,7 @@ public class DeviceFragment extends SmartLockFragment
 				mContext.getString(R.string.smartlock_ctrl_delete), false);
 		mProgress.show();
 
-		if (mFocusPlugId.equalsIgnoreCase("0")) {
+		if (mFocusLockId.equalsIgnoreCase("0")) {
 			int a = 0;
 		}
 
