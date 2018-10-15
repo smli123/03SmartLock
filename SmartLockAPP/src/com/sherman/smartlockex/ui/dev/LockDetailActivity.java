@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sherman.smartlockex.R;
-import com.sherman.smartlockex.dataprovider.SmartLockHelper;
+import com.sherman.smartlockex.dataprovider.SmartLockExLockHelper;
 import com.sherman.smartlockex.internet.UDPReceiver;
 import com.sherman.smartlockex.processhandler.SmartLockMessage;
 import com.sherman.smartlockex.ui.common.PubDefine;
@@ -30,7 +30,7 @@ import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
 
 public class LockDetailActivity extends TitledActivity implements OnClickListener {
 	private Context mContext = null;
-	private SmartLockHelper mLockHelper = null;
+	private SmartLockExLockHelper mLockHelper = null;
 	
 	private TextView tv_status;
 	private TextView tv_log;
@@ -84,7 +84,7 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 		setTitleLeftButton(R.string.smartlock_goback,
 				R.drawable.title_btn_selector, this);
         
-        mLockHelper = new SmartLockHelper(mContext);
+        mLockHelper = new SmartLockExLockHelper(mContext);
         
         Intent intent = getIntent();
         mLockID = intent.getStringExtra("LOCKID");

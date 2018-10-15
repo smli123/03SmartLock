@@ -1,5 +1,7 @@
 package com.sherman.smartlockex.dataprovider;
 
+import java.util.ArrayList;
+
 import com.sherman.smartlockex.ui.common.PubFunc;
 import com.sherman.smartlockex.ui.common.SmartLockDefine;
 
@@ -25,157 +27,238 @@ public class SmartLockExLockHelper {
 			mContentResolver = mContext.getContentResolver();
 		}
 	}
-	
-	private SmartLockDefine getData(Cursor cur) {
-		SmartLockDefine user = new SmartLockDefine();
-    	while (cur.moveToNext()){
-    		user.mID = cur.getInt(SmartLockExContentDefine.Lock.ID_COLUMN);
-    		user.mUserName = cur.getString(SmartLockExContentDefine.Lock.USER_NAME_COLUMN);
-    		user.mName = cur.getString(SmartLockExContentDefine.Lock.LOCK_NAME_COLUMN);
-    		user.mStatus = cur.getInt(SmartLockExContentDefine.Lock.LOCK_STATUS_COLUMN);
-    		user.mOnline = cur.getInt(SmartLockExContentDefine.Lock.LOCK_ONLINE_COLUMN) == 1 ? true : false;
-    		user.mAddress = cur.getString(SmartLockExContentDefine.Lock.LOCK_ADDRESS_COLUMN);
-    		user.mType = cur.getString(SmartLockExContentDefine.Lock.LOCK_TYPE_COLUMN);
-    		user.mCharge = cur.getInt(SmartLockExContentDefine.Lock.LOCK_CHARGE_COLUMN);
-    	}		
-		return user;	
-	}
-	
 
-	public SmartLockDefine getLock(){
-		if (null == mContentResolver) {
-			return null; 
+	// 获得数据
+	private ArrayList<SmartLockDefine> getData(Cursor cur) {
+		ArrayList<SmartLockDefine> devs = new ArrayList<SmartLockDefine>();
+		while (cur.moveToNext()) {
+			SmartLockDefine item = new SmartLockDefine();
+			item.mID = cur
+					.getInt(SmartLockExContentDefine.Lock.ID_COLUMN);
+			item.mLockID = cur
+					.getString(SmartLockExContentDefine.Lock.LOCK_ID_COLUMN);
+			item.mUserName = cur
+					.getString(SmartLockExContentDefine.Lock.USER_NAME_COLUMN);
+			item.mName = cur
+					.getString(SmartLockExContentDefine.Lock.LOCK_NAME_COLUMN);
+			item.mStatus = cur
+					.getInt(SmartLockExContentDefine.Lock.LOCK_STATUS_COLUMN);
+			item.mOnline = cur
+					.getInt(SmartLockExContentDefine.Lock.LOCK_ONLINE_COLUMN) == 1 ? true : false;
+			item.mAddress = cur
+					.getString(SmartLockExContentDefine.Lock.LOCK_ADDRESS_COLUMN);
+			item.mType = cur
+					.getString(SmartLockExContentDefine.Lock.LOCK_TYPE_COLUMN);
+			item.mCharge = cur
+					.getInt(SmartLockExContentDefine.Lock.LOCK_CHARGE_COLUMN);
+
+			devs.add(item);
 		}
-		SmartLockDefine user = null;
-		String where = "";
-		String order = SmartLockExContentDefine.Lock._ID  + " asc";
-    	Cursor cur = mContentResolver.query(SmartLockExContentDefine.Lock.ALL_CONTENT_URI, 
-    			                            null, 
-				                            where, 
-				                            null, 
-				                            order);
-    	
-    	
-    	if (null != cur) {
-    		user = getData(cur);
-    		cur.close();
-    	}
-		return user;
-    }	
-    
+		return devs;
+	}
 
-    public SmartLockDefine getLock(String lockName){
-    	SmartLockDefine user = new SmartLockDefine();
+	// 获得指定用户名下所有插座
+	public ArrayList<SmartLockDefine> getAllSmartLock(String user) {
+		ArrayList<SmartLockDefine> devs = new ArrayList<SmartLockDefine>();
 		if (null == mContentResolver) {
-			return null; 
-		}    	
-    	
-		String where = SmartLockExContentDefine.Lock.LOCK_NAME + "='" + lockName + "'";
-    	    	
-    	Cursor cur = mContentResolver.query(SmartLockExContentDefine.Lock.ALL_CONTENT_URI, 
-                                            null, 
-                                            where, 
-                                            null, 
-                                            null);
-    	if (null != cur) {
-    		if (cur.moveToFirst() == false) {
-            	cur.close();
-            	return null;    			
-    		}
-    		user.mID = cur.getInt(SmartLockExContentDefine.Lock.ID_COLUMN);
-    		user.mUserName = cur.getString(SmartLockExContentDefine.Lock.USER_NAME_COLUMN);
-    		user.mName = cur.getString(SmartLockExContentDefine.Lock.LOCK_NAME_COLUMN);
-    		user.mStatus = cur.getInt(SmartLockExContentDefine.Lock.LOCK_STATUS_COLUMN);
-    		user.mOnline = cur.getInt(SmartLockExContentDefine.Lock.LOCK_ONLINE_COLUMN) == 1 ? true : false;
-    		user.mAddress = cur.getString(SmartLockExContentDefine.Lock.LOCK_ADDRESS_COLUMN);
-    		user.mType = cur.getString(SmartLockExContentDefine.Lock.LOCK_TYPE_COLUMN);
-    		user.mCharge = cur.getInt(SmartLockExContentDefine.Lock.LOCK_CHARGE_COLUMN);
-        	cur.close();
-        	return user;         	
-    	} else {
-        	return null;     		
-    	}
-    }
-    
+			return null;
+		}
+		String where = SmartLockExContentDefine.Lock.USER_NAME
+				+ " = '" + user + "'";
+		String order = SmartLockExContentDefine.Lock._ID + " asc";
+		Cursor cur = mContentResolver.query(
+				SmartLockExContentDefine.Lock.ALL_CONTENT_URI, null,
+				where, null, order);
 
-    public long addLock(SmartLockDefine item){
+		if (null != cur) {
+			devs = getData(cur);
+			cur.close();
+		}
+
+		return devs;
+	}
+
+	// 获得指定插座信息
+	public SmartLockDefine getSmartLock(String id) {
+		SmartLockDefine device = null;
 		if (null == mContentResolver) {
-			return 0; 
-		} 
-		if (null == item) {
+			return null;
+		}
+
+		String where = SmartLockExContentDefine.Lock.LOCK_ID + "='"
+				+ id + "'";
+
+		Cursor cur = mContentResolver.query(
+				SmartLockExContentDefine.Lock.ALL_CONTENT_URI, null,
+				where, null, null);
+		if (null != cur) {
+			while (cur.moveToNext()) {
+				device = new SmartLockDefine();
+				device.mID = cur
+						.getInt(SmartLockExContentDefine.Lock.ID_COLUMN);
+				device.mLockID = cur
+						.getString(SmartLockExContentDefine.Lock.LOCK_ID_COLUMN);
+				device.mUserName = cur
+						.getString(SmartLockExContentDefine.Lock.USER_NAME_COLUMN);
+				device.mName = cur
+						.getString(SmartLockExContentDefine.Lock.LOCK_NAME_COLUMN);
+				device.mStatus = cur
+						.getInt(SmartLockExContentDefine.Lock.LOCK_STATUS_COLUMN);
+				device.mOnline = cur
+						.getInt(SmartLockExContentDefine.Lock.LOCK_ONLINE_COLUMN) == 1 ? true : false;
+				device.mAddress = cur
+						.getString(SmartLockExContentDefine.Lock.LOCK_ADDRESS_COLUMN);
+				device.mType = cur
+						.getString(SmartLockExContentDefine.Lock.LOCK_TYPE_COLUMN);
+				device.mCharge = cur
+						.getInt(SmartLockExContentDefine.Lock.LOCK_CHARGE_COLUMN);
+				break;
+			}
+			cur.close();
+			return device;
+		} else {
+			return null;
+		}
+	}
+
+	// 增加新插座
+	public long addSmartLock(SmartLockDefine device) {
+		if (null == mContentResolver) {
 			return 0;
 		}
-		
-		deleteLock(item.mName);
-			
-    	ContentValues values = new ContentValues();
-    	values.put(SmartLockExContentDefine.Lock.USER_NAME, item.mUserName);
-    	values.put(SmartLockExContentDefine.Lock.LOCK_NAME, item.mName);
-    	values.put(SmartLockExContentDefine.Lock.LOCK_STATUS, item.mStatus);
-    	values.put(SmartLockExContentDefine.Lock.LOCK_ONLINE, item.mOnline ? "1" : "0");
-    	values.put(SmartLockExContentDefine.Lock.LOCK_ADDRESS, item.mAddress);
-    	values.put(SmartLockExContentDefine.Lock.LOCK_TYPE, item.mType);
-    	values.put(SmartLockExContentDefine.Lock.LOCK_CHARGE, item.mCharge);
-    	
-    	Uri uri = mContentResolver.insert(SmartLockExContentDefine.Lock.ALL_CONTENT_URI, values);
-    	PubFunc.log(TAG, "Insert a record");
-    	
-    	if (null == uri) {
-    		return 0;
-    	}
-        try {
-    	    long id = ContentUris.parseId(uri);
-    	    return id;
-        } catch(Exception e) {
-        	Log.e(TAG, e.getMessage());
-        	return 0;
-        }
-    }
-    
-    public boolean deleteLock(String lockName){
-		if (null == mContentResolver) {
-			return false; 
+		if (null == device) {
+			return 0;
 		}
-    	String where = SmartLockExContentDefine.Lock.LOCK_NAME + "='" + lockName + "'"; 
-    	int count = mContentResolver.delete(SmartLockExContentDefine.Lock.ALL_CONTENT_URI, where, null);
-    	return count > 0 ? true : false;
-    }
-       
 
-    public void clearLock(){
-		if (null != mContentResolver) {
-			PubFunc.log(TAG, "Clear users");
-			mContentResolver.delete(SmartLockExContentDefine.Lock.ALL_CONTENT_URI, null, null); 
+		ContentValues values = new ContentValues();
+		values.put(SmartLockExContentDefine.Lock.LOCK_ID,
+				device.mLockID);
+		values.put(SmartLockExContentDefine.Lock.USER_NAME,
+				device.mUserName);
+		values.put(SmartLockExContentDefine.Lock.LOCK_NAME,
+				device.mName);
+		values.put(SmartLockExContentDefine.Lock.LOCK_STATUS,
+				device.mStatus);
+		values.put(SmartLockExContentDefine.Lock.LOCK_ONLINE,
+				device.mOnline == true ? 1 : 0);
+		values.put(SmartLockExContentDefine.Lock.LOCK_ADDRESS,
+				device.mAddress);
+		values.put(SmartLockExContentDefine.Lock.LOCK_TYPE,
+				device.mType);
+		values.put(SmartLockExContentDefine.Lock.LOCK_CHARGE,
+				device.mCharge);
+
+		Uri uri = mContentResolver
+				.insert(SmartLockExContentDefine.Lock.ALL_CONTENT_URI,
+						values);
+		PubFunc.log(TAG, "Insert a record");
+
+		if (null == uri) {
+			return 0;
 		}
-    }
-    
-    public int modifyLock(SmartLockDefine item){
+		try {
+			long id = ContentUris.parseId(uri);
+			return id;
+		} catch (Exception e) {
+			Log.e(TAG, e.getMessage());
+			return 0;
+		}
+	}
+
+	// 删除指定的插座
+	public boolean deleteSmartLock(String id) {
 		if (null == mContentResolver) {
-			return -1; 
-		} 
-		if (null == item) {
+			return false;
+		}
+		String where = SmartLockExContentDefine.Lock.LOCK_ID + "='"
+				+ id + "'";
+		int count = mContentResolver.delete(
+				SmartLockExContentDefine.Lock.ALL_CONTENT_URI, where,
+				null);
+		return count > 0 ? true : false;
+	}
+
+	// 删除所有插座
+	public void clearSmartLock() {
+		if (null != mContentResolver) {
+			PubFunc.log(TAG, "Clear call lock");
+			mContentResolver.delete(
+					SmartLockExContentDefine.Lock.ALL_CONTENT_URI,
+					null, null);
+		}
+	}
+
+	// 修改插座
+	public int modifySmartLock(SmartLockDefine device) {
+		if (null == mContentResolver) {
 			return -1;
 		}
-			
-    	ContentValues values = new ContentValues();
-    	values.put(SmartLockExContentDefine.Lock.USER_NAME, item.mUserName);
-    	values.put(SmartLockExContentDefine.Lock.LOCK_NAME, item.mName);
-    	values.put(SmartLockExContentDefine.Lock.LOCK_STATUS, item.mStatus);
-    	values.put(SmartLockExContentDefine.Lock.LOCK_ONLINE, item.mOnline ? "1" : "0");
-    	values.put(SmartLockExContentDefine.Lock.LOCK_ADDRESS, item.mAddress);
-    	values.put(SmartLockExContentDefine.Lock.LOCK_TYPE, item.mType);
-    	values.put(SmartLockExContentDefine.Lock.LOCK_CHARGE, item.mCharge);
-    	
-    	String where = null;
-    	if (!item.mName.isEmpty()) {
-    		where = SmartLockExContentDefine.Lock.LOCK_NAME + "='" + item.mName + "'";
-    	}
-    	
-    	int index = mContentResolver.update(SmartLockExContentDefine.Lock.ALL_CONTENT_URI, 
-    			                         values, 
-    			                         where, 
-    			                         null);
-    	PubFunc.log(TAG, "Update a record");
-        return index;
-    } 
+		if (null == device) {
+			return -1;
+		}
+
+		ContentValues values = new ContentValues();
+		values.put(SmartLockExContentDefine.Lock.LOCK_ID,
+				device.mLockID);
+		values.put(SmartLockExContentDefine.Lock.USER_NAME,
+				device.mUserName);
+		values.put(SmartLockExContentDefine.Lock.LOCK_NAME,
+				device.mName);
+		values.put(SmartLockExContentDefine.Lock.LOCK_STATUS,
+				device.mStatus);
+		values.put(SmartLockExContentDefine.Lock.LOCK_ONLINE,
+				device.mOnline);
+		values.put(SmartLockExContentDefine.Lock.LOCK_ADDRESS,
+				device.mAddress);
+		values.put(SmartLockExContentDefine.Lock.LOCK_TYPE,
+				device.mType);
+		values.put(SmartLockExContentDefine.Lock.LOCK_CHARGE,
+				device.mCharge);
+
+		String where = SmartLockExContentDefine.Lock.LOCK_ID + "='"
+				+ device.mLockID + "'";
+		int index = mContentResolver.update(
+				SmartLockExContentDefine.Lock.ALL_CONTENT_URI,
+				values, where, null);
+		PubFunc.log(TAG, "Update a lock");
+		return index;
+	}
+
+	// 判断用户名下的指定ID的插座是否存在
+	public boolean isLockExist(final String username, final String lockname) {
+		if (null == mContentResolver) {
+			Log.e(TAG, "mContentResolver=null");
+			return true;
+		}
+
+		String where = SmartLockExContentDefine.Lock.USER_NAME + "='"
+				+ username + "' AND "
+				+ SmartLockExContentDefine.Lock.LOCK_NAME + "='"
+				+ lockname + "'";
+		Cursor cur = mContentResolver.query(
+				SmartLockExContentDefine.Lock.ALL_CONTENT_URI, null,
+				where, null, null);
+		if (null == cur || 0 == cur.getCount()) {
+			cur.close();
+			return false;
+		}
+
+		cur.close();
+		return true;
+	}
+
+	public void setAllLocksOffline() {
+		if (null == mContentResolver) {
+			return;
+		}
+
+		ContentValues values = new ContentValues();
+		values.put(SmartLockExContentDefine.Lock.LOCK_ONLINE, false);
+		values.put(SmartLockExContentDefine.Lock.LOCK_STATUS, 0);
+
+		mContentResolver.update(
+				SmartLockExContentDefine.Lock.ALL_CONTENT_URI,
+				values, null, null);
+		PubFunc.log(TAG, "Update setAllLocksOffline");
+	}
 }

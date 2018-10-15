@@ -45,5 +45,10 @@
     <dimen name="list_item_left_padding">10dp</dimen>
     <dimen name="list_item_right_padding">10dp</dimen>
     
+    <!--  Message separator -->
+    <dimen name="message_margin_top">15dp</dimen>
+    <dimen name="message_margin_left">5dp</dimen>
+    <dimen name="message_margin_text">5dp</dimen>
+    
     
 </resources>

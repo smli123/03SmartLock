@@ -3,7 +3,7 @@ package com.sherman.smartlockex.ui.dev;
 import java.util.ArrayList;
 
 import com.sherman.smartlockex.R;
-import com.sherman.smartlockex.dataprovider.SmartLockHelper;
+import com.sherman.smartlockex.dataprovider.SmartLockExLockHelper;
 import com.sherman.smartlockex.ui.common.SmartLockDefine;
 import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
 import com.sherman.smartlockex.ui.wheelutils.ActionSheetDialog;
@@ -159,7 +159,7 @@ public class DevlistAdapter extends BaseAdapter {
 			String lockId = v.getContentDescription().toString();
 			intent.putExtra("LOCKID", lockId);
 
-			SmartLockHelper mPlugHelper = new SmartLockHelper(
+			SmartLockExLockHelper mPlugHelper = new SmartLockExLockHelper(
 					SmartLockApplication.getContext());
 			SmartLockDefine mPlug = mPlugHelper.getSmartLock(lockId);
 			if (null == mPlug) {

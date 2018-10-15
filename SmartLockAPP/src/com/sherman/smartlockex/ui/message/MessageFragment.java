@@ -15,8 +15,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.sherman.smartlockex.ui.common.SmartLockFragment;
+import com.sherman.smartlockex.ui.dev.LockDetailActivity;
 import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
 import com.sherman.smartlockex.ui.util.MyAlertDialog;
 import com.sherman.smartlockex.ui.util.RefreshableView;
@@ -26,10 +29,14 @@ import com.sherman.smartlockex.R;
 public class MessageFragment extends SmartLockFragment
 		implements
 			View.OnClickListener {
-	private ListView mMessageList = null;
+	
+	private RelativeLayout rl_message_device;
+	private RelativeLayout rl_message_system;
+	
+	private TextView tv_message_device_new_info;
+	private TextView tv_message_system_new_info;
 
-	private String mFocusPlugId = "0";
-	private boolean mFocusPlugPower = false;
+	private String mFocusLockId = "0";
 
 //	private RefreshableView mRefreshableView = null;
 
@@ -53,13 +60,13 @@ public class MessageFragment extends SmartLockFragment
 		super.onCreate(savedInstanceState);
 
 		mContext = getActivity();
-
-		new Handler().postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				qryPlugsFromServer();
-			}
-		}, 1);
+		
+//		new Handler().postDelayed(new Runnable() {
+//			@Override
+//			public void run() {
+//				qryMessagesFromServer();
+//			}
+//		}, 1);
 	}
 
 	private Handler mTimeoutHandler = new Handler() {
@@ -71,7 +78,7 @@ public class MessageFragment extends SmartLockFragment
 		}
 	};
 
-	private void qryPlugsFromServer() {
+	private void qryMessagesFromServer() {
 		registerTimeoutHandler(mTimeoutHandler);
 //
 //		StringBuffer sb = new StringBuffer();
@@ -90,14 +97,25 @@ public class MessageFragment extends SmartLockFragment
 			mFragmentView = inflater.inflate(R.layout.fragment_message, container,
 					false);
 		}
-
-		mMessageList = (ListView) mFragmentView.findViewById(R.id.message_list);
+		
+		initView();
 
 		return mFragmentView;
+	}
+	
+	private void initView() {
+		rl_message_device = (RelativeLayout)mFragmentView.findViewById(R.id.rl_message_device);
+		rl_message_system = (RelativeLayout) mFragmentView.findViewById(R.id.rl_message_system);
+		tv_message_device_new_info = (TextView) mFragmentView.findViewById(R.id.tv_message_device_new_info);
+		tv_message_system_new_info = (TextView) mFragmentView.findViewById(R.id.tv_message_system_new_info);
+		
+		rl_message_device.setOnClickListener(this);
+		rl_message_system.setOnClickListener(this);
 	}
 
 	private Handler updateHandler = new Handler() {
 		public void handleMessage(Message msg) {
+			
 		};
 	};
 
@@ -109,11 +127,21 @@ public class MessageFragment extends SmartLockFragment
 
 	@Override
 	public void onClick(View v) {
+		Intent intent = new Intent();
+		switch(v.getId()) {
+		case R.id.rl_message_device:
+			intent.setClass(mContext, ActivityMessageDevice.class);
+			break;
+		case R.id.rl_message_system:
+			intent.setClass(mContext, ActivityMessageSystem.class);
+			break;
+		}
+		
+		mContext.startActivity(intent);
 	}
 
 	@Override
 	public void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 	}
 

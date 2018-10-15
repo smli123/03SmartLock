@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:background="@color/white">
+    
+	<RelativeLayout 
+	    android:id="@+id/rl_lock_item"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:background="@color/white"
+	    android:paddingTop="5dp" 
+    	android:paddingBottom="5dp"
+    	android:orientation="horizontal" >    
+
+	    <ImageView
+	        android:id="@+id/iv_message_icon"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
+	        android:layout_marginTop="@dimen/list_item_top_padding"
+	        android:layout_marginBottom="@dimen/list_item_bottom_padding"
+	        android:layout_marginLeft="@dimen/list_item_left_padding"
+	        android:layout_marginRight="@dimen/list_item_right_padding"
+	        android:contentDescription="@null"
+	        android:scaleType="fitXY"
+	        android:src="@drawable/smp_message_device" />
+	
+	    <RelativeLayout
+	        android:id="@+id/rl_message_total"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
+	        android:layout_toRightOf="@id/iv_message_icon"
+	        android:orientation="vertical" >
+	        
+		    <RelativeLayout
+		        android:id="@+id/rl_message_name"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentTop="true"
+		        android:layout_marginTop="0dp"
+		        android:orientation="horizontal" >
+	        
+		        <TextView
+		            android:id="@+id/tv_message_name"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="@dimen/list_item_left_padding"
+			        android:layout_marginRight="@dimen/list_item_right_padding" 
+			        android:textColor="@color/black"
+			        android:textSize="20dp"
+			        android:text="@null"/> 
+	
+		    </RelativeLayout>
+		    
+		    <RelativeLayout
+		        android:id="@+id/rl_message_type"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+				android:layout_below="@id/rl_lock_name"
+		        android:orientation="horizontal"
+		        android:layout_marginTop="10dp" >
+	        
+		        <ImageView
+		            android:id="@+id/iv_message_type"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentLeft="true"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="@dimen/list_item_left_padding"
+		            android:layout_marginRight="@dimen/list_item_right_padding"
+		            android:src="@drawable/smp_message_type" />
+	
+		        <TextView
+		            android:id="@+id/tv_message_type"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+		        	android:layout_toRightOf="@id/iv_message_type"
+			        android:layout_marginLeft="@dimen/list_item_left_padding"
+			        android:layout_marginRight="@dimen/list_item_right_padding"
+			        android:text="[开锁状态]" /> 
+	
+		    </RelativeLayout>
+		    
+		    <RelativeLayout
+		        android:id="@+id/rl_message_detail"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+				android:layout_below="@id/rl_message_type"
+		        android:orientation="horizontal"
+		        android:layout_marginTop="10dp"
+		        android:layout_marginBottom="0dp" >
+	        
+		        <TextView
+		            android:id="@+id/tv_message_detail"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="@dimen/list_item_left_padding"
+			        android:layout_marginRight="@dimen/list_item_right_padding"
+			        android:text="详细信息" />
+		         
+		    </RelativeLayout>
+		    
+	    </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

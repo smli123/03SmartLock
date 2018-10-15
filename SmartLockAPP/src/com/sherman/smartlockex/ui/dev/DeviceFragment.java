@@ -16,7 +16,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.sherman.smartlockex.dataprovider.SmartLockHelper;
+import com.sherman.smartlockex.dataprovider.SmartLockExLockHelper;
 import com.sherman.smartlockex.processhandler.SmartLockMessage;
 import com.sherman.smartlockex.ui.common.PubDefine;
 import com.sherman.smartlockex.ui.common.PubFunc;
@@ -33,7 +33,7 @@ import com.sherman.smartlockex.R;
 public class DeviceFragment extends SmartLockFragment
 		implements
 			View.OnClickListener {
-	private SmartLockHelper mLockHelper = null;
+	private SmartLockExLockHelper mLockHelper = null;
 	private String mFocusLockId = "0";
 	
 	private ListView mDevList = null;
@@ -154,7 +154,7 @@ public class DeviceFragment extends SmartLockFragment
 		super.onCreate(savedInstanceState);
 
 		mContext = getActivity();
-		mLockHelper = new SmartLockHelper(mContext);
+		mLockHelper = new SmartLockExLockHelper(mContext);
 
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(PubDefine.PLUG_MODIFY_PLUGNAME);

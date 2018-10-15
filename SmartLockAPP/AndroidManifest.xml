@@ -25,7 +25,17 @@
         
          <provider
 			android:name="com.sherman.smartlockex.dataprovider.SmartLockExLockProvider" 
-			android:authorities="com.sherman.smartlockprovider">
+			android:authorities="com.sherman.dataprovider.smartlockprovider">
+        </provider>
+        
+         <provider
+			android:name="com.sherman.smartlockex.dataprovider.MessageDeviceProvider" 
+			android:authorities="com.sherman.dataprovider.messagedeviceprovider">
+        </provider>
+        
+         <provider
+			android:name="com.sherman.smartlockex.dataprovider.MessageSystemProvider" 
+			android:authorities="com.sherman.dataprovider.messagesystemprovider">
         </provider>
         
         <activity
@@ -63,6 +73,16 @@
             
         <activity 
             android:name="com.sherman.smartlockex.ui.dev.LockDetailActivity"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:label="@string/app_name" />
+            
+        <activity 
+            android:name="com.sherman.smartlockex.ui.message.ActivityMessageDevice"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:label="@string/app_name" />
+            
+        <activity 
+            android:name="com.sherman.smartlockex.ui.message.ActivityMessageSystem"
             android:theme="@android:style/Theme.Holo.NoActionBar"
             android:label="@string/app_name" />
             

@@ -22,7 +22,8 @@ public class DBHelper  extends SQLiteOpenHelper{
 		super(context, SmartLockExDbDefine.g_SmartLockDbName, null, SmartLockExDbDefine.DATABASE_VERSION);
 
 		mTableList.add(SmartLockExContentDefine.Lock.TABLE_NAME);
-		
+		mTableList.add(SmartLockExContentDefine.MessageDevice.TABLE_NAME);
+		mTableList.add(SmartLockExContentDefine.MessageSystem.TABLE_NAME);
 	}
 
 	@Override
@@ -30,9 +31,10 @@ public class DBHelper  extends SQLiteOpenHelper{
 		if (null == db) {
 			return;
 		}
-		
+
 		db.execSQL(SmartLockExContentDefine.Lock.TABLE_CREATE);
-		
+		db.execSQL(SmartLockExContentDefine.MessageDevice.TABLE_CREATE);
+		db.execSQL(SmartLockExContentDefine.MessageSystem.TABLE_CREATE);
 	}
 
 	@Override

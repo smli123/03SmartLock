@@ -5,19 +5,162 @@
     android:layout_gravity="center"
     android:orientation="vertical"> 
     
-    <TextView
-         android:id="@+id/tv_message"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:text="Message 消息"/>
+    <ImageView
+        android:id="@+id/image_sep_1"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/message_margin_top"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"		               
+        android:background="@color/lightwhite"        
+        android:contentDescription="@null" />		    
+
+    <RelativeLayout
+        android:id="@+id/rl_message_device"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/message_margin_top"
+        android:layout_marginBottom="@dimen/message_margin_top"	
+		android:layout_marginLeft="@dimen/message_margin_left"		        	        		
+		android:layout_marginRight="@dimen/message_margin_left"
+        android:layout_below="@+id/image_sep_1"
+        android:background="@null"
+        android:layout_centerVertical="false"
+        android:visibility="visible" >
+
+        <ImageView
+            android:id="@+id/iv_message_device"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/smp_message_device" />
+
+        <RelativeLayout 
+            android:id="@+id/rl_message_device_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_message_device"
+            android:layout_centerVertical="true" >
+            
+            <TextView 
+                android:id="@+id/tv_message_device_name"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+		        android:layout_marginLeft="@dimen/list_item_left_padding"
+		        android:layout_marginRight="@dimen/list_item_right_padding" 
+		        android:textColor="@color/black"
+		        android:textSize="20dp"
+		        android:text="设备消息"/>
+            
+            <TextView 
+                android:id="@+id/tv_message_device_new_info"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+            	android:layout_below="@id/tv_message_device_name"
+		        android:layout_marginTop="@dimen/message_margin_text"
+		        android:layout_marginLeft="@dimen/list_item_left_padding"
+		        android:layout_marginRight="@dimen/list_item_right_padding" 
+		        android:textColor="@color/gray"
+		        android:textSize="15dp"
+		        android:text="门锁[门锁状态]-关锁成功"/>
+            
+        </RelativeLayout>
+        
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/smp_more" />
+           
+    </RelativeLayout>    
+
+    <ImageView
+        android:id="@+id/image_sep_2"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"            
+        android:layout_below="@+id/rl_message_device"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"		               
+        android:background="@color/lightwhite"        
+        android:contentDescription="@null" />		    
+
+    <RelativeLayout
+        android:id="@+id/rl_message_system"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image_sep_2"
+        android:layout_marginTop="@dimen/message_margin_top"
+        android:layout_marginBottom="@dimen/message_margin_top"	
+		android:layout_marginLeft="@dimen/message_margin_left"		        	        		
+		android:layout_marginRight="@dimen/message_margin_left"
+        android:background="@null"
+        android:layout_centerVertical="false"
+        android:visibility="visible" >
+
+        <ImageView
+            android:id="@+id/iv_message_system"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/smp_message_system" />
+
+        <RelativeLayout 
+            android:id="@+id/rl_message_system_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_message_system"
+            android:layout_centerVertical="true" >
+            
+            <TextView 
+                android:id="@+id/tv_message_system_name"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+		        android:layout_marginLeft="@dimen/list_item_left_padding"
+		        android:layout_marginRight="@dimen/list_item_right_padding" 
+		        android:textColor="@color/black"
+		        android:textSize="20dp"
+		        android:text="系统消息"/>
+            
+            <TextView 
+                android:id="@+id/tv_message_system_new_info"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+            	android:layout_below="@id/tv_message_system_name"
+		        android:layout_marginTop="@dimen/message_margin_text"
+		        android:layout_marginLeft="@dimen/list_item_left_padding"
+		        android:layout_marginRight="@dimen/list_item_right_padding" 
+		        android:textColor="@color/gray"
+		        android:textSize="15dp"
+		        android:text="[暂无系统消息]"/>
+            
+        </RelativeLayout>
+        
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/smp_more" />
+    </RelativeLayout>    
+
+    <ImageView
+        android:id="@+id/image_sep_3"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"            
+        android:layout_below="@+id/rl_message_system"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"		               
+        android:background="@color/lightwhite"
+        android:contentDescription="@null" />		    
     
-    <ListView
-          android:id="@+id/message_list"
-          android:layout_width="match_parent"
-	      android:layout_height="wrap_content"
-	      android:layout_below="@id/tv_message"
-          android:divider="@drawable/list_item_diliver_left10_right0"
-          android:dividerHeight="1px">
-    </ListView>
 	   
 </RelativeLayout>
