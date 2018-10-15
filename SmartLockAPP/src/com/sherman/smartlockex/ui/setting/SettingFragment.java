@@ -28,10 +28,6 @@ public class SettingFragment extends SmartLockFragment
 			View.OnClickListener {
 	private ListView mSettingList = null;
 
-	private String mFocusPlugId = "0";
-	private boolean mFocusPlugPower = false;
-
-//	private RefreshableView mRefreshableView = null;
 
 	private static SettingFragment mFragment = null;
 
