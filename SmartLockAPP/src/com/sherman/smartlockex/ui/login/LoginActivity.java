@@ -178,6 +178,9 @@ public class LoginActivity extends TitledActivity implements OnClickListener {
 
 			PubStatus.g_userPwd = password;
 			sendMsg(true, sb.toString(), true);
+			
+			// Only For Test, it must delete
+			PubStatus.g_userEmail = "smli123@163.com";
 		}
 	}
     

@@ -193,28 +193,6 @@ public class SmartLockActivity extends FragmentActivity
 
 	}
 
-	private Handler mLogouthandler = new Handler() {
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-				case 0 :
-//					Intent mIntent = new Intent();
-//					mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//					mIntent.setClass(SmartPlugApplication.getContext(),
-//							LoginActivity.class);
-//					mIntent.putExtra("FORCE_LOGOUT", 1);
-//					SmartPlugApplication.getContext().startActivity(mIntent);
-//					finish();
-//					break;
-//				case MSG_READ_CITY_WEATHER :
-//					String output = (String) msg.obj;
-//					tSpeech.speak(output, TextToSpeech.QUEUE_FLUSH, null);
-//					break;
-//				default :
-//					break;
-			}
-		};
-	};
-
 	private void InitViewPager() {
 		mPager = (ViewPager) findViewById(R.id.vg_tab_pager);
 		if (null != fragmentsList) {
@@ -226,6 +204,7 @@ public class SmartLockActivity extends FragmentActivity
 		Fragment deviceFragment = DeviceFragment.newInstance();
 		Fragment messageFragment = MessageFragment.newInstance();
 		Fragment settingFragment = SettingFragment.newInstance();
+		((SettingFragment) settingFragment).setHandler(mLogouthandler);
 		
 		fragmentsList.add(deviceFragment);
 		fragmentsList.add(messageFragment);
@@ -420,4 +399,23 @@ public class SmartLockActivity extends FragmentActivity
 		super.onNewIntent(intent);
 
 	}
+	
+
+	private Handler mLogouthandler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+				case 0 :
+					Intent mIntent = new Intent();
+					mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					mIntent.setClass(SmartLockApplication.getContext(),
+							LoginActivity.class);
+					mIntent.putExtra("FORCE_LOGOUT", 1);
+					SmartLockApplication.getContext().startActivity(mIntent);
+					finish();
+					break;
+				default :
+					break;
+			}
+		};
+	};
 }
