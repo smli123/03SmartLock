@@ -1,7 +1,7 @@
 package com.smartlock.platform.commdefine;
 
 public abstract class ServerPortDefine {
-	public final static int SERVER_BASE_PORT_TCP					= 8010;
+	public final static int SERVER_BASE_PORT_TCP					= 6010;
 	//智能插座 TCP
 	public final static int SMART_PLUG_APP_SERVER_PORT				= SERVER_BASE_PORT_TCP + 1;		//7011
 	public final static int SMART_PLUG_MODULE_SERVER_PORT			= SERVER_BASE_PORT_TCP + 2;		//7012
