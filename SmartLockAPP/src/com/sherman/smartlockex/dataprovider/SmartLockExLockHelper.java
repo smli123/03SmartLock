@@ -47,6 +47,8 @@ public class SmartLockExLockHelper {
 					.getInt(SmartLockExContentDefine.Lock.LOCK_ONLINE_COLUMN) == 1 ? true : false;
 			item.mAddress = cur
 					.getString(SmartLockExContentDefine.Lock.LOCK_ADDRESS_COLUMN);
+			item.mVersion = cur
+					.getString(SmartLockExContentDefine.Lock.LOCK_VERSION_COLUMN);
 			item.mType = cur
 					.getString(SmartLockExContentDefine.Lock.LOCK_TYPE_COLUMN);
 			item.mCharge = cur
@@ -108,6 +110,8 @@ public class SmartLockExLockHelper {
 						.getInt(SmartLockExContentDefine.Lock.LOCK_ONLINE_COLUMN) == 1 ? true : false;
 				device.mAddress = cur
 						.getString(SmartLockExContentDefine.Lock.LOCK_ADDRESS_COLUMN);
+				device.mVersion = cur
+						.getString(SmartLockExContentDefine.Lock.LOCK_VERSION_COLUMN);
 				device.mType = cur
 						.getString(SmartLockExContentDefine.Lock.LOCK_TYPE_COLUMN);
 				device.mCharge = cur
@@ -143,6 +147,8 @@ public class SmartLockExLockHelper {
 				device.mOnline == true ? 1 : 0);
 		values.put(SmartLockExContentDefine.Lock.LOCK_ADDRESS,
 				device.mAddress);
+		values.put(SmartLockExContentDefine.Lock.LOCK_VERSION,
+				device.mVersion);
 		values.put(SmartLockExContentDefine.Lock.LOCK_TYPE,
 				device.mType);
 		values.put(SmartLockExContentDefine.Lock.LOCK_CHARGE,
@@ -210,6 +216,8 @@ public class SmartLockExLockHelper {
 				device.mOnline);
 		values.put(SmartLockExContentDefine.Lock.LOCK_ADDRESS,
 				device.mAddress);
+		values.put(SmartLockExContentDefine.Lock.LOCK_VERSION,
+				device.mVersion);
 		values.put(SmartLockExContentDefine.Lock.LOCK_TYPE,
 				device.mType);
 		values.put(SmartLockExContentDefine.Lock.LOCK_CHARGE,

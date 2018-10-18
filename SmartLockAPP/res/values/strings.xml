@@ -10,7 +10,33 @@
     <string name="smartlock_title_message">消息</string>
     <string name="smartlock_title_settings">我的</string>
     
+    <!-- 设备操作 -->
+    <string name="smartlock_oper_noscanplug">未扫描到门锁</string>
+    <string name="smartlock_oper_openwifi">"正在打开WiFi，请稍等..."</string>
+    <string name="smartlock_oper_devices">"待配置门锁"</string>
+    <string name="smartlock_oper_scan_devices">"搜索到的门锁"</string>
+    <string name="smartlock_oper_scanning">"扫描门锁"</string>
+    <string name="smartlock_oper_scan">"扫描"</string>
+    <string name="smartlock_oper_noscanrouter">"未扫描到本地无线路由器"</string>
+    <string name="smartlock_oper_getplugfail">"获得门锁信息失败"</string>
+    <string name="smartlock_oper_connectrouterfail">"门锁连接无线路由器失败"</string>
+    <string name="smartlock_oper_nowifi">"未检测到WiFi连接，增加门锁失败"</string>
+    <string name="smartlock_oper_socketexception">"网络连接异常，增加门锁失败"</string>
+    <string name="smartlock_oper_getpluginfofail">"获得门锁信息失败，请重启门锁再添加"</string>
+    <string name="smartlock_oper_connectseverfail">"门锁连接服务器失败，请复位门锁后再添加"</string>
+    <string name="smartlock_oper_initplug">"获取门锁信息"</string>
+    <string name="smartlock_oper_selectrouter">"选择本地路由器:"</string>
+    <string name="smartlock_oper_execconfig">"增加门锁"</string>
+    <string name="smartlock_oper_selectrouter_title">"请选择无线路由器"</string>
+    <string name="smartlock_oper_selectmac_title">"请选择Mac地址"</string>
+    <string name="smartlock_oper_selectmodule_title">"请选择模块"</string>
+    <string name="smartlock_oper_routermode_title">"路由器加密方式"</string>
+    <string name="smartlock_oper_connect_plug">"连接门锁..."</string>
+    <string name="smartlock_oper_connect_fail">"连接门锁失败"</string>
+    <string name="smartlock_oper_router_not_support_chinese">"智能门锁不支持路由器名字中含有中文、特殊英文字符，请修改路由器SSID或更换新的路由器"</string>
+    
     <string name="smartlock_goback">返回</string>  
+    <string name="smartlock_refresh">刷新</string>
     <string name="smartlock_exit">退出</string>
     <string name="smartlock_ok">确认</string>
     <string name="smartlock_cancel">取消</string>

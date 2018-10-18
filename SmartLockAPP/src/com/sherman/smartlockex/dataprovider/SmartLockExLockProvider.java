@@ -134,21 +134,12 @@ public class SmartLockExLockProvider extends ContentProvider {
 				cursor = gotaDB.query(true, 
 			              SmartLockExContentDefine.Lock.TABLE_NAME.toLowerCase(), 
 			              projection, 
-			              null, 
+			              selection, 
 			              selectionArgs, 
 			              groupBy,
 			              null, 
 			              sortOrder, 
 			              null);
-//				cursor = gotaDB.query(true, 
-//			              SmartLockExContentDefine.Lock.TABLE_NAME.toLowerCase(), 
-//			              projection, 
-//			              selection, 
-//			              selectionArgs, 
-//			              groupBy,
-//			              null, 
-//			              sortOrder, 
-//			              null);
 				break;
 			case ACTION:
 				long id = ContentUris.parseId(uri);

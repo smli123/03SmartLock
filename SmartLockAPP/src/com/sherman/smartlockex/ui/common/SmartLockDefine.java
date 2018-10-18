@@ -8,6 +8,7 @@ public class SmartLockDefine {
     public int  	mStatus;
     public boolean 	mOnline;
     public String 	mAddress;
+    public String 	mVersion;
     public String 	mType;
     public int 	mCharge;
 }

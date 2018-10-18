@@ -30,6 +30,7 @@ import com.sherman.smartlockex.R;
 import com.sherman.smartlockex.ui.common.PubDefine;
 import com.sherman.smartlockex.ui.common.PubStatus;
 import com.sherman.smartlockex.ui.common.SmartLockFragmentPagerAdapter;
+import com.sherman.smartlockex.ui.dev.AddSocketActivity2;
 import com.sherman.smartlockex.ui.dev.DeviceFragment;
 import com.sherman.smartlockex.ui.login.LoginActivity;
 import com.sherman.smartlockex.ui.message.MessageFragment;
@@ -384,8 +385,8 @@ public class SmartLockActivity extends FragmentActivity
 		 * break;
 		 */
 			case R.id.titlebar_rightbutton :
-//				Intent intent = new Intent(this, AddSocketActivity2.class);
-//				startActivity(intent);
+				Intent intent = new Intent(this, AddSocketActivity2.class);
+				startActivity(intent);
 				break;
 		}
 

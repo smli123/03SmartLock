@@ -16,6 +16,7 @@ public class PubDefine {
 	public static final int WAIT_SER_RESPONSE = 6000; 		// 服务器超时时间
 	public static final int WAIT_WIFI_RESPONSE = 3000; 		// 设备WIFI超时时间
 	public static final String COMPANY_NAME = "sherman";
+	public static final String DEVICE_SSID_PRE = "SMART_LOCK";
 	public final static String SERVERIP_HANGZHOU = "121.41.19.6"; // 杭州服务器IP地址
 	public final static String SERVERIP_SHENZHEN = "112.126.65.122"; // 深圳服务器IP地址
 	public final static String SERVERIP_DEBUG = "192.168.0.102"; // 本地调试服务器IP地址

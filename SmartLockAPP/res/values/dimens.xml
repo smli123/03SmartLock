@@ -39,6 +39,17 @@
     <dimen name="text_size_norlarge">33sp</dimen> 
     <dimen name="text_size_xxxlarge">60sp</dimen>
     
+    <!-- 文本大小定义 -->
+    <dimen name="text_size_xsamll">8sp</dimen>
+    <dimen name="text_size_samll">12sp</dimen>	
+    <dimen name="text_size_normal">15sp</dimen>
+    <dimen name="text_size_midnormal">18sp</dimen>
+    <dimen name="text_size_medium">20sp</dimen>
+    <dimen name="text_size_large">25sp</dimen>
+    <dimen name="text_size_xllarge">30sp</dimen>
+    <dimen name="text_size_xlarge">35sp</dimen> 
+    <dimen name="text_size_xxlarge">90sp</dimen>    
+    
 	<!-- 文本大小  设计公司参考部分，上部分的设置将取消 -->
     <dimen name="list_item_top_padding">10dp</dimen>
     <dimen name="list_item_bottom_padding">10dp</dimen>

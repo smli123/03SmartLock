@@ -25,6 +25,7 @@ public class SmartLockExContentDefine {
 		public static final String LOCK_STATUS = "Lock_Status";
 		public static final String LOCK_ONLINE = "Online";
 		public static final String LOCK_ADDRESS = "Address";
+		public static final String LOCK_VERSION = "Version";
 		public static final String LOCK_TYPE = "DeviceType";
 		public static final String LOCK_CHARGE = "Charge";
 
@@ -36,8 +37,9 @@ public class SmartLockExContentDefine {
 		public static final int LOCK_STATUS_COLUMN = 4;
 		public static final int LOCK_ONLINE_COLUMN = 5;
 		public static final int LOCK_ADDRESS_COLUMN = 6;
-		public static final int LOCK_TYPE_COLUMN = 7;
-		public static final int LOCK_CHARGE_COLUMN = 8;
+		public static final int LOCK_VERSION_COLUMN = 7;
+		public static final int LOCK_TYPE_COLUMN = 8;
+		public static final int LOCK_CHARGE_COLUMN = 9;
 
 		// create table
 		public final static String TABLE_CREATE = "CREATE TABLE IF NOT EXISTS "
@@ -49,6 +51,7 @@ public class SmartLockExContentDefine {
 				+ LOCK_STATUS + " integer default 0, "
 				+ LOCK_ONLINE + " integer default 0, "
 				+ LOCK_ADDRESS + " text default '', "
+				+ LOCK_VERSION + " text default '', "
 				+ LOCK_TYPE + " text default '', "
 				+ LOCK_CHARGE + " integer default 0);";
 
