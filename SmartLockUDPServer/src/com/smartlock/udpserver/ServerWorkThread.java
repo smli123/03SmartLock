@@ -21,48 +21,26 @@ import com.smartlock.udpserver.Function.APPAddModuleMsgHandle;
 import com.smartlock.udpserver.Function.AppLogOutMsgHandle;
 import com.smartlock.udpserver.Function.AppLoginMsgHandle;
 import com.smartlock.udpserver.Function.AppPassThroughMsgHandle;
-import com.smartlock.udpserver.Function.AppQuerySceneMsgHandle;
-import com.smartlock.udpserver.Function.AppUpgradeStartMsgHandle;
 import com.smartlock.udpserver.Function.APPDeleteModuleMsgHandle;
 import com.smartlock.udpserver.Function.APPFindPwdHandle;
 import com.smartlock.udpserver.Function.APPModEmailMsgHandle;
 import com.smartlock.udpserver.Function.APPModPwdMsgHandle;
 import com.smartlock.udpserver.Function.APPModifyPlugNameHandle;
-import com.smartlock.udpserver.Function.ModuleAddTimerMsgHandle;
 import com.smartlock.udpserver.Function.ModuleBack2APCtrlMsgHandle;
-import com.smartlock.udpserver.Function.ModuleBellOnMsgHandle;
+import com.smartlock.udpserver.Function.NofityBellMsgHandle;
 import com.smartlock.udpserver.Function.ModuleHeartBeatTask;
 import com.smartlock.udpserver.Function.ModuleHeartMsgHandle;
-import com.smartlock.udpserver.Function.ModuleLogFileMsgHandle;
 import com.smartlock.udpserver.Function.ModuleLoginHandle;
-import com.smartlock.udpserver.Function.ModuleModNameMsgHandle;
-import com.smartlock.udpserver.Function.ModuleModPlugMsgHandle;
-import com.smartlock.udpserver.Function.ModuleModTimerMsgHandle;
-import com.smartlock.udpserver.Function.ModulePowerCtrlMsgHandle;
-import com.smartlock.udpserver.Function.ModuleRecvFileEndMsgHandle;
-import com.smartlock.udpserver.Function.ModuleRecvFileSendMsgHandle;
-import com.smartlock.udpserver.Function.ModuleRecvFileStartMsgHandle;
-import com.smartlock.udpserver.Function.ModuleWindowCtrlMsgHandle;
-import com.smartlock.udpserver.Function.NotifyPowerStatusHandle;
-import com.smartlock.udpserver.Function.QueryChargeHandle;
-import com.smartlock.udpserver.Function.QueryGonglvHandle;
+import com.smartlock.udpserver.Function.ModuleLockCtrlMsgHandle;
+import com.smartlock.udpserver.Function.NotifyLockStatusHandle;
+import com.smartlock.udpserver.Function.APPQueryAllModuleInfoHandle;
 import com.smartlock.udpserver.Function.TransmitHearBeatMsgHandle;
 import com.smartlock.udpserver.Function.TransmitTransMsgHandle;
-import com.smartlock.udpserver.Function.UpgradeEndRspHandle;
-import com.smartlock.udpserver.Function.UpgradeReEndRspHandle;
-import com.smartlock.udpserver.Function.UpgradeReSendRespHandle;
-import com.smartlock.udpserver.Function.UpgradeSendRespHandle;
-import com.smartlock.udpserver.Function.UpgradeStartRespHandle;
 import com.smartlock.udpserver.Function.APPUserRegisterMsgHandle;
 import com.smartlock.udpserver.commdef.ICallFunction;
 import com.smartlock.udpserver.commdef.ServerCommDefine;
 import com.smartlock.udpserver.commdef.ServerParamConfiger;
 import com.smartlock.udpserver.commdef.ServerRetCodeMgr;
-import com.smartlock.udpserver.db.ServerDBMgr;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONException;
-import net.sf.json.JSONObject;
 
 public class ServerWorkThread  implements Runnable{
 	private static Map<String,ConnectInfo> m_AppIPMap 		= new HashMap<String,ConnectInfo>();
@@ -70,121 +48,9 @@ public class ServerWorkThread  implements Runnable{
 	private static Map<String,ConnectInfo> m_ModuleTransmitMap 	= new HashMap<String,ConnectInfo>();
 	private static Map<Object,Object> m_SendFuncMap 		= new HashMap<Object,Object>();
 	private static DatagramPacket m_packet = null;
-	private static Map<String, ModuleUpgradeOnLineMgr> m_moduleUpgradeMgrMap = new HashMap<String, ModuleUpgradeOnLineMgr>();
 	private static ServerWorkThread m_thread = null;
 	
 	private static Map<String,Integer> m_ModuleFileNOMap 	= new HashMap<String,Integer>();
-	private static Map<String,ModuleRecvFileMgr> m_ModuleRecvFileMap 	= new HashMap<String,ModuleRecvFileMgr>();
-	private static Map<String,ModuleLogFileMgr> m_ModuleLogFileMap 	= new HashMap<String,ModuleLogFileMgr>();
-	
-	// GSON 空调红外数据
-	private static List<Map<String, Object>> m_IRData = new ArrayList<Map<String, Object>>();
-	private static Set<String> m_IRSet = new HashSet<String>();
-	private static Map<String, String> m_IRSubId = new HashMap<String,String>();
-	
-	// GSON 电视红外数据
-	private static List<Map<String, Object>> m_TVIRData = new ArrayList<Map<String, Object>>();
-	private static Set<String> m_TVIRSet = new HashSet<String>();
-	private static Map<String, String> m_TVIRSubId = new HashMap<String,String>();
-	
-    public static void parseJSONWithGSON_IRDATA(String jsonStr)
-    {
-        m_IRData.clear();
-        m_IRSet.clear();
-        
-        JSONObject jsonObj;
-        Map<String, Object> map = null;
-        try
-        {
-            jsonObj = new JSONObject();
-            JSONArray objList = JSONArray.fromObject(jsonStr);
-
-            for (int i = 0; i < objList.size(); i++)
-            {
-            	JSONObject jsonItem = objList.getJSONObject(i);
-            	map = new HashMap<String, Object>();
-    			
-    	        map.put("id", 		jsonItem.getString("id"));
-    	        map.put("sub_id", 	jsonItem.getString("sub_id"));
-    	        map.put("value", 	jsonItem.getString("value"));
-    	        
-    	        m_IRData.add(map);
-    	        m_IRSet.add(jsonItem.getString("id"));
-            }
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
-    }
-	
-	// 读取红外数据值
-	public static String ReadCurrentAR(String id, String sub_id) {
-		for (int i = 0; i < m_IRData.size(); i++) {
-			if (m_IRData.get(i).get("id").toString().equals(id) && m_IRData.get(i).get("sub_id").toString().equals(sub_id)) {
-				return m_IRData.get(i).get("value").toString();
-			}
-		}
-		return null;
-	}
-
-	public static String getIRSet() {
-		String str = m_IRSet.toString();
-		str = str.replace("[", "");
-		str = str.replace("]", "");
-		str = str.replace(", ", "@");
-		return str;
-	}
-	
-
-    public static void parseJSONWithGSON_TVIRDATA(String jsonStr)
-    {
-        m_TVIRData.clear();
-        m_TVIRSet.clear();
-        
-        JSONObject jsonObj;
-        Map<String, Object> map = null;
-        try
-        {
-            jsonObj = new JSONObject();
-            JSONArray objList = JSONArray.fromObject(jsonStr);
-
-            for (int i = 0; i < objList.size(); i++)
-            {
-            	JSONObject jsonItem = objList.getJSONObject(i);
-            	map = new HashMap<String, Object>();
-    			
-    	        map.put("id", 		jsonItem.getString("id"));
-    	        map.put("sub_id", 	jsonItem.getString("sub_id"));
-    	        map.put("value", 	jsonItem.getString("value"));
-    	        
-    	        m_TVIRData.add(map);
-    	        m_TVIRSet.add(jsonItem.getString("id"));
-            }
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
-    }
-	
-	// 读取红外数据值
-	public static String ReadCurrentTVAR(String id, String sub_id) {
-		for (int i = 0; i < m_IRData.size(); i++) {
-			if (m_TVIRData.get(i).get("id").toString().equals(id) && m_TVIRData.get(i).get("sub_id").toString().equals(sub_id)) {
-				return m_TVIRData.get(i).get("value").toString();
-			}
-		}
-		return null;
-	}
-
-	public static String getTVIRSet() {
-		String str = m_TVIRSet.toString();
-		str = str.replace("[", "");
-		str = str.replace("]", "");
-		str = str.replace(", ", "@");
-		return str;
-	}
 	
 	public ServerWorkThread(DatagramPacket packet)
 	{
@@ -210,82 +76,6 @@ public class ServerWorkThread  implements Runnable{
 		return m_packet.getPort();
 	}
 	
-	public void RegisterUpgradeMgr(int iBlockSize, int iFileBinNo, String strDevId, String strUserName, int iaux_FileBinNo, String strDeviceType) 
-	{
-		ModuleUpgradeOnLineMgr moduleUpgradeMgr = new ModuleUpgradeOnLineMgr(iBlockSize, iFileBinNo, strDevId, strUserName, iaux_FileBinNo, strDeviceType);
-		m_moduleUpgradeMgrMap.put(strDevId, moduleUpgradeMgr);
-	}
-	public void UnRegisterUpgradeMgr(String strDevId)
-	{
-		ModuleUpgradeOnLineMgr mgr = GetModuleUpgradeMgr(strDevId);
-		if (mgr != null) {
-			mgr.StopUpgradeStartTimer();
-			mgr.StopUpgradeSendTimer();
-		}
-		m_moduleUpgradeMgrMap.remove(strDevId);
-	}	
-	public ModuleUpgradeOnLineMgr GetModuleUpgradeMgr(String strdevId)
-	{
-		if (!m_moduleUpgradeMgrMap.containsKey(strdevId))
-		{
-			LogWriter.WriteDebugLog(LogWriter.SELF, String.format("Module(%s) not register. NO Upgrade Mgr",  strdevId));
-			return null;
-		}
-		return m_moduleUpgradeMgrMap.get(strdevId);
-	}	
-	
-	/**注册接收文件管理器 **/
-	public void RegisterRecvFileMgr(String strDevId, int fileno)
-	{
-		ModuleRecvFileMgr moduleRecvFileMgr = new ModuleRecvFileMgr(strDevId, fileno);
-		m_ModuleRecvFileMap.put(strDevId, moduleRecvFileMgr);
-	}
-	
-	public static void UnRegisterRecvFileMgr(String strDevId)
-	{
-		ModuleRecvFileMgr mgr = GetModuleRecvFileMgr(strDevId);
-		if (mgr != null) {
-			mgr.Destroy();
-		}
-		m_ModuleRecvFileMap.remove(strDevId);
-	}
-
-	public static ModuleRecvFileMgr GetModuleRecvFileMgr(String strDevId)
-	{
-		if (!m_ModuleRecvFileMap.containsKey(strDevId))
-		{
-			LogWriter.WriteDebugLog(LogWriter.SELF, String.format("Module(%s) not register. NO RecvFile Mgr",  strDevId));
-			return null;
-		}
-		return m_ModuleRecvFileMap.get(strDevId);
-	}
-	
-	/** 注册模块日志记录文件管理器 **/
-	public static void RegisterModuleLogFileMgr(String strDevId)
-	{
-		ModuleLogFileMgr moduleLogFileMgr = new ModuleLogFileMgr(strDevId);
-		m_ModuleLogFileMap.put(strDevId, moduleLogFileMgr);
-	}
-	
-	public static void UnRegisterModuleLogFileMgr(String strDevId)
-	{
-		ModuleLogFileMgr mgr = GetModuleLogFileMgr(strDevId);
-		if (mgr != null) {
-			mgr.Destroy();
-		}
-		m_ModuleLogFileMap.remove(strDevId);
-	}
-
-	public static ModuleLogFileMgr GetModuleLogFileMgr(String strDevId)
-	{
-		if (!m_ModuleLogFileMap.containsKey(strDevId))
-		{
-			LogWriter.WriteDebugLog(LogWriter.SELF, String.format("Module(%s) not register. NO RecvLogFile Mgr",  strDevId));
-			return null;
-		}
-		return m_ModuleLogFileMap.get(strDevId);
-	}
-	
 	public static int GetModuleFileNO(String strDevId)
 	{
 		if (!m_ModuleFileNOMap.containsKey(strDevId))
@@ -308,55 +98,30 @@ public class ServerWorkThread  implements Runnable{
 		/* APP命令 */
 		m_SendFuncMap.put(ServerCommDefine.APP_REGUSER_MSG_HEADER, new APPUserRegisterMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_RSTPWD_MSG_HEADER, new APPFindPwdHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_LOGIN_MSG_HEADER, new AppLoginMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_LOGOUT_MSG_HEADER, new AppLogOutMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_MOD_EMAIL_MSG_HEADER, new APPModEmailMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_MOD_PWD_MSG_HEADER, new APPModPwdMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_LOGIN_MSG_HEADER, new AppLoginMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_LOGOUT_MSG_HEADER, new AppLogOutMsgHandle());
 		
+		m_SendFuncMap.put(ServerCommDefine.APP_QRY_PLUG_MSG_HEADER, new APPQueryAllModuleInfoHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_ADD_PLUG_MSG_HEADER, new APPAddModuleMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_DEL_PLUG_MSG_HEADER, new APPDeleteModuleMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_MOD_PLUG_MSG_HEADER, new APPModifyPlugNameHandle());
 		
 		/* APP和模块命令*/
-		m_SendFuncMap.put(ServerCommDefine.APP_POWER_CTRL_MSG_HEADER, new ModulePowerCtrlMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_BELL_ON_MSG_HEADER, new ModuleBellOnMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_LOCK_CTRL_MSG_HEADER, new ModuleLockCtrlMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_BACK2AP_CTRL_MSG_HEADER, new ModuleBack2APCtrlMsgHandle());
-
 		
 		/* 模块命令 */
-		m_SendFuncMap.put(ServerCommDefine.POWER_CTRL_MSG_HEADER, new ModulePowerCtrlMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.BELL_ON_MSG_HEADER, new ModuleBellOnMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.BACK2AP_CTRL_MSG_HEADER, new ModuleBack2APCtrlMsgHandle());
-
-		m_SendFuncMap.put(ServerCommDefine.MOD_PLUG_MSG_HEADER, new ModuleModPlugMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.MOD_MODULE_NAME_MSG_HEADER, new ModuleModNameMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.MODULE_LOGIN_MSG_HEADER, new ModuleLoginHandle());
+		m_SendFuncMap.put(ServerCommDefine.LOCK_CTRL_MSG_HEADER, new ModuleLockCtrlMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.NOTIFY_BELL_MSG_HEADER, new NofityBellMsgHandle());
+
+		m_SendFuncMap.put(ServerCommDefine.MOD_PLUG_MSG_HEADER, new APPModifyPlugNameHandle());
+		m_SendFuncMap.put(ServerCommDefine.BACK2AP_CTRL_MSG_HEADER, new ModuleBack2APCtrlMsgHandle());
 		
 		/* 模板上报消息 */
-		m_SendFuncMap.put(ServerCommDefine.NOTIFY_POWER_STATUS, new NotifyPowerStatusHandle());
-		
-		
-		
-		
-		/* 下面的命令不在使用，暂时保留 */
-		/* APP启动模块升级 */
-		m_SendFuncMap.put(ServerCommDefine.UPGRADE_START_MSG_HEADER, new UpgradeStartRespHandle());
-		m_SendFuncMap.put(ServerCommDefine.MODULE_UPGRADE_SEND_MSG_HEADER, new UpgradeSendRespHandle());
-		m_SendFuncMap.put(ServerCommDefine.MODULE_UPGRADE_END_MSG_HEADER, new UpgradeEndRspHandle());
-		m_SendFuncMap.put(ServerCommDefine.MODULE_UPGRADE_RESEND_MSG_HEADER, new UpgradeReSendRespHandle());
-		m_SendFuncMap.put(ServerCommDefine.MODULE_UPGRADE_REEND_MSG_HEADER, new UpgradeReEndRspHandle());
-		
-		/* 模块升级命令 */
-		m_SendFuncMap.put(ServerCommDefine.MODULE_RECV_FILE_START_MSG_HEADER, new ModuleRecvFileStartMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.MODULE_RECV_FILE_SEND_MSG_HEADER, new ModuleRecvFileSendMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.MODULE_RECV_FILE_END_MSG_HEADER, new ModuleRecvFileEndMsgHandle());
-		
-		/* 模块日志 */
-		m_SendFuncMap.put(ServerCommDefine.MODULE_LOG_FILE_START_MSG_HEADER, new ModuleLogFileMsgHandle());
-		
-		/** 转发器功能  **/
-		m_SendFuncMap.put(ServerCommDefine.TRANSMIT_HEARBEAT_MSG_HEADER, new TransmitHearBeatMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.TRANSMIT_TRANS_MSG_HEADER, new TransmitTransMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.NOTIFY_LOCK_STATUS, new NotifyLockStatusHandle());
 	}
 	
 	private static boolean IsNeedJudgeLogin(String strCmd)
@@ -364,8 +129,7 @@ public class ServerWorkThread  implements Runnable{
 		if (strCmd.equalsIgnoreCase(ServerCommDefine.APP_LOGIN_MSG_HEADER) ||
 			strCmd.equalsIgnoreCase(ServerCommDefine.APP_REGUSER_MSG_HEADER) ||
 			strCmd.equalsIgnoreCase(ServerCommDefine.APP_RSTPWD_MSG_HEADER) ||
-			strCmd.equalsIgnoreCase(ServerCommDefine.APP_PASSTHROUGH_MSG_HEADER) ||
-			strCmd.equalsIgnoreCase(ServerCommDefine.APP_AIRCON_SERVER_CTRL_MSG_HEADER))
+			strCmd.equalsIgnoreCase(ServerCommDefine.APP_PASSTHROUGH_MSG_HEADER))
 		{
 			return false;
 		}
@@ -854,17 +618,6 @@ public class ServerWorkThread  implements Runnable{
 	public static String getModuleCookie(String strModuleID)
 	{
 		return m_ModuleIPMap.get(strModuleID).getCookie();
-	}
-
-	public static String getIRSubId(String subIRName) {
-		// TODO Auto-generated method stub
-		String subId = m_IRSubId.get(subIRName);
-		return subId;
-	}
-	public static String getTVIRSubId(String subIRName) {
-		// TODO Auto-generated method stub
-		String subId = m_TVIRSubId.get(subIRName);
-		return subId;
 	}
 
 }

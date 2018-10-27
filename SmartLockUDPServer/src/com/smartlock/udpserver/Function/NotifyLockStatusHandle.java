@@ -11,7 +11,7 @@ import com.smartlock.udpserver.commdef.ServerRetCodeMgr;
 import com.smartlock.udpserver.db.ServerDBMgr;
 import com.smartlock.udpserver.db.USER_MODULE;
 
-public class NotifyPowerStatusHandle implements ICallFunction{
+public class NotifyLockStatusHandle implements ICallFunction{
 	
 	@Override
 	public int call(Runnable thread_base, String strMsg) {
@@ -38,7 +38,10 @@ public class NotifyPowerStatusHandle implements ICallFunction{
 		String strNewCookie		= strRet[0].trim();
 		String strUserName		= strRet[2].trim();
 		String strDevId			= strRet[3].trim();
-		String strStatus		= strRet[5].trim();
+		int iStatus				= Integer.valueOf(strRet[4].trim());
+		int iCharge				= Integer.valueOf(strRet[5].trim());
+		int iUserType			= Integer.valueOf(strRet[6].trim());
+		String strUserCode		= strRet[7].trim();
 		
 		ServerWorkThread thread = (ServerWorkThread)thread_base;
 		
@@ -61,7 +64,7 @@ public class NotifyPowerStatusHandle implements ICallFunction{
 		try
 		{
 			//更新数据库
-			boolean bRet = dbMgr.UpdateModuleInfo_PwrStatus(strDevId, Integer.valueOf(strStatus));
+			boolean bRet = dbMgr.UpdateModuleInfo_Status_Charge(strDevId, iStatus, iCharge);
 			if(!bRet)
 			{
 				LogWriter.WriteErrorLog(LogWriter.SELF, String.format("(%s)db operation failed. ", strDevId));
@@ -70,11 +73,12 @@ public class NotifyPowerStatusHandle implements ICallFunction{
 			
 			USER_MODULE info = dbMgr.QueryUserModuleByDevId(strDevId);
 			
-			NotifyToAPP(info.getUserName(),strDevId, ServerCommDefine.NOTIFY_POWER_STATUS, 
-					ServerRetCodeMgr.SUCCESS_CODE,  strStatus);
+			String strResult = strRet[4].trim() + "," + strRet[5].trim() + "," + strRet[6].trim() + "," + strRet[7].trim();
+			NotifyToAPP(info.getUserName(),strDevId, ServerCommDefine.NOTIFY_LOCK_STATUS, 
+					ServerRetCodeMgr.SUCCESS_CODE,  strResult);
 			
 			//通知模块通知已收到
-			ResponseToModule(strDevId, String.format("%s#", ServerCommDefine.NOTIFY_POWER_STATUS));
+			ResponseToModule(strDevId, String.format("%s#", ServerCommDefine.NOTIFY_LOCK_STATUS));
 			return ServerRetCodeMgr.SUCCESS_CODE;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

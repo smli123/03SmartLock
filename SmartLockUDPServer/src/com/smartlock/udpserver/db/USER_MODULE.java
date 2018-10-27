@@ -1,12 +1,12 @@
 package com.smartlock.udpserver.db;
 /**USER_MODULE(String strUserName,String strModuleId,byte iCtrlMode)*/
 public class USER_MODULE {
-	public final static byte 		PRIMARY				= 0;		//主用户
-	public final static byte		SLAVE					= 1;		//从用户
-	public final static String	TABLE_NAME		= "user_module";	//数据库表名称
-	public final static String 	USER_NAME		= "user_name";
-	public final static String   	MODULE_ID		= "module_id";
-	public final static String	CTRL_MODE		= "ctrl_mode";			//0主用户，1从用户
+	public final static byte 	PRIMARY		= 0;				//主用户
+	public final static byte	SLAVE		= 1;				//从用户
+	public final static String	TABLE_NAME	= "user_module";	//数据库表名称
+	public final static String 	USER_NAME	= "user_name";
+	public final static String  MODULE_ID	= "module_id";
+	public final static String	CTRL_MODE	= "ctrl_mode";		//0主用户，1从用户
 	
 	private String m_strUserName;
 	private String m_strModuleId;

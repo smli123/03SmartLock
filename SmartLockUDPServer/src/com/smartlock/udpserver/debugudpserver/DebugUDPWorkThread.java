@@ -122,7 +122,7 @@ public class DebugUDPWorkThread  implements Runnable{
 			return;
 		}
 		String strDevId = strRet[1];
-		Vector<TIMER_INFO> vecTimerInfo = m_dbMgr.QueryTimerInfoList(strDevId);
+		Vector<TIMER_INFO> vecTimerInfo = null;	//m_dbMgr.QueryTimerInfoList(strDevId);
 		String strTimerInfoList = String.format("================timer info list of dev(%s)=============\n",strDevId)
 				+ String.format("ID \t TYPE \t MODULE_ID \t PEROID \t TIMEON \t TIMEOFF \t ENABLE\n");
 		for(int i = 0; i < vecTimerInfo.size();i++)

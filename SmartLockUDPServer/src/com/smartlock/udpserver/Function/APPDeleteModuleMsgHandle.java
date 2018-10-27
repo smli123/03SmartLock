@@ -67,18 +67,6 @@ public class APPDeleteModuleMsgHandle implements ICallFunction{
 				return ServerRetCodeMgr.ERROR_CODE_FAILED_DB_OPERATION;
 			}
 			
-			//删除模板对应的定时器信息 timer_info
-			if(!dbMgr.DeleteTimerInfo(strModuleId))
-			{
-				dbMgr.Rollback();
-				//关闭事务机制
-				dbMgr.EndTansacion();
-				ResponseToAPP(strMsgHeader, strUserName, strModuleId, ServerRetCodeMgr.ERROR_CODE_FAILED_DB_OPERATION);
-				
-				LogWriter.WriteTraceLog(LogWriter.SELF, String.format("(%s:%d)\t App(%s) [Database] Failed to del timer info(%s). ", 
-						thread.getSrcIP(),thread.getSrcPort(),strUserName,strModuleId));
-				return ServerRetCodeMgr.ERROR_CODE_FAILED_DB_OPERATION;
-			}
 			//删除模块信息 module_info
 			if(!dbMgr.DeleteModuleInfo(strModuleId))
 			{

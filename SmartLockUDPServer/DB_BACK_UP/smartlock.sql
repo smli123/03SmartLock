@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2018 年 09 月 17 日 14:47
+-- 生成日期: 2018 年 10 月 27 日 17:26
 -- 服务器版本: 5.1.69
 -- PHP 版本: 5.2.17p1
 
@@ -19,50 +19,6 @@ SET time_zone = "+00:00";
 --
 -- 数据库: `smartlock`
 --
-
--- --------------------------------------------------------
-
---
--- 表的结构 `module_batterycharge`
---
-
-CREATE TABLE IF NOT EXISTS `module_batterycharge` (
-  `module_id` varchar(32) NOT NULL,
-  `oper_date` datetime NOT NULL,
-  `charge` double NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `module_batterycharge`
---
-
-INSERT INTO `module_batterycharge` (`module_id`, `oper_date`, `charge`) VALUES
-('64792801', '2018-02-28 10:11:18', 81.9);
-
--- --------------------------------------------------------
-
---
--- 表的结构 `module_batterylocation`
---
-
-CREATE TABLE IF NOT EXISTS `module_batterylocation` (
-  `module_id` varchar(32) NOT NULL,
-  `oper_date` datetime NOT NULL,
-  `longitude` double NOT NULL,
-  `dimension` double NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `module_charge`
---
-
-CREATE TABLE IF NOT EXISTS `module_charge` (
-  `module_id` varchar(32) NOT NULL,
-  `oper_date` datetime NOT NULL,
-  `charge` double NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -91,15 +47,9 @@ CREATE TABLE IF NOT EXISTS `module_info` (
   `mac` varchar(24) NOT NULL,
   `module_version` varchar(32) NOT NULL,
   `module_type` varchar(32) NOT NULL,
-  `protype` tinyint(1) unsigned NOT NULL COMMENT 'protocol type',
-  `power_status` tinyint(1) unsigned NOT NULL,
-  `mode` smallint(1) unsigned NOT NULL,
-  `red` tinyint(1) unsigned NOT NULL,
-  `green` tinyint(1) unsigned NOT NULL,
-  `blue` tinyint(1) unsigned NOT NULL,
+  `module_status` tinyint(1) unsigned NOT NULL,
+  `module_charge` tinyint(1) unsigned NOT NULL,
   `cookie` varchar(32) NOT NULL,
-  `aircon_name` varchar(32) NOT NULL,
-  `tv_name` varchar(32) NOT NULL,
   PRIMARY KEY (`module_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -107,72 +57,8 @@ CREATE TABLE IF NOT EXISTS `module_info` (
 -- 转存表中的数据 `module_info`
 --
 
-INSERT INTO `module_info` (`module_id`, `module_name`, `mac`, `module_version`, `module_type`, `protype`, `power_status`, `mode`, `red`, `green`, `blue`, `cookie`, `aircon_name`, `tv_name`) VALUES
-('651000', '651000', '60:01:94:09:df:32', '20171219A1V2.E', '1_3', 2, 4, 0, 255, 0, 0, '20180123151000', '', '');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `module_irscene`
---
-
-CREATE TABLE IF NOT EXISTS `module_irscene` (
-  `irscene_id` int(11) NOT NULL,
-  `module_id` varchar(32) NOT NULL,
-  `enable` tinyint(4) NOT NULL,
-  `power` tinyint(4) NOT NULL,
-  `mode` tinyint(4) NOT NULL,
-  `direction` tinyint(4) NOT NULL,
-  `scale` tinyint(4) NOT NULL,
-  `temperature` tinyint(4) NOT NULL,
-  `time` varchar(32) NOT NULL,
-  `period` varchar(32) NOT NULL,
-  `irname` varchar(32) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `module_scene`
---
-
-CREATE TABLE IF NOT EXISTS `module_scene` (
-  `scene_id` int(11) NOT NULL,
-  `scene_name` varchar(32) NOT NULL,
-  `power_enable` tinyint(4) NOT NULL,
-  `power_moduleid` varchar(32) NOT NULL,
-  `power_control` tinyint(4) NOT NULL,
-  `curtain_enable` tinyint(4) NOT NULL,
-  `curtain_moduleid` varchar(32) NOT NULL,
-  `curtain_control` tinyint(4) NOT NULL,
-  `aircon_enable` tinyint(4) NOT NULL,
-  `aircon_moduleid` varchar(32) NOT NULL,
-  `aircon_temperature` tinyint(4) NOT NULL,
-  `aircon_control` tinyint(4) NOT NULL,
-  `pc_enable` tinyint(4) NOT NULL,
-  `pc_moduleid` varchar(32) NOT NULL,
-  `pc_mac_moduleid` varchar(32) NOT NULL,
-  `pc_mac_address` varchar(32) NOT NULL,
-  `pc_control` tinyint(4) NOT NULL,
-  `user_name` varchar(32) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `timer_info`
---
-
-CREATE TABLE IF NOT EXISTS `timer_info` (
-  `timer_id` tinyint(1) unsigned NOT NULL AUTO_INCREMENT,
-  `timer_type` tinyint(1) unsigned NOT NULL,
-  `module_id` varchar(32) NOT NULL,
-  `peroid` varchar(16) NOT NULL,
-  `time_on` varchar(32) NOT NULL,
-  `time_off` varchar(32) NOT NULL,
-  `enable` tinyint(1) unsigned NOT NULL,
-  PRIMARY KEY (`timer_id`,`module_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+INSERT INTO `module_info` (`module_id`, `module_name`, `mac`, `module_version`, `module_type`, `module_status`, `module_charge`, `cookie`) VALUES
+('651000', '651000', '60:01:94:09:df:32', '20171219A1V2.E', '1', 1, 87, '20180123151000');
 
 -- --------------------------------------------------------
 
@@ -193,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `user_info` (
 --
 
 INSERT INTO `user_info` (`user_name`, `password`, `email`, `cookie`) VALUES
-('smli123hz', 'E10ADC3949BA59ABBE56E057F20F883E', 'smli123@163.com', '0');
+('lishimin', 'E10ADC3949BA59ABBE56E057F20F883E', 'smli123@163.com', '0');
 
 -- --------------------------------------------------------
 

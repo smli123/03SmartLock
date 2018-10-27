@@ -67,9 +67,6 @@ public class ModuleHeartBeatTask_bak  extends TimerTask implements ICallFunction
 				/* step2 清理模块存储的信息 */
 				ServerWorkThread.UnRegisterModuleIP(m_strModuleID);
 				
-				//清理模块日志信息
-				ServerWorkThread.UnRegisterModuleLogFileMgr(m_strModuleID);
-				
 				/* step3 停止心跳检测定时器*/
 				LogWriter.WriteDebugLog(LogWriter.SELF, String.format("Stop Heart Timer:%s, timer info:%s", m_strModuleID, info.getHeartTimer().toString()));
 				info.getHeartTimer().cancel();

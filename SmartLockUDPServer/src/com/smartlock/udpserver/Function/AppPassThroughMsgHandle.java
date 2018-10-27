@@ -5,7 +5,6 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 
 import com.smartlock.platform.LogTool.LogWriter;
-import com.smartlock.udpserver.ModuleUpgradeOnLineMgr;
 import com.smartlock.udpserver.ServerMainThread;
 import com.smartlock.udpserver.ServerWorkThread;
 import com.smartlock.udpserver.commdef.ICallFunction;

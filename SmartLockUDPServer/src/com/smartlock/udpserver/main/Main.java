@@ -4,7 +4,6 @@ import com.smartlock.platform.LogTool.LogWriter;
 import com.smartlock.udpserver.ServerMainThread;
 import com.smartlock.udpserver.commdef.ServerParamConfiger;
 import com.smartlock.udpserver.db.ServerDBMgr;
-import com.smartlock.udpserver.debugserver.DebugServerThread;
 import com.smartlock.udpserver.debugudpserver.DebugUDPServerThread;
 
 public class Main {
@@ -28,17 +27,13 @@ public class Main {
 			Thread app_server = new ServerMainThread();
 			LogWriter.WriteTraceLog(LogWriter.SELF,"SmartLockServer App Server started successfully.");
 			
-			//STEP4 创建远程调试服务器
-			Thread debug_server = new DebugServerThread();
-			LogWriter.WriteTraceLog(LogWriter.SELF,"Remote Debug Server started successfully.");
-			
 			//STEP4 创建远程调试服务器(UDP)
 			Thread debug_udp_server = new DebugUDPServerThread();
 			LogWriter.WriteTraceLog(LogWriter.SELF,"Remote Debug UDP Server started successfully.");
 			
 			//STEP5 等待各线程结束
 			app_server.join();
-			debug_server.join();
+			debug_udp_server.join();
 			
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

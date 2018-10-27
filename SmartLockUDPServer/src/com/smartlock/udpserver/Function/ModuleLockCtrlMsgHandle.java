@@ -9,7 +9,7 @@ import com.smartlock.udpserver.db.MODULE_INFO;
 import com.smartlock.udpserver.db.ServerDBMgr;
 import com.smartlock.udpserver.db.USER_MODULE;
 
-public class ModulePowerCtrlMsgHandle implements ICallFunction{
+public class ModuleLockCtrlMsgHandle implements ICallFunction{
 	/**********************************************************************************************************
 	 * @name ParentCtrlRespHandle  status通用回应函数；所有对STATUS的变更，均由该函数响应 
 	 * 			包含：1、继电器通/断开控制   2、USB控制  3、PARENT CTRL 4、
@@ -119,7 +119,7 @@ public class ModulePowerCtrlMsgHandle implements ICallFunction{
 		
 		try
 		{
-			dbMgr.UpdateModuleInfo_PwrStatus(strModuleID, Integer.valueOf(strStatus));
+			dbMgr.UpdateModuleInfo_Status(strModuleID, Integer.valueOf(strStatus));
 			
 			//获取模块返回的返回码
 			if(0 != iRetCode)
