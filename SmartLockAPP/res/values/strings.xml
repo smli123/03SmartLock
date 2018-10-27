@@ -10,6 +10,16 @@
     <string name="smartlock_title_message">消息</string>
     <string name="smartlock_title_settings">我的</string>
     
+    <!-- Login -->
+    <string name="smartlock_login_input_username">"输入用户名"</string>
+    <string name="smartlock_login_input_pasword">"输入密码"</string>
+    <string name="smartlock_login_login">"登 录"</string>
+    <string name="smartlock_login_register">"新用户注册"</string>
+    <string name="smartlock_login_forget_password">"忘记密码"</string>
+    
+    <!-- Add Lock -->
+    <string name="smartlock_add_lock">"增加门锁"</string>
+    
     <!-- 设备操作 -->
     <string name="smartlock_oper_noscanplug">未扫描到门锁</string>
     <string name="smartlock_oper_openwifi">"正在打开WiFi，请稍等..."</string>
@@ -130,6 +140,29 @@
     
     <string name="common_timeout">时间超时</string>
 	<string name="smartlock_add_fail">"增加门锁失败"</string>
+	<string name="smartlock_add_success">"增加门锁成功"</string>
+	<string name="add_lock_name">门锁名称</string>
+    <string name="add_lock_mac">门锁MAC</string>
+    <string name="add_lock_mac_address">MAC地址</string>
+    
+    <string name="str_wifi">无线路由器</string>
+    <string name="str_wifi_mode">加密类型</string>
+    <string name="str_selectall">全选</string>
+    <string name="str_wifi_pwd">路由器密码</string>
+    <string name="str_wifi_ssid">SSID</string>
+    <string name="str_passwd_visible">显示密码</string>
+    <string name="str_info_plugname_empty_error">请给插座命名</string>
+    <string name="str_info_pwd_empty_error">请输入密码</string>
+    <string name="str_aboutus">关于我们</string>
+    <string name="str_cleartimer">清除定时任务</string>
+    
+    <string name="protocol_config">通信协议</string>
+    <string name="protocol_tcp">TCP</string>
+    <string name="protocol_udp">UDP</string>
+    
+    <string name="add">增加</string>
+    
+    <string name="smartlock_ap2station_fail">"切换AP失败，请手工切换WIFI"</string>
 	
 	<!-- 错误码 -->
 	<string name="app_response_not_register">用户尚未注册</string>
@@ -209,8 +242,6 @@
     <string name="str_new_email">新邮箱</string>
     <string name="plug_modify_name">改名称</string>
 
-    <string name="str_passwd_visible">显示密码</string>
-    
     <string name="app_modify_pwd">修改密码</string>
     <string name="app_modify_email">修改邮箱</string>
     
@@ -235,5 +266,20 @@
     <string name="soft_update_later">稍后更新</string>
     <string name="soft_updating">正在更新</string>
     <string name="soft_update_cancel">取消</string>
+    
+    <!-- SmartLink Add Device To Internet -->
+    <string name="ssid_title">"WIFI名字: "</string>
+    <string name="bssid_title">"BSSID: "</string>
+    <string name="password_title">"WIFI密码: "</string>
+    <string name="device_count_title">"设备个数: "</string>
+    <string name="package_broadcast">"广播"</string>
+    <string name="package_multicast">"组播"</string>
+    <string name="confirm">"提交"</string>
+    <string name="wifi_5g_message">"设备不支持 5G WIFI"</string>
+    <string name="location_disable_message">"GPS定位功能被禁止"</string>
+    <string name="connected_to_wifi_router">" 已经连接到WIFI路由器"</string>
+    <string name="connecting_to_wifi_router">"正在配置网络, 请稍等..."</string>
+    <string name="esptouch_task_failed_port_is_used">"配置网络失败, 端口被占用"</string>
+    <string name="esptouch_task_failed">"配置网络失败"</string>
     
 </resources>

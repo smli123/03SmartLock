@@ -17,82 +17,35 @@ import java.util.Set;
 import java.util.Timer;
 
 import com.smartlock.platform.LogTool.LogWriter;
-import com.smartlock.udpserver.Function.AddModuleMsgHandle;
-import com.smartlock.udpserver.Function.AppAddSceneMsgHandle;
-import com.smartlock.udpserver.Function.AppApplySceneMsgHandle;
-import com.smartlock.udpserver.Function.AppDelSceneMsgHandle;
-import com.smartlock.udpserver.Function.AppGrowLightAddTimeTaskHandle;
-import com.smartlock.udpserver.Function.AppGrowLightDelTimeTaskHandle;
-import com.smartlock.udpserver.Function.AppGrowLightModTimeTaskHandle;
-import com.smartlock.udpserver.Function.AppGrowLightQryStatusHandle;
-import com.smartlock.udpserver.Function.AppGrowLightQrySunTimeHandle;
-import com.smartlock.udpserver.Function.AppGrowLightQryTimeCurveHandle;
-import com.smartlock.udpserver.Function.AppGrowLightQryTimeTaskHandle;
-import com.smartlock.udpserver.Function.AppGrowLightSetBrightHandle;
-import com.smartlock.udpserver.Function.AppGrowLightSetCurTimeHandle;
-import com.smartlock.udpserver.Function.AppGrowLightSetSunTimeHandle;
-import com.smartlock.udpserver.Function.AppGrowLightSetTemperatureHandle;
-import com.smartlock.udpserver.Function.AppGrowLightSetTimeCurveHandle;
-import com.smartlock.udpserver.Function.AppGrowLightSetWorkModeHandle;
+import com.smartlock.udpserver.Function.APPAddModuleMsgHandle;
 import com.smartlock.udpserver.Function.AppLogOutMsgHandle;
 import com.smartlock.udpserver.Function.AppLoginMsgHandle;
 import com.smartlock.udpserver.Function.AppPassThroughMsgHandle;
 import com.smartlock.udpserver.Function.AppQuerySceneMsgHandle;
-import com.smartlock.udpserver.Function.AppRemotePrintMsgHandle;
 import com.smartlock.udpserver.Function.AppUpgradeStartMsgHandle;
-import com.smartlock.udpserver.Function.DeleteModuleMsgHandle;
-import com.smartlock.udpserver.Function.EnableEnergeHandle;
-import com.smartlock.udpserver.Function.FindPwdHandle;
-import com.smartlock.udpserver.Function.IRAddSceneMsgHandle;
-import com.smartlock.udpserver.Function.IRDelSceneMsgHandle;
-import com.smartlock.udpserver.Function.IREnableSceneMsgHandle;
-import com.smartlock.udpserver.Function.IRModifySceneMsgHandle;
-import com.smartlock.udpserver.Function.IRQueryIRDataHandle;
-import com.smartlock.udpserver.Function.IRQuerySceneMsgHandle;
-import com.smartlock.udpserver.Function.IRQueryTVIRDataHandle;
-import com.smartlock.udpserver.Function.IRStartSceneMsgHandle;
-import com.smartlock.udpserver.Function.ModEmailMsgHandle;
-import com.smartlock.udpserver.Function.ModPwdMsgHandle;
-import com.smartlock.udpserver.Function.ModifyPlugNameHandle;
-import com.smartlock.udpserver.Function.ModuleALEDCtrlMsgHandle;
+import com.smartlock.udpserver.Function.APPDeleteModuleMsgHandle;
+import com.smartlock.udpserver.Function.APPFindPwdHandle;
+import com.smartlock.udpserver.Function.APPModEmailMsgHandle;
+import com.smartlock.udpserver.Function.APPModPwdMsgHandle;
+import com.smartlock.udpserver.Function.APPModifyPlugNameHandle;
 import com.smartlock.udpserver.Function.ModuleAddTimerMsgHandle;
-import com.smartlock.udpserver.Function.ModuleAirConCtrlMsgHandle;
-import com.smartlock.udpserver.Function.ModuleAirConServerCtrlMsgHandle;
 import com.smartlock.udpserver.Function.ModuleBack2APCtrlMsgHandle;
 import com.smartlock.udpserver.Function.ModuleBellOnMsgHandle;
-import com.smartlock.udpserver.Function.ModuleCurtainCtrlMsgHandle;
-import com.smartlock.udpserver.Function.ModuleDelTimerMsgHandle;
-import com.smartlock.udpserver.Function.ModuleEnableIRTimerMsgHandle;
 import com.smartlock.udpserver.Function.ModuleHeartBeatTask;
 import com.smartlock.udpserver.Function.ModuleHeartMsgHandle;
-import com.smartlock.udpserver.Function.ModuleLightRGBMsgHandle;
 import com.smartlock.udpserver.Function.ModuleLogFileMsgHandle;
 import com.smartlock.udpserver.Function.ModuleLoginHandle;
 import com.smartlock.udpserver.Function.ModuleModNameMsgHandle;
 import com.smartlock.udpserver.Function.ModuleModPlugMsgHandle;
 import com.smartlock.udpserver.Function.ModuleModTimerMsgHandle;
 import com.smartlock.udpserver.Function.ModulePowerCtrlMsgHandle;
-import com.smartlock.udpserver.Function.ModuleQueryMaopiCtrlMsgHandle;
-import com.smartlock.udpserver.Function.ModuleQueryWeightCtrlMsgHandle;
 import com.smartlock.udpserver.Function.ModuleRecvFileEndMsgHandle;
 import com.smartlock.udpserver.Function.ModuleRecvFileSendMsgHandle;
 import com.smartlock.udpserver.Function.ModuleRecvFileStartMsgHandle;
-import com.smartlock.udpserver.Function.ModuleSetTcpUdpMsgHandle;
-import com.smartlock.udpserver.Function.ModuleSetTimerEnableFlagMsgHandle;
-import com.smartlock.udpserver.Function.ModuleTVServerCtrlMsgHandle;
 import com.smartlock.udpserver.Function.ModuleWindowCtrlMsgHandle;
-import com.smartlock.udpserver.Function.NotifyBatteryEnergeHandle;
-import com.smartlock.udpserver.Function.NotifyBatteryLocationHandle;
-import com.smartlock.udpserver.Function.NotifyCurtainStatusHandle;
-import com.smartlock.udpserver.Function.NotifyEnergeHandle;
-import com.smartlock.udpserver.Function.NotifyKettleStatusHandle;
 import com.smartlock.udpserver.Function.NotifyPowerStatusHandle;
-import com.smartlock.udpserver.Function.QueryAllModuleInfoHandle;
-import com.smartlock.udpserver.Function.QueryBatteryEnergeHandle;
-import com.smartlock.udpserver.Function.QueryBatteryLocationHandle;
 import com.smartlock.udpserver.Function.QueryChargeHandle;
 import com.smartlock.udpserver.Function.QueryGonglvHandle;
-import com.smartlock.udpserver.Function.QueryNetIPHandle;
 import com.smartlock.udpserver.Function.TransmitHearBeatMsgHandle;
 import com.smartlock.udpserver.Function.TransmitTransMsgHandle;
 import com.smartlock.udpserver.Function.UpgradeEndRspHandle;
@@ -100,7 +53,7 @@ import com.smartlock.udpserver.Function.UpgradeReEndRspHandle;
 import com.smartlock.udpserver.Function.UpgradeReSendRespHandle;
 import com.smartlock.udpserver.Function.UpgradeSendRespHandle;
 import com.smartlock.udpserver.Function.UpgradeStartRespHandle;
-import com.smartlock.udpserver.Function.UserRegisterMsgHandle;
+import com.smartlock.udpserver.Function.APPUserRegisterMsgHandle;
 import com.smartlock.udpserver.commdef.ICallFunction;
 import com.smartlock.udpserver.commdef.ServerCommDefine;
 import com.smartlock.udpserver.commdef.ServerParamConfiger;
@@ -349,126 +302,49 @@ public class ServerWorkThread  implements Runnable{
 	
 	public static void Init()
 	{
-		/* APP命令 */
-		m_SendFuncMap.put(ServerCommDefine.APP_REMOTE_PRINT_MSG_HEADER, new AppRemotePrintMsgHandle());
-
-		m_SendFuncMap.put(ServerCommDefine.APP_REGUSER_MSG_HEADER, new UserRegisterMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_RSTPWD_MSG_HEADER, new FindPwdHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_LOGIN_MSG_HEADER, new AppLoginMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_LOGOUT_MSG_HEADER, new AppLogOutMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_ADD_PLUG_MSG_HEADER, new AddModuleMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_DEL_PLUG_MSG_HEADER, new DeleteModuleMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_MOD_PLUG_MSG_HEADER, new ModifyPlugNameHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_QRY_PLUG_MSG_HEADER, new QueryAllModuleInfoHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_MOD_EMAIL_MSG_HEADER, new ModEmailMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_MOD_PWD_MSG_HEADER, new ModPwdMsgHandle());
-		
-		// 空调红外遥控器
-		m_SendFuncMap.put(ServerCommDefine.APP_QRY_IRDATA_MSG_HEADER, new IRQueryIRDataHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_AIRCON_SERVER_CTRL_MSG_HEADER, new ModuleAirConServerCtrlMsgHandle());
-
-		// 电视红外遥控器
-		m_SendFuncMap.put(ServerCommDefine.APP_QRY_TV_IRDATA_MSG_HEADER, new IRQueryTVIRDataHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_TV_SERVER_CTRL_MSG_HEADER, new ModuleTVServerCtrlMsgHandle());
-		
-		// 红外场景管理
-		m_SendFuncMap.put(ServerCommDefine.APP_ADD_SCENE_MSG_HEADER, new AppAddSceneMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_DEL_SCENE_MSG_HEADER, new AppDelSceneMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_QRY_SCENE_MSG_HEADER, new AppQuerySceneMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_APPLY_SCENE_MSG_HEADER, new AppApplySceneMsgHandle());
-				
-		// 红外场景管理
-		m_SendFuncMap.put(ServerCommDefine.APP_ADD_IRSCENE_MSG_HEADER, new IRAddSceneMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_DEL_IRSCENE_MSG_HEADER, new IRDelSceneMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_MODIFY_IRSCENE_MSG_HEADER, new IRModifySceneMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_QUERY_IRSCENE_MSG_HEADER, new IRQuerySceneMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_ENABLE_IRSCENE_MSG_HEADER, new IREnableSceneMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.START_IRSCENE_MSG_HEADER, new IRStartSceneMsgHandle());
-
-		m_SendFuncMap.put(ServerCommDefine.ADD_IRSCENE_MSG_HEADER, new IRAddSceneMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.DEL_IRSCENE_MSG_HEADER, new IRDelSceneMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.MODIFY_IRSCENE_MSG_HEADER, new IRModifySceneMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.QUERY_IRSCENE_MSG_HEADER, new IRQuerySceneMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.ENABLE_IRSCENE_MSG_HEADER, new IREnableSceneMsgHandle());		
-		
-		/* APP和模块命令*/
-		m_SendFuncMap.put(ServerCommDefine.APP_BELL_ON_MSG_HEADER, new ModuleBellOnMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_SET_TIMER_ENABLE_MSG_HEADER, new ModuleSetTimerEnableFlagMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_TCP_UDP_MSG_HEADER, new ModuleSetTcpUdpMsgHandle());		
-		m_SendFuncMap.put(ServerCommDefine.APP_PARENT_CTRL_MSG_HEADER, new ModulePowerCtrlMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_USB_CTRL_MSG_HEADER, new ModulePowerCtrlMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_LIGHT_CTRL_MSG_HEADER, new ModulePowerCtrlMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_POWER_CTRL_MSG_HEADER, new ModulePowerCtrlMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_BACK2AP_CTRL_MSG_HEADER, new ModuleBack2APCtrlMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_LIGHT_RGB_MSG_HEADER, new ModuleLightRGBMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_ADD_TIMER_MSG_HEADER, new ModuleAddTimerMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_DEL_TIMER_MSG_HEADER, new ModuleDelTimerMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_MOD_TIMER_MSG_HEADER, new ModuleModTimerMsgHandle());
-
-		// 智能电子秤
-		m_SendFuncMap.put(ServerCommDefine.APP_STEELYARD_QUERY_WEIGHT, new ModuleQueryWeightCtrlMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_STEELYARD_QUERY_MAOPI, new ModuleQueryMaopiCtrlMsgHandle());
-		
-		m_SendFuncMap.put(ServerCommDefine.APP_CURTAIN_CTRL_MSG_HEADER, new ModuleCurtainCtrlMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_WINDOW_CTRL_MSG_HEADER, new ModuleWindowCtrlMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_ALED_CTRL_MSG_HEADER, new ModuleALEDCtrlMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_AIRCON_CTRL_MSG_HEADER, new ModuleAirConCtrlMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_UPGRADE_START_MSG_HEADER, new AppUpgradeStartMsgHandle());
-
 		/* APP透传通道命令 */
 		m_SendFuncMap.put(ServerCommDefine.APP_PASSTHROUGH_MSG_HEADER, new AppPassThroughMsgHandle());
+
+		/* APP命令 */
+		m_SendFuncMap.put(ServerCommDefine.APP_REGUSER_MSG_HEADER, new APPUserRegisterMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_RSTPWD_MSG_HEADER, new APPFindPwdHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_LOGIN_MSG_HEADER, new AppLoginMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_LOGOUT_MSG_HEADER, new AppLogOutMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_MOD_EMAIL_MSG_HEADER, new APPModEmailMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_MOD_PWD_MSG_HEADER, new APPModPwdMsgHandle());
+		
+		m_SendFuncMap.put(ServerCommDefine.APP_ADD_PLUG_MSG_HEADER, new APPAddModuleMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_DEL_PLUG_MSG_HEADER, new APPDeleteModuleMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_MOD_PLUG_MSG_HEADER, new APPModifyPlugNameHandle());
+		
+		/* APP和模块命令*/
+		m_SendFuncMap.put(ServerCommDefine.APP_POWER_CTRL_MSG_HEADER, new ModulePowerCtrlMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_BELL_ON_MSG_HEADER, new ModuleBellOnMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_BACK2AP_CTRL_MSG_HEADER, new ModuleBack2APCtrlMsgHandle());
+
 		
 		/* 模块命令 */
-		m_SendFuncMap.put(ServerCommDefine.BELL_ON_MSG_HEADER, new ModuleBellOnMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.SET_TIMER_ENABLE_MSG_HEADER, new ModuleSetTimerEnableFlagMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.TCP_UDP_MSG_HEADER, new ModuleSetTcpUdpMsgHandle());
-		
-		m_SendFuncMap.put(ServerCommDefine.NOTIFY_POWER_STATUS, new NotifyPowerStatusHandle());
-		m_SendFuncMap.put(ServerCommDefine.NOTIFY_CURTAIN_STATUS, new NotifyCurtainStatusHandle());
-		m_SendFuncMap.put(ServerCommDefine.NOTIFY_KETTLE_STATUS, new NotifyKettleStatusHandle());
-		
-		/* 功率功能 */
-		m_SendFuncMap.put(ServerCommDefine.NOTIFY_ENERGE, new NotifyEnergeHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_ENABLE_ENERGE, new EnableEnergeHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_QUERY_GONGLV, new QueryGonglvHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_QUERY_CHARGE, new QueryChargeHandle());
-		m_SendFuncMap.put(ServerCommDefine.ENABLE_ENERGE, new EnableEnergeHandle());
-		m_SendFuncMap.put(ServerCommDefine.QUERY_GONGLV, new QueryGonglvHandle());
-		
-		/* 智能电池 */
-		m_SendFuncMap.put(ServerCommDefine.NOTIFY_BATTERYENERGE, new NotifyBatteryEnergeHandle());
-		m_SendFuncMap.put(ServerCommDefine.NOTIFY_BATTERYLOCATION, new NotifyBatteryLocationHandle());
-		
-		m_SendFuncMap.put(ServerCommDefine.APP_QUERY_BATTERYENERGE, new QueryBatteryEnergeHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_QUERY_BATTERYLOCATON, new QueryBatteryLocationHandle());
-		
-		m_SendFuncMap.put(ServerCommDefine.QUERY_NETIP, new QueryNetIPHandle());
-		
-		m_SendFuncMap.put(ServerCommDefine.MODULE_HEART_MSG_HEADER, new ModuleHeartMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.PARENT_CTRL_MSG_HEADER, new ModulePowerCtrlMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.USB_CTRL_MSG_HEADER, new ModulePowerCtrlMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.LIGHT_CTRL_MSG_HEADER, new ModulePowerCtrlMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.POWER_CTRL_MSG_HEADER, new ModulePowerCtrlMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.BELL_ON_MSG_HEADER, new ModuleBellOnMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.BACK2AP_CTRL_MSG_HEADER, new ModuleBack2APCtrlMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.LIGHT_RGB_MSG_HEADER, new ModuleLightRGBMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.ADD_TIMER_MSG_HEADER, new ModuleAddTimerMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.DEL_TIMER_MSG_HEADER, new ModuleDelTimerMsgHandle());
+
 		m_SendFuncMap.put(ServerCommDefine.MOD_PLUG_MSG_HEADER, new ModuleModPlugMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.MOD_TIMER_MSG_HEADER, new ModuleModTimerMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.MOD_MODULE_NAME_MSG_HEADER, new ModuleModNameMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.MODULE_LOGIN_MSG_HEADER, new ModuleLoginHandle());
+		
+		/* 模板上报消息 */
+		m_SendFuncMap.put(ServerCommDefine.NOTIFY_POWER_STATUS, new NotifyPowerStatusHandle());
+		
+		
+		
+		
+		/* 下面的命令不在使用，暂时保留 */
+		/* APP启动模块升级 */
 		m_SendFuncMap.put(ServerCommDefine.UPGRADE_START_MSG_HEADER, new UpgradeStartRespHandle());
 		m_SendFuncMap.put(ServerCommDefine.MODULE_UPGRADE_SEND_MSG_HEADER, new UpgradeSendRespHandle());
 		m_SendFuncMap.put(ServerCommDefine.MODULE_UPGRADE_END_MSG_HEADER, new UpgradeEndRspHandle());
 		m_SendFuncMap.put(ServerCommDefine.MODULE_UPGRADE_RESEND_MSG_HEADER, new UpgradeReSendRespHandle());
 		m_SendFuncMap.put(ServerCommDefine.MODULE_UPGRADE_REEND_MSG_HEADER, new UpgradeReEndRspHandle());
-		
-		m_SendFuncMap.put(ServerCommDefine.CURTAIN_CTRL_MSG_HEADER, new ModuleCurtainCtrlMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.WINDOW_CTRL_MSG_HEADER, new ModuleWindowCtrlMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.ALED_CTRL_MSG_HEADER	, new ModuleALEDCtrlMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.AIRCON_CTRL_MSG_HEADER, new ModuleAirConCtrlMsgHandle());
-
-		m_SendFuncMap.put(ServerCommDefine.MODULE_ENAMBE_IR_TIMER_MSG_HEADER, new ModuleEnableIRTimerMsgHandle());
 		
 		/* 模块升级命令 */
 		m_SendFuncMap.put(ServerCommDefine.MODULE_RECV_FILE_START_MSG_HEADER, new ModuleRecvFileStartMsgHandle());
@@ -481,140 +357,8 @@ public class ServerWorkThread  implements Runnable{
 		/** 转发器功能  **/
 		m_SendFuncMap.put(ServerCommDefine.TRANSMIT_HEARBEAT_MSG_HEADER, new TransmitHearBeatMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.TRANSMIT_TRANS_MSG_HEADER, new TransmitTransMsgHandle());
-		
-		/** 植物生长灯 **/
-		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_QRY_STATUS_MSG_HEADER, new AppGrowLightQryStatusHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_SET_BRIGHT_MSG_HEADER, new AppGrowLightSetBrightHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_QRY_TIMECURVE_MSG_HEADER, new AppGrowLightQryTimeCurveHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_SET_TIMECURVE_MSG_HEADER, new AppGrowLightSetTimeCurveHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_SET_TEMPERATURE_MSG_HEADER, new AppGrowLightSetTemperatureHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_SET_CURTIME_MSG_HEADER, new AppGrowLightSetCurTimeHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_SET_WORKMODE_MSG_HEADER, new AppGrowLightSetWorkModeHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_ADD_TIMETASK_MSG_HEADER, new AppGrowLightAddTimeTaskHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_DEL_TIMETASK_MSG_HEADER, new AppGrowLightDelTimeTaskHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_MOD_TIMETASK_MSG_HEADER, new AppGrowLightModTimeTaskHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_QRY_TIMETASK_MSG_HEADER, new AppGrowLightQrySunTimeHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_QRY_SUNTIME_MSG_HEADER, new AppGrowLightQryTimeTaskHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_GROWLIGHT_SET_SUNTIME_MSG_HEADER, new AppGrowLightSetSunTimeHandle());
-		
-		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_QRY_STATUS_MSG_HEADER, new AppGrowLightQryStatusHandle());
-		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_SET_BRIGHT_MSG_HEADER, new AppGrowLightSetBrightHandle());
-		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_QRY_TIMECURVE_MSG_HEADER, new AppGrowLightQryTimeCurveHandle());
-		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_SET_TIMECURVE_MSG_HEADER, new AppGrowLightSetTimeCurveHandle());
-		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_SET_TEMPERATURE_MSG_HEADER, new AppGrowLightSetTemperatureHandle());
-		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_SET_CURTIME_MSG_HEADER, new AppGrowLightSetCurTimeHandle());
-		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_SET_WORKMODE_MSG_HEADER, new AppGrowLightSetWorkModeHandle());
-		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_ADD_TIMETASK_MSG_HEADER, new AppGrowLightAddTimeTaskHandle());
-		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_DEL_TIMETASK_MSG_HEADER, new AppGrowLightDelTimeTaskHandle());
-		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_MOD_TIMETASK_MSG_HEADER, new AppGrowLightModTimeTaskHandle());
-		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_QRY_TIMETASK_MSG_HEADER, new AppGrowLightQryTimeTaskHandle());
-		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_QRY_SUNTIME_MSG_HEADER, new AppGrowLightQrySunTimeHandle());
-		m_SendFuncMap.put(ServerCommDefine.GROWLIGHT_SET_SUNTIME_MSG_HEADER, new AppGrowLightSetSunTimeHandle());
-		
-		/* 空调红外数据接口 */
-		String jsonStr = JsonFileReader.getJson(ServerParamConfiger.strIRFileName);
-		parseJSONWithGSON_IRDATA(jsonStr);
-		initIRSubID();
-		
-		/* 电视红外数据接口 */
-		jsonStr = JsonFileReader.getJson(ServerParamConfiger.strTVIRFileName);
-		parseJSONWithGSON_TVIRDATA(jsonStr);
-		initTVIRSubID();
 	}
 	
-	private static void initIRSubID() {
-		// TODO Auto-generated method stub
-		m_IRSubId.put("mode_auto","001");
-		m_IRSubId.put("mode_cool","002");
-		m_IRSubId.put("mode_wet","003");
-		m_IRSubId.put("mode_wind","004");
-		m_IRSubId.put("mode_warm","005");
-		m_IRSubId.put("scale_auto","006");
-		m_IRSubId.put("scale_big","007");
-		m_IRSubId.put("scale_middle","008");
-		m_IRSubId.put("scale_small","009");
-		m_IRSubId.put("direction_on","010");
-		m_IRSubId.put("direction_off","011");
-		m_IRSubId.put("sway_1","012");
-		m_IRSubId.put("sway_2","013");
-		m_IRSubId.put("sway_3","014");
-		m_IRSubId.put("sway_4","015");
-		m_IRSubId.put("open_01","016");
-		m_IRSubId.put("open_02","017");
-		m_IRSubId.put("open_03","018");
-		m_IRSubId.put("open_04","019");
-		m_IRSubId.put("open_05","020");
-		m_IRSubId.put("open_06","021");
-		m_IRSubId.put("open_07","022");
-		m_IRSubId.put("open_08","023");
-		m_IRSubId.put("open_09","024");
-		m_IRSubId.put("open_10","025");
-		m_IRSubId.put("open_11","026");
-		m_IRSubId.put("open_12","027");
-		m_IRSubId.put("open_13","028");
-		m_IRSubId.put("open_14","029");
-		m_IRSubId.put("open_15","030");
-		m_IRSubId.put("open_close","031");
-		m_IRSubId.put("close_01","032");
-		m_IRSubId.put("close_02","033");
-		m_IRSubId.put("close_03","034");
-		m_IRSubId.put("close_04","035");
-		m_IRSubId.put("close_05","036");
-		m_IRSubId.put("close_06","037");
-		m_IRSubId.put("close_07","038");
-		m_IRSubId.put("close_08","039");
-		m_IRSubId.put("close_09","040");
-		m_IRSubId.put("close_10","041");
-		m_IRSubId.put("close_11","042");
-		m_IRSubId.put("close_12","043");
-		m_IRSubId.put("close_13","044");
-		m_IRSubId.put("close_14","045");
-		m_IRSubId.put("close_15","046");
-		m_IRSubId.put("close_close","047");
-		m_IRSubId.put("temp_16","048");
-		m_IRSubId.put("temp_17","049");
-		m_IRSubId.put("temp_18","050");
-		m_IRSubId.put("temp_19","051");
-		m_IRSubId.put("temp_20","052");
-		m_IRSubId.put("temp_21","053");
-		m_IRSubId.put("temp_22","054");
-		m_IRSubId.put("temp_23","055");
-		m_IRSubId.put("temp_24","056");
-		m_IRSubId.put("temp_25","057");
-		m_IRSubId.put("temp_26","058");
-		m_IRSubId.put("temp_27","059");
-		m_IRSubId.put("temp_28","060");
-		m_IRSubId.put("temp_29","061");
-		m_IRSubId.put("temp_30","062");
-		m_IRSubId.put("power_on","063");
-		m_IRSubId.put("power_off","064");
-		m_IRSubId.put("warmer","065");
-
-	}
-
-	private static void initTVIRSubID() {
-		m_TVIRSubId.put("power_on","001");
-		m_TVIRSubId.put("power_off","002");
-		m_TVIRSubId.put("mute_on","003");
-		m_TVIRSubId.put("mute_off","004");
-		m_TVIRSubId.put("volume_add","005");
-		m_TVIRSubId.put("volume_reduce","006");
-		m_TVIRSubId.put("channel_add","007");
-		m_TVIRSubId.put("channel_reduce","008");
-		m_TVIRSubId.put("num_01","009");
-		m_TVIRSubId.put("num_02","010");
-		m_TVIRSubId.put("num_03","011");
-		m_TVIRSubId.put("num_04","012");
-		m_TVIRSubId.put("num_05","013");
-		m_TVIRSubId.put("num_06","014");
-		m_TVIRSubId.put("num_07","015");
-		m_TVIRSubId.put("num_08","016");
-		m_TVIRSubId.put("num_09","017");
-		m_TVIRSubId.put("num_00","018");
-		m_TVIRSubId.put("num_cancel","019");
-		m_TVIRSubId.put("num_ok","020");
-	}
-
 	private static boolean IsNeedJudgeLogin(String strCmd)
 	{
 		if (strCmd.equalsIgnoreCase(ServerCommDefine.APP_LOGIN_MSG_HEADER) ||

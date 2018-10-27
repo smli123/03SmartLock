@@ -119,6 +119,8 @@ public class SettingFragment extends SmartLockFragment
 				.findViewById(R.id.rl_person_info);
 		rl_mgr_update = (RelativeLayout) mFragmentView
 				.findViewById(R.id.rl_mgr_update);
+		// lishin Code is not run
+		rl_mgr_update.setVisibility(View.GONE);
 		rl_mgr_feedback = (RelativeLayout) mFragmentView
 				.findViewById(R.id.rl_mgr_feedback);
 		rl_mgr_help = (RelativeLayout) mFragmentView

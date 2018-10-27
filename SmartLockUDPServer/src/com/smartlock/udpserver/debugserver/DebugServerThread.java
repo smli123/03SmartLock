@@ -19,7 +19,7 @@ public class DebugServerThread extends Thread{
 		//创建SOCKET
 		ServerSocket server;
 		try {
-			server = new ServerSocket(ServerPortDefine.SMART_PLUG_DEBUG_UDP_SERVER_PORT);
+			server = new ServerSocket(ServerPortDefine.SMART_LOCK_DEBUG_UDP_SERVER_PORT);
 			while(true)
 			{
 				/*STEP2 监听*/

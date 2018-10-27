@@ -64,7 +64,7 @@ public class ActivityMessageSystem extends TitledActivity implements OnClickList
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState, R.layout.activity_message_device,
+		super.onCreate(savedInstanceState, R.layout.activity_message_system,
 				false);
 		SmartLockApplication.resetTask();
 		SmartLockApplication.getInstance().addActivity(this);

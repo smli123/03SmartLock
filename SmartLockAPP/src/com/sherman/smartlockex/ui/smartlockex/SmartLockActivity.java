@@ -30,7 +30,7 @@ import com.sherman.smartlockex.R;
 import com.sherman.smartlockex.ui.common.PubDefine;
 import com.sherman.smartlockex.ui.common.PubStatus;
 import com.sherman.smartlockex.ui.common.SmartLockFragmentPagerAdapter;
-import com.sherman.smartlockex.ui.dev.AddSocketActivity2;
+import com.sherman.smartlockex.ui.dev.AddDeviceActivity;
 import com.sherman.smartlockex.ui.dev.DeviceFragment;
 import com.sherman.smartlockex.ui.login.LoginActivity;
 import com.sherman.smartlockex.ui.message.MessageFragment;
@@ -51,7 +51,7 @@ public class SmartLockActivity extends FragmentActivity
 	
 	protected boolean mBack2Exit = false;
 	private TextView tvTitle;
-//	private Button mBtnAddPlug = null;
+	private Button btn_AddLock = null;
 
 	private Button btnLoginout;
 
@@ -155,11 +155,11 @@ public class SmartLockActivity extends FragmentActivity
 		 * mImgAddPlug.setOnClickListener(this);
 		 */
 
-//		mBtnAddPlug = (Button) findViewById(R.id.titlebar_rightbutton);
-//		mBtnAddPlug.setText("增加");
-//		mBtnAddPlug.setBackgroundResource(R.drawable.title_btn_selector);
-//		mBtnAddPlug.setVisibility(View.VISIBLE);
-//		mBtnAddPlug.setOnClickListener(this);
+		btn_AddLock = (Button) findViewById(R.id.titlebar_rightbutton);
+		btn_AddLock.setText(R.string.add);
+		btn_AddLock.setBackgroundResource(R.drawable.title_btn_selector);
+		btn_AddLock.setVisibility(View.VISIBLE);
+		btn_AddLock.setOnClickListener(this);
 
 		// mImgFreshPlug = (ImageView) findViewById(R.id.titlebar_leftimage);
 		// mImgFreshPlug.setImageResource(R.drawable.plug_fresh_pressed);
@@ -385,7 +385,7 @@ public class SmartLockActivity extends FragmentActivity
 		 * break;
 		 */
 			case R.id.titlebar_rightbutton :
-				Intent intent = new Intent(this, AddSocketActivity2.class);
+				Intent intent = new Intent(this, AddDeviceActivity.class);
 				startActivity(intent);
 				break;
 		}

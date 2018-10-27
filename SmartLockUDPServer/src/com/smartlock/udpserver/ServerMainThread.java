@@ -32,7 +32,7 @@ public class ServerMainThread extends Thread {
 		{
 			try {
 				/*STEP1 查询模块IP地址*/
-				dataSocket = new DatagramSocket(ServerPortDefine.SMART_PLUG_UDP_SERVER_PORT);
+				dataSocket = new DatagramSocket(ServerPortDefine.SMART_LOCK_UDP_SERVER_PORT);
 				/*STEP2 监听*/
 				while(true)
 				{

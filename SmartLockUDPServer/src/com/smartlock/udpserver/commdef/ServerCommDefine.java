@@ -24,6 +24,9 @@ public class ServerCommDefine {
 	
 	public final static String QUERY_NETIP					= "APPQRYNETIP";
 	
+	/* 智能门锁 */
+	public final static String APP_LOCK_OPEN_CTRL_MSG_HEADER		= "APPLOCK_OPEN";	// 开锁、关锁
+	
 	/**APP消息头*/
 	public final static String APP_REMOTE_PRINT_MSG_HEADER 	= "APPREMOTEPRINT";				//注册
 	public final static String APP_REGUSER_MSG_HEADER 		= "APPREG";				//注册
@@ -43,78 +46,10 @@ public class ServerCommDefine {
 	public final static String APP_QRY_IRDATA_MSG_HEADER		= "APPQRYIRDATA";			//空调红外遥控器
 	public final static String APP_QRY_TV_IRDATA_MSG_HEADER		= "APPQRYTVIRDATA";			//电视红外遥控器
 	
-	// 植物生长灯
-	public final static String APP_GROWLIGHT_QRY_STATUS_MSG_HEADER		= "APPQRYGROWLIGHTSTATUS";
-	public final static String APP_GROWLIGHT_SET_BRIGHT_MSG_HEADER		= "APPSETGROWLIGHTBRIGHT";
-	public final static String APP_GROWLIGHT_QRY_TIMECURVE_MSG_HEADER		= "APPQRYGROWLIGHTTIMECURVE";
-	public final static String APP_GROWLIGHT_SET_TIMECURVE_MSG_HEADER		= "APPSETGROWLIGHTTIMECURVE";
-	public final static String APP_GROWLIGHT_SET_TEMPERATURE_MSG_HEADER		= "APPSETGROWLIGHTTEMPERATURE";
-	public final static String APP_GROWLIGHT_SET_CURTIME_MSG_HEADER		= "APPSETGROWLIGHTCURTIME";
-	public final static String APP_GROWLIGHT_SET_WORKMODE_MSG_HEADER		= "APPSETGROWLIGHTWORKMODE";
-	public final static String APP_GROWLIGHT_ADD_TIMETASK_MSG_HEADER		= "APPADDGROWLIGHTTIMETASK";
-	public final static String APP_GROWLIGHT_DEL_TIMETASK_MSG_HEADER		= "APPDELGROWLIGHTTIMETASK";
-	public final static String APP_GROWLIGHT_MOD_TIMETASK_MSG_HEADER		= "APPMODGROWLIGHTTIMETASK";
-	public final static String APP_GROWLIGHT_QRY_TIMETASK_MSG_HEADER		= "APPQRYGROWLIGHTTIMETASK";
-	public final static String APP_GROWLIGHT_QRY_SUNTIME_MSG_HEADER		= "APPQRYGROWLIGHTSUNTIME";
-	public final static String APP_GROWLIGHT_SET_SUNTIME_MSG_HEADER		= "APPSETGROWLIGHTSUNTIME";
-
-	public final static String GROWLIGHT_QRY_STATUS_MSG_HEADER		= "QRYGROWLIGHTSTATUS";
-	public final static String GROWLIGHT_SET_BRIGHT_MSG_HEADER		= "SETGROWLIGHTBRIGHT";
-	public final static String GROWLIGHT_QRY_TIMECURVE_MSG_HEADER		= "QRYGROWLIGHTTIMECURVE";
-	public final static String GROWLIGHT_SET_TIMECURVE_MSG_HEADER		= "SETGROWLIGHTTIMECURVE";
-	public final static String GROWLIGHT_SET_TEMPERATURE_MSG_HEADER		= "SETGROWLIGHTTEMPERATURE";
-	public final static String GROWLIGHT_SET_CURTIME_MSG_HEADER		= "SETGROWLIGHTCURTIME";
-	public final static String GROWLIGHT_SET_WORKMODE_MSG_HEADER		= "SETGROWLIGHTWORKMODE";
-	public final static String GROWLIGHT_ADD_TIMETASK_MSG_HEADER		= "ADDGROWLIGHTTIMETASK";
-	public final static String GROWLIGHT_DEL_TIMETASK_MSG_HEADER		= "DELGROWLIGHTTIMETASK";
-	public final static String GROWLIGHT_MOD_TIMETASK_MSG_HEADER		= "MODGROWLIGHTTIMETASK";
-	public final static String GROWLIGHT_QRY_TIMETASK_MSG_HEADER		= "QRYGROWLIGHTTIMETASK";
-	public final static String GROWLIGHT_QRY_SUNTIME_MSG_HEADER		= "QRYGROWLIGHTSUNTIME";
-	public final static String GROWLIGHT_SET_SUNTIME_MSG_HEADER		= "SETGROWLIGHTSUNTIME";
-	
-	// 智能电子秤
-	public final static String APP_STEELYARD_QUERY_WEIGHT		= "APPGET_WEIGHT";			//净重
-	public final static String APP_STEELYARD_QUERY_MAOPI		= "APPGET_MAOPI";			//毛重，皮的重量
-	
-	// 场景管理
-	public final static String APP_QRY_SCENE_MSG_HEADER			= "APPQRYSCENE";			//
-	public final static String APP_ADD_SCENE_MSG_HEADER			= "APPADDSCENE";			//
-	public final static String APP_DEL_SCENE_MSG_HEADER			= "APPDELSCENE";			//
-	public final static String APP_APPLY_SCENE_MSG_HEADER		= "APPAPPLYSCENE";			//
-	
-	public final static String APP_CURTAIN_CTRL_MSG_HEADER		= "APPCURTAIN_ACTION";				//窗帘
-	public final static String APP_WINDOW_CTRL_MSG_HEADER		= "APPWINDOW_ACTION";				//窗户
-	public final static String APP_ALED_CTRL_MSG_HEADER			= "APPALED";				//智能灯
-	public final static String APP_AIRCON_CTRL_MSG_HEADER		= "APPAIRCON";				//空调红外遥控器接口1
-	public final static String APP_AIRCON_SERVER_CTRL_MSG_HEADER= "APPAIRCONSERVER";//空调红外遥控器接口2
-	public final static String APP_TV_SERVER_CTRL_MSG_HEADER	= "APPTVSERVER";//电视红外遥控器接口2
-	
-	public final static String APP_SET_TIMER_ENABLE_MSG_HEADER	= "APPSETTIMERENABLE";		//设置定时器的使能状
-	public final static String APP_ADD_TIMER_MSG_HEADER			= "APPADDTIMER";
-	public final static String APP_MOD_TIMER_MSG_HEADER			= "APPMODTIMER";
-	public final static String APP_DEL_TIMER_MSG_HEADER			= "APPDELTIMER";
-	public final static String APP_LIGHT_RGB_MSG_HEADER			= "APPRGB";
-	public final static String APP_USB_CTRL_MSG_HEADER			= "APPUSB";
 	public final static String APP_UPGRADE_START_MSG_HEADER		= "APPUPGRADESTART";
 	public final static String APP_BELL_ON_MSG_HEADER			= "APPBELLON";
-	public final static String APP_TCP_UDP_MSG_HEADER			= "APPTCPUDP";
-	public final static String APP_PARENT_CTRL_MSG_HEADER		= "APPPARENTCTRL";
 	public final static String APP_PASSTHROUGH_MSG_HEADER		= "APPPASSTHROUGH";			//Server不做处理，透传APP发过来的命令给MOUDLE
 
-	/* APP 红外数据场景 */
-	public final static String APP_ADD_IRSCENE_MSG_HEADER		= "APPADDIRSCENE";
-	public final static String APP_DEL_IRSCENE_MSG_HEADER		= "APPDELIRSCENE";
-	public final static String APP_MODIFY_IRSCENE_MSG_HEADER	= "APPMODIFYIRSCENE";
-	public final static String APP_QUERY_IRSCENE_MSG_HEADER		= "APPQUERYIRSCENE";
-	public final static String APP_ENABLE_IRSCENE_MSG_HEADER	= "APPENABLEIRSCENE";
-	public final static String START_IRSCENE_MSG_HEADER			= "STARTSCENE";
-	
-	public final static String ADD_IRSCENE_MSG_HEADER			= "ADDIRSCENE";
-	public final static String DEL_IRSCENE_MSG_HEADER			= "DELIRSCENE";
-	public final static String MODIFY_IRSCENE_MSG_HEADER		= "MODIFYIRSCENE";
-	public final static String QUERY_IRSCENE_MSG_HEADER			= "QUERYIRSCENE";
-	public final static String ENABLE_IRSCENE_MSG_HEADER		= "ENABLEIRSCENE";
-	
 	/**模块消息头*/
 	public final static String MODULE_LOGIN_MSG_HEADER								= "LOGIN";
 	public final static String MODULE_QUERY_POWER_STATUS							= "QRYPWRSTA";			//APP主动查询继电器状态
@@ -140,26 +75,10 @@ public class ServerCommDefine {
 	public final static String MOD_TIMER_MSG_HEADER			= "MODTIMER";
 	public final static String DEL_TIMER_MSG_HEADER			= "DELTIMER";
 	public final static String MOD_PLUG_MSG_HEADER			= "MODPLUG";
-	public final static String LIGHT_RGB_MSG_HEADER			= "RGB";
-	public final static String USB_CTRL_MSG_HEADER			= "USB";
 	public final static String UPGRADE_START_MSG_HEADER		= "UPGRADESTART";
 	public final static String BELL_ON_MSG_HEADER			= "BELLON";
-	public final static String TCP_UDP_MSG_HEADER			= "TCPUDP";
-	public final static String PARENT_CTRL_MSG_HEADER		= "PARENTCTRL";
 	public final static String MOD_MODULE_NAME_MSG_HEADER	= "MODNAME";
 	
-	/* MODULE 红外数据 */
-	public final static String MODULE_ADD_IR_TIMER_MSG_HEADER		= "ADDIRTIMER";
-	public final static String MODULE_DEL_IR_TIMER_MSG_HEADER		= "DELIRTIMER";
-	public final static String MODULE_ENAMBE_IR_TIMER_MSG_HEADER	= "ENABLEIRTIMER";
-
-	
-	/** 无线摄像头传递图片文件  **/
-	public final static String MODULE_RECV_FILE_START_MSG_HEADER	= "JPG_START";
-	public final static String MODULE_RECV_FILE_SEND_MSG_HEADER		= "JPG_SEND";
-	public final static String MODULE_RECV_FILE_END_MSG_HEADER		= "JPG_END";
-	public final static String MODULE_RECV_FILE_OVER_MSG_HEADER		= "JPG_OVER";
-
 	/** 模块日志文件  **/
 	public final static String MODULE_LOG_FILE_START_MSG_HEADER		= "MODULELOG";
 	
@@ -171,9 +90,9 @@ public class ServerCommDefine {
 	public final static int MODULE_OFF_LINE		= 0;	//模块离线状态
 	public final static int MODULE_ON_LINE 		= 1;	//模块在线状态
 	
-	/**模块继电器通断*/
-	public final static int MODULE_STATUS_POWER_OFF	= 0;	//继电器断电
-	public final static int MODULE_STATUS_POWER_ON		= 1;	//继电器通电
+	/**模块门锁状态*/
+	public final static int MODULE_STATUS_LOCK_OFF	= 0;	//门锁关闭
+	public final static int MODULE_STATUS_LOCK_ON	= 1;	//门锁打开
 	
 	/**命令分隔符*/
 	public final static String CMD_SPLIT_STRING			= "[,#]";

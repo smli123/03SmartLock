@@ -3,8 +3,6 @@ package com.sherman.smartlockex.ui.login;
 import com.sherman.smartlockex.R;
 import com.sherman.smartlockex.R.id;
 import com.sherman.smartlockex.R.layout;
-import com.sherman.smartlockex.R.menu;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

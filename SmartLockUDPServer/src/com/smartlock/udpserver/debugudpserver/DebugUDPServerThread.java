@@ -12,7 +12,7 @@ import com.smartlock.platform.LogTool.LogWriter;
 import com.smartlock.platform.commdefine.ServerPortDefine;
 
 public class DebugUDPServerThread extends Thread{
-	private static int DEBUG_UDP_SERVER_PORT = ServerPortDefine.SMART_PLUG_DEBUG_UDP_SERVER_PORT + 10;
+	private static int DEBUG_UDP_SERVER_PORT = ServerPortDefine.SMART_LOCK_DEBUG_UDP_SERVER_PORT + 10;
 	
 	private ExecutorService executor = Executors.newCachedThreadPool();
 	public static DatagramSocket dataSocket = null;

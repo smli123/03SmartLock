@@ -10,12 +10,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
+//import org.apache.http.HttpEntity;
+//import org.apache.http.HttpResponse;
+//import org.apache.http.client.HttpClient;
+//import org.apache.http.client.methods.HttpGet;
+//import org.apache.http.impl.client.DefaultHttpClient;
+//import org.apache.http.util.EntityUtils;
 
 import com.sherman.smartlockex.R;
 
@@ -177,18 +177,18 @@ public class UpdateManager {
 	// 下载version.xml
 	private String downLoadVersionFile(String url) {
 		String response = null;
-		try {
-			HttpClient httpClient = new DefaultHttpClient();
-			HttpGet httpGet = new HttpGet(url);
-			HttpResponse httpResponse = httpClient.execute(httpGet);
-			if (httpResponse.getStatusLine().getStatusCode() == 200) { // 访问服务器成功
-				HttpEntity entity = httpResponse.getEntity();
-				response = EntityUtils.toString(entity, "utf-8");
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			HttpClient httpClient = new DefaultHttpClient();
+//			HttpGet httpGet = new HttpGet(url);
+//			HttpResponse httpResponse = httpClient.execute(httpGet);
+//			if (httpResponse.getStatusLine().getStatusCode() == 200) { // 访问服务器成功
+//				HttpEntity entity = httpResponse.getEntity();
+//				response = EntityUtils.toString(entity, "utf-8");
+//			}
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		return response;
 	}
 
@@ -253,7 +253,7 @@ public class UpdateManager {
 		try {
 			// 获取软件版本号，对应AndroidManifest.xml下android:versionCode
 			versionCode = context.getPackageManager().getPackageInfo(
-					"com.thingzdo.smartplug_udp", 0).versionCode;
+					"com.sherman.smartlockex", 0).versionCode;
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}

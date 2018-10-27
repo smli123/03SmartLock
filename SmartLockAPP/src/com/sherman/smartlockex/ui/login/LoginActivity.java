@@ -3,7 +3,6 @@ package com.sherman.smartlockex.ui.login;
 import com.sherman.smartlockex.R;
 import com.sherman.smartlockex.R.id;
 import com.sherman.smartlockex.R.layout;
-import com.sherman.smartlockex.R.menu;
 import com.sherman.smartlockex.internet.UDPReceiver;
 import com.sherman.smartlockex.processhandler.SmartLockMessage;
 import com.sherman.smartlockex.ui.common.PubDefine;
