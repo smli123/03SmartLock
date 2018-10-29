@@ -99,55 +99,40 @@ public class SmartLockEventHandler extends Handler {
 				new SmartLockEventHandlerResetPwd()));
 
 		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
-				SmartLockMessage.EVT_SP_ADDPLUG,
-				new SmartLockEventHandlerAddPlug()));
+				SmartLockMessage.EVT_SP_QRYLOCK,
+				new SmartLockEventHandlerQueryLock()));
+		
+		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
+				SmartLockMessage.EVT_SP_ADDLOCK,
+				new SmartLockEventHandlerAddLock()));
 
 		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
-				SmartLockMessage.EVT_SP_DELPLUG,
-				new SmartLockEventHandlerDeletePlug()));
+				SmartLockMessage.EVT_SP_DELLOCK,
+				new SmartLockEventHandlerDeleteLock()));
 
 		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
-				SmartLockMessage.EVT_SP_MODYPLUG,
-				new SmartLockEventHandlerModifyPlugName()));
-
-		mEventHandlerMaps
-				.add(new SmartLockEventHandlerMap(
-						SmartLockMessage.EVT_SP_POWER,
-						new SmartLockEventHandlerPower()));
-
-		mEventHandlerMaps
-				.add(new SmartLockEventHandlerMap(
-						SmartLockMessage.EVT_SP_LIGHT,
-						new SmartLockEventHandlerLight()));
+				SmartLockMessage.EVT_SP_MODLOCK,
+				new SmartLockEventHandlerModifyLockName()));
 
 		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
 				SmartLockMessage.EVT_SP_BACK2AP,
-				new SmartLockEventHandlerBACK2AP()));
+				new SmartLockEventHandlerBack2AP()));
 
-		// usb
-		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
-				SmartLockMessage.EVT_SP_USB, new SmartLockEventHandlerUSB()));
 
 		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
 				SmartLockMessage.EVT_SP_NOTIFYONLINE,
 				new SmartLockEventHandlerNotifyOnline()));
 
-		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
-				SmartLockMessage.EVT_SP_NOTIFYPOWER,
-				new SmartLockEventHandlerNotifyPower()));
-
-		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
-				SmartLockMessage.EVT_SP_NOTIFYLIGHT,
-				new SmartLockEventHandlerNotifyLight()));
-
-		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
-				SmartLockMessage.EVT_SP_NOTIFYUPGRADEAP,
-				new SmartLockEventHandlerNotifyUpgradeAP()));
-
 		// SmartLock
 		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
 				SmartLockMessage.EVT_SP_NOTIFYLOCKSTATUS,
 				new SmartLockEventHandlerNotifyLockStatus()));
+		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
+				SmartLockMessage.EVT_SP_NOTIFYLOCKBELL,
+				new SmartLockEventHandlerNotifyLockBell()));
+		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
+				SmartLockMessage.EVT_SP_NOTIFYLOCKALARM,
+				new SmartLockEventHandlerNotifyLockAlarm()));
 
 	}
 

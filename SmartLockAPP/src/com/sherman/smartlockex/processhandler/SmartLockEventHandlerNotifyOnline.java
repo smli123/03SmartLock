@@ -11,7 +11,7 @@ import com.sherman.smartlockex.ui.smartlockex.AppServerReposeDefine;
 import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
 
 public class SmartLockEventHandlerNotifyOnline extends SmartLockEventHandler {
-	Intent mIntent = new Intent(PubDefine.PLUG_NOTIFY_ONLINE);
+	Intent mIntent = new Intent(PubDefine.LOCK_NOTIFY_ONLINE_BROADCAST);
 	@Override
 	public void handleMessage(Message msg) {
 		String[] buffer = (String[]) msg.obj;

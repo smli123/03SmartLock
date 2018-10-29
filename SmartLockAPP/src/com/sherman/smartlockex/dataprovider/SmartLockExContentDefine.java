@@ -28,6 +28,7 @@ public class SmartLockExContentDefine {
 		public static final String LOCK_VERSION = "Version";
 		public static final String LOCK_TYPE = "DeviceType";
 		public static final String LOCK_CHARGE = "Charge";
+		public static final String LOCK_RELATION = "Relation";
 
 		// 列数
 		public static final int ID_COLUMN = 0;
@@ -40,6 +41,7 @@ public class SmartLockExContentDefine {
 		public static final int LOCK_VERSION_COLUMN = 7;
 		public static final int LOCK_TYPE_COLUMN = 8;
 		public static final int LOCK_CHARGE_COLUMN = 9;
+		public static final int LOCK_RELATION_COLUMN = 10;
 
 		// create table
 		public final static String TABLE_CREATE = "CREATE TABLE IF NOT EXISTS "
@@ -53,7 +55,8 @@ public class SmartLockExContentDefine {
 				+ LOCK_ADDRESS + " text default '', "
 				+ LOCK_VERSION + " text default '', "
 				+ LOCK_TYPE + " text default '', "
-				+ LOCK_CHARGE + " integer default 0);";
+				+ LOCK_CHARGE + " integer default 0, "
+				+ LOCK_RELATION + " integer default 0);";
 
 		public static final String TRIGGER_LOCK_DELETE = "Trigger_Locks";
 		public final static String SQL_TRIGER_LOCK_DELETE = " CREATE TRIGGER ["

@@ -51,7 +51,7 @@ public class ModuleHeartMsgHandle  implements ICallFunction {
 		}
 		
 		/* 为了定位模块的Socket接受不到消息的bug，临时增加代码调试使用，正式发布必须删除 */
-		String strHeartRsp0 = String.format("%s,%s,%s,%s,%s#", strCookie, "Server_Echo", strUserName, strDevId, ServerWorkThread.IsModuleLogin(strDevId) ? "0" : "1");
+		String strHeartRsp0 = String.format("%s,%s,%s,%s,%s#", strCookie, ServerCommDefine.MODULE_HEART_MSG_HEADER, strUserName, strDevId, ServerWorkThread.IsModuleLogin(strDevId) ? "0" : "1");
 		try {
 			Response(thread.getSrcIP(), thread.getSrcPort(), strHeartRsp0);
 			

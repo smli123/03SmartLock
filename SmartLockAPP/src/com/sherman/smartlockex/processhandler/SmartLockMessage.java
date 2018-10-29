@@ -7,66 +7,54 @@ import com.sherman.smartlockex.ui.common.PubDefine;
 
 
 public class SmartLockMessage {
+	// 透传命令
+	public static final String CMD_SP_PASSTHROUGHT = "APPPASSTHROUGH";
+	
 	// 只跟服务器有交互的命令
-	public static final String CMD_SP_REGISTER = "APPREG";
-	public static final String CMD_SP_MODPWD = "APPMODPWD";
-	public static final String CMD_SP_MODEMAIL = "APPMODEMAIL";
-	public static final String CMD_SP_FINDPWD = "APPFINDPWD";
-	public static final String CMD_SP_LOGIN_SERVER = "APPLOGIN";
+	public static final String CMD_SP_REGISTER 		= "APPREG";
+	public static final String CMD_SP_MODPWD 		= "APPMODPWD";
+	public static final String CMD_SP_MODEMAIL 		= "APPMODEMAIL";
+	public static final String CMD_SP_FINDPWD 		= "APPFINDPWD";
+	public static final String CMD_SP_LOGIN_SERVER 	= "APPLOGIN";
+	public static final String CMD_SP_LOGINOUT 		= "APPLOGOUT";
+	public static final String CMD_SP_ADDLOCK 		= "APPADDLOCK";
+	public static final String CMD_SP_DELLOCK 		= "APPDELLOCK";
+	public static final String CMD_SP_MODYLOCK 		= "APPMODLOCK";
+	public static final String CMD_SP_QRYLOCK 		= "APPQRYLOCK";
+	
+	// 模块交互命令
 	public static final String CMD_SP_LOGIN_MODULE = "LOGIN"; // 登录模块的命令，用于直连方式登录
-	public static final String CMD_SP_LOGINOUT = "APPLOGOUT";
-	public static final String CMD_SP_ADDPLUG = "APPADDPLUG";
-	public static final String CMD_SP_DELPLUG = "APPDELPLUG";
-	public static final String CMD_SP_MODYPLUG = "APPMODPLUG";
-	public static final String CMD_SP_QRYPLUG = "APPQRYPLUG";
 
 	// 跟模块有交互的命令
-	public static final String CMD_SP_POWER = "APPPOWER";
-	public static final String CMD_SP_LIGHT = "APPLIGHT";
-	public static final String CMD_SP_USB = "APPUSB";
 	public static final String CMD_SP_BACK2AP = "APPBACK2AP";
-	
+	public static final String CMD_SP_OPEN_LOCK = "APPLOCK_OPEN";
 
-	public static final String CMD_SP_OPER_LOCK = "APPOPERLOCK";
-
-	// 服务器主动通知的命令
-	public static final String CMD_SP_NOTIFYONLINE = "APPNOTIFYONLINE";
-	public static final String CMD_SP_NOTIFYPOWER = "APPNOTIFYPOWER";
-	public static final String CMD_SP_NOTIFYLIGHT = "APPNOTIFYLIGHT";
-	public static final String CMD_SP_NOTIFYUSB = "APPNOTIFYUSB";
-
-	public static final String CMD_SP_NOTIFYUPGRADEAP = "APPNOTIFYUPGRADEAP";
-	
-	// SMart LOCK
-	public static final String CMD_SP_NOTIFYLOCKSTATUS = "APPNOTIFYLOCKSTATUS";
+	/**设备通知消息头*/
+	public static final String CMD_SP_NOTIFYONLINE = "NOTIFYONLINE";
+	public static final String CMD_SP_NOTIFYLOCKSTATUS = "NOTIFY_STASTUS";
+	public static final String CMD_SP_NOTIFYLOCKBELL = "NOTIFY_BELL";
+	public static final String CMD_SP_NOTIFYLOCKALARM = "NOTIFY_ALARM";
 
 	// -------------------------------------------------------
 	public static final int EVT_SP_REGISTER = 10;
 	public static final int EVT_SP_MODPWD = 11;
 	public static final int EVT_SP_MODEMAIL = 12;
 	public static final int EVT_SP_FINDPWD = 13;
+	public static final int EVT_SP_LOGIN = 14;
+	public static final int EVT_SP_LOGINOUT = 15;
 
-	public static final int EVT_SP_LOGIN = 50;
-	public static final int EVT_SP_LOGINOUT = 51;
+	public static final int EVT_SP_ADDLOCK = 100;
+	public static final int EVT_SP_DELLOCK = 101;
+	public static final int EVT_SP_MODLOCK = 102;
+	public static final int EVT_SP_QRYLOCK = 106;
 
-	public static final int EVT_SP_ADDPLUG = 100;
-	public static final int EVT_SP_DELPLUG = 101;
-	public static final int EVT_SP_MODYPLUG = 102;
-	public static final int EVT_SP_QRYPLUG = 106;
-	public static final int EVT_SP_POWER = 108;
-	public static final int EVT_SP_LIGHT = 109;
-	public static final int EVT_SP_USB = 113;
-
-	public static final int EVT_SP_BACK2AP = 119;
+	public static final int EVT_SP_BACK2AP = 150;
+	public static final int EVT_SP_OPEN_LOCK = 151;
 
 	public static final int EVT_SP_NOTIFYONLINE = 200;
-	public static final int EVT_SP_NOTIFYPOWER = 201;
-	public static final int EVT_SP_NOTIFYLIGHT = 202;
-	public static final int EVT_SP_NOTIFYUSB = 203;
-
-	public static final int EVT_SP_NOTIFYUPGRADEAP = 204;
-	
-	public static final int EVT_SP_NOTIFYLOCKSTATUS = 300;
+	public static final int EVT_SP_NOTIFYLOCKSTATUS = 201;
+	public static final int EVT_SP_NOTIFYLOCKBELL = 202;
+	public static final int EVT_SP_NOTIFYLOCKALARM = 203;
 
 	public static Map<String, Integer> mEventCommand = new HashMap<String, Integer>();
 	static {
@@ -76,21 +64,21 @@ public class SmartLockMessage {
 		mEventCommand.put(CMD_SP_FINDPWD, EVT_SP_FINDPWD);
 		mEventCommand.put(CMD_SP_LOGIN_SERVER, EVT_SP_LOGIN);
 		mEventCommand.put(CMD_SP_LOGINOUT, EVT_SP_LOGINOUT);
-		mEventCommand.put(CMD_SP_ADDPLUG, EVT_SP_ADDPLUG);
-		mEventCommand.put(CMD_SP_DELPLUG, EVT_SP_DELPLUG);
-		mEventCommand.put(CMD_SP_MODYPLUG, EVT_SP_MODYPLUG);
-		mEventCommand.put(CMD_SP_QRYPLUG, EVT_SP_QRYPLUG);
-		mEventCommand.put(CMD_SP_POWER, EVT_SP_POWER);
-		mEventCommand.put(CMD_SP_LIGHT, EVT_SP_LIGHT);
+		
+		mEventCommand.put(CMD_SP_ADDLOCK, EVT_SP_ADDLOCK);
+		mEventCommand.put(CMD_SP_DELLOCK, EVT_SP_DELLOCK);
+		mEventCommand.put(CMD_SP_MODYLOCK, EVT_SP_MODLOCK);
+		mEventCommand.put(CMD_SP_QRYLOCK, EVT_SP_QRYLOCK);
+		
 		mEventCommand.put(CMD_SP_BACK2AP, EVT_SP_BACK2AP);
-		mEventCommand.put(CMD_SP_USB, EVT_SP_USB);
+		mEventCommand.put(CMD_SP_OPEN_LOCK, EVT_SP_OPEN_LOCK);
+		
 		mEventCommand.put(CMD_SP_NOTIFYONLINE, EVT_SP_NOTIFYONLINE);
-		mEventCommand.put(CMD_SP_NOTIFYPOWER, EVT_SP_NOTIFYPOWER);
-		mEventCommand.put(CMD_SP_NOTIFYLIGHT, EVT_SP_NOTIFYLIGHT);
-		mEventCommand.put(CMD_SP_NOTIFYUPGRADEAP, EVT_SP_NOTIFYUPGRADEAP);
 		
 		// SmartLock
 		mEventCommand.put(CMD_SP_NOTIFYLOCKSTATUS, EVT_SP_NOTIFYLOCKSTATUS);
+		mEventCommand.put(CMD_SP_NOTIFYLOCKBELL, EVT_SP_NOTIFYLOCKBELL);
+		mEventCommand.put(CMD_SP_NOTIFYLOCKALARM, EVT_SP_NOTIFYLOCKALARM);
 
 	};
 
@@ -117,27 +105,26 @@ public class SmartLockMessage {
 	public static Map<String, String> mCommandAction = new HashMap<String, String>();
 	static {
 		mCommandAction.put(CMD_SP_REGISTER, PubDefine.REGISTER_BROADCAST);
-		mCommandAction.put(CMD_SP_MODPWD, PubDefine.USER_MODIFY_PASSWORD);
-		mCommandAction.put(CMD_SP_MODEMAIL, PubDefine.USER_MODIFY_EMAIL);
+		mCommandAction.put(CMD_SP_MODPWD, PubDefine.USER_MODIFY_PASSWORD_BROADCAST);
+		mCommandAction.put(CMD_SP_MODEMAIL, PubDefine.USER_MODIFY_EMAIL_BROADCAST);
 		mCommandAction.put(CMD_SP_FINDPWD, PubDefine.FINDPWD_BROADCAST);
 		mCommandAction.put(CMD_SP_LOGIN_SERVER, PubDefine.LOGIN_BROADCAST);
 		mCommandAction.put(CMD_SP_LOGINOUT, PubDefine.LOGOUT_BROADCAST);
-		mCommandAction.put(CMD_SP_ADDPLUG, PubDefine.PLUG_ADD_TASK);
-		mCommandAction.put(CMD_SP_DELPLUG, PubDefine.PLUG_DELETE);
-		mCommandAction.put(CMD_SP_MODYPLUG, PubDefine.PLUG_MODIFY_PLUGNAME);
-		mCommandAction.put(CMD_SP_QRYPLUG, PubDefine.PLUG_UPDATE);
-		mCommandAction.put(CMD_SP_POWER, PubDefine.PLUG_POWER_ACTION);
-		mCommandAction.put(CMD_SP_LIGHT, PubDefine.PLUG_LIGHT_ACTION);
-		mCommandAction.put(CMD_SP_BACK2AP, PubDefine.PLUG_BACK2AP_ACTION);
+		
+		mCommandAction.put(CMD_SP_ADDLOCK, PubDefine.LOCK_ADDLOCK_BROADCAST);
+		mCommandAction.put(CMD_SP_DELLOCK, PubDefine.LOCK_DELETELOCK_BROADCAST);
+		mCommandAction.put(CMD_SP_MODYLOCK, PubDefine.LOCK_MODIFY_LOCKNAME_BROADCAST);
+		mCommandAction.put(CMD_SP_QRYLOCK, PubDefine.LOCK_QRYLOCK_BROADCAST);
+		
+		mCommandAction.put(CMD_SP_BACK2AP, PubDefine.LOCK_BACK2AP_BROADCAST);
+		mCommandAction.put(CMD_SP_OPEN_LOCK, PubDefine.LOCK_OPENLOCK_BROADCAST);
 
-		// mCommandAction.put(CMD_SP_BELL, EVT_SP_BELL);
-		mCommandAction.put(CMD_SP_USB, PubDefine.PLUG_USB_ACTION);
-		mCommandAction.put(CMD_SP_NOTIFYONLINE, PubDefine.PLUG_NOTIFY_ONLINE);
-		mCommandAction.put(CMD_SP_NOTIFYPOWER, PubDefine.PLUG_NOTIFY_POWER);
-		mCommandAction.put(CMD_SP_NOTIFYLIGHT, PubDefine.PLUG_NOTIFY_LIGHT);
+		mCommandAction.put(CMD_SP_NOTIFYONLINE, PubDefine.LOCK_NOTIFY_ONLINE_BROADCAST);
 		
 		// SmartLock
-		mCommandAction.put(CMD_SP_NOTIFYLOCKSTATUS, PubDefine.LOCK_NOTIFY_STATUS);
+		mCommandAction.put(CMD_SP_NOTIFYLOCKSTATUS, PubDefine.LOCK_NOTIFY_STATUS_BROADCAST);
+		mCommandAction.put(CMD_SP_NOTIFYLOCKBELL, PubDefine.LOCK_NOTIFY_BELL_BROADCAST);
+		mCommandAction.put(CMD_SP_NOTIFYLOCKALARM, PubDefine.LOCK_NOTIFY_ALARM_BROADCAST);
 
 	};
 

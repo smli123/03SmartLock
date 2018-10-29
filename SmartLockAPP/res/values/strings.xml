@@ -195,9 +195,7 @@
 	<string name="smartlock_ctrl_modifyplugname_fail">"修改门锁名称失败"</string>
 	<string name="smartlock_ctrl_modifypwd_fail">"修改密码失败"</string>
 	<string name="smartlock_ctrl_delete_fail">"删除门锁失败"</string>
-	<string name="smartlock_oper_light_fail">"操作夜灯失败"</string>
-	<string name="smartlock_oper_power_fail">"操作电源失败"</string>
-	<string name="smartlock_oper_usb_fail">"操作USB失败"</string>
+	<string name="smartlock_oper_lock_fail">"操作门锁失败"</string>
 	
     <string name="smartlock_ctrl_userregister_fail">"用户注册失败"</string>
     <string name="smartlock_ctrl_resetpwd_fail">"重置密码失败"</string>
@@ -281,5 +279,8 @@
     <string name="connecting_to_wifi_router">"正在配置网络, 请稍等..."</string>
     <string name="esptouch_task_failed_port_is_used">"配置网络失败, 端口被占用"</string>
     <string name="esptouch_task_failed">"配置网络失败"</string>
-    
+
+    <!-- SmartLock Detail Activity -->
+    <string name="lock_detail_current_lockstatus">"门锁当前状态："</string>
+    <string name="lock_detail_authorize">"授权管理"</string>
 </resources>

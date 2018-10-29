@@ -10,7 +10,7 @@ import com.sherman.smartlockex.ui.smartlockex.AppServerReposeDefine;
 import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
 
 public class SmartLockEventHandlerModifyEmail extends SmartLockEventHandler {
-	Intent mIntent = new Intent(PubDefine.USER_MODIFY_EMAIL);
+	Intent mIntent = new Intent(PubDefine.USER_MODIFY_EMAIL_BROADCAST);
 	
 	@Override
 	public void handleMessage(Message msg) {

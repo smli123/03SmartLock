@@ -11,17 +11,17 @@ public class ServerCommDefine {
 	public final static String APP_RSTPWD_MSG_HEADER		= "APPFINDPWD";			//重置用户密码
 	public final static String APP_LOGIN_MSG_HEADER 		= "APPLOGIN";			//LOGIN
 	public final static String APP_LOGOUT_MSG_HEADER		= "APPLOGOUT";			//LOGOUT
-	public final static String APP_ADD_PLUG_MSG_HEADER		= "APPADDPLUG";
-	public final static String APP_DEL_PLUG_MSG_HEADER		= "APPDELPLUG";
-	public final static String APP_MOD_PLUG_MSG_HEADER		= "APPMODPLUG";
-	public final static String APP_QRY_PLUG_MSG_HEADER		= "APPQRYPLUG";
-	public final static String APP_NOTIFY_ONLINE_MSG_HEADER	= "APPNOTIFYONLINE";	//上线
+	public final static String APP_ADD_PLUG_MSG_HEADER		= "APPADDLOCK";
+	public final static String APP_DEL_PLUG_MSG_HEADER		= "APPDELLOCK";
+	public final static String APP_MOD_PLUG_MSG_HEADER		= "APPMODLOCK";
+	public final static String APP_QRY_PLUG_MSG_HEADER		= "APPQRYLOCK";
 	
 	/* APP智能门锁 */
-	public final static String APP_LOCK_CTRL_MSG_HEADER		= "APPLOCK_OPEN";		//开锁关锁操作
 	public final static String APP_BACK2AP_CTRL_MSG_HEADER	= "APPBACK2AP";			//设备初始化
+	public final static String APP_LOCK_CTRL_MSG_HEADER		= "APPLOCK_OPEN";		//开锁关锁操作
 	
 	/**设备通知消息头*/
+	public final static String APP_NOTIFY_ONLINE_MSG_HEADER	= "NOTIFYONLINE";	//上线
 	public final static String NOTIFY_LOCK_STATUS			= "NOTIFY_STASTUS";		//推送门锁状态
 	public final static String NOTIFY_BELL_MSG_HEADER		= "NOTIFY_BELL";		//推送门锁门铃
 	public final static String NOTIFY_NOTIFY_ALARM			= "NOTIFY_ALARM";		//推送门锁告警
@@ -33,7 +33,7 @@ public class ServerCommDefine {
 	public final static String LOCK_CTRL_MSG_HEADER				= "LOCK_OPEN";		//门锁打开关闭操作
 	public final static String BACK2AP_CTRL_MSG_HEADER			= "BACK2AP";		//设备初始化
 	
-	public final static String MOD_PLUG_MSG_HEADER		= "MODPLUG";
+	public final static String MOD_PLUG_MSG_HEADER		= "MODLOCK";
 	
 	/** 转发器功能  **/
 	public final static String TRANSMIT_HEARBEAT_MSG_HEADER		= "TRANSMIT_HEARBEAT";

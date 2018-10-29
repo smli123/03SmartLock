@@ -1,5 +1,7 @@
 package com.smartlock.udpserver.Function;
 
+import java.util.Vector;
+
 import com.smartlock.platform.LogTool.LogWriter;
 import com.smartlock.udpserver.ServerWorkThread;
 import com.smartlock.udpserver.commdef.ICallFunction;
@@ -85,10 +87,14 @@ public class NofityBellMsgHandle implements ICallFunction{
 		
 		try
 		{
-			USER_MODULE info = dbMgr.QueryUserModuleByDevId(strDevId);
-			
-			NotifyToAPP(info.getUserName(),strDevId, ServerCommDefine.NOTIFY_BELL_MSG_HEADER, 
-					ServerRetCodeMgr.SUCCESS_CODE,  strRetCode);
+			Vector<USER_MODULE> info = dbMgr.QueryUserModuleByDevId(strDevId);
+			if (info != null) {
+				for (int i = 0; i < info.size(); i++) {
+					String username = info.get(i).getUserName();
+					NotifyToAPP(username,strDevId, ServerCommDefine.NOTIFY_BELL_MSG_HEADER, 
+							ServerRetCodeMgr.SUCCESS_CODE,  strRetCode);
+				}
+			}
 			
 			//通知模块通知已收到
 			ResponseToModule(strDevId, String.format("%s#", ServerCommDefine.NOTIFY_BELL_MSG_HEADER));

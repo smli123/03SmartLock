@@ -91,6 +91,7 @@
 		            android:layout_marginLeft="@dimen/list_item_left_padding"
 		            android:layout_marginRight="@dimen/list_item_right_padding"
 		            android:layout_toRightOf="@id/iv_lock_status"
+		            android:textSize="@dimen/text_size_midsamll"
 		            android:src="@drawable/smp_lock_charge" />
 	
 		        <TextView
@@ -100,6 +101,7 @@
 		        	android:layout_toRightOf="@id/iv_lock_charge"
 			        android:layout_marginLeft="@dimen/list_item_left_padding"
 			        android:layout_marginRight="@dimen/list_item_right_padding"
+			        android:textColor="@color/black"
 			        android:text="@null" /> 
 	
 		    </RelativeLayout>

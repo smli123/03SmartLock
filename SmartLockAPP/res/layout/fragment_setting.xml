@@ -86,7 +86,8 @@
 		        android:paddingBottom="@dimen/margin_10dip"	
 		        android:layout_marginRight="@dimen/margin_10dip"
 		        android:layout_marginLeft="@dimen/margin_10dip"		        
-		        android:background="@drawable/common_list_selector" >
+		        android:background="@drawable/common_list_selector" 
+		        android:visibility="gone">
 		
 		        <ImageView
 		            android:id="@+id/iv_update_icon"
@@ -129,7 +130,8 @@
 		        android:layout_marginRight="@dimen/margin_10dip"		               
 		        android:layout_below="@+id/rl_mgr_update"
 		        android:background="@color/lightwhite"        
-		        android:contentDescription="@null" />		    
+		        android:contentDescription="@null" 
+		        android:visibility="gone"/>		    
 		
 		    <RelativeLayout
 		        android:id="@+id/rl_mgr_feedback"
@@ -188,7 +190,7 @@
 	        android:layout_marginLeft="@dimen/margin_10dip"
 	        android:layout_marginRight="@dimen/margin_10dip"
 	        android:layout_marginTop="@dimen/margin_10dip"
-	        android:background="@color/white" >
+	        android:background="@color/white">
 
 			<RelativeLayout
 		        android:id="@+id/rl_mgr_help"

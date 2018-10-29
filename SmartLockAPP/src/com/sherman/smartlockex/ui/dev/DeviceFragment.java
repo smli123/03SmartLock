@@ -64,18 +64,18 @@ public class DeviceFragment extends SmartLockFragment
 			if (null != mProgress) {
 				mProgress.dismiss();
 			}
-			if (intent.getAction().equals(PubDefine.PLUG_POWER_ACTION)) {
+			if (intent.getAction().equals(PubDefine.LOCK_OPENLOCK_BROADCAST)) {
 				timeoutHandler.removeCallbacks(timeoutProcess);
 				int code = intent.getIntExtra("RESULT", 0);
 				int status = intent.getIntExtra("STATUS", 0);
 				String message = intent.getStringExtra("MESSAGE");
 				switch (code) {
 					case 0 :
-						SmartLockDefine plug = mLockHelper
+						SmartLockDefine lock = mLockHelper
 								.getSmartLock(mFocusLockId);
-						if (null != plug) {
-							plug.mStatus = status;
-							if (0 < mLockHelper.modifySmartLock(plug)) {
+						if (null != lock) {
+							lock.mStatus = status;
+							if (0 < mLockHelper.modifySmartLock(lock)) {
 								doBackgroundLoad();
 							}
 						}
@@ -87,7 +87,16 @@ public class DeviceFragment extends SmartLockFragment
 				}
 			}
 
-			if (intent.getAction().equals(PubDefine.PLUG_UPDATE)) {
+			if (intent.getAction().equals(PubDefine.LOCK_ADDLOCK_BROADCAST)) {
+				timeoutHandler.removeCallbacks(timeoutProcess);
+				int ret = intent.getIntExtra("RESULT", 0);
+				String message = intent.getStringExtra("MESSAGE");
+				if (0 == ret) {
+					qryLocksFromServer();
+				}
+			}
+
+			if (intent.getAction().equals(PubDefine.LOCK_QRYLOCK_BROADCAST)) {
 				timeoutHandler.removeCallbacks(timeoutProcess);
 				int ret = intent.getIntExtra("RESULT", 0);
 				String message = intent.getStringExtra("MESSAGE");
@@ -99,24 +108,16 @@ public class DeviceFragment extends SmartLockFragment
 				}
 				doBackgroundLoad();
 			}
-
-			if (intent.getAction().equals(PubDefine.PLUG_NOTIFY_POWER)) {
-				doBackgroundLoad();
-			}
-
-			if (intent.getAction().equals(PubDefine.PLUG_NOTIFY_ONLINE)) {
-				qryLocksFromServer();
-				// doBackgroundLoad();
-			}
-			if (intent.getAction().equals(PubDefine.PLUG_DELETE)) {
+			
+			if (intent.getAction().equals(PubDefine.LOCK_DELETELOCK_BROADCAST)) {
 				timeoutHandler.removeCallbacks(timeoutProcess);
 				int ret = intent.getIntExtra("RESULT", 0);
 				String message = intent.getStringExtra("MESSAGE");
 				switch (ret) {
 					case 0 :
-						if (true == mLockHelper.deleteSmartLock(mFocusLockId)) {
+//						if (true == mLockHelper.deleteSmartLock(mFocusLockId)) {
 							doBackgroundLoad();
-						}
+//						}
 
 						break;
 					default :
@@ -124,7 +125,7 @@ public class DeviceFragment extends SmartLockFragment
 						break;
 				}
 			}
-			if (intent.getAction().equals(PubDefine.PLUG_MODIFY_PLUGNAME)) {
+			if (intent.getAction().equals(PubDefine.LOCK_MODIFY_LOCKNAME_BROADCAST)) {
 				if (null != mProgress) {
 					mProgress.dismiss();
 				}
@@ -145,7 +146,6 @@ public class DeviceFragment extends SmartLockFragment
 						break;
 				}
 			}
-
 		}
 	};
 
@@ -157,12 +157,12 @@ public class DeviceFragment extends SmartLockFragment
 		mLockHelper = new SmartLockExLockHelper(mContext);
 
 		IntentFilter filter = new IntentFilter();
-		filter.addAction(PubDefine.PLUG_MODIFY_PLUGNAME);
-		filter.addAction(PubDefine.PLUG_DELETE);
-		filter.addAction(PubDefine.PLUG_POWER_ACTION);
-		filter.addAction(PubDefine.PLUG_NOTIFY_POWER);
-		filter.addAction(PubDefine.PLUG_NOTIFY_ONLINE);
-		filter.addAction(PubDefine.PLUG_UPDATE);
+		filter.addAction(PubDefine.LOCK_QRYLOCK_BROADCAST);
+		filter.addAction(PubDefine.LOCK_MODIFY_LOCKNAME_BROADCAST);
+		filter.addAction(PubDefine.LOCK_DELETELOCK_BROADCAST);
+		filter.addAction(PubDefine.LOCK_ADDLOCK_BROADCAST);
+		filter.addAction(PubDefine.LOCK_NOTIFY_STATUS_BROADCAST);
+		filter.addAction(PubDefine.LOCK_NOTIFY_ONLINE_BROADCAST);
 		mContext.registerReceiver(mLoadPlugReveiver, filter);
 
 		new Handler().postDelayed(new Runnable() {
@@ -189,7 +189,7 @@ public class DeviceFragment extends SmartLockFragment
 		registerTimeoutHandler(mTimeoutHandler);
 
 		StringBuffer sb = new StringBuffer();
-		sb.append(SmartLockMessage.CMD_SP_QRYPLUG)
+		sb.append(SmartLockMessage.CMD_SP_QRYLOCK)
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 				.append(PubStatus.g_CurUserName);
 
@@ -222,7 +222,7 @@ public class DeviceFragment extends SmartLockFragment
 		}, 0);
 		
 		// Test for all
-		testInsertInfo();
+//		testInsertInfo();
 		
 		return mFragmentView;
 	}
@@ -237,6 +237,7 @@ public class DeviceFragment extends SmartLockFragment
 		item.mAddress = "33:44:65:00:FF";
 		item.mType = "1";
 		item.mCharge = 81;
+		item.mRelation = 0;
 		mLockHelper.addSmartLock(item);
 	}
 
@@ -366,7 +367,7 @@ public class DeviceFragment extends SmartLockFragment
 				mProgress.show();
 
 				StringBuffer sb = new StringBuffer();
-				sb.append(SmartLockMessage.CMD_SP_MODYPLUG)
+				sb.append(SmartLockMessage.CMD_SP_MODYLOCK)
 						.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 						.append(PubStatus.g_CurUserName)
 						.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
@@ -409,7 +410,7 @@ public class DeviceFragment extends SmartLockFragment
 		}
 
 		StringBuffer sb = new StringBuffer();
-		sb.append(SmartLockMessage.CMD_SP_DELPLUG)
+		sb.append(SmartLockMessage.CMD_SP_DELLOCK)
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 				.append(PubStatus.g_CurUserName)
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL).append(plugId);

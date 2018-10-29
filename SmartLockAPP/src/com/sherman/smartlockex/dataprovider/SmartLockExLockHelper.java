@@ -53,6 +53,8 @@ public class SmartLockExLockHelper {
 					.getString(SmartLockExContentDefine.Lock.LOCK_TYPE_COLUMN);
 			item.mCharge = cur
 					.getInt(SmartLockExContentDefine.Lock.LOCK_CHARGE_COLUMN);
+			item.mRelation = cur
+					.getInt(SmartLockExContentDefine.Lock.LOCK_RELATION_COLUMN);
 
 			devs.add(item);
 		}
@@ -116,6 +118,8 @@ public class SmartLockExLockHelper {
 						.getString(SmartLockExContentDefine.Lock.LOCK_TYPE_COLUMN);
 				device.mCharge = cur
 						.getInt(SmartLockExContentDefine.Lock.LOCK_CHARGE_COLUMN);
+				device.mRelation = cur
+						.getInt(SmartLockExContentDefine.Lock.LOCK_RELATION_COLUMN);
 				break;
 			}
 			cur.close();
@@ -153,6 +157,8 @@ public class SmartLockExLockHelper {
 				device.mType);
 		values.put(SmartLockExContentDefine.Lock.LOCK_CHARGE,
 				device.mCharge);
+		values.put(SmartLockExContentDefine.Lock.LOCK_RELATION,
+				device.mRelation);
 
 		Uri uri = mContentResolver
 				.insert(SmartLockExContentDefine.Lock.ALL_CONTENT_URI,
@@ -222,6 +228,8 @@ public class SmartLockExLockHelper {
 				device.mType);
 		values.put(SmartLockExContentDefine.Lock.LOCK_CHARGE,
 				device.mCharge);
+		values.put(SmartLockExContentDefine.Lock.LOCK_RELATION,
+				device.mRelation);
 
 		String where = SmartLockExContentDefine.Lock.LOCK_ID + "='"
 				+ device.mLockID + "'";
@@ -263,6 +271,7 @@ public class SmartLockExLockHelper {
 		ContentValues values = new ContentValues();
 		values.put(SmartLockExContentDefine.Lock.LOCK_ONLINE, false);
 		values.put(SmartLockExContentDefine.Lock.LOCK_STATUS, 0);
+		values.put(SmartLockExContentDefine.Lock.LOCK_CHARGE, 0);
 
 		mContentResolver.update(
 				SmartLockExContentDefine.Lock.ALL_CONTENT_URI,

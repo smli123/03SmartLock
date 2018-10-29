@@ -40,7 +40,7 @@ public class ActivityModifyEmail extends TitledActivity implements
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			if (intent.getAction().equals(PubDefine.USER_MODIFY_EMAIL)) {
+			if (intent.getAction().equals(PubDefine.USER_MODIFY_EMAIL_BROADCAST)) {
 
 				int ret = intent.getIntExtra("RESULT", 0);
 				switch (ret) {
@@ -109,7 +109,7 @@ public class ActivityModifyEmail extends TitledActivity implements
 		btnOK = (Button) this.findViewById(R.id.btn_finish);
 		btnOK.setOnClickListener(this);
 		IntentFilter filter = new IntentFilter();
-		filter.addAction(PubDefine.USER_MODIFY_EMAIL);
+		filter.addAction(PubDefine.USER_MODIFY_EMAIL_BROADCAST);
 		this.registerReceiver(mModifyEmailRev, filter);
 	}
 	

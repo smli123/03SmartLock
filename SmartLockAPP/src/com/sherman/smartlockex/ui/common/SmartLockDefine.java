@@ -9,6 +9,7 @@ public class SmartLockDefine {
     public boolean 	mOnline;
     public String 	mAddress;
     public String 	mVersion;
-    public String 	mType;
-    public int 	mCharge;
+    public String 	mType;		// 设备类型
+    public int 	mCharge;		// 电量
+    public int 	mRelation;		// 主/从，主：管理用户，从：分享用户
 }

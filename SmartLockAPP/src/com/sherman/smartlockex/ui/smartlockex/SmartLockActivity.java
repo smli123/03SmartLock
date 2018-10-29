@@ -156,7 +156,6 @@ public class SmartLockActivity extends FragmentActivity
 		 */
 
 		btn_AddLock = (Button) findViewById(R.id.titlebar_rightbutton);
-		btn_AddLock.setText(R.string.add);
 		btn_AddLock.setBackgroundResource(R.drawable.title_btn_selector);
 		btn_AddLock.setVisibility(View.VISIBLE);
 		btn_AddLock.setOnClickListener(this);
@@ -272,7 +271,8 @@ public class SmartLockActivity extends FragmentActivity
 					
 					tvTitle.setText(getString(R.string.smartlock_title_dev));
 					
-//					mBtnAddPlug.setVisibility(View.VISIBLE);
+					btn_AddLock.setVisibility(View.VISIBLE);
+					btn_AddLock.setText(R.string.add);
 					break;
 				case 1 :
 					animation = new TranslateAnimation(0, position_two, 0,
@@ -294,7 +294,7 @@ public class SmartLockActivity extends FragmentActivity
 
 					tvTitle.setText(getString(R.string.smartlock_title_message));
 					
-//					mBtnAddPlug.setVisibility(View.INVISIBLE);
+					btn_AddLock.setVisibility(View.INVISIBLE);
 					break;
 				case 2 :
 					animation = new TranslateAnimation(position_two, position_three, 0,
@@ -316,7 +316,7 @@ public class SmartLockActivity extends FragmentActivity
 		
 					tvTitle.setText(getString(R.string.smartlock_title_settings));
 					
-//					mBtnAddPlug.setVisibility(View.INVISIBLE);
+					btn_AddLock.setVisibility(View.INVISIBLE);
 					break;
 				default :
 					break;

@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sherman.smartlockex.R;
@@ -32,6 +33,7 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 	private Context mContext = null;
 	private SmartLockExLockHelper mLockHelper = null;
 	
+	private LinearLayout ll_authorize_area;
 	private TextView tv_status;
 	private TextView tv_log;
 	
@@ -45,7 +47,7 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			if (intent.getAction().equals(PubDefine.LOCK_NOTIFY_STATUS)) {
+			if (intent.getAction().equals(PubDefine.LOCK_NOTIFY_STATUS_BROADCAST)) {
 					int status = intent.getIntExtra("STATUS", -1);
 					Message msg = new Message();
 					msg.what = 0;
@@ -96,7 +98,7 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
         initView();
         
         IntentFilter filter = new IntentFilter();
-		filter.addAction(PubDefine.LOCK_NOTIFY_STATUS);
+		filter.addAction(PubDefine.LOCK_NOTIFY_STATUS_BROADCAST);
 		registerReceiver(mLoginRev, filter);
     }
     
@@ -137,6 +139,13 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 		tv_log = (TextView) findViewById(R.id.tv_log);
 		tv_lock_open = (TextView) findViewById(R.id.tv_lock_open);
 		tv_lock_close = (TextView) findViewById(R.id.tv_lock_close);
+		ll_authorize_area = (LinearLayout) findViewById(R.id.ll_authorize_area);
+		
+		if (mLock.mRelation == 0) {
+			ll_authorize_area.setVisibility(View.VISIBLE);
+		} else {
+			ll_authorize_area.setVisibility(View.GONE);
+		}
 		
 		tv_lock_open.setOnClickListener(this);
 		tv_lock_close.setOnClickListener(this);
@@ -144,7 +153,7 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 
 	private void setLock(int i_status) {
 		StringBuffer sb = new StringBuffer();
-		sb.append(SmartLockMessage.CMD_SP_OPER_LOCK)
+		sb.append(SmartLockMessage.CMD_SP_OPEN_LOCK)
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 				.append(PubStatus.getUserName())
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)

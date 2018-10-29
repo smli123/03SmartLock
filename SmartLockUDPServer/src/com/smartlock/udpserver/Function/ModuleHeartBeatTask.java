@@ -2,6 +2,7 @@ package com.smartlock.udpserver.Function;
 
 import java.sql.Timestamp;
 import java.util.TimerTask;
+import java.util.Vector;
 
 import com.smartlock.platform.LogTool.LogWriter;
 import com.smartlock.udpserver.ConnectInfo;
@@ -67,13 +68,19 @@ public class ModuleHeartBeatTask  extends TimerTask implements ICallFunction{
 			
 			try
 			{
-				USER_MODULE user_info = dbMgr.QueryUserModuleByDevId(m_strModuleID);
-				if (null != user_info)
-				{
-					NotifyToAPP(user_info.getUserName(), m_strModuleID, 
-							ServerCommDefine.APP_NOTIFY_ONLINE_MSG_HEADER, 
-							ServerRetCodeMgr.SUCCESS_CODE,
-							String.valueOf(ServerCommDefine.MODULE_OFF_LINE)) ;
+				//通知APP模块已上线
+				Vector<USER_MODULE> user_info = dbMgr.QueryUserModuleByDevId(m_strModuleID);
+				if (user_info == null) {
+					LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Failed to QueryUserModuleByDevId. (DevID:%s)", 
+							m_strModuleID));
+				} else {
+					for (int i = 0; i < user_info.size(); i++) {
+						USER_MODULE user = user_info.get(i);
+						NotifyToAPP(user.getUserName(), m_strModuleID, 
+								ServerCommDefine.APP_NOTIFY_ONLINE_MSG_HEADER, 
+								ServerRetCodeMgr.SUCCESS_CODE,
+								String.valueOf(ServerCommDefine.MODULE_ON_LINE)) ;		
+					}
 				}
 	
 				/* step2 清理模块存储的信息 */

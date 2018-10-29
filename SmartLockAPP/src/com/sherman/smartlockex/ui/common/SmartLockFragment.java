@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 //import com.sherman.smartlockex.internet.SendMsgProxy;
+import com.sherman.smartlockex.internet.SendMsgProxy;
 import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
 import com.sherman.smartlockex.R;
 
@@ -73,7 +74,7 @@ public abstract class SmartLockFragment extends Fragment{
 	}; 
 	
     protected void sendMsg(boolean containCookie, String msg, boolean needDelay) {
-//    	SendMsgProxy.sendCtrlMsg(containCookie, msg,  timeoutHandler);
+    	SendMsgProxy.sendCtrlMsg(containCookie, msg,  timeoutHandler);
     	
 		if (true == needDelay) {
 			timeoutHandler.removeCallbacks(timeoutProcess);

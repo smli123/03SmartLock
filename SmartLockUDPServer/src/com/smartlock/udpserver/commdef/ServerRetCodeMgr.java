@@ -42,6 +42,7 @@ public class ServerRetCodeMgr {
 	public final static int ERROR_CODE_MODULE_NOT_ANSWER			= MODULE_ERROR_CODE_BASE + 2;	//0x30000002
 	public final static int ERROR_CODE_MODULE_RET_ERROR				= MODULE_ERROR_CODE_BASE + 3;	//0X30000004
 	public final static int ERROR_CODE_MODULE_HAS_LOGIN				= MODULE_ERROR_CODE_BASE + 4;	//0X30000004
+	public final static int ERROR_CODE_MODULE_NOT_EXIST				= MODULE_ERROR_CODE_BASE + 5;	//0X30000004
 	
 	/***************************************FUNCTION ERROR CODE*******************************************************************/
 	public final static int FUNC_ERROR_CODE_BASE								= 0x40000000;
@@ -79,6 +80,7 @@ public class ServerRetCodeMgr {
 			put(ERROR_CODE_MODULE_RET_ERROR								,"module return error code.");
 			put(ERROR_CODE_FAILED_UPDATE_COOKIE						,"failed to update module cookie.")	;
 			put(ERROR_CODE_MODULE_HAS_LOGIN                         ,"module has login.");
+			put(ERROR_CODE_MODULE_NOT_EXIST							,"module is not exist.");
 			
 			/*************************************COMMON ERROR******************************************************/
 			put(ERROR_CODE_RECEIVED_INVALID_STRING					,"received inavlid string.");

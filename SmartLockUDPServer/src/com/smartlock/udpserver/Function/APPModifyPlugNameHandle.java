@@ -1,5 +1,7 @@
 package com.smartlock.udpserver.Function;
 
+import java.util.Vector;
+
 import com.smartlock.platform.LogTool.LogWriter;
 import com.smartlock.udpserver.ServerWorkThread;
 import com.smartlock.udpserver.commdef.ICallFunction;
@@ -29,7 +31,7 @@ public class APPModifyPlugNameHandle implements ICallFunction{
 		String strMsgHeader			= strRet[1].trim();
 		String strUserName 			= strRet[2].trim();
 		String strModuleId			= strRet[3].trim();
-		String strStatus			= strRet[4].trim();
+		String strNewModuleName		= strRet[4].trim();
 	
 		/* 校验参数合法性 */
 		int iRet = CheckAppCmdValid(strUserName, strCookie);
@@ -43,9 +45,12 @@ public class APPModifyPlugNameHandle implements ICallFunction{
 		
 		try
 		{
-			USER_MODULE info = dbMgr.QueryUserModuleByDevId(strModuleId);
-			if(null == info)
-			{
+			Vector<USER_MODULE> infos = dbMgr.QueryUserModuleByDevId(strModuleId);
+			if(null == infos) {
+				ResponseToAPP(strMsgHeader, strUserName, strModuleId, ServerRetCodeMgr.ERROR_CODE_USER_NOT_OWN_MODULE);
+				return ServerRetCodeMgr.ERROR_CODE_USER_NOT_OWN_MODULE;
+			}
+			if (infos.size() == 0) {
 				ResponseToAPP(strMsgHeader, strUserName, strModuleId, ServerRetCodeMgr.ERROR_CODE_USER_NOT_OWN_MODULE);
 				return ServerRetCodeMgr.ERROR_CODE_USER_NOT_OWN_MODULE;
 			}
@@ -54,25 +59,29 @@ public class APPModifyPlugNameHandle implements ICallFunction{
 			MODULE_INFO module_info = dbMgr.QueryModuleInfo(strModuleId);
 			if(null == module_info)
 			{
-				ResponseToAPP(strMsgHeader, info.getUserName(), ServerRetCodeMgr.ERROR_CODE_MODULE_ID_UNREGISTERED);
+				ResponseToAPP(strMsgHeader, strUserName, ServerRetCodeMgr.ERROR_CODE_MODULE_ID_UNREGISTERED);
 				return ServerRetCodeMgr.ERROR_CODE_MODULE_ID_UNREGISTERED;			
 			}
 		
 			/* 透传给模块 */
 			try {	
-				/* 待模块返回 */
-				iRet = NotifyToModule(strMsg);
-				if (ServerRetCodeMgr.SUCCESS_CODE != iRet)
-				{
-					return iRet;
-				}
+//				/* 待模块返回 */
+//				iRet = NotifyToModule(strMsg);
+//				if (ServerRetCodeMgr.SUCCESS_CODE != iRet)
+//				{
+//					return iRet;
+//				}
 				
 				// lishimin 
-				dbMgr.UpdateModuleInfo_ModuleName(strModuleId, strStatus);
+				dbMgr.UpdateModuleInfo_ModuleName(strModuleId, strNewModuleName);
 				//返回信息给APP
 				//必须把strMsg中的"#"去掉；
 				strMsg = strMsg.substring(0, strMsg.indexOf("#"));
-				ResponseToAPP(strMsgHeader, strUserName, ServerRetCodeMgr.SUCCESS_CODE, strMsg);
+				
+				for (int i = 0; i < infos.size(); i++) {
+					String username = infos.get(i).getUserName();
+					ResponseToAPP(strMsgHeader, username, ServerRetCodeMgr.SUCCESS_CODE, strMsg);
+				}
 
 				return ServerRetCodeMgr.SUCCESS_CODE;
 			} catch (Exception e) {
@@ -144,7 +153,13 @@ public class APPModifyPlugNameHandle implements ICallFunction{
 			}
 			
 			//给APP回复成功
-			ResponseToAPP(strMsgHeader, strUserName, strModuleID, ServerRetCodeMgr.SUCCESS_CODE, strStatus);
+			Vector<USER_MODULE> infos = dbMgr.QueryUserModuleByDevId(strModuleID);
+			if(null != infos) {
+				for (int i = 0; i < infos.size(); i++) {
+					String username = infos.get(i).getUserName();
+					ResponseToAPP(strMsgHeader, username, strModuleID, ServerRetCodeMgr.SUCCESS_CODE, strStatus);
+				}
+			}
 			return ServerRetCodeMgr.SUCCESS_CODE;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

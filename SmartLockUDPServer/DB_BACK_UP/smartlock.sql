@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2018 年 10 月 27 日 17:26
+-- 生成日期: 2018 年 10 月 29 日 09:32
 -- 服务器版本: 5.1.69
 -- PHP 版本: 5.2.17p1
 
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `module_data` (
 CREATE TABLE IF NOT EXISTS `module_info` (
   `module_id` varchar(32) NOT NULL,
   `module_name` varchar(32) NOT NULL,
-  `mac` varchar(24) NOT NULL,
+  `module_mac` varchar(24) NOT NULL,
   `module_version` varchar(32) NOT NULL,
   `module_type` varchar(32) NOT NULL,
   `module_status` tinyint(1) unsigned NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `module_info` (
 -- 转存表中的数据 `module_info`
 --
 
-INSERT INTO `module_info` (`module_id`, `module_name`, `mac`, `module_version`, `module_type`, `module_status`, `module_charge`, `cookie`) VALUES
+INSERT INTO `module_info` (`module_id`, `module_name`, `module_mac`, `module_version`, `module_type`, `module_status`, `module_charge`, `cookie`) VALUES
 ('651000', '651000', '60:01:94:09:df:32', '20171219A1V2.E', '1', 1, 87, '20180123151000');
 
 -- --------------------------------------------------------

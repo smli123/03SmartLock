@@ -1,5 +1,7 @@
 package com.smartlock.udpserver.Function;
 
+import java.util.Vector;
+
 import com.smartlock.platform.LogTool.LogWriter;
 import com.smartlock.udpserver.ServerWorkThread;
 import com.smartlock.udpserver.commdef.ICallFunction;
@@ -40,8 +42,13 @@ public class ModuleLockCtrlMsgHandle implements ICallFunction{
 		
 		try
 		{
-			USER_MODULE info = dbMgr.QueryUserModuleByDevId(strModuleId);
+			Vector<USER_MODULE> info = dbMgr.QueryUserModuleByDevId(strModuleId);
 			if(null == info)
+			{
+				ResponseToAPP(strMsgHeader, strUserName, strModuleId, ServerRetCodeMgr.ERROR_CODE_USER_NOT_OWN_MODULE);
+				return ServerRetCodeMgr.ERROR_CODE_USER_NOT_OWN_MODULE;
+			}
+			if(info.size() == 0)
 			{
 				ResponseToAPP(strMsgHeader, strUserName, strModuleId, ServerRetCodeMgr.ERROR_CODE_USER_NOT_OWN_MODULE);
 				return ServerRetCodeMgr.ERROR_CODE_USER_NOT_OWN_MODULE;
@@ -51,7 +58,7 @@ public class ModuleLockCtrlMsgHandle implements ICallFunction{
 			MODULE_INFO module_info = dbMgr.QueryModuleInfo(strModuleId);
 			if(null == module_info)
 			{
-				ResponseToAPP(strMsgHeader, info.getUserName(), ServerRetCodeMgr.ERROR_CODE_MODULE_ID_UNREGISTERED);
+				ResponseToAPP(strMsgHeader, strUserName, ServerRetCodeMgr.ERROR_CODE_MODULE_ID_UNREGISTERED);
 				return ServerRetCodeMgr.ERROR_CODE_MODULE_ID_UNREGISTERED;			
 			}
 		

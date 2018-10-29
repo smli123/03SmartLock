@@ -10,6 +10,7 @@ import com.sherman.smartlockex.ui.wheelutils.ActionSheetDialog;
 import com.sherman.smartlockex.ui.wheelutils.ActionSheetDialog.OnSheetItemClickListener;
 import com.sherman.smartlockex.ui.wheelutils.ActionSheetDialog.SheetItemColor;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -73,6 +74,7 @@ public class DevlistAdapter extends BaseAdapter {
 			view.setImageResource(resId);
 		}
 
+		@SuppressLint("ResourceAsColor") 
 		public void ViewData(SmartLockDefine device, int position) {
 			if (device != null) {
 				tv_lock_name.setSingleLine(true);
@@ -80,16 +82,30 @@ public class DevlistAdapter extends BaseAdapter {
 				if (!TextUtils.isEmpty(device.mLockID)) {
 					tv_lock_name.setText(device.mName);
 
-					rl_lock_item.setOnClickListener(selectPlugClick);
+					if (device.mOnline == true) {
+						rl_lock_item.setBackgroundColor(Color.TRANSPARENT);
+						iv_lock_online.setImageResource(R.drawable.smp_online);
+					} else {
+						rl_lock_item.setBackgroundColor(Color.LTGRAY);
+						iv_lock_online.setImageResource(R.drawable.smp_offline);
+					}
 					
+					if (device.mRelation == 0) {
+						iv_lock_authorize.setVisibility(View.VISIBLE);
+						rl_lock_item.setOnLongClickListener(deletePlug);
+					} else {
+						iv_lock_authorize.setVisibility(View.GONE);
+						rl_lock_item.setOnLongClickListener(null);
+					}
+						
+
+					rl_lock_item.setOnClickListener(selectPlugClick);					
 					iv_lock_icon.setImageResource(R.drawable.smp_lock_big);
-					iv_lock_online.setImageResource(device.mOnline == true ? R.drawable.smp_online : R.drawable.smp_offline);
 					iv_lock_status.setImageResource(device.mStatus == 0 ? R.drawable.smp_lock_close : R.drawable.smp_lock_open);
 					tv_lock_charge.setText(String.valueOf(device.mCharge));
-
+					
 					rl_lock_item.setContentDescription(String
 							.valueOf(device.mLockID));
-					rl_lock_item.setOnLongClickListener(deletePlug);
 				}
 			}
 		}

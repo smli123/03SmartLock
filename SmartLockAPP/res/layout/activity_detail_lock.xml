@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/commom_bg_color">
     
     <include
           android:id="@+id/commontitlebar"  
@@ -12,31 +12,46 @@
           layout="@layout/view_common_titlebar"
           android:layout_alignParentTop="true" />   
 
-
     <RelativeLayout
         android:id="@+id/rl_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/commontitlebar"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal" >
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="5dp" >
     	
         <TextView
-            android:id="@+id/tv_status"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_status_memo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/lock_detail_current_lockstatus"
+            android:textColor="@color/black"
+            android:textSize="@dimen/version_font_size" />
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_status_memo"
             android:text="@null"
             android:textColor="@color/black"
             android:textSize="@dimen/version_font_size" />
     </RelativeLayout>
     
-    <LinearLayout 
+    <LinearLayout
         android:id="@+id/ll_control_area"
         android:layout_width="match_parent"
-    	android:layout_height="wrap_content" 
+        android:layout_height="wrap_content"
         android:layout_below="@id/rl_status"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-    	android:orientation="horizontal">
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="5dp" >
     	
         <TextView
             android:id="@+id/tv_lock_open"
@@ -60,7 +75,48 @@
             android:textColor="@color/black"
             android:textSize="@dimen/version_font_size" />
     </LinearLayout>
-    
+
+    <LinearLayout 
+        android:id="@+id/ll_authorize_area"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content" 
+        android:layout_below="@id/ll_control_area"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+    	android:orientation="horizontal"
+    	android:background="@color/white">
+        
+        <RelativeLayout
+            android:id="@+id/rl_authorize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/commontitlebar"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="5dp" >
+	    	
+	        <TextView
+	            android:id="@+id/tv_authorize_memo"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/lock_detail_authorize"
+	            android:textColor="@color/black"
+	            android:textSize="@dimen/version_font_size" />
+
+	        <TextView
+	            android:id="@+id/tv_authorize"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentRight="true"
+	            android:layout_alignParentTop="true"
+	            android:text="增加"
+	            android:textColor="@color/black"
+	            android:textSize="@dimen/version_font_size" />
+	    </RelativeLayout>
+        
+    </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/rl_log"
         android:layout_width="match_parent"

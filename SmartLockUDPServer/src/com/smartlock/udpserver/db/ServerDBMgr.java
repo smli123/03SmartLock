@@ -590,19 +590,27 @@ public class ServerDBMgr {
 	 * @author zxluan
 	 * @date 2015/03/28
 	 */
-	public USER_MODULE QueryUserModuleByDevId(String strDevId)
+	public Vector<USER_MODULE> QueryUserModuleByDevId(String strDevId)
 	{
+		Vector<USER_MODULE> vecUserModuleList = new Vector<USER_MODULE>();
 		Map<String,String> selection = new HashMap<String,String>();
 		selection.put(USER_MODULE.MODULE_ID, strDevId);
 		ResultSet rs;
 		try {
 			rs = m_dbTool.query(USER_MODULE.TABLE_NAME, selection);
-			if(rs.next())
+//			if(rs.next())
+//			{
+//				return new USER_MODULE(rs.getString(USER_MODULE.USER_NAME),
+//						rs.getString(USER_MODULE.MODULE_ID),
+//						rs.getByte(USER_MODULE.CTRL_MODE));
+//			}
+			while(rs.next())
 			{
-				return new USER_MODULE(rs.getString(USER_MODULE.USER_NAME),
+				vecUserModuleList.add(new USER_MODULE(rs.getString(USER_MODULE.USER_NAME),
 						rs.getString(USER_MODULE.MODULE_ID),
-						rs.getByte(USER_MODULE.CTRL_MODE));
+						rs.getByte(USER_MODULE.CTRL_MODE)));
 			}
+			return vecUserModuleList;
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

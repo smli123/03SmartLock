@@ -2,6 +2,7 @@ package com.smartlock.udpserver.Function;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Vector;
 
 import com.smartlock.platform.LogTool.LogWriter;
 import com.smartlock.udpserver.ServerWorkThread;
@@ -71,11 +72,16 @@ public class NotifyLockStatusHandle implements ICallFunction{
 				return ServerRetCodeMgr.ERROR_CODE_FAILED_DB_OPERATION;
 			}
 			
-			USER_MODULE info = dbMgr.QueryUserModuleByDevId(strDevId);
+			Vector<USER_MODULE> info = dbMgr.QueryUserModuleByDevId(strDevId);
 			
-			String strResult = strRet[4].trim() + "," + strRet[5].trim() + "," + strRet[6].trim() + "," + strRet[7].trim();
-			NotifyToAPP(info.getUserName(),strDevId, ServerCommDefine.NOTIFY_LOCK_STATUS, 
-					ServerRetCodeMgr.SUCCESS_CODE,  strResult);
+			if (info != null) {
+				String strResult = strRet[4].trim() + "," + strRet[5].trim() + "," + strRet[6].trim() + "," + strRet[7].trim();
+				for (int i = 0; i < info.size(); i++) {
+					String username = info.get(i).getUserName();
+					NotifyToAPP(username,strDevId, ServerCommDefine.NOTIFY_LOCK_STATUS, 
+							ServerRetCodeMgr.SUCCESS_CODE, strResult);
+				}
+			}
 			
 			//通知模块通知已收到
 			ResponseToModule(strDevId, String.format("%s#", ServerCommDefine.NOTIFY_LOCK_STATUS));

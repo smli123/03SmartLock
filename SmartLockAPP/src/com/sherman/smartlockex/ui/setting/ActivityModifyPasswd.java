@@ -50,7 +50,7 @@ public class ActivityModifyPasswd extends TitledActivity implements
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			if (intent.getAction().equals(PubDefine.USER_MODIFY_PASSWORD)) {
+			if (intent.getAction().equals(PubDefine.USER_MODIFY_PASSWORD_BROADCAST)) {
 
 				int ret = intent.getIntExtra("RESULT", 0);
 				String message = intent.getStringExtra("MESSAGE");
@@ -130,7 +130,7 @@ public class ActivityModifyPasswd extends TitledActivity implements
 		btnOK = (Button) this.findViewById(R.id.btn_finish);
 		btnOK.setOnClickListener(this);
 		IntentFilter filter = new IntentFilter();
-		filter.addAction(PubDefine.USER_MODIFY_PASSWORD);
+		filter.addAction(PubDefine.USER_MODIFY_PASSWORD_BROADCAST);
 		this.registerReceiver(mModifyPasswdRev, filter);
 
 		checkPwd = (ShermanCheckBox) findViewById(R.id.chkViewPwd);

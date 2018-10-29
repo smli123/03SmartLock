@@ -9,8 +9,8 @@ import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
 import android.content.Intent;
 import android.os.Message;
 
-public class SmartLockEventHandlerBACK2AP extends SmartLockEventHandler {
-	Intent mIntent = new Intent(PubDefine.PLUG_BACK2AP_ACTION);
+public class SmartLockEventHandlerBack2AP extends SmartLockEventHandler {
+	Intent mIntent = new Intent(PubDefine.LOCK_BACK2AP_BROADCAST);
 	@Override
 	public void handleMessage(Message msg) {
 		String[] buffer = (String[]) msg.obj;

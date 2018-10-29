@@ -11,7 +11,7 @@ import android.os.Message;
 
 public class SmartLockEventHandlerModifyPwd extends SmartLockEventHandler {
 	
-	Intent mIntent = new Intent(PubDefine.USER_MODIFY_PASSWORD);
+	Intent mIntent = new Intent(PubDefine.USER_MODIFY_PASSWORD_BROADCAST);
 	@Override
 	public void handleMessage(Message msg) {
 		// TODO Auto-generated method stub

@@ -12,19 +12,20 @@ import com.smartlock.udpserver.db.ServerDBMgr;
 import com.smartlock.udpserver.db.USER_MODULE;
 
 public class APPQueryAllModuleInfoHandle implements ICallFunction{
-	private String GenModuleInfo(MODULE_INFO info, String strDevId)
+	private String GenModuleInfo(MODULE_INFO info, String strDevId, int iRelation)
 	{
 		if(null == info)
 		{
 			/* 查不到的模块回默认值 */
 			String strModuleInfo = strDevId + ",";
-			strModuleInfo += "thingzdo_" + strDevId + ",";
+			strModuleInfo += "smartlock_" + strDevId + ",";
 			strModuleInfo += "00:00:00:00:00:00" + ",";	//MAC地址
-			strModuleInfo += "20161017A1V1.4" + ",";	// Module Version
-			strModuleInfo += "0001_0001" + ",";			// Module Type
+			strModuleInfo += "201811028A1V1.4" + ",";	// Module Version
+			strModuleInfo += "1" + ",";					// Module Type
 			strModuleInfo += MODULE_INFO.OFFLINE + ",";
 			strModuleInfo += 0 + ",";
-			strModuleInfo += 0 + ",";			
+			strModuleInfo += 0 + ",";	
+			strModuleInfo += iRelation;
 			
 			return strModuleInfo;
 		}
@@ -39,7 +40,6 @@ public class APPQueryAllModuleInfoHandle implements ICallFunction{
 		String strStaus			= String.valueOf(info.getStatus());
 		String strCharge		= String.valueOf(info.getCharge());
 		
-		String strModuleIp	 	= "192.168.1.1";//APP暂时没想好，暂时写死，后续再处理 
 		//模块信息
 		String strModuleInfo = strDevId + ",";
 		strModuleInfo += info.getModuleName() + ",";
@@ -49,13 +49,14 @@ public class APPQueryAllModuleInfoHandle implements ICallFunction{
 		strModuleInfo += strOnLine + ",";
 		strModuleInfo += strStaus + ",";
 		strModuleInfo += strCharge + ",";
+		strModuleInfo += iRelation;
 		
 		return strModuleInfo;
 	}
 	/**********************************************************************************************************
 	 * @name QueryAllModuleInfoHandle 查询指定用户名下的所有模块信息
 	 * @param 	strMsg: 命令字符串 格式：cookie,QRYPLUG,<username>
-	 * @RET 		<new cookie>,QRYPLUG, <username>,<0xFFFF>,<code>,
+	 * @RET 		<new cookie>,APPQRYPLUG, <username>,<0xFFFF>,<code>,
 	 *                                   <count>,<ID1>,<devname1>,<mac1>,<protocol type>,<online1>,<poweron1>,<ip1>,<red>,<green>,<blue>,
 	 * 																<timer_count>,	<timer_id1>,<timer_enable>,<period1>,<powerontime1>,<powerofftime1>@...@
 	 * 																							<timer_id_n>,<timer_enable>,<period_n>,<powerontime_n>,<powerofftime_n>#…#
@@ -99,7 +100,7 @@ public class APPQueryAllModuleInfoHandle implements ICallFunction{
 				MODULE_INFO info = dbMgr.QueryModuleInfo(strDevId);
 				
 				//模块信息
-				String strModuleInfo = GenModuleInfo(info, strDevId);
+				String strModuleInfo = GenModuleInfo(info, strDevId, user_module.getCtrlMode());
 				
 				//将该模块信息加入模块信息列表中
 				strModuleInfoList += "," + strModuleInfo;

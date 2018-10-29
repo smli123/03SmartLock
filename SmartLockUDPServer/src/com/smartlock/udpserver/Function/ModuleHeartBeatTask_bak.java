@@ -2,6 +2,7 @@ package com.smartlock.udpserver.Function;
 
 import java.sql.Timestamp;
 import java.util.TimerTask;
+import java.util.Vector;
 
 import com.smartlock.platform.LogTool.LogWriter;
 import com.smartlock.udpserver.ConnectInfo;
@@ -55,13 +56,19 @@ public class ModuleHeartBeatTask_bak  extends TimerTask implements ICallFunction
 		if (onlineTime > 20) {	// 超过50秒，表示离线
 			try
 			{
-				USER_MODULE user_info = dbMgr.QueryUserModuleByDevId(m_strModuleID);
-				if (null != user_info)
-				{
-					NotifyToAPP(user_info.getUserName(), m_strModuleID, 
-							ServerCommDefine.APP_NOTIFY_ONLINE_MSG_HEADER, 
-							ServerRetCodeMgr.SUCCESS_CODE,
-							String.valueOf(ServerCommDefine.MODULE_OFF_LINE)) ;
+				//通知APP模块已离线
+				Vector<USER_MODULE> user_info = dbMgr.QueryUserModuleByDevId(m_strModuleID);
+				if (user_info == null) {
+					LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Failed to QueryUserModuleByDevId. (DevID:%s)", 
+							m_strModuleID));
+				} else {
+					for (int i = 0; i < user_info.size(); i++) {
+						USER_MODULE user = user_info.get(i);
+						NotifyToAPP(user.getUserName(), m_strModuleID, 
+								ServerCommDefine.APP_NOTIFY_ONLINE_MSG_HEADER, 
+								ServerRetCodeMgr.SUCCESS_CODE,
+								String.valueOf(ServerCommDefine.MODULE_OFF_LINE)) ;		
+					}
 				}
 
 				/* step2 清理模块存储的信息 */
@@ -104,86 +111,8 @@ public class ModuleHeartBeatTask_bak  extends TimerTask implements ICallFunction
 				dbMgr.Destroy();
 			}
 		}
-		
-		
-//		if(ServerWorkThread.getModuleConnectInfo(m_strModuleID).isAlive())
-//		{
-//			//收到心跳包
-//			ServerWorkThread.RefreshModuleAliveFlag(m_strModuleID, false);
-//			LogWriter.WriteHeartLog(LogWriter.SELF,
-//					String.format("[%s]Server receive heart package.TaskTimer:%s", m_strModuleID, this.toString()));
-//		}
-//		else
-//		{
-//			//没有收到心跳包
-//			LogWriter.WriteHeartLog(LogWriter.SELF,
-//					String.format("[%s]Server did not receive heart package.TaskTimer:%s", m_strModuleID, this.toString()));
-//			
-//			/* step1通知用户模块下线  */
-//			// Debug for new ServerDBMgr()
-////			LogWriter.WriteDebugLog(LogWriter.SELF, 
-////					String.format("(Before ModuleHeartBeatTask new ServerDBMgr(), m_strModuleID=(%s)", m_strModuleID));
-//			
-//			ServerDBMgr dbMgr = new ServerDBMgr();
-//			
-////			LogWriter.WriteDebugLog(LogWriter.SELF, 
-////					String.format("(After ModuleHeartBeatTask new ServerDBMgr(), m_strModuleID=(%s)", m_strModuleID));
-//			
-//			try
-//			{
-//				USER_MODULE user_info = dbMgr.QueryUserModuleByDevId(m_strModuleID);
-//				if (null != user_info)
-//				{
-//					NotifyToAPP(user_info.getUserName(), m_strModuleID, 
-//							ServerCommDefine.APP_NOTIFY_ONLINE_MSG_HEADER, 
-//							ServerRetCodeMgr.SUCCESS_CODE,
-//							String.valueOf(ServerCommDefine.MODULE_OFF_LINE)) ;
-//				}
-//	
-//				/* step2 清理模块存储的信息 */
-//				ServerWorkThread.UnRegisterModuleIP(m_strModuleID);
-//				
-//				//清理模块日志信息
-//				ServerWorkThread.UnRegisterModuleLogFileMgr(m_strModuleID);
-//				
-//				/* step3 停止心跳检测定时器*/
-//				LogWriter.WriteDebugLog(LogWriter.SELF, String.format("Stop Heart Timer:%s, timer info:%s", m_strModuleID, info.getHeartTimer().toString()));
-//				info.getHeartTimer().cancel();
-//				
-//				// 更新模块上线日志信息 lishimin -- MODULE_DATA
-//				if (ServerParamConfiger.getRecordModuleData() == true) {
-//					dbMgr.BeginTansacion();
-//					MODULE_DATA data = dbMgr.QueryModuleDataByModuleId(m_strModuleID);
-//					Timestamp dtLogoutTime = dbMgr.getCurrentTime();
-//					data.setLogoutTime(dtLogoutTime);
-//					long ionlineTime = (dtLogoutTime.getTime() - data.getLoginTime().getTime())/1000;
-//					data.setOnlineTime(ionlineTime);
-//					
-//					boolean bRet = dbMgr.UpdateModuleData(data);
-//					if(!bRet)
-//					{
-//						LogWriter.WriteErrorLog(LogWriter.SELF, String.format("(%s)\t Failed to UpdateModuleData:[%s - %s]", 
-//								m_strModuleID,data.getLoginTime(),data.getLogoutTime()));
-//						dbMgr.Rollback();
-//						dbMgr.EndTansacion();
-//					} else {
-//						LogWriter.WriteErrorLog(LogWriter.SELF, String.format("(%s)\t Succeed to UpdateModuleData:[%s - %s]", 
-//								m_strModuleID,data.getLoginTime(),data.getLogoutTime()));
-//					}
-//					dbMgr.Commit();
-//					dbMgr.EndTansacion();
-//				}
-//				
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			finally
-//			{
-//				dbMgr.Destroy();
-//			}
-//		}
 	}
+	
 	@Override
 	public int call(Runnable thread_base, String strMsg) {
 		// TODO Auto-generated method stub

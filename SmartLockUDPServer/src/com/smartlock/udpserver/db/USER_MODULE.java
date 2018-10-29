@@ -1,8 +1,8 @@
 package com.smartlock.udpserver.db;
 /**USER_MODULE(String strUserName,String strModuleId,byte iCtrlMode)*/
 public class USER_MODULE {
-	public final static byte 	PRIMARY		= 0;				//主用户
-	public final static byte	SLAVE		= 1;				//从用户
+	public final static int 	PRIMARY		= 0;				//主用户
+	public final static int		SLAVE		= 1;				//从用户
 	public final static String	TABLE_NAME	= "user_module";	//数据库表名称
 	public final static String 	USER_NAME	= "user_name";
 	public final static String  MODULE_ID	= "module_id";
@@ -10,8 +10,8 @@ public class USER_MODULE {
 	
 	private String m_strUserName;
 	private String m_strModuleId;
-	private byte m_CtrlMode;
-	public USER_MODULE(String strUserName,String strModuleId,byte iCtrlMode)
+	private int m_CtrlMode;
+	public USER_MODULE(String strUserName,String strModuleId,int iCtrlMode)
 	{
 		setUserName(strUserName);
 		setModuleId(strModuleId);
@@ -43,10 +43,10 @@ public class USER_MODULE {
 	public void setModuleId(String strModuleId) {
 		this.m_strModuleId = strModuleId;
 	}
-	public byte getCtrlMode() {
+	public int getCtrlMode() {
 		return m_CtrlMode;
 	}
-	public void setCtrlMode(byte iCtrlMode) {
+	public void setCtrlMode(int iCtrlMode) {
 		this.m_CtrlMode = iCtrlMode;
 	}
 }

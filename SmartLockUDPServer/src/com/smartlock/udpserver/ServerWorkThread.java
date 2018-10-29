@@ -113,6 +113,7 @@ public class ServerWorkThread  implements Runnable{
 		m_SendFuncMap.put(ServerCommDefine.APP_BACK2AP_CTRL_MSG_HEADER, new ModuleBack2APCtrlMsgHandle());
 		
 		/* 模块命令 */
+		m_SendFuncMap.put(ServerCommDefine.MODULE_HEART_MSG_HEADER, new ModuleHeartMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.MODULE_LOGIN_MSG_HEADER, new ModuleLoginHandle());
 		m_SendFuncMap.put(ServerCommDefine.LOCK_CTRL_MSG_HEADER, new ModuleLockCtrlMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.NOTIFY_BELL_MSG_HEADER, new NofityBellMsgHandle());
@@ -122,6 +123,10 @@ public class ServerWorkThread  implements Runnable{
 		
 		/* 模板上报消息 */
 		m_SendFuncMap.put(ServerCommDefine.NOTIFY_LOCK_STATUS, new NotifyLockStatusHandle());
+		
+		/** 转发器功能  **/
+		m_SendFuncMap.put(ServerCommDefine.TRANSMIT_HEARBEAT_MSG_HEADER, new TransmitHearBeatMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.TRANSMIT_TRANS_MSG_HEADER, new TransmitTransMsgHandle());
 	}
 	
 	private static boolean IsNeedJudgeLogin(String strCmd)

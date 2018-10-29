@@ -34,7 +34,7 @@ public class ActivityMessageSystem extends TitledActivity implements OnClickList
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			if (intent.getAction().equals(PubDefine.LOCK_NOTIFY_STATUS)) {
+			if (intent.getAction().equals(PubDefine.LOCK_NOTIFY_STATUS_BROADCAST)) {
 					int status = intent.getIntExtra("STATUS", -1);
 					Message msg = new Message();
 					msg.what = 0;
@@ -81,7 +81,7 @@ public class ActivityMessageSystem extends TitledActivity implements OnClickList
         initView();
         
         IntentFilter filter = new IntentFilter();
-		filter.addAction(PubDefine.LOCK_NOTIFY_STATUS);
+		filter.addAction(PubDefine.LOCK_NOTIFY_STATUS_BROADCAST);
 		registerReceiver(mLoginRev, filter);
     }
     
