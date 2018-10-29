@@ -1,5 +1,7 @@
 package com.smartlock.udpserver.Function;
 
+import java.util.Vector;
+
 import com.smartlock.platform.LogTool.LogWriter;
 import com.smartlock.udpserver.ServerWorkThread;
 import com.smartlock.udpserver.commdef.ICallFunction;
@@ -36,21 +38,22 @@ public class APPDeleteModuleMsgHandle implements ICallFunction{
 		}	
 		
 		ServerDBMgr dbMgr = new ServerDBMgr();
+		Vector<USER_MODULE> user_infos = dbMgr.QueryUserModuleByDevId((strModuleId));
 		
 		try
 		{
-			//判断用户是否拥有该插座
-			USER_MODULE user_module = dbMgr.QueryUserModule(strUserName, strModuleId);
+			//判断用户是否拥有该设备
+			USER_MODULE user_module = dbMgr.QueryUserModule(strUserName, strModuleId, USER_MODULE.PRIMARY);
 			if(null == user_module)
-			{
-				ResponseToAPP(strMsgHeader, strUserName, strModuleId, ServerRetCodeMgr.ERROR_CODE_USER_NOT_OWN_MODULE);
-				return ServerRetCodeMgr.ERROR_CODE_USER_NOT_OWN_MODULE;
-			}
-			if(user_module.getCtrlMode() == USER_MODULE.SLAVE)
 			{
 				ResponseToAPP(strMsgHeader, strUserName, strModuleId, ServerRetCodeMgr.ERROR_CODE_USER_HAS_NO_AUTHORITY);
 				return ServerRetCodeMgr.ERROR_CODE_USER_HAS_NO_AUTHORITY;
 			}
+//			if(user_module.getCtrlMode() == USER_MODULE.SLAVE)
+//			{
+//				ResponseToAPP(strMsgHeader, strUserName, strModuleId, ServerRetCodeMgr.ERROR_CODE_USER_HAS_NO_AUTHORITY);
+//				return ServerRetCodeMgr.ERROR_CODE_USER_HAS_NO_AUTHORITY;
+//			}
 		
 			//开启事务机制
 			dbMgr.BeginTansacion();
@@ -89,7 +92,12 @@ public class APPDeleteModuleMsgHandle implements ICallFunction{
 					thread.getSrcIP(),thread.getSrcPort(),strUserName,strModuleId));
 			
 			//通知 APP，删车成功
-			ResponseToAPP(strMsgHeader, strUserName, strModuleId, ServerRetCodeMgr.SUCCESS_CODE);
+			if (user_infos != null) {
+				for (int i = 0; i < user_infos.size(); i++) {
+					String oneUserName = user_infos.get(i).getUserName();
+					ResponseToAPP(strMsgHeader, oneUserName, strModuleId, ServerRetCodeMgr.SUCCESS_CODE);
+				}
+			}
 			return ServerRetCodeMgr.SUCCESS_CODE;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

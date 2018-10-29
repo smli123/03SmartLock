@@ -68,7 +68,7 @@ public class NotifyLockStatusHandle implements ICallFunction{
 			boolean bRet = dbMgr.UpdateModuleInfo_Status_Charge(strDevId, iStatus, iCharge);
 			if(!bRet)
 			{
-				LogWriter.WriteErrorLog(LogWriter.SELF, String.format("(%s)db operation failed. ", strDevId));
+				LogWriter.WriteErrorLog(LogWriter.SELF, String.format("(%s)db operation failed. [ModuleInfo]", strDevId));
 				return ServerRetCodeMgr.ERROR_CODE_FAILED_DB_OPERATION;
 			}
 			
@@ -84,7 +84,8 @@ public class NotifyLockStatusHandle implements ICallFunction{
 			}
 			
 			//通知模块通知已收到
-			ResponseToModule(strDevId, String.format("%s#", ServerCommDefine.NOTIFY_LOCK_STATUS));
+			String moduleCommand = String.format("%s,%s,%s,%s,%d#", strNewCookie, ServerCommDefine.NOTIFY_LOCK_STATUS, strUserName, strDevId, 0);
+			ResponseToModule(strDevId, moduleCommand);
 			return ServerRetCodeMgr.SUCCESS_CODE;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

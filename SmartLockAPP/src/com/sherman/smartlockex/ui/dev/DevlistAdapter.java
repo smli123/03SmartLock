@@ -98,7 +98,6 @@ public class DevlistAdapter extends BaseAdapter {
 						rl_lock_item.setOnLongClickListener(null);
 					}
 						
-
 					rl_lock_item.setOnClickListener(selectPlugClick);					
 					iv_lock_icon.setImageResource(R.drawable.smp_lock_big);
 					iv_lock_status.setImageResource(device.mStatus == 0 ? R.drawable.smp_lock_close : R.drawable.smp_lock_open);

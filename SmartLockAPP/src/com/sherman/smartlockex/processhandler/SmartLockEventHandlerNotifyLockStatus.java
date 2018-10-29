@@ -28,11 +28,17 @@ public class SmartLockEventHandlerNotifyLockStatus extends SmartLockEventHandler
 			
 			String moduleID = buffer[3];
 			int status = Integer.parseInt(buffer[EVENT_MESSAGE_HEADER+1]);
+			int charge = Integer.parseInt(buffer[EVENT_MESSAGE_HEADER+2]);
+			int userType = Integer.parseInt(buffer[EVENT_MESSAGE_HEADER+3]);
+			String memo = buffer[EVENT_MESSAGE_HEADER+4];
 			
 			if (0 == code) {
 				mIntent.putExtra("RESULT", 0);
 				mIntent.putExtra("LOCKID", moduleID);
 				mIntent.putExtra("STATUS", status);
+				mIntent.putExtra("CHARGE", charge);
+				mIntent.putExtra("USERTYPE", userType);
+				mIntent.putExtra("USERMEMO", memo);
 		    	
 			} else {
 		    	mIntent.putExtra("RESULT", code);

@@ -217,6 +217,9 @@ public class SmartLockActivity extends FragmentActivity
 		
 		mPager.setOnPageChangeListener(new MyOnPageChangeListener());
 		
+		btn_AddLock.setVisibility(View.VISIBLE);
+		btn_AddLock.setText(R.string.add);
+		
 //		tv_tab_dev.setTextColor(resources.getColor(R.color.blue));
 //		iv_tab_dev.setImageResource(R.drawable.smp_tab_devlist_pressed);
 	}

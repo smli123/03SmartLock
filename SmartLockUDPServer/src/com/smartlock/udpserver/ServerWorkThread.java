@@ -31,6 +31,7 @@ import com.smartlock.udpserver.Function.NofityBellMsgHandle;
 import com.smartlock.udpserver.Function.ModuleHeartBeatTask;
 import com.smartlock.udpserver.Function.ModuleHeartMsgHandle;
 import com.smartlock.udpserver.Function.ModuleLoginHandle;
+import com.smartlock.udpserver.Function.NofityAlarmMsgHandle;
 import com.smartlock.udpserver.Function.ModuleLockCtrlMsgHandle;
 import com.smartlock.udpserver.Function.NotifyLockStatusHandle;
 import com.smartlock.udpserver.Function.APPQueryAllModuleInfoHandle;
@@ -113,10 +114,11 @@ public class ServerWorkThread  implements Runnable{
 		m_SendFuncMap.put(ServerCommDefine.APP_BACK2AP_CTRL_MSG_HEADER, new ModuleBack2APCtrlMsgHandle());
 		
 		/* 模块命令 */
+		m_SendFuncMap.put(ServerCommDefine.LOCK_CTRL_MSG_HEADER, new ModuleLockCtrlMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.MODULE_HEART_MSG_HEADER, new ModuleHeartMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.MODULE_LOGIN_MSG_HEADER, new ModuleLoginHandle());
-		m_SendFuncMap.put(ServerCommDefine.LOCK_CTRL_MSG_HEADER, new ModuleLockCtrlMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.NOTIFY_BELL_MSG_HEADER, new NofityBellMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.NOTIFY_NOTIFY_ALARM, new NofityAlarmMsgHandle());
 
 		m_SendFuncMap.put(ServerCommDefine.MOD_PLUG_MSG_HEADER, new APPModifyPlugNameHandle());
 		m_SendFuncMap.put(ServerCommDefine.BACK2AP_CTRL_MSG_HEADER, new ModuleBack2APCtrlMsgHandle());

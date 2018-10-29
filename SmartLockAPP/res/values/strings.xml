@@ -283,4 +283,8 @@
     <!-- SmartLock Detail Activity -->
     <string name="lock_detail_current_lockstatus">"门锁当前状态："</string>
     <string name="lock_detail_authorize">"授权管理"</string>
+    
+    <string name="lock_detail_lockstatus_unknown">"未知状态"</string>
+    <string name="lock_detail_lockstatus_opened">"门锁已经打开"</string>
+    <string name="lock_detail_lockstatus_closed">"门锁已经关闭"</string>
 </resources>

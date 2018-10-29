@@ -29,6 +29,7 @@ public class ModuleLockCtrlMsgHandle implements ICallFunction{
 		String strMsgHeader			= strRet[1].trim();
 		String strUserName 			= strRet[2].trim();
 		String strModuleId			= strRet[3].trim();
+		int iStatus					= Integer.valueOf(strRet[4].trim());
 	
 		/* 校验参数合法性 */
 		int iRet = CheckAppCmdValid(strUserName, strCookie);
@@ -65,11 +66,9 @@ public class ModuleLockCtrlMsgHandle implements ICallFunction{
 			/* 透传给模块 */
 			try {	
 				/* 待模块返回 */
-				iRet = NotifyToModule(strMsg);
-				if (ServerRetCodeMgr.SUCCESS_CODE != iRet)
-				{
-					return iRet;
-				}
+				
+				String moduleCommand = String.format("%s,%s,%s,%s,%d#", strCookie, ServerCommDefine.LOCK_CTRL_MSG_HEADER, strUserName, strModuleId, iStatus);
+				ResponseToModule(strModuleId, moduleCommand);
 				
 				return ServerRetCodeMgr.SUCCESS_CODE;
 			} catch (Exception e) {
@@ -107,14 +106,12 @@ public class ModuleLockCtrlMsgHandle implements ICallFunction{
 		// TODO Auto-generated method stub
 		String strRet[] 	= strMsg.split(ServerCommDefine.CMD_SPLIT_STRING);
 		String strNewCookie	= strRet[0].trim();
-		int iRetCode = Integer.valueOf(strRet[4].trim());
-		String strStatus = strRet[5].trim();
-
-		// 7/8/9 改为1/2/3
 		String strMsgHeader = strRet[1].trim();
 		String strUserName 	= strRet[2].trim();
 		String strModuleID	= strRet[3].trim();
-		
+		int iRetCode 		= Integer.valueOf(strRet[4].trim());
+		String strStatus 	= strRet[5].trim();
+
 		/* 更新COOKIE */
 		ServerWorkThread.RefreshModuleCookie(strModuleID, strNewCookie);
 		/* 刷新心跳状态 */
@@ -131,12 +128,12 @@ public class ModuleLockCtrlMsgHandle implements ICallFunction{
 			//获取模块返回的返回码
 			if(0 != iRetCode)
 			{
-				ResponseToAPP(strMsgHeader, strUserName, strModuleID, ServerRetCodeMgr.ERROR_CODE_MODULE_RET_ERROR);
+				ResponseToAPP(ServerCommDefine.APP_LOCK_CTRL_MSG_HEADER, strUserName, strModuleID, ServerRetCodeMgr.ERROR_CODE_MODULE_RET_ERROR);
 				return ServerRetCodeMgr.ERROR_CODE_MODULE_RET_ERROR;
 			}
 			
 			//给APP回复成功
-			ResponseToAPP(strMsgHeader, strUserName, strModuleID, ServerRetCodeMgr.SUCCESS_CODE, strStatus);
+			ResponseToAPP(ServerCommDefine.APP_LOCK_CTRL_MSG_HEADER, strUserName, strModuleID, ServerRetCodeMgr.SUCCESS_CODE, strStatus);
 			return ServerRetCodeMgr.SUCCESS_CODE;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

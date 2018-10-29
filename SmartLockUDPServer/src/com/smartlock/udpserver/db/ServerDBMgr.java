@@ -32,28 +32,6 @@ public class ServerDBMgr {
 		m_dbTool.Destroy();
 	}
 	
-	private boolean CreateModuleInfoTriger()
-	{
-		/*删除module_info时，需要清理timer_info,user_module*/
-		String strDropTrigger = "DROP TRIGGER IF EXISTS t_delete_module";
-		try {
-			m_dbTool.execute(strDropTrigger);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			LogWriter.WriteExceptionLog(LogWriter.SRV_SELF_LOG,e,"");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			LogWriter.WriteExceptionLog(LogWriter.SRV_SELF_LOG,e,"");
-		}
-		String strCreateTrigger = "CREATE TRIGGER t_delete_module" +
-					" ALTER DELETE ON " + MODULE_INFO.TABLE_NAME +
-					" BEGIN" + 
-					" delete from " + TIMER_INFO.TABLE_NAME + " where " + TIMER_INFO.MODULE_ID + "= old." + MODULE_INFO.MODULE_ID +
-					" delete from " + USER_MODULE.TABLE_NAME + " where " + USER_MODULE.MODULE_ID  + "old." + MODULE_INFO.MODULE_ID;
-		return true;
-	}
 	public boolean UpdateDB(int db_version)
 	{		
 		return true;
@@ -623,6 +601,33 @@ public class ServerDBMgr {
 		
 		return null;
 	}
+	
+	public USER_MODULE QueryUserModuleByDevId(String strDevId, int type)
+	{
+		Map<String,String> selection = new HashMap<String,String>();
+		selection.put(USER_MODULE.MODULE_ID, strDevId);
+		selection.put(USER_MODULE.CTRL_MODE, String.valueOf(type));
+		ResultSet rs;
+		try {
+			rs = m_dbTool.query(USER_MODULE.TABLE_NAME, selection);
+			if(rs.next())
+			{
+				return new USER_MODULE(rs.getString(USER_MODULE.USER_NAME),
+						rs.getString(USER_MODULE.MODULE_ID),
+						rs.getByte(USER_MODULE.CTRL_MODE));
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			LogWriter.WriteExceptionLog(LogWriter.SRV_SELF_LOG,e,"");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			LogWriter.WriteExceptionLog(LogWriter.SRV_SELF_LOG,e,"");
+		}
+		
+		return null;
+	}
 	/**
 	 * @name QueryModuleList 查询指定用户拥有的模块列表
 	 * @param strUserName 	用户名
@@ -645,6 +650,59 @@ public class ServerDBMgr {
 				return new USER_MODULE(rs.getString(USER_MODULE.USER_NAME),
 						rs.getString(USER_MODULE.MODULE_ID),
 						rs.getByte(USER_MODULE.CTRL_MODE));
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			LogWriter.WriteExceptionLog(LogWriter.SRV_SELF_LOG,e,"");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			LogWriter.WriteExceptionLog(LogWriter.SRV_SELF_LOG,e,"");
+		}
+		
+		return null;
+	}
+
+	public USER_MODULE QueryUserModule(String strUserName, String strDevId, int type) 
+	{
+		Map<String,String> selection = new HashMap<String,String>();
+		selection.put(USER_MODULE.USER_NAME, strUserName);
+		selection.put(USER_MODULE.MODULE_ID, strDevId);
+		selection.put(USER_MODULE.CTRL_MODE, String.valueOf(type));
+		ResultSet rs;
+		try {
+			rs = m_dbTool.query(USER_MODULE.TABLE_NAME, selection);
+			if(rs.next())
+			{
+				return new USER_MODULE(rs.getString(USER_MODULE.USER_NAME),
+						rs.getString(USER_MODULE.MODULE_ID),
+						rs.getByte(USER_MODULE.CTRL_MODE));
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			LogWriter.WriteExceptionLog(LogWriter.SRV_SELF_LOG,e,"");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			LogWriter.WriteExceptionLog(LogWriter.SRV_SELF_LOG,e,"");
+		}
+		
+		return null;
+	}
+	
+	public String QueryPrimaryUserName(String strDevId)
+	{
+		Map<String,String> selection = new HashMap<String,String>();
+		selection.put(USER_MODULE.MODULE_ID, strDevId);
+		selection.put(USER_MODULE.CTRL_MODE, String.valueOf(USER_MODULE.PRIMARY));
+		ResultSet rs;
+		try {
+			rs = m_dbTool.query(USER_MODULE.TABLE_NAME, selection);
+			if(rs.next())
+			{
+				return rs.getString(USER_MODULE.USER_NAME);
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -724,14 +782,14 @@ public class ServerDBMgr {
 		return false;
 	}
 	
-	public boolean UpdateUserModule(USER_MODULE user_module) 
+	public boolean UpdateUserModule(USER_MODULE user_module, String oldDevID) 
 	{
 		Map<String,String> content = new HashMap<String,String>();
 		Map<String,String> selection = new HashMap<String,String>();
 		content.put(USER_MODULE.USER_NAME, user_module.getUserName());
 		content.put(USER_MODULE.MODULE_ID, user_module.getModuleId());
 		content.put(USER_MODULE.CTRL_MODE, String.valueOf(user_module.getCtrlMode()));
-		selection.put(USER_MODULE.MODULE_ID, user_module.getModuleId());
+		selection.put(USER_MODULE.MODULE_ID, oldDevID);
 		try {
 			return m_dbTool.update(USER_MODULE.TABLE_NAME, content, selection);
 		} catch (SQLException e) {
@@ -919,13 +977,40 @@ public class ServerDBMgr {
 	{
 		Map<String,String> content = new HashMap<String,String>();
 		Map<String,String> selection = new HashMap<String,String>();
-		content.put(MODULE_INFO.MODULE_MAC, String.valueOf(info.getMac()));
-		content.put(MODULE_INFO.MODULE_VER, String.valueOf(info.getModuleVer()));
-		content.put(MODULE_INFO.MODULE_TYPE, String.valueOf(info.getModuleType()));
+		content.put(MODULE_INFO.MODULE_MAC, info.getMac());
+		content.put(MODULE_INFO.MODULE_VER, info.getModuleVer());
+		content.put(MODULE_INFO.MODULE_TYPE, info.getModuleType());
 		content.put(MODULE_INFO.MODULE_STATUS, String.valueOf(info.getStatus()));
-		content.put(MODULE_INFO.MODULE_NAME, String.valueOf(info.getModuleName()));
+		content.put(MODULE_INFO.MODULE_NAME, info.getModuleName());
+		content.put(MODULE_INFO.MODULE_ID, info.getModuleId());
 		content.put(MODULE_INFO.MODULE_CHARGE, String.valueOf(info.getCharge()));
 		content.put(MODULE_INFO.COOKIE, info.getCookie());
+		
+		selection.put(MODULE_INFO.MODULE_ID, info.getModuleId());
+		try {
+			return m_dbTool.update(MODULE_INFO.TABLE_NAME, content, selection);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			LogWriter.WriteExceptionLog(LogWriter.SRV_SELF_LOG,e,"");
+		}
+		return false;
+	}
+
+	public boolean UpdateModuleInfoByMac(MODULE_INFO info) 
+	{
+		Map<String,String> content = new HashMap<String,String>();
+		Map<String,String> selection = new HashMap<String,String>();
+		content.put(MODULE_INFO.MODULE_MAC, info.getMac());
+		content.put(MODULE_INFO.MODULE_VER, info.getModuleVer());
+		content.put(MODULE_INFO.MODULE_TYPE, info.getModuleType());
+		content.put(MODULE_INFO.MODULE_STATUS, String.valueOf(info.getStatus()));
+		content.put(MODULE_INFO.MODULE_NAME, info.getModuleName());
+		content.put(MODULE_INFO.MODULE_ID, info.getModuleId());
+		content.put(MODULE_INFO.MODULE_CHARGE, String.valueOf(info.getCharge()));
+		content.put(MODULE_INFO.COOKIE, info.getCookie());
+		
+		selection.put(MODULE_INFO.MODULE_MAC, info.getMac());
 		try {
 			return m_dbTool.update(MODULE_INFO.TABLE_NAME, content, selection);
 		} catch (SQLException e) {
@@ -1053,5 +1138,172 @@ public class ServerDBMgr {
 		
 		return false;
 	}
+
+	/****************************************************************************
+	 * MESSAGE_DEVICE 相关操作
+	 * **************************************************************************/
+	public Vector<MESSAGE_DEVICE> QueryMessageDeviceByUserName(String strUserName)
+	{
+		Vector<MESSAGE_DEVICE> vecList = new Vector<MESSAGE_DEVICE>();
+		Map<String,String> selection = new HashMap<String,String>();
+		selection.put(MESSAGE_DEVICE.USER_NAME, strUserName);
+		ResultSet rs;
+		try {
+			rs = m_dbTool.query(MESSAGE_DEVICE.TABLE_NAME, selection);
+			while(rs.next())
+			{
+				vecList.add(new MESSAGE_DEVICE(rs.getInt(MESSAGE_DEVICE.MESSAGE_ID),
+						rs.getString(MESSAGE_DEVICE.MODULE_ID),
+						rs.getString(MESSAGE_DEVICE.USER_NAME),
+						rs.getInt(MESSAGE_DEVICE.MESSAGE_TYPE),
+						rs.getInt(MESSAGE_DEVICE.MESSAGE_DATA),
+						rs.getInt(MESSAGE_DEVICE.USER_TYPE),
+						rs.getString(MESSAGE_DEVICE.USER_MEMO)));
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			LogWriter.WriteExceptionLog(LogWriter.SRV_SELF_LOG,e,"");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			LogWriter.WriteExceptionLog(LogWriter.SRV_SELF_LOG,e,"");
+		}
+		
+		return vecList;
+	}
+
+	public Vector<MESSAGE_DEVICE> QueryMessageDeviceByDevId(String strDevId)
+	{
+		Vector<MESSAGE_DEVICE> vecList = new Vector<MESSAGE_DEVICE>();
+		Map<String,String> selection = new HashMap<String,String>();
+		selection.put(MESSAGE_DEVICE.MODULE_ID, strDevId);
+		ResultSet rs;
+		try {
+			rs = m_dbTool.query(MESSAGE_DEVICE.TABLE_NAME, selection);
+			while(rs.next())
+			{
+				vecList.add(new MESSAGE_DEVICE(rs.getInt(MESSAGE_DEVICE.MESSAGE_ID),
+						rs.getString(MESSAGE_DEVICE.MODULE_ID),
+						rs.getString(MESSAGE_DEVICE.USER_NAME),
+						rs.getInt(MESSAGE_DEVICE.MESSAGE_TYPE),
+						rs.getInt(MESSAGE_DEVICE.MESSAGE_DATA),
+						rs.getInt(MESSAGE_DEVICE.USER_TYPE),
+						rs.getString(MESSAGE_DEVICE.USER_MEMO)));
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			LogWriter.WriteExceptionLog(LogWriter.SRV_SELF_LOG,e,"");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			LogWriter.WriteExceptionLog(LogWriter.SRV_SELF_LOG,e,"");
+		}
+		
+		return vecList;
+	}
+	
+	public MESSAGE_DEVICE QueryMessageDeviceByMessageId(String strDevId, int messageID) 
+	{
+		Map<String,String> selection = new HashMap<String,String>();
+		selection.put(MESSAGE_DEVICE.MODULE_ID, strDevId);
+		selection.put(MESSAGE_DEVICE.MESSAGE_ID, String.valueOf(messageID));
+		ResultSet rs;
+		try {
+			rs = m_dbTool.query(MESSAGE_DEVICE.TABLE_NAME, selection);
+			if(rs.next())
+			{
+				return new MESSAGE_DEVICE(rs.getInt(MESSAGE_DEVICE.MESSAGE_ID),
+						rs.getString(MESSAGE_DEVICE.MODULE_ID),
+						rs.getString(MESSAGE_DEVICE.USER_NAME),
+						rs.getInt(MESSAGE_DEVICE.MESSAGE_TYPE),
+						rs.getInt(MESSAGE_DEVICE.MESSAGE_DATA),
+						rs.getInt(MESSAGE_DEVICE.USER_TYPE),
+						rs.getString(MESSAGE_DEVICE.USER_MEMO));
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			LogWriter.WriteExceptionLog(LogWriter.SRV_SELF_LOG,e,"");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			LogWriter.WriteExceptionLog(LogWriter.SRV_SELF_LOG,e,"");
+		}
+		
+		return null;
+	}
+	
+	public boolean DeleteMessageDevice(String strDevId)
+	{
+		Map<String,String> selection = new HashMap<String,String>();
+		selection.put(MESSAGE_DEVICE.MODULE_ID, strDevId);
+		try {
+			return m_dbTool.delete(MESSAGE_DEVICE.TABLE_NAME, selection);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			LogWriter.WriteExceptionLog(LogWriter.SRV_SELF_LOG,e,"");
+		}
+		return false;
+	}
+	
+	public boolean ClearMessageDevice() 
+	{
+		try {
+			return m_dbTool.delete(MESSAGE_DEVICE.TABLE_NAME);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			LogWriter.WriteExceptionLog(LogWriter.SRV_SELF_LOG,e,"");
+		}
+		return false;
+	}
+
+	public boolean InsertMessageDevice(MESSAGE_DEVICE message) 
+	{
+		Map<String,String> content = new HashMap<String,String>();
+		content.put(MESSAGE_DEVICE.MESSAGE_ID, String.valueOf(message.getMessageId()));		
+		content.put(MESSAGE_DEVICE.MODULE_ID, message.getModuleId());
+		content.put(MESSAGE_DEVICE.USER_NAME, message.getUserName());
+		content.put(MESSAGE_DEVICE.MESSAGE_TYPE, String.valueOf(message.getMessageType()));
+		content.put(MESSAGE_DEVICE.MESSAGE_DATA, String.valueOf(message.getMessageData()));
+		content.put(MESSAGE_DEVICE.USER_TYPE, String.valueOf(message.getUserType()));
+		content.put(MESSAGE_DEVICE.USER_MEMO, message.getUserMemo());
+		
+		try {
+			return m_dbTool.insert(MESSAGE_DEVICE.TABLE_NAME, content);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			LogWriter.WriteExceptionLog(LogWriter.SRV_SELF_LOG,e,"");
+		}
+		
+		return false;
+	}
+	
+	public boolean UpdateUserModule(MESSAGE_DEVICE message) 
+	{
+		Map<String,String> content = new HashMap<String,String>();
+		Map<String,String> selection = new HashMap<String,String>();
+		content.put(MESSAGE_DEVICE.MESSAGE_ID, String.valueOf(message.getMessageId()));		
+		content.put(MESSAGE_DEVICE.MODULE_ID, message.getModuleId());
+		content.put(MESSAGE_DEVICE.USER_NAME, message.getUserName());
+		content.put(MESSAGE_DEVICE.MESSAGE_TYPE, String.valueOf(message.getMessageType()));
+		content.put(MESSAGE_DEVICE.MESSAGE_DATA, String.valueOf(message.getMessageData()));
+		content.put(MESSAGE_DEVICE.USER_TYPE, String.valueOf(message.getUserType()));
+		content.put(MESSAGE_DEVICE.USER_MEMO, message.getUserMemo());
+		try {
+			return m_dbTool.update(MESSAGE_DEVICE.TABLE_NAME, content, selection);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			LogWriter.WriteExceptionLog(LogWriter.SRV_SELF_LOG,e,"");
+		}
+		
+		return false;
+	}
+
 	
 }

@@ -132,11 +132,11 @@ public class DeviceFragment extends SmartLockFragment
 				int ret = intent.getIntExtra("RESULT", 0);
 				String message = intent.getStringExtra("MESSAGE");
 				timeoutHandler.removeCallbacks(timeoutProcess);
-				SmartLockDefine plug = mLockHelper.getSmartLock(mFocusLockId);
+				SmartLockDefine item = mLockHelper.getSmartLock(mFocusLockId);
 				switch (ret) {
 					case 0 :
-						plug.mName = mNewPlugName;
-						if (0 < mLockHelper.modifySmartLock(plug)) {
+						item.mName = mNewPlugName;
+						if (0 < mLockHelper.modifySmartLock(item)) {
 							doBackgroundLoad();
 						}
 
@@ -145,6 +145,28 @@ public class DeviceFragment extends SmartLockFragment
 						PubFunc.thinzdoToast(mContext, message);
 						break;
 				}
+			}
+			if (intent.getAction().equals(PubDefine.LOCK_NOTIFY_STATUS_BROADCAST)) {
+				String message = intent.getStringExtra("MESSAGE");
+				int ret = intent.getIntExtra("RESULT", 0);
+				String moduleID = intent.getStringExtra("LOCKID");
+				int status = intent.getIntExtra("STATUS", -1);
+				int charge = intent.getIntExtra("CHARGE", 0);
+				int userType = intent.getIntExtra("USERTYPE", 0);
+				String memo = intent.getStringExtra("USERMEMO");
+				SmartLockDefine item = mLockHelper.getSmartLock(moduleID);
+				switch (ret) {
+				case 0 :
+					item.mStatus = status;
+					item.mCharge = charge;
+					if (0 < mLockHelper.modifySmartLock(item)) {
+						doBackgroundLoad();
+					}
+					break;
+				default :
+					PubFunc.thinzdoToast(mContext, message);
+					break;
+			}
 			}
 		}
 	};

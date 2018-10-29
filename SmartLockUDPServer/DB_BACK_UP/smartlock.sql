@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2018 年 10 月 29 日 09:32
+-- 生成日期: 2018 年 10 月 29 日 15:57
 -- 服务器版本: 5.1.69
 -- PHP 版本: 5.2.17p1
 
@@ -19,6 +19,37 @@ SET time_zone = "+00:00";
 --
 -- 数据库: `smartlock`
 --
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `message_device`
+--
+
+CREATE TABLE IF NOT EXISTS `message_device` (
+  `message_id` int(11) NOT NULL,
+  `module_id` varchar(32) NOT NULL,
+  `user_name` varchar(32) NOT NULL,
+  `message_type` int(11) NOT NULL,
+  `message_data` int(11) NOT NULL,
+  `user_type` int(11) NOT NULL,
+  `user_memo` varchar(32) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `message_system`
+--
+
+CREATE TABLE IF NOT EXISTS `message_system` (
+  `message_id` int(11) NOT NULL,
+  `module_id` varchar(32) NOT NULL,
+  `message_type` int(11) NOT NULL,
+  `message_data` int(11) NOT NULL,
+  `user_type` int(11) NOT NULL,
+  `user_memo` varchar(32) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -58,7 +89,8 @@ CREATE TABLE IF NOT EXISTS `module_info` (
 --
 
 INSERT INTO `module_info` (`module_id`, `module_name`, `module_mac`, `module_version`, `module_type`, `module_status`, `module_charge`, `cookie`) VALUES
-('651000', '651000', '60:01:94:09:df:32', '20171219A1V2.E', '1', 1, 87, '20180123151000');
+('60:01:94:09:df:31', '651001Name', '60:01:94:09:df:31', '20171219A1V2.E', '1', 1, 82, '20180123151000'),
+('651002', '651002', '60:01:94:09:df:32', '20171219A1V2.E', '1', 1, 82, '20180123151000');
 
 -- --------------------------------------------------------
 
@@ -93,6 +125,14 @@ CREATE TABLE IF NOT EXISTS `user_module` (
   `ctrl_mode` tinyint(1) NOT NULL,
   PRIMARY KEY (`user_name`,`module_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `user_module`
+--
+
+INSERT INTO `user_module` (`user_name`, `module_id`, `ctrl_mode`) VALUES
+('lishimin', '60:01:94:09:df:31', 0),
+('lishimin', '651002', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

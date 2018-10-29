@@ -48,11 +48,17 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			if (intent.getAction().equals(PubDefine.LOCK_NOTIFY_STATUS_BROADCAST)) {
+					String moduleID = intent.getStringExtra("LOCKID");
 					int status = intent.getIntExtra("STATUS", -1);
-					Message msg = new Message();
-					msg.what = 0;
-					msg.arg1 = status;
-					updateHandler.sendMessage(msg);
+					int charge = intent.getIntExtra("CHARGE", 0);
+					int userType = intent.getIntExtra("USERTYPE", 0);
+					String memo = intent.getStringExtra("USERMEMO");
+					if (moduleID.equals(mLockID) == true) {
+						Message msg = new Message();
+						msg.what = 0;
+						msg.arg1 = status;
+						updateHandler.sendMessage(msg);
+					}
 				}
 			}
 	};
@@ -62,11 +68,11 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 			switch (msg.what) {
 			case 0:
 				int status = msg.arg1;
-				String str_status = "未知状态";
+				String str_status = SmartLockApplication.getInstance().getString(R.string.lock_detail_lockstatus_unknown);
 				if (status == 0) {
-					str_status = "门锁已经打开";
+					str_status = SmartLockApplication.getInstance().getString(R.string.lock_detail_lockstatus_closed);
 				} else if (status == 1) {
-					str_status = "门锁已经关闭";
+					str_status = SmartLockApplication.getInstance().getString(R.string.lock_detail_lockstatus_opened);
 				}
 				 
 				tv_status.setText(str_status);
@@ -149,6 +155,12 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 		
 		tv_lock_open.setOnClickListener(this);
 		tv_lock_close.setOnClickListener(this);
+		
+
+		Message msg = new Message();
+		msg.what = 0;
+		msg.arg1 = mLock.mStatus;
+		updateHandler.sendMessage(msg);
 	}
 
 	private void setLock(int i_status) {

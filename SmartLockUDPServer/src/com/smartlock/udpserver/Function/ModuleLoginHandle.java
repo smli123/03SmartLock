@@ -47,13 +47,16 @@ public class ModuleLoginHandle implements ICallFunction {
 		String strModuleType	= strRet[7].trim();
 		int iStatus    			= Integer.valueOf(strRet[8].trim());
 		int iCharge    			= Integer.valueOf(strRet[9].trim());
-		String strReserve1 		= strRet[11].trim();
-		String strReserve2 		= strRet[12].trim();
-		String strReserve3 		= strRet[13].trim();
+		String strReserve1 		= strRet[10].trim();
+		String strReserve2 		= strRet[11].trim();
+		String strReserve3 		= strRet[12].trim();
 		
 		/* 获取DB管理器 */
 		ServerWorkThread thread = (ServerWorkThread)thread_base;
 		ServerDBMgr dbMgr = new ServerDBMgr();
+		
+		String strNewAppUserName = "";
+		int i = 0;
 		
 		try
 		{
@@ -67,129 +70,90 @@ public class ModuleLoginHandle implements ICallFunction {
 			dbMgr.BeginTansacion();
 
 			boolean bRet = false;
-//			// 处理ModuleID变化，但是Mac地址不变的情况
-//			Vector<MODULE_INFO> deleteinfo = dbMgr.QueryModuleInfoFromMac(strMac); 
-//			int i = 0;
-//			int total = deleteinfo.size();
-//			for (i = 0; i < total; i++) {
-//				LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t [%d/%d]Find it Mac:[%s] %s - %s", 
-//						i, total, strMac, strDevId, deleteinfo.get(i).getModuleId()));
-//				
-//				USER_MODULE user = dbMgr.QueryUserModuleByDevId(deleteinfo.get(i).getModuleId());
-//				if (user != null) {
-//					if (user.getUserName().equals(strAppUserName) == true) {
-//					
-//						if (deleteinfo.get(i).getModuleId().equals(strDevId) == false) {
-//							LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t ModuleID Diff:%s - %s", 
-//									strDevId, deleteinfo.get(i).getModuleId()));
-//							
-//							
-//							// 删除 此模块的module_info, timer_info, module_user信息；
-//							bRet = dbMgr.DeleteUserModule(strAppUserName, deleteinfo.get(i).getModuleId());
-//							if (bRet == false) {
-//								LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Failed to Delete UserModule:%s %s", 
-//										strAppUserName, deleteinfo.get(i).getModuleId()));
-//							}
-//							bRet = dbMgr.DeleteModuleInfo(deleteinfo.get(i).getModuleId());
-//							if (bRet == false) {
-//								LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Failed to Delete ModuleID:%s", 
-//										deleteinfo.get(i).getModuleId()));
-//							}
-//						}
-//					}
-//				}
-//			}
 			
-			Vector<MODULE_INFO> module_infos = dbMgr.QueryModuleInfoFromMac(strMac);
-			if (module_infos == null) {
-				// read database failed
-				LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Failed to QueryModuleInfoFromMac. (Mac:%s)", 
-						strMac));
+			// 先找DevID
+			MODULE_INFO dev_info = dbMgr.QueryModuleInfo(strDevId);
+			int findMode = 0;
+			if (dev_info != null) {
+				// find one module, OK
+				strNewAppUserName = dbMgr.QueryPrimaryUserName(strDevId);
+				if (strNewAppUserName == null) {
+					LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Failed to QueryPrimaryUserName. (DevId:%s)", 
+							strDevId));
+					strNewAppUserName = "";
+				}
+				findMode = 1;
+				
+				dev_info.setModuleId(strDevId);
+//				dev_info.setModuleName(strModuleName);
+				dev_info.setModuleType(strModuleType);
+				dev_info.setModuleVer(strModuleVer);
+				dev_info.setStatus(iStatus);
+				dev_info.setCharge(iCharge);
+				dev_info.setCookie(strCookie);
+				dbMgr.UpdateModuleInfo(dev_info);
 			} else {
-				if (module_infos.size() == 0 ) {
-					// not find module,
-					LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Find ==0  Module have the Mac. (Mac: %s)", 
+				// DevID 没有找到，就找MacID
+				Vector<MODULE_INFO> module_infos = dbMgr.QueryModuleInfoFromMac(strMac);
+				if (module_infos == null) {
+					// read database failed
+					LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Failed to QueryModuleInfoFromMac. (Mac:%s)", 
 							strMac));
-				} else if (module_infos.size() == 1 ) {
-					// find one module, OK
-					MODULE_INFO info = module_infos.get(0);
-					info.setModuleId(strDevId);
-//					info.setModuleName(strModuleName);
-					info.setModuleType(strModuleType);
-					info.setModuleVer(strModuleVer);
-					info.setStatus(iStatus);
-					info.setCharge(iCharge);
-					info.setCookie(strCookie);
-					dbMgr.UpdateModuleInfo(info);	
-					
-					// 配置网路后，第一次登陆
-					if (strAppUserName.equalsIgnoreCase(PubDefine.DEFAULT_USERNAME) == true) {
-						// 把USER_MODULE 中user和Mac的对应改为user和strDevId的对应关系
-						Vector<USER_MODULE> infos = dbMgr.QueryUserModuleByDevId(strMac);
-						if (infos == null) {
-							LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Failed to QueryUserModuleByDevId. (DevID or Mac:%s)", 
-									strMac));
-						} else {
-							if (infos.size() == 0) {
-								LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Find 0 UserModule in QueryUserModuleByDevId. (DevID or Mac:%s)", 
+				} else {
+					if (module_infos.size() == 0 ) {
+						// not find module,
+						LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Find ==0  Module have the Mac. (Mac: %s)", 
+								strMac));
+					} else if (module_infos.size() == 1 ) {
+						findMode = 2;
+						// find one module, OK
+						MODULE_INFO info = module_infos.get(0);
+						info.setModuleId(strDevId);
+	//					info.setModuleName(strModuleName);
+						info.setModuleType(strModuleType);
+						info.setModuleVer(strModuleVer);
+						info.setStatus(iStatus);
+						info.setCharge(iCharge);
+						info.setCookie(strCookie);
+						dbMgr.UpdateModuleInfoByMac(info);
+						
+						// 配置网路后，第一次登陆
+						if (strAppUserName.equalsIgnoreCase(PubDefine.DEFAULT_USERNAME) == true) {
+							// 把USER_MODULE 中user和Mac的对应改为user和strDevId的对应关系
+							Vector<USER_MODULE> infos = dbMgr.QueryUserModuleByDevId(strMac);
+							if (infos == null) {
+								LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Failed to QueryUserModuleByDevId. (DevID or Mac:%s)", 
 										strMac));
 							} else {
-								LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Find %d UserModule in QueryUserModuleByDevId. (DevID or Mac:%s)", 
-										infos.size(), strMac));
-								for (int i = 0; i < infos.size(); i++) {
-									USER_MODULE user = infos.get(i);
-									user.setModuleId(strDevId);
-									if (!dbMgr.UpdateUserModule(user)) {
-										LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Fail to UpdateUserModule. (user:%s devid:%s Relation:%d)", 
-												user.getUserName(), user.getModuleId(), user.getCtrlMode()));
+								if (infos.size() == 0) {
+									LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Find 0 UserModule in QueryUserModuleByDevId. (DevID or Mac:%s)", 
+											strMac));
+								} else {
+									LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Find %d UserModule in QueryUserModuleByDevId. (DevID or Mac:%s)", 
+												infos.size(), strMac));
+									for (i = 0; i < infos.size(); i++) {
+										USER_MODULE user = infos.get(i);
+										if (user.getCtrlMode() == USER_MODULE.PRIMARY) {
+											strNewAppUserName = user.getUserName();
+										}
+										user.setModuleId(strDevId);
+										if (!dbMgr.UpdateUserModule(user, strMac)) {
+											LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Fail to UpdateUserModule. (user:%s devid:%s Relation:%d)", 
+													user.getUserName(), user.getModuleId(), user.getCtrlMode()));
+										}
 									}
 								}
 							}
+						} else {	// 配置网络后，重复登陆
+							
 						}
-					} else {	// 配置网络后，重复登陆
-						
+					} else {
+						// find more module 
+						LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Find >=2  Module have same Mac. (Mac: %s)", 
+								strMac));
 					}
-				} else {
-					// find more module 
-					LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Find >=2  Module have same Mac. (Mac: %s)", 
-							strMac));
 				}
 			}
-			
-//			//如果不存在该模块
-//			if(null == dbMgr.QueryModuleInfo(strDevId))
-//			{
-//				//更新模块信息
-//				MODULE_INFO info = new MODULE_INFO(strDevId,strModuleName,strMac,strModuleVer,strModuleType,
-//						iStatus,
-//						iCharge,
-//						strCookie);
-//				bRet = dbMgr.InsertModuleInfo(info);
-//				if(!bRet)
-//				{
-//					LogWriter.WriteErrorLog(LogWriter.SELF, String.format("(%s)\t Failed to InsertModuleInfo:%s", 
-//							strDevId,strMsgHeader));
-//					dbMgr.Rollback();
-//					dbMgr.EndTansacion();
-//					return ServerRetCodeMgr.ERROR_CODE_FAILED_DB_OPERATION;
-//				}
-//			}
-//			
-//			MODULE_INFO module_info = dbMgr.QueryModuleInfo(strDevId);
-//
-//			// Update USRE_MODULE module.
-//			if (strAppUserName.equalsIgnoreCase("thingzdo") == false && 
-//					strAppUserName.equalsIgnoreCase("usrname") == false &&
-//					strAppUserName.equalsIgnoreCase("username") == false) {
-//				USER_MODULE user_module = dbMgr.QueryUserModuleByDevId(strDevId);
-//				if (user_module == null) {
-//					LogWriter.WriteTraceLog(LogWriter.SELF, String.format("InsertUserModule[ModuleLoginMsg_Insert](user:%s, devid:%s)", strAppUserName,strDevId));
-//					dbMgr.InsertUserModule(new USER_MODULE(strAppUserName,strDevId,USER_MODULE.PRIMARY));
-//				} else {
-//					LogWriter.WriteTraceLog(LogWriter.SELF, String.format("InsertUserModule[ModuleLoginMsg_Update](user:%s, devid:%s)", strAppUserName,strDevId));
-//					dbMgr.UpdateUserModule(new USER_MODULE(strAppUserName,strDevId,USER_MODULE.PRIMARY));
-//				}
-//			}
 			
 			dbMgr.Commit();
 			dbMgr.EndTansacion();
@@ -214,18 +178,34 @@ public class ModuleLoginHandle implements ICallFunction {
 			c_info.setTsLastTime(tsLastTime);
 			LogWriter.WriteTraceLog(LogWriter.SELF, String.format("[LastTime][%s]\tLoginTime:%d", strDevId, tsLastTime.getTime()));
 			
-			//通知APP模块已上线
-			Vector<USER_MODULE> user_info = dbMgr.QueryUserModuleByDevId(strDevId);
-			if (user_info == null) {
-				LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Failed to QueryUserModuleByDevId. (DevID or Mac:%s)", 
-						strMac));
+			//反馈模块信息
+			LogWriter.WriteTraceLog(LogWriter.SELF, String.format("Login: Send UserName to Module [%s:%s]", strNewAppUserName, strDevId));
+			if (strNewAppUserName.isEmpty() == true) {
+				ResponseToModule(strDevId, String.format("%s,%s,%s,%s,%d#", strCookie, ServerCommDefine.MODULE_LOGIN_MSG_HEADER, strNewAppUserName, strDevId, 1));
 			} else {
-				for (int i = 0; i < user_info.size(); i++) {
-					USER_MODULE user = user_info.get(i);
-					NotifyToAPP(user.getUserName(), strDevId, 
-							ServerCommDefine.APP_NOTIFY_ONLINE_MSG_HEADER, 
-							ServerRetCodeMgr.SUCCESS_CODE,
-							String.valueOf(ServerCommDefine.MODULE_ON_LINE)) ;		
+				ResponseToModule(strDevId, String.format("%s,%s,%s,%s,%d#", strCookie, ServerCommDefine.MODULE_LOGIN_MSG_HEADER, strNewAppUserName, strDevId, 0));
+			}
+			
+			// 刷新Coolie
+			ServerWorkThread.RefreshModuleCookie(strDevId, strCookie);
+			
+			//通知APP模块已上线
+			if (findMode == 2) {
+				//通知 APP，加模块成功
+				ResponseToAPP(ServerCommDefine.APP_ADD_PLUG_MSG_HEADER, strNewAppUserName, strDevId, ServerRetCodeMgr.SUCCESS_CODE);
+			} else {
+				Vector<USER_MODULE> user_info = dbMgr.QueryUserModuleByDevId(strDevId);
+				if (user_info == null) {
+					LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Failed to QueryUserModuleByDevId. (DevID:%s Mac:%s)", 
+							strDevId, strMac));
+				} else {
+					for (i = 0; i < user_info.size(); i++) {
+						USER_MODULE user = user_info.get(i);
+						NotifyToAPP(user.getUserName(), strDevId, 
+								ServerCommDefine.APP_NOTIFY_ONLINE_MSG_HEADER, 
+								ServerRetCodeMgr.SUCCESS_CODE,
+								String.valueOf(ServerCommDefine.MODULE_ON_LINE)) ;		
+					}
 				}
 			}
 

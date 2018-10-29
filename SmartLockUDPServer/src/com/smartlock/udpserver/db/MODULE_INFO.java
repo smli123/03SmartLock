@@ -17,6 +17,7 @@ package com.smartlock.udpserver.db;
 
 public class MODULE_INFO {
 	public final static String 	TABLE_NAME 				= "module_info";
+	
 	public final static String 	MODULE_ID				= "module_id";
 	public final static String 	MODULE_NAME				= "module_name";
 	public final static String  MODULE_MAC				= "module_mac";

@@ -13,7 +13,6 @@ import com.smartlock.udpserver.ServerMainThread;
 import com.smartlock.udpserver.ServerWorkThread;
 import com.smartlock.udpserver.db.MODULE_INFO;
 import com.smartlock.udpserver.db.ServerDBMgr;
-import com.smartlock.udpserver.db.TIMER_INFO;
 import com.smartlock.udpserver.db.USER_INFO;
 
 public class DebugUDPWorkThread  implements Runnable{
@@ -115,28 +114,7 @@ public class DebugUDPWorkThread  implements Runnable{
 	}
 	private void ShowTimer(String strMsg) throws ClassNotFoundException, SQLException, IOException
 	{
-		String strRet[] = strMsg.split(",");
-		if(strRet.length != 2)
-		{
-			Response(String.format("Invalid CMD(%s)", strMsg).getBytes());
-			return;
-		}
-		String strDevId = strRet[1];
-		Vector<TIMER_INFO> vecTimerInfo = null;	//m_dbMgr.QueryTimerInfoList(strDevId);
-		String strTimerInfoList = String.format("================timer info list of dev(%s)=============\n",strDevId)
-				+ String.format("ID \t TYPE \t MODULE_ID \t PEROID \t TIMEON \t TIMEOFF \t ENABLE\n");
-		for(int i = 0; i < vecTimerInfo.size();i++)
-		{
-			strTimerInfoList +=String.format("%d \t %d \t %s \t %s \t %s \t %s \t %d\n"
-					,vecTimerInfo.get(i).getTimerId()
-					,vecTimerInfo.get(i).getTimerType()
-					,vecTimerInfo.get(i).getModuleId()
-					,vecTimerInfo.get(i).getPeroid()
-					,vecTimerInfo.get(i).getTimeOn()
-					,vecTimerInfo.get(i).getTimeOff()
-					,vecTimerInfo.get(i).getEnableFlag());
-		}
-		Response(strTimerInfoList.getBytes());
+		
 	}
 	private void Passthroughtxt(String strMsg) throws ClassNotFoundException, SQLException, IOException
 	{

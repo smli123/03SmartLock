@@ -23,9 +23,9 @@ public class ServerMainThread extends Thread {
 	public void run()
 	{
 		/* 启动时间校对定时器 */
-		new Timer().schedule(new ModuleAdjustModuleTimeTask(), 
-				ServerParamConfiger.getiTimeoutAdjustTime(), 
-				ServerParamConfiger.getiTimeoutAdjustTime());
+//		new Timer().schedule(new ModuleAdjustModuleTimeTask(), 
+//				ServerParamConfiger.getiTimeoutAdjustTime(), 
+//				ServerParamConfiger.getiTimeoutAdjustTime());
 		
 		/* 服务器永远也不会退出 */
 		while(true)

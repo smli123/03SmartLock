@@ -65,7 +65,8 @@ public class NofityBellMsgHandle implements ICallFunction{
 		String strNewCookie		= strRet[0].trim();
 		String strUserName		= strRet[2].trim();
 		String strDevId			= strRet[3].trim();
-		String strRetCode			= strRet[4].trim();
+		String strRetCode		= strRet[4].trim();
+		String strType			= strRet[5].trim();
 		
 		ServerWorkThread thread = (ServerWorkThread)thread_base;
 		
@@ -87,17 +88,17 @@ public class NofityBellMsgHandle implements ICallFunction{
 		
 		try
 		{
-			Vector<USER_MODULE> info = dbMgr.QueryUserModuleByDevId(strDevId);
+			USER_MODULE info = dbMgr.QueryUserModuleByDevId(strDevId, USER_MODULE.PRIMARY);
 			if (info != null) {
-				for (int i = 0; i < info.size(); i++) {
-					String username = info.get(i).getUserName();
-					NotifyToAPP(username,strDevId, ServerCommDefine.NOTIFY_BELL_MSG_HEADER, 
-							ServerRetCodeMgr.SUCCESS_CODE,  strRetCode);
-				}
+				String username = info.getUserName();
+				NotifyToAPP(username,strDevId, ServerCommDefine.NOTIFY_BELL_MSG_HEADER, 
+						ServerRetCodeMgr.SUCCESS_CODE,  strRetCode);
 			}
 			
 			//通知模块通知已收到
-			ResponseToModule(strDevId, String.format("%s#", ServerCommDefine.NOTIFY_BELL_MSG_HEADER));
+			String moduleCommand = String.format("%s,%s,%s,%s,%d#", strNewCookie, ServerCommDefine.NOTIFY_BELL_MSG_HEADER, strUserName, strDevId, 0);
+			ResponseToModule(strDevId, moduleCommand);
+			
 			return ServerRetCodeMgr.SUCCESS_CODE;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
