@@ -1037,6 +1037,7 @@ public class ServerDBMgr {
 		content.put(MODULE_INFO.MODULE_MAC, module_info.getMac());
 		content.put(MODULE_INFO.MODULE_VER, module_info.getModuleVer());
 		content.put(MODULE_INFO.MODULE_TYPE, module_info.getModuleType());
+		content.put(MODULE_INFO.COOKIE, module_info.getCookie());
 		content.put(MODULE_INFO.MODULE_STATUS, String.valueOf(module_info.getStatus()));
 		content.put(MODULE_INFO.MODULE_CHARGE, String.valueOf(module_info.getCharge()));
 		try {

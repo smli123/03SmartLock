@@ -42,6 +42,7 @@ import com.espressif.iot.esptouch.util.EspNetUtil;
 import com.sherman.smartlockex.R;
 import com.sherman.smartlockex.dataprovider.SmartLockExContentDefine;
 import com.sherman.smartlockex.processhandler.SmartLockMessage;
+import com.sherman.smartlockex.ui.common.PubDefine;
 import com.sherman.smartlockex.ui.common.PubStatus;
 import com.sherman.smartlockex.ui.common.StringUtils;
 import com.sherman.smartlockex.ui.common.TitledActivity;
@@ -100,6 +101,10 @@ public class AddDeviceActivity extends TitledActivity implements OnClickListener
                 onWifiChanged(wifiManager.getConnectionInfo());
                 onLocationChanged();
             }
+            
+            if (intent.getAction().equals(PubDefine.LOCK_ADDLOCK_BROADCAST)) {
+				mHandler.sendEmptyMessage(1);
+			}
         }
     };
 
@@ -148,6 +153,8 @@ public class AddDeviceActivity extends TitledActivity implements OnClickListener
         } else {
             registerBroadcastReceiver();
         }
+        
+//        addLock("b4:e6:2d:0b:dd:20");
     }
 
     @SuppressLint("NewApi") 
@@ -185,6 +192,7 @@ public class AddDeviceActivity extends TitledActivity implements OnClickListener
         if (isSDKAtLeastP()) {
             filter.addAction(LocationManager.PROVIDERS_CHANGED_ACTION);
         }
+        filter.addAction(PubDefine.LOCK_ADDLOCK_BROADCAST);
         registerReceiver(mReceiver, filter);
         mReceiverRegistered = true;
     }
@@ -271,19 +279,30 @@ public class AddDeviceActivity extends TitledActivity implements OnClickListener
 
             @Override
             public void run() {
-                String text = result.getBssid() + SmartLockApplication.getInstance().getString(R.string.connected_to_wifi_router);
-//                addLock(result.getBssid());
-                
                 // Add SmartLock in Server
+                String newMac = transMac(result.getBssid());
+
                 Message msg = new Message();
                 msg.what = 0;
-                msg.obj = result.getBssid();
+                msg.obj = newMac;
                 mHandler.sendMessage(msg);
-                
+
+                String text = newMac + SmartLockApplication.getInstance().getString(R.string.connected_to_wifi_router);
                 Toast.makeText(AddDeviceActivity.this, text,
                         Toast.LENGTH_LONG).show();
             }
         });
+    }
+    
+    private String transMac(String mac) {
+    	StringBuilder newMac = new StringBuilder(mac);
+    	newMac.insert(2, ":");
+    	newMac.insert(5, ":");
+    	newMac.insert(8, ":");
+    	newMac.insert(11, ":");
+    	newMac.insert(14, ":");
+    	
+    	return newMac.toString();
     }
 
     private static class EsptouchAsyncTask4 extends AsyncTask<byte[], Void, List<IEsptouchResult>> {
@@ -433,6 +452,7 @@ public class AddDeviceActivity extends TitledActivity implements OnClickListener
 					addLock(strMac);
 					break;
 				case 1 :
+					finish();
 					break;
 				default :
 					break;
