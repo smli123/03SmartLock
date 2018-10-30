@@ -41,14 +41,14 @@ public class ModuleHeartMsgHandle  implements ICallFunction {
 		ServerWorkThread.RefreshModuleAliveFlag(strDevId, true);
 		ServerWorkThread.RefreshModuleIP(strDevId, thread.getSrcIP(), thread.getSrcPort());
 		
-		// Update ConnectInfo's LastTime
-		ConnectInfo c_info = ServerWorkThread.getModuleConnectInfo(strDevId);
-		if (c_info != null) {
-			java.util.Date dt = new java.util.Date();
-			Timestamp tsLastTime = new Timestamp(dt.getTime());
-			c_info.setTsLastTime(tsLastTime);
-			LogWriter.WriteTraceLog(LogWriter.SELF, String.format("[LastTime][%s]\tHearTime:%d", strDevId, tsLastTime.getTime()));
-		}
+//		// Update ConnectInfo's LastTime
+//		ConnectInfo c_info = ServerWorkThread.getModuleConnectInfo(strDevId);
+//		if (c_info != null) {
+//			java.util.Date dt = new java.util.Date();
+//			Timestamp tsLastTime = new Timestamp(dt.getTime());
+//			c_info.setTsLastTime(tsLastTime);
+//			LogWriter.WriteTraceLog(LogWriter.SELF, String.format("[LastTime][%s]\tHearTime:%d", strDevId, tsLastTime.getTime()));
+//		}
 		
 		/* 为了定位模块的Socket接受不到消息的bug，临时增加代码调试使用，正式发布必须删除 */
 		String strHeartRsp0 = String.format("%s,%s,%s,%s,%s#", strCookie, ServerCommDefine.MODULE_HEART_MSG_HEADER, strUserName, strDevId, ServerWorkThread.IsModuleLogin(strDevId) ? "0" : "1");
