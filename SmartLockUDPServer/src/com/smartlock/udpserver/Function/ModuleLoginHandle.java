@@ -55,7 +55,7 @@ public class ModuleLoginHandle implements ICallFunction {
 		ServerWorkThread thread = (ServerWorkThread)thread_base;
 		ServerDBMgr dbMgr = new ServerDBMgr();
 		
-		String strNewAppUserName = "";
+		String strNewAppUserName = PubDefine.DEFAULT_USERNAME;
 		int i = 0;
 		
 		try
@@ -80,7 +80,7 @@ public class ModuleLoginHandle implements ICallFunction {
 				if (strNewAppUserName == null) {
 					LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Failed to QueryPrimaryUserName. (DevId:%s)", 
 							strDevId));
-					strNewAppUserName = "";
+					strNewAppUserName = PubDefine.DEFAULT_USERNAME;
 				}
 				findMode = 1;
 				
@@ -167,16 +167,16 @@ public class ModuleLoginHandle implements ICallFunction {
 			/* 刷新心跳状态 */
 			ServerWorkThread.RefreshModuleAliveFlag(strDevId, true);
 				
-			//通知模块登录成功
-			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
-			ResponseToModule(strDevId, String.format("%s,%s,%s#", strCookie, ServerCommDefine.MODULE_LOGIN_MSG_HEADER, df.format(new Date())));
+//			//通知模块登录成功
+//			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
+//			ResponseToModule(strDevId, String.format("%s,%s,%s#", strCookie, ServerCommDefine.MODULE_LOGIN_MSG_HEADER, df.format(new Date())));
 			
-			// Update ConnectInfo's LastTime
-			ConnectInfo c_info = ServerWorkThread.getModuleConnectInfo(strDevId);
-			java.util.Date dt = new java.util.Date();
-			Timestamp tsLastTime = new Timestamp(dt.getTime());
-			c_info.setTsLastTime(tsLastTime);
-			LogWriter.WriteTraceLog(LogWriter.SELF, String.format("[LastTime][%s]\tLoginTime:%d", strDevId, tsLastTime.getTime()));
+//			// Update ConnectInfo's LastTime
+//			ConnectInfo c_info = ServerWorkThread.getModuleConnectInfo(strDevId);
+//			java.util.Date dt = new java.util.Date();
+//			Timestamp tsLastTime = new Timestamp(dt.getTime());
+//			c_info.setTsLastTime(tsLastTime);
+//			LogWriter.WriteTraceLog(LogWriter.SELF, String.format("[LastTime][%s]\tLoginTime:%d", strDevId, tsLastTime.getTime()));
 			
 			//反馈模块信息
 			LogWriter.WriteTraceLog(LogWriter.SELF, String.format("Login: Send UserName to Module [%s:%s]", strNewAppUserName, strDevId));
