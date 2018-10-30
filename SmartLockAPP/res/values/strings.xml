@@ -45,7 +45,9 @@
     <string name="smartlock_oper_connect_fail">"连接门锁失败"</string>
     <string name="smartlock_oper_router_not_support_chinese">"智能门锁不支持路由器名字中含有中文、特殊英文字符，请修改路由器SSID或更换新的路由器"</string>
     
-    <string name="smartlock_goback">返回</string>  
+    <string name="smartlock_goback">返回</string>
+    <string name="smartlock_clear_message">清除</string>    
+    <string name="smartlock_clear_message_confirm">确认要清除掉所有的消息?</string>    
     <string name="smartlock_refresh">刷新</string>
     <string name="smartlock_exit">退出</string>
     <string name="smartlock_ok">确认</string>
