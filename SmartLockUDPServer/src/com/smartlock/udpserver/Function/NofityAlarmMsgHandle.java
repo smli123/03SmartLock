@@ -112,7 +112,7 @@ public class NofityAlarmMsgHandle implements ICallFunction{
 			}
 			
 			// 通过APP用户
-			String strResult = strRet[4].trim() + "," + strRet[5].trim() + "," + strRet[6].trim() + "," + strRet[7].trim();
+			String strResult = strRet[4].trim() + "," + strRet[5].trim() + "," + strRet[6].trim() + "," + strRet[7].trim() + strRet[8].trim();
 			for (int i = 0; i < info.size(); i++) {
 				String username = info.get(i).getUserName();
 				NotifyToAPP(username,strDevId, ServerCommDefine.NOTIFY_NOTIFY_ALARM, 
@@ -120,7 +120,7 @@ public class NofityAlarmMsgHandle implements ICallFunction{
 			}
 			
 			//通知模块通知已收到
-			String moduleCommand = String.format("%s,%s,%s,%s,%d#", strNewCookie, ServerCommDefine.NOTIFY_BELL_MSG_HEADER, strUserName, strDevId, 0);
+			String moduleCommand = String.format("%s,%s,%s,%s,%d#", strNewCookie, ServerCommDefine.NOTIFY_NOTIFY_ALARM, strUserName, strDevId, 0);
 			ResponseToModule(strDevId, moduleCommand);
 			
 			return ServerRetCodeMgr.SUCCESS_CODE;

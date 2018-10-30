@@ -18,9 +18,8 @@ public class PubDefine {
 	public static final String COMPANY_NAME = "Sherman";
 	public static final String DEVICE_SSID_PRE = "Thingzdo";
 	public final static String SERVERIP_HANGZHOU = "121.41.19.6"; // 杭州服务器IP地址
-	public final static String SERVERIP_SHENZHEN = "112.126.65.122"; // 深圳服务器IP地址
 	public final static String SERVERIP_DEBUG = "192.168.3.9"; // 本地调试服务器IP地址
-	public static String SERVER_HOST_NAME = SERVERIP_HANGZHOU;
+	public static String SERVER_HOST_NAME = SERVERIP_DEBUG;
 	
 	public static enum SmartPlug_Connect_Mode {
 		Internet, WiFi

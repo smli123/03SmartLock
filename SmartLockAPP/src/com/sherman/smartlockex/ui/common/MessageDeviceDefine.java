@@ -7,5 +7,8 @@ public class MessageDeviceDefine {
 	public String 	mDeviceID;
 	public String 	mDeviceName;
     public int  	mOperType;
+    public int  	mOperData;
+    public int  	mUserType;
     public String 	mDetail;
+    public boolean  mMarked;
 }

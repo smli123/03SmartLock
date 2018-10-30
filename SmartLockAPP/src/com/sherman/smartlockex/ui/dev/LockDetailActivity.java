@@ -60,7 +60,18 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 						updateHandler.sendMessage(msg);
 					}
 				}
+			
+			if (intent.getAction().equals(PubDefine.LOCK_OPENLOCK_BROADCAST)) {
+				String moduleID = intent.getStringExtra("LOCKID");
+				int status = intent.getIntExtra("STATUS", -1);
+				if (moduleID.equals(mLockID) == true) {
+					Message msg = new Message();
+					msg.what = 0;
+					msg.arg1 = status;
+					updateHandler.sendMessage(msg);
+				}
 			}
+		}
 	};
 	
 	private Handler updateHandler = new Handler() {
@@ -105,6 +116,7 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
         
         IntentFilter filter = new IntentFilter();
 		filter.addAction(PubDefine.LOCK_NOTIFY_STATUS_BROADCAST);
+		filter.addAction(PubDefine.LOCK_OPENLOCK_BROADCAST);
 		registerReceiver(mLoginRev, filter);
     }
     

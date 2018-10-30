@@ -64,15 +64,16 @@ public interface ICallFunction {
 	public default int CheckModuleCmdValid(String strModuleID, String strCookie)
 	{
 		/* 校验模块是否登录 */
-
-		/* COOKIE检验 */
-		int iRet = ServerWorkThread.CheckCookie(ServerWorkThread.getModuleCookie(strModuleID), strCookie);
-		if ( ServerRetCodeMgr.SUCCESS_CODE != iRet)
-		{
-			return iRet;
-		}
-
 		return ServerRetCodeMgr.SUCCESS_CODE;
+
+//		/* COOKIE检验 */
+//		int iRet = ServerWorkThread.CheckCookie(ServerWorkThread.getModuleCookie(strModuleID), strCookie);
+//		if ( ServerRetCodeMgr.SUCCESS_CODE != iRet)
+//		{
+//			return iRet;
+//		}
+//
+//		return ServerRetCodeMgr.SUCCESS_CODE;
 	};
 	
 	public default void Response(String strIp, int port, String strRet) throws IOException

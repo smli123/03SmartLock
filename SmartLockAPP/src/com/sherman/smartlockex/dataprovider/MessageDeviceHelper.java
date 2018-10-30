@@ -45,6 +45,12 @@ public class MessageDeviceHelper {
 					.getString(SmartLockExContentDefine.MessageDevice.DEVICE_NAME_COLUMN);
 			item.mOperType = cur
 					.getInt(SmartLockExContentDefine.MessageDevice.OPER_TYPE_COLUMN);
+			item.mOperData = cur
+					.getInt(SmartLockExContentDefine.MessageDevice.OPER_DATA_COLUMN);
+			item.mUserType = cur
+					.getInt(SmartLockExContentDefine.MessageDevice.USER_TYPE_COLUMN);
+			item.mMarked = cur
+					.getInt(SmartLockExContentDefine.MessageDevice.MARKED_COLUMN) == 0 ? false : true;
 			item.mDetail = cur
 					.getString(SmartLockExContentDefine.MessageDevice.DETAIL_COLUMN);
 
@@ -69,6 +75,12 @@ public class MessageDeviceHelper {
 					.getString(SmartLockExContentDefine.MessageDevice.DEVICE_NAME_COLUMN);
 			item.mOperType = cur
 					.getInt(SmartLockExContentDefine.MessageDevice.OPER_TYPE_COLUMN);
+			item.mOperData = cur
+					.getInt(SmartLockExContentDefine.MessageDevice.OPER_DATA_COLUMN);
+			item.mUserType = cur
+					.getInt(SmartLockExContentDefine.MessageDevice.USER_TYPE_COLUMN);
+			item.mMarked = cur
+					.getInt(SmartLockExContentDefine.MessageDevice.MARKED_COLUMN) == 0 ? false : true;
 			item.mDetail = cur
 					.getString(SmartLockExContentDefine.MessageDevice.DETAIL_COLUMN);
 			
@@ -150,6 +162,12 @@ public class MessageDeviceHelper {
 						.getString(SmartLockExContentDefine.MessageDevice.DEVICE_NAME_COLUMN);
 				item.mOperType = cur
 						.getInt(SmartLockExContentDefine.MessageDevice.OPER_TYPE_COLUMN);
+				item.mOperData = cur
+						.getInt(SmartLockExContentDefine.MessageDevice.OPER_DATA_COLUMN);
+				item.mUserType = cur
+						.getInt(SmartLockExContentDefine.MessageDevice.USER_TYPE_COLUMN);
+				item.mMarked = cur
+						.getInt(SmartLockExContentDefine.MessageDevice.MARKED_COLUMN) == 0 ? false : true;
 				item.mDetail = cur
 						.getString(SmartLockExContentDefine.MessageDevice.DETAIL_COLUMN);
 
@@ -182,6 +200,12 @@ public class MessageDeviceHelper {
 				item.mDeviceName);
 		values.put(SmartLockExContentDefine.MessageDevice.OPER_TYPE,
 				item.mOperType);
+		values.put(SmartLockExContentDefine.MessageDevice.OPER_DATA,
+				item.mOperData);
+		values.put(SmartLockExContentDefine.MessageDevice.USER_TYPE,
+				item.mUserType);
+		values.put(SmartLockExContentDefine.MessageDevice.MARKED,
+				item.mMarked == true ? 1 : 0);
 		values.put(SmartLockExContentDefine.MessageDevice.DETAIL,
 				item.mDetail);
 
@@ -245,6 +269,12 @@ public class MessageDeviceHelper {
 				item.mDeviceName);
 		values.put(SmartLockExContentDefine.MessageDevice.OPER_TYPE,
 				item.mOperType);
+		values.put(SmartLockExContentDefine.MessageDevice.OPER_DATA,
+				item.mOperData);
+		values.put(SmartLockExContentDefine.MessageDevice.USER_TYPE,
+				item.mUserType);
+		values.put(SmartLockExContentDefine.MessageDevice.MARKED,
+				item.mMarked == true ? 1 : 0);
 		values.put(SmartLockExContentDefine.MessageDevice.DETAIL,
 				item.mDetail);
 

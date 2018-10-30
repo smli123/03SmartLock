@@ -24,7 +24,7 @@ public class SmartLockEventHandlerNotifyLockBell extends SmartLockEventHandler {
 		    				SmartLockApplication.getContext().getString(R.string.smartlock_oper_lock_fail));
 		    	SmartLockApplication.getContext().sendBroadcast(mIntent);
 				return;
-			}			
+			}
 			
 			String moduleID = buffer[3];
 			int status = Integer.parseInt(buffer[EVENT_MESSAGE_HEADER+1]);

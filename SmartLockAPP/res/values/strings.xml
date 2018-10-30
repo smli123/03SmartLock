@@ -59,6 +59,16 @@
     <string name="register_confirmpwd">密码确认</string>
     <string name="register_email">电子邮箱</string>
     <string name="register_pwdfindSIM">密保号码</string>
+    <string name="smartlock_info">信息</string>
+    <string name="smartlock_lock">门锁</string>
+    <string name="smartlock_status">状态</string>
+    <string name="smartlock_bell">门铃</string>
+    <string name="smartlock_bell_ring">响起</string>
+    <string name="smartlock_bell_stopring">停啦</string>
+    
+    <!-- Message -->
+    <string name="smartlock_message_device">设备消息</string>
+    <string name="smartlock_message_system">系统消息</string>
     
     <string name="smartlock_nosharp_email">邮箱中不能包含#符号</string>
     <string name="smartlock_nosharp_username">用户名中不能包含#符号</string>
@@ -285,6 +295,6 @@
     <string name="lock_detail_authorize">"授权管理"</string>
     
     <string name="lock_detail_lockstatus_unknown">"未知状态"</string>
-    <string name="lock_detail_lockstatus_opened">"门锁已经打开"</string>
-    <string name="lock_detail_lockstatus_closed">"门锁已经关闭"</string>
+    <string name="lock_detail_lockstatus_opened">"已经打开"</string>
+    <string name="lock_detail_lockstatus_closed">"已经关闭"</string>
 </resources>

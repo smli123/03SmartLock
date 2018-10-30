@@ -18,6 +18,8 @@ import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -38,6 +40,10 @@ import com.espressif.iot.esptouch.task.__IEsptouchTask;
 import com.espressif.iot.esptouch.util.ByteUtil;
 import com.espressif.iot.esptouch.util.EspNetUtil;
 import com.sherman.smartlockex.R;
+import com.sherman.smartlockex.dataprovider.SmartLockExContentDefine;
+import com.sherman.smartlockex.processhandler.SmartLockMessage;
+import com.sherman.smartlockex.ui.common.PubStatus;
+import com.sherman.smartlockex.ui.common.StringUtils;
 import com.sherman.smartlockex.ui.common.TitledActivity;
 import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
 
@@ -266,10 +272,17 @@ public class AddDeviceActivity extends TitledActivity implements OnClickListener
             @Override
             public void run() {
                 String text = result.getBssid() + SmartLockApplication.getInstance().getString(R.string.connected_to_wifi_router);
+//                addLock(result.getBssid());
+                
+                // Add SmartLock in Server
+                Message msg = new Message();
+                msg.what = 0;
+                msg.obj = result.getBssid();
+                mHandler.sendMessage(msg);
+                
                 Toast.makeText(AddDeviceActivity.this, text,
                         Toast.LENGTH_LONG).show();
             }
-
         });
     }
 
@@ -411,4 +424,39 @@ public class AddDeviceActivity extends TitledActivity implements OnClickListener
             activity.mTask = null;
         }
     }
+    
+	private Handler mHandler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+				case 0 :
+					String strMac = (String)msg.obj;
+					addLock(strMac);
+					break;
+				case 1 :
+					break;
+				default :
+					break;
+			}
+		};
+	};
+    
+	private void addLock(String strMac) {
+		String strDevName = "DefaultName";
+		String strDevID = strMac;
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append(SmartLockMessage.CMD_SP_ADDLOCK)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(PubStatus.getUserName())
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(strDevName)	// DevName
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(strDevID)	// DevID
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(strMac)		// Mac
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(SmartLockExContentDefine.Lock.RELATION_MASTER);	// Relation
+
+		sendMsg(true, sb.toString(), true);
+	}
 }

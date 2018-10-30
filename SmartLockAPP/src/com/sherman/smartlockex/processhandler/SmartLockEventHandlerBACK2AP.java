@@ -24,7 +24,7 @@ public class SmartLockEventHandlerBack2AP extends SmartLockEventHandler {
 				return;
 			}			
 			
-			mIntent.putExtra("PLUGID", buffer[3]);
+			mIntent.putExtra("LOCKID", buffer[3]);
 
 			int status = Integer.parseInt(buffer[EVENT_MESSAGE_HEADER+1]);
 			

@@ -34,16 +34,14 @@ public class ActivityMessageDevice extends TitledActivity implements OnClickList
 	private ListView lv_message;
 	private ArrayList<MessageDeviceDefine> mMessage_list = new  ArrayList<MessageDeviceDefine>(); 
 	
+	private SmartLockApplication app = SmartLockApplication.getInstance();
+	
 	private BroadcastReceiver mLoginRev = new BroadcastReceiver() {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			if (intent.getAction().equals(PubDefine.LOCK_NOTIFY_STATUS_BROADCAST)) {
-					int status = intent.getIntExtra("STATUS", -1);
-					Message msg = new Message();
-					msg.what = 0;
-					msg.arg1 = status;
-					updateHandler.sendMessage(msg);
+			if (intent.getAction().equals(PubDefine.LOCK_NOTIFY_ALARM_BROADCAST)) {
+				initView();
 				}
 			}
 	};
@@ -81,10 +79,10 @@ public class ActivityMessageDevice extends TitledActivity implements OnClickList
         
         initView();
         
-        testInsertInfo();
+//        testInsertInfo();
         
         IntentFilter filter = new IntentFilter();
-		filter.addAction(PubDefine.LOCK_NOTIFY_STATUS_BROADCAST);
+		filter.addAction(PubDefine.LOCK_NOTIFY_ALARM_BROADCAST);
 		registerReceiver(mLoginRev, filter);
     }
     
@@ -110,7 +108,7 @@ public class ActivityMessageDevice extends TitledActivity implements OnClickList
     }
     
     private void updateUI() {
-    	setTitle("设备消息");
+    	setTitle(app.getString(R.string.smartlock_message_device));
     }
 
 	@Override

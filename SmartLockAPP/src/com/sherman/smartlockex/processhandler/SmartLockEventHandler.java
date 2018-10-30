@@ -115,6 +115,10 @@ public class SmartLockEventHandler extends Handler {
 				new SmartLockEventHandlerModifyLockName()));
 
 		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
+				SmartLockMessage.EVT_SP_OPEN_LOCK,
+				new SmartLockEventHandlerOpenLock()));
+		
+		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
 				SmartLockMessage.EVT_SP_BACK2AP,
 				new SmartLockEventHandlerBack2AP()));
 

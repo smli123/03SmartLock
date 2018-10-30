@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Message;
 
 import com.sherman.smartlockex.R;
+import com.sherman.smartlockex.dataprovider.MessageDeviceHelper;
+import com.sherman.smartlockex.ui.common.MessageDeviceDefine;
 import com.sherman.smartlockex.ui.common.PubDefine;
 import com.sherman.smartlockex.ui.common.PubFunc;
 import com.sherman.smartlockex.ui.common.PubStatus;
@@ -24,7 +26,7 @@ public class SmartLockEventHandlerNotifyLockAlarm extends SmartLockEventHandler 
 		    				SmartLockApplication.getContext().getString(R.string.smartlock_oper_lock_fail));
 		    	SmartLockApplication.getContext().sendBroadcast(mIntent);
 				return;
-			}			
+			}
 			
 			String moduleID = buffer[3];
 			int status = Integer.parseInt(buffer[EVENT_MESSAGE_HEADER+1]);
@@ -34,6 +36,18 @@ public class SmartLockEventHandlerNotifyLockAlarm extends SmartLockEventHandler 
 				mIntent.putExtra("LOCKID", moduleID);
 				mIntent.putExtra("STATUS", status);
 		    	
+				MessageDeviceDefine item = new MessageDeviceDefine();
+				item.mMessageID = buffer[4];
+				item.mUserName = buffer[2];
+				item.mDeviceID = buffer[3];
+				item.mDeviceName = buffer[4];
+				item.mOperType = Integer.valueOf(buffer[5]);
+				item.mOperData = Integer.valueOf(buffer[6]);
+				item.mUserType = Integer.valueOf(buffer[7]);
+				item.mDetail = buffer[8];
+				item.mMarked = false;
+				
+				addMessage(item);
 			} else {
 		    	mIntent.putExtra("RESULT", code);
 		    	mIntent.putExtra("STATUS", status);
@@ -49,5 +63,12 @@ public class SmartLockEventHandlerNotifyLockAlarm extends SmartLockEventHandler 
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private boolean addMessage(MessageDeviceDefine item) {
+		MessageDeviceHelper  helper = new MessageDeviceHelper(SmartLockApplication.getContext());
+		long i = helper.addMessage(item);
+		
+		return i > 0 ? true : false;
 	}
 }

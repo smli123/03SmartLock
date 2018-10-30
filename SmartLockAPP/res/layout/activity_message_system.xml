@@ -13,9 +13,8 @@
       layout="@layout/view_common_titlebar"
       android:layout_alignParentTop="true" />   
 
-    
     <ListView
-          android:id="@+id/message_list"
+          android:id="@+id/lv_message"
           android:layout_width="match_parent"
 	      android:layout_height="wrap_content"
 	      android:layout_below="@id/commontitlebar"

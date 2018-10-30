@@ -38,7 +38,7 @@ public class APPDeleteModuleMsgHandle implements ICallFunction{
 		}	
 		
 		ServerDBMgr dbMgr = new ServerDBMgr();
-		Vector<USER_MODULE> user_infos = dbMgr.QueryUserModuleByDevId((strModuleId));
+		Vector<USER_MODULE> user_infos = dbMgr.QueryUserModuleByDevId(strModuleId);
 		
 		try
 		{

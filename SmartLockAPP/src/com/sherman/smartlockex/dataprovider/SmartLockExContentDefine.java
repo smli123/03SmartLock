@@ -42,6 +42,9 @@ public class SmartLockExContentDefine {
 		public static final int LOCK_TYPE_COLUMN = 8;
 		public static final int LOCK_CHARGE_COLUMN = 9;
 		public static final int LOCK_RELATION_COLUMN = 10;
+		
+		public static final int RELATION_MASTER = 0;
+		public static final int RELATION_SLAVE = 1;
 
 		// create table
 		public final static String TABLE_CREATE = "CREATE TABLE IF NOT EXISTS "
@@ -90,6 +93,9 @@ public class SmartLockExContentDefine {
 		public String 	mDeviceID;
 		public String 	mDeviceName;
 	    public int  	mOperType;
+	    public int  	mOperData;
+	    public int  	mUserType;
+	    public int  	mMarked;
 	    public String 	mDetail;
 		
 		// 列名属性
@@ -98,6 +104,9 @@ public class SmartLockExContentDefine {
 		public static final String DEVICE_ID = "DeviceID";
 		public static final String DEVICE_NAME = "DeviceName";
 		public static final String OPER_TYPE = "OperType";
+		public static final String OPER_DATA = "OperData";
+		public static final String USER_TYPE = "UserType";
+		public static final String MARKED = "Marked";
 		public static final String DETAIL = "Detail";
 
 		// 列数
@@ -107,7 +116,10 @@ public class SmartLockExContentDefine {
 		public static final int DEVICE_ID_COLUMN = 3;
 		public static final int DEVICE_NAME_COLUMN = 4;
 		public static final int OPER_TYPE_COLUMN = 5;
-		public static final int DETAIL_COLUMN = 6;
+		public static final int OPER_DATA_COLUMN = 6;
+		public static final int USER_TYPE_COLUMN = 7;
+		public static final int MARKED_COLUMN = 8;
+		public static final int DETAIL_COLUMN = 9;
 
 		// create table
 		public final static String TABLE_CREATE = "CREATE TABLE IF NOT EXISTS "
@@ -118,6 +130,9 @@ public class SmartLockExContentDefine {
 				+ DEVICE_ID + " text default '', " 
 				+ DEVICE_NAME + " text default '', " 
 				+ OPER_TYPE + " integer default 0, "
+				+ OPER_DATA + " integer default 0, "
+				+ USER_TYPE + " integer default 0, "
+				+ MARKED + " integer default 0, "
 				+ DETAIL + " text default '');";
 
 		public final static String DEFAULT_SORT_ORDER = _ID + " desc";
@@ -135,7 +150,6 @@ public class SmartLockExContentDefine {
 				+ AUTHORITY + "/" + ONE_RECORD);
 
 		public static final String TABLE_NAME = "MessageSystem";
-		
 		
 		public int    	mID;
 		public String 	mMessageID;

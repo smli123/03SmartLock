@@ -109,8 +109,7 @@ public class ModuleLockCtrlMsgHandle implements ICallFunction{
 		String strMsgHeader = strRet[1].trim();
 		String strUserName 	= strRet[2].trim();
 		String strModuleID	= strRet[3].trim();
-		int iRetCode 		= Integer.valueOf(strRet[4].trim());
-		String strStatus 	= strRet[5].trim();
+		String strStatus 	= strRet[4].trim();
 
 		/* 更新COOKIE */
 		ServerWorkThread.RefreshModuleCookie(strModuleID, strNewCookie);
@@ -125,15 +124,8 @@ public class ModuleLockCtrlMsgHandle implements ICallFunction{
 		{
 			dbMgr.UpdateModuleInfo_Status(strModuleID, Integer.valueOf(strStatus));
 			
-			//获取模块返回的返回码
-			if(0 != iRetCode)
-			{
-				ResponseToAPP(ServerCommDefine.APP_LOCK_CTRL_MSG_HEADER, strUserName, strModuleID, ServerRetCodeMgr.ERROR_CODE_MODULE_RET_ERROR);
-				return ServerRetCodeMgr.ERROR_CODE_MODULE_RET_ERROR;
-			}
-			
 			//给APP回复成功
-			ResponseToAPP(ServerCommDefine.APP_LOCK_CTRL_MSG_HEADER, strUserName, strModuleID, ServerRetCodeMgr.SUCCESS_CODE, strStatus);
+			ResponseToAPP(ServerCommDefine.LOCK_CTRL_MSG_HEADER, strUserName, strModuleID, ServerRetCodeMgr.SUCCESS_CODE, strStatus);
 			return ServerRetCodeMgr.SUCCESS_CODE;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
