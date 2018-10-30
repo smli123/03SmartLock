@@ -93,7 +93,7 @@ public class ActivityMessageDevice extends TitledActivity implements OnClickList
 		item.mUserName = "lishimin";
 		item.mDeviceID = "641001";
 		item.mDeviceName = "TestOK1";
-		item.mOperType = 1;
+		item.mMessageType = 1;
 		item.mDetail = "【开锁成功】";
 		
 		mMessageHelper.addMessage(item);

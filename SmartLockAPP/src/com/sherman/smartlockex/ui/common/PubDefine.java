@@ -19,13 +19,13 @@ public class PubDefine {
 	public static final String DEVICE_SSID_PRE = "Thingzdo";
 	public final static String SERVERIP_HANGZHOU = "121.41.19.6"; // 杭州服务器IP地址
 	public final static String SERVERIP_DEBUG = "192.168.3.9"; // 本地调试服务器IP地址
-	public static String SERVER_HOST_NAME = SERVERIP_DEBUG;
+	public static String SERVER_HOST_NAME = SERVERIP_HANGZHOU;
 	
-	public static enum SmartPlug_Connect_Mode {
+	public static enum SmartLock_Connect_Mode {
 		Internet, WiFi
 	};
 	
-	public static SmartPlug_Connect_Mode g_Connect_Mode = SmartPlug_Connect_Mode.Internet;
+	public static SmartLock_Connect_Mode g_Connect_Mode = SmartLock_Connect_Mode.Internet;
 	
 	// Broadcast Info
 	public static final String SOCKET_CONNECT_FAIL_BROADCAST = "com.sherman.socket.connect.fail";

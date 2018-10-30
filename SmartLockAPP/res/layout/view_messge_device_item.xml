@@ -19,10 +19,6 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_centerVertical="true"
-	        android:layout_marginTop="@dimen/list_item_top_padding"
-	        android:layout_marginBottom="@dimen/list_item_bottom_padding"
-	        android:layout_marginLeft="@dimen/list_item_left_padding"
-	        android:layout_marginRight="@dimen/list_item_right_padding"
 	        android:contentDescription="@null"
 	        android:scaleType="fitXY"
 	        android:src="@drawable/smp_message_device" />
@@ -44,9 +40,21 @@
 		        android:orientation="horizontal" >
 	        
 		        <TextView
-		            android:id="@+id/tv_message_name"
-			        android:layout_width="match_parent"
+		            android:id="@+id/tv_message_no"
+			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
+		        	android:layout_alignParentLeft="true"
+			        android:layout_marginLeft="@dimen/list_item_left_padding"
+			        android:layout_marginRight="@dimen/list_item_right_padding" 
+			        android:textColor="@color/black"
+			        android:textSize="20dp"
+			        android:text="@null"/> 
+			        
+		        <TextView
+		            android:id="@+id/tv_message_devicename"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+		        	android:layout_toRightOf="@id/tv_message_no"
 			        android:layout_marginLeft="@dimen/list_item_left_padding"
 			        android:layout_marginRight="@dimen/list_item_right_padding" 
 			        android:textColor="@color/black"
@@ -59,7 +67,7 @@
 		        android:id="@+id/rl_message_type"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
-				android:layout_below="@id/rl_lock_name"
+				android:layout_below="@id/rl_message_name"
 		        android:orientation="horizontal"
 		        android:layout_marginTop="10dp" >
 	        
@@ -74,14 +82,21 @@
 		            android:src="@drawable/smp_message_type" />
 	
 		        <TextView
-		            android:id="@+id/tv_message_type"
+		            android:id="@+id/tv_message_data"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 		        	android:layout_toRightOf="@id/iv_message_type"
 			        android:layout_marginLeft="@dimen/list_item_left_padding"
 			        android:layout_marginRight="@dimen/list_item_right_padding"
-			        android:text="[开锁状态]" /> 
-	
+			        android:text="@null" /> 
+				<TextView
+		            android:id="@+id/tv_message_usertype"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+		        	android:layout_toRightOf="@id/tv_message_data"
+			        android:layout_marginLeft="@dimen/list_item_left_padding"
+			        android:layout_marginRight="@dimen/list_item_right_padding"
+			        android:text="@null" />
 		    </RelativeLayout>
 		    
 		    <RelativeLayout
@@ -99,7 +114,7 @@
 			        android:layout_height="wrap_content"
 			        android:layout_marginLeft="@dimen/list_item_left_padding"
 			        android:layout_marginRight="@dimen/list_item_right_padding"
-			        android:text="详细信息" />
+			        android:text="@null" />
 		         
 		    </RelativeLayout>
 		    

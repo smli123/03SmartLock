@@ -5,6 +5,7 @@ import android.os.Message;
 
 import com.sherman.smartlockex.R;
 import com.sherman.smartlockex.dataprovider.MessageDeviceHelper;
+import com.sherman.smartlockex.dataprovider.SmartLockExLockHelper;
 import com.sherman.smartlockex.ui.common.MessageDeviceDefine;
 import com.sherman.smartlockex.ui.common.PubDefine;
 import com.sherman.smartlockex.ui.common.PubFunc;
@@ -37,14 +38,17 @@ public class SmartLockEventHandlerNotifyLockAlarm extends SmartLockEventHandler 
 				mIntent.putExtra("STATUS", status);
 		    	
 				MessageDeviceDefine item = new MessageDeviceDefine();
-				item.mMessageID = buffer[4];
+				item.mMessageID = buffer[5];
 				item.mUserName = buffer[2];
-				item.mDeviceID = buffer[3];
-				item.mDeviceName = buffer[4];
-				item.mOperType = Integer.valueOf(buffer[5]);
-				item.mOperData = Integer.valueOf(buffer[6]);
-				item.mUserType = Integer.valueOf(buffer[7]);
-				item.mDetail = buffer[8];
+				item.mDeviceID = moduleID;
+				
+				SmartLockExLockHelper  helper = new SmartLockExLockHelper(SmartLockApplication.getContext());
+				item.mDeviceName = helper.getSmartLock(moduleID).mName;
+				
+				item.mMessageType = Integer.valueOf(buffer[6]);
+				item.mMessageData = Integer.valueOf(buffer[7]);
+				item.mUserType = Integer.valueOf(buffer[8]);
+				item.mDetail = buffer[9];
 				item.mMarked = false;
 				
 				addMessage(item);

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2018 年 10 月 29 日 15:57
+-- 生成日期: 2018 年 10 月 30 日 14:55
 -- 服务器版本: 5.1.69
 -- PHP 版本: 5.2.17p1
 
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `module_info` (
 --
 
 INSERT INTO `module_info` (`module_id`, `module_name`, `module_mac`, `module_version`, `module_type`, `module_status`, `module_charge`, `cookie`) VALUES
-('60:01:94:09:df:31', '651001Name', '60:01:94:09:df:31', '20171219A1V2.E', '1', 1, 82, '20180123151000'),
+('651001', '651001Name', '60:01:94:09:df:31', 'V1R1C00', '1', 1, 30, '20181025171553'),
 ('651002', '651002', '60:01:94:09:df:32', '20171219A1V2.E', '1', 1, 82, '20180123151000');
 
 -- --------------------------------------------------------
@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `user_module` (
 --
 
 INSERT INTO `user_module` (`user_name`, `module_id`, `ctrl_mode`) VALUES
-('lishimin', '60:01:94:09:df:31', 0),
+('lishimin', '651001', 0),
 ('lishimin', '651002', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

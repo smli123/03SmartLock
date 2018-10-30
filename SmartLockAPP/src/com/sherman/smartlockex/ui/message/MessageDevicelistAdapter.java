@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.sherman.smartlockex.R;
 import com.sherman.smartlockex.ui.common.MessageDeviceDefine;
+import com.sherman.smartlockex.ui.common.PubFunc;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -46,8 +47,11 @@ public class MessageDevicelistAdapter extends BaseAdapter {
 	}
 
 	private class ViewHolder {
+		public TextView tv_message_no;
+		public TextView tv_message_devicename;
 		public ImageView iv_message_type;
-		public TextView tv_message_type;
+		public TextView tv_message_data;
+		public TextView tv_message_usertype;
 		public TextView tv_message_detail;
 
 		private void setImageRes(ImageView view, int resId) {
@@ -56,15 +60,19 @@ public class MessageDevicelistAdapter extends BaseAdapter {
 
 		public void ViewData(MessageDeviceDefine device, int position) {
 			if (device != null) {
-				tv_message_type.setSingleLine(true);
+				tv_message_data.setSingleLine(true);
 
 				if (!TextUtils.isEmpty(device.mMessageID)) {
-					String str_type = String.valueOf(device.mOperType);
-					tv_message_type.setText(str_type);
+					tv_message_no.setText(device.mMessageID);
+					tv_message_devicename.setText(device.mDeviceName);
 
 					iv_message_type.setImageResource(R.drawable.smp_message_type);
-					tv_message_detail.setText(device.mDetail);
+					String str_data = PubFunc.getStringMessageData(device.mMessageData);
+					tv_message_data.setText(str_data);
+					str_data = PubFunc.getStringUserType(device.mUserType);
+					tv_message_usertype.setText(str_data);
 
+					tv_message_detail.setText(device.mDetail);
 				}
 			}
 		}
@@ -86,11 +94,17 @@ public class MessageDevicelistAdapter extends BaseAdapter {
 		if (convertView == null) {
 			holder = new ViewHolder();
 			convertView = mInflater.inflate(R.layout.view_messge_device_item, null);
-			
+
+			holder.tv_message_no = (TextView) convertView
+					.findViewById(R.id.tv_message_no);
+			holder.tv_message_devicename = (TextView) convertView
+					.findViewById(R.id.tv_message_devicename);
 			holder.iv_message_type = (ImageView) convertView
 					.findViewById(R.id.iv_message_type);
-			holder.tv_message_type = (TextView) convertView
-					.findViewById(R.id.tv_message_type);
+			holder.tv_message_data = (TextView) convertView
+					.findViewById(R.id.tv_message_data);
+			holder.tv_message_usertype = (TextView) convertView
+					.findViewById(R.id.tv_message_usertype);
 			holder.tv_message_detail = (TextView) convertView
 					.findViewById(R.id.tv_message_detail);
 			
@@ -104,7 +118,7 @@ public class MessageDevicelistAdapter extends BaseAdapter {
 			convertView.setBackgroundColor(Color.TRANSPARENT);
 			holder.ViewData(FavoriteItem, position);
 
-			if (FavoriteItem.mOperType == 1) {
+			if (FavoriteItem.mMessageType == 1) {
 				// do nothing...
 			}
 		}

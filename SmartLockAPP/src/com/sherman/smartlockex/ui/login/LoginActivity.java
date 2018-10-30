@@ -62,7 +62,7 @@ public class LoginActivity extends TitledActivity implements OnClickListener {
 		public void onReceive(Context context, Intent intent) {
 			if (intent.getAction().equals(PubDefine.LOGIN_BROADCAST)
 					&& true == PubDefine.g_First_Login) {
-				PubDefine.g_Connect_Mode = PubDefine.SmartPlug_Connect_Mode.Internet;
+				PubDefine.g_Connect_Mode = PubDefine.SmartLock_Connect_Mode.Internet;
 
 				if (null != mProgress) {
 					mProgress.dismiss();
@@ -145,7 +145,7 @@ public class LoginActivity extends TitledActivity implements OnClickListener {
 	private Handler connectHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			if (1 == msg.what) {
-				PubDefine.g_Connect_Mode = PubDefine.SmartPlug_Connect_Mode.Internet;
+				PubDefine.g_Connect_Mode = PubDefine.SmartLock_Connect_Mode.Internet;
 				onlineLogin();
 			} else {
 				if (null != mProgress) {

@@ -51,7 +51,7 @@ public class UDPClient {
 		
 			InetAddress address = null;
 			try {
-				if (PubDefine.g_Connect_Mode == PubDefine.SmartPlug_Connect_Mode.Internet) { 
+				if (PubDefine.g_Connect_Mode == PubDefine.SmartLock_Connect_Mode.Internet) { 
 					address = InetAddress.getByName(PubDefine.SERVER_HOST_NAME);
 				} else {
 					address = InetAddress.getByName(mIP);
@@ -83,7 +83,7 @@ public class UDPClient {
 				byte[] msg_temp =  mMessage.getBytes();	// 解决 支持 中文问题
 				int len = mMessage == null ? 0 : msg_temp.length;
 				DatagramPacket dPacket = new DatagramPacket(mMessage.getBytes(), len, address,
-						PubDefine.g_Connect_Mode == PubDefine.SmartPlug_Connect_Mode.Internet ?  
+						PubDefine.g_Connect_Mode == PubDefine.SmartLock_Connect_Mode.Internet ?  
 								PubDefine.SERVER_PORT : PubDefine.MODULE_PORT);
 
 				dSocket.send(dPacket);
@@ -149,7 +149,7 @@ public class UDPClient {
 
 			InetAddress address = null;
 			try {
-				if (PubDefine.g_Connect_Mode == PubDefine.SmartPlug_Connect_Mode.Internet) { 
+				if (PubDefine.g_Connect_Mode == PubDefine.SmartLock_Connect_Mode.Internet) { 
 					address = InetAddress.getByName(PubDefine.SERVER_HOST_NAME);
 				} else {
 					address = InetAddress.getByName(mIP);
@@ -170,7 +170,7 @@ public class UDPClient {
 	    	PubFunc.log("SEND_UDP_Bin:" + mMessageBin);
 			try {
 				DatagramPacket dPacket = new DatagramPacket(mMessageBin, mMessageBin.length, address,
-						PubDefine.g_Connect_Mode == PubDefine.SmartPlug_Connect_Mode.Internet ?  
+						PubDefine.g_Connect_Mode == PubDefine.SmartLock_Connect_Mode.Internet ?  
 								PubDefine.SERVER_PORT : PubDefine.MODULE_PORT);
 
 				dSocket.send(dPacket);

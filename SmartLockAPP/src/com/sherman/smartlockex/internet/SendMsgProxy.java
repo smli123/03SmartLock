@@ -13,7 +13,7 @@ import android.os.Handler;
 public class SendMsgProxy {
 	public static void sendCtrlMsg(boolean containCookie, String msg, Handler timeoutHandler) {
     	String message = msg;
-    	if (PubDefine.g_Connect_Mode != PubDefine.SmartPlug_Connect_Mode.Internet) {
+    	if (PubDefine.g_Connect_Mode != PubDefine.SmartLock_Connect_Mode.Internet) {
     		message = message.substring(3,  message.length());
     	}
     	if (null == PubStatus.g_userCookie || PubStatus.g_userCookie.isEmpty()) {
@@ -26,9 +26,9 @@ public class SendMsgProxy {
     	}
    		message = message + StringUtils.PACKAGE_END_SYMBOL;
 		
-		if (PubDefine.g_Connect_Mode == PubDefine.SmartPlug_Connect_Mode.Internet) {
+		if (PubDefine.g_Connect_Mode == PubDefine.SmartLock_Connect_Mode.Internet) {
 			UDPClient.getInstance().send(message, timeoutHandler);
-		} else if (PubDefine.g_Connect_Mode == PubDefine.SmartPlug_Connect_Mode.WiFi) {
+		} else if (PubDefine.g_Connect_Mode == PubDefine.SmartLock_Connect_Mode.WiFi) {
 			new SendCmdToSocketRunnable(timeoutHandler, message).run();
 		}
 	}
@@ -70,9 +70,9 @@ public class SendMsgProxy {
     		}
     	}
 		
-		if (PubDefine.g_Connect_Mode == PubDefine.SmartPlug_Connect_Mode.Internet) {
+		if (PubDefine.g_Connect_Mode == PubDefine.SmartLock_Connect_Mode.Internet) {
 			UDPClient.getInstance().sendBin(messageBin, timeoutHandler);
-		} else if (PubDefine.g_Connect_Mode == PubDefine.SmartPlug_Connect_Mode.WiFi) {
+		} else if (PubDefine.g_Connect_Mode == PubDefine.SmartLock_Connect_Mode.WiFi) {
 			new SendCmdToSocketRunnable(timeoutHandler, messageBin).run();
 		}
 	}

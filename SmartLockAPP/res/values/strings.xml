@@ -70,6 +70,17 @@
     <string name="smartlock_message_device">设备消息</string>
     <string name="smartlock_message_system">系统消息</string>
     
+    <string name="smartlock_message_alarm">报警</string>
+    <string name="smartlock_message_lock_is_prized">智能锁被撬</string>
+    <string name="smartlock_message_lock_is_open_by_xiepo">斜坡开锁报警</string>
+    <string name="smartlock_message_lock_is_open_by_defaultuser">默认用户</string>
+    <string name="smartlock_message_lock_is_open_by_fingeruser">指纹用户</string>
+    <string name="smartlock_message_lock_is_open_by_passwroduser">密码用户</string>
+    <string name="smartlock_message_lock_is_open_by_carduser">卡用户</string>
+    <string name="smartlock_message_lock_is_open_by_keyuser">钥匙用户</string>
+    <string name="smartlock_message_lock_is_open_by_appuser">手机用户</string>
+    
+    
     <string name="smartlock_nosharp_email">邮箱中不能包含#符号</string>
     <string name="smartlock_nosharp_username">用户名中不能包含#符号</string>
     <string name="smartlock_nosharp_pwd">密码中不能包含#符号</string>

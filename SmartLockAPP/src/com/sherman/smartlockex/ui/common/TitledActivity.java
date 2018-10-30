@@ -245,7 +245,7 @@ public abstract class TitledActivity extends Activity {
 //	    		SmartLockApplication.getContext().sendBroadcast(new Intent(PubDefine.SOCKET_CONNECT_FAIL_BROADCAST));
 //	    		String error = ret.mMessage;
 	    		String error = SmartLockApplication.getContext().getString(R.string.login_timeout);
-	    		if (PubDefine.g_Connect_Mode != PubDefine.SmartPlug_Connect_Mode.Internet) {
+	    		if (PubDefine.g_Connect_Mode != PubDefine.SmartLock_Connect_Mode.Internet) {
 	    			error = SmartLockApplication.getContext().getString(R.string.oper_error);
 	    		}
 	    		PubFunc.thinzdoToast(SmartLockApplication.getContext(), error);
@@ -256,7 +256,7 @@ public abstract class TitledActivity extends Activity {
 //	    		SmartLockApplication.getContext().sendBroadcast(new Intent(PubDefine.SOCKET_CONNECT_FAIL_BROADCAST));
 //	    		String error = ret.mMessage;
 	    		String error = SmartLockApplication.getContext().getString(R.string.login_timeout);
-	    		if (PubDefine.g_Connect_Mode != PubDefine.SmartPlug_Connect_Mode.Internet) {
+	    		if (PubDefine.g_Connect_Mode != PubDefine.SmartLock_Connect_Mode.Internet) {
 	    			error = SmartLockApplication.getContext().getString(R.string.oper_error);
 	    		}
 	    		PubFunc.thinzdoToast(SmartLockApplication.getContext(), error);
@@ -291,7 +291,7 @@ public abstract class TitledActivity extends Activity {
 				mProgress.dismiss();
 			}	
     		String error = SmartLockApplication.getContext().getString(R.string.login_timeout);
-    		if (PubDefine.g_Connect_Mode != PubDefine.SmartPlug_Connect_Mode.Internet) {
+    		if (PubDefine.g_Connect_Mode != PubDefine.SmartLock_Connect_Mode.Internet) {
     			error = SmartLockApplication.getContext().getString(R.string.oper_error);
     		}
     		PubFunc.thinzdoToast(SmartLockApplication.getContext(), error);
@@ -342,7 +342,7 @@ public abstract class TitledActivity extends Activity {
 		if (true == needDelay) {
 			timeoutHandler.removeCallbacks(timeoutProcess);
 			timeoutHandler.postDelayed(timeoutProcess, 
-					PubDefine.g_Connect_Mode == PubDefine.SmartPlug_Connect_Mode.Internet ? 
+					PubDefine.g_Connect_Mode == PubDefine.SmartLock_Connect_Mode.Internet ? 
 							PubDefine.WAIT_SER_RESPONSE : PubDefine.WAIT_WIFI_RESPONSE);
 		}    	
     };
@@ -353,7 +353,7 @@ public abstract class TitledActivity extends Activity {
 		if (true == needDelay) {
 			timeoutHandler.removeCallbacks(timeoutProcess);
 			timeoutHandler.postDelayed(timeoutProcess, 
-					PubDefine.g_Connect_Mode == PubDefine.SmartPlug_Connect_Mode.Internet ? 
+					PubDefine.g_Connect_Mode == PubDefine.SmartLock_Connect_Mode.Internet ? 
 							PubDefine.WAIT_SER_RESPONSE : PubDefine.WAIT_WIFI_RESPONSE);
 		}    	
     }; 

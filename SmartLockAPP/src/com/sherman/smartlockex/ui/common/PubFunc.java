@@ -634,4 +634,54 @@ public class PubFunc {
 		return value;
 	}
 
+    public static String getStringMessageType(int a) {
+    	SmartLockApplication app = SmartLockApplication.getInstance();
+    	String result = "unknown type";
+    	switch (a) {
+    	case 0:
+    		result = app.getString(R.string.smartlock_message_alarm);
+    		break;
+    	}
+    	
+    	return result;
+    }
+    
+    public static String getStringMessageData(int a) {
+    	SmartLockApplication app = SmartLockApplication.getInstance();
+    	String result = "unknown something";
+    	switch (a) {
+    	case 0:
+    		result = app.getString(R.string.smartlock_message_lock_is_prized);
+    		break;
+    	case 1:
+    		result = app.getString(R.string.smartlock_message_lock_is_open_by_xiepo);
+    		break;
+    	}
+    	
+    	return result;
+    }
+    
+    public static String getStringUserType(int a) {
+    	SmartLockApplication app = SmartLockApplication.getInstance();
+    	String result = "unknown user";
+
+    	switch (a) {
+    	case 0:
+    		result = app.getString(R.string.smartlock_message_lock_is_open_by_defaultuser);
+    		break;
+    	case 1:
+    		result = app.getString(R.string.smartlock_message_lock_is_open_by_fingeruser);
+    		break;
+    	case 2:
+    		result = app.getString(R.string.smartlock_message_lock_is_open_by_passwroduser);
+    	case 3:
+    		result = app.getString(R.string.smartlock_message_lock_is_open_by_carduser);
+    	case 4:
+    		result = app.getString(R.string.smartlock_message_lock_is_open_by_keyuser);
+    	case 5:
+    		result = app.getString(R.string.smartlock_message_lock_is_open_by_appuser);
+    	}
+    	
+    	return result;
+    }
 }
