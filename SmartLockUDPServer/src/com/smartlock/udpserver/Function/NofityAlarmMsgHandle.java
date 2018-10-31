@@ -1,5 +1,9 @@
 package com.smartlock.udpserver.Function;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 import com.smartlock.platform.LogTool.LogWriter;
@@ -68,10 +72,13 @@ public class NofityAlarmMsgHandle implements ICallFunction{
 		String strUserName		= strRet[2].trim();
 		String strDevId			= strRet[3].trim();
 		int iMessageID			= Integer.valueOf(strRet[4].trim());
-		int iType				= Integer.valueOf(strRet[5].trim());
-		int iData				= Integer.valueOf(strRet[6].trim());
-		int iUserType			= Integer.valueOf(strRet[7].trim());
-		String strMemo			= strRet[8].trim();
+		String messageTime		= strRet[5].trim();
+		int iType				= Integer.valueOf(strRet[6].trim());
+		int iData				= Integer.valueOf(strRet[7].trim());
+		int iUserType			= Integer.valueOf(strRet[8].trim());
+		String strMemo			= strRet[9].trim();
+		
+		Timestamp dtMessageTime = transString(messageTime);
 		
 		ServerWorkThread thread = (ServerWorkThread)thread_base;
 		
@@ -106,13 +113,13 @@ public class NofityAlarmMsgHandle implements ICallFunction{
 			}
 			
 			// 写库
-			if (!dbMgr.InsertMessageDevice(new MESSAGE_DEVICE(iMessageID, strDevId, strUserName, iType, iData, iUserType, strMemo))) {
+			if (!dbMgr.InsertMessageDevice(new MESSAGE_DEVICE(iMessageID, strDevId, strUserName, iType, iData, iUserType, strMemo, dtMessageTime))) {
 				LogWriter.WriteErrorLog(LogWriter.SELF, String.format("(%s)db operation failed. [MessageDevice]", strDevId));
 				return ServerRetCodeMgr.ERROR_CODE_FAILED_DB_OPERATION;
 			}
 			
 			// 通过APP用户
-			String strResult = strRet[4].trim() + "," + strRet[5].trim() + "," + strRet[6].trim() + "," + strRet[7].trim() + "," + strRet[8].trim();
+			String strResult = strRet[4].trim() + "," + strRet[5].trim() + "," + strRet[6].trim() + "," + strRet[7].trim() + "," + strRet[8].trim() + "," + strRet[9].trim();
 			for (int i = 0; i < info.size(); i++) {
 				String username = info.get(i).getUserName();
 				NotifyToAPP(username,strDevId, ServerCommDefine.NOTIFY_NOTIFY_ALARM, 
@@ -133,5 +140,16 @@ public class NofityAlarmMsgHandle implements ICallFunction{
 		{
 			dbMgr.Destroy();
 		}
-	}	
+	}
+	
+	private Timestamp transString(String message_time) {
+		Timestamp ts = new Timestamp(System.currentTimeMillis());  
+        try {  
+        	ts = Timestamp.valueOf(message_time);  
+            System.out.println(ts);  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        }
+		return ts;
+	}
 }

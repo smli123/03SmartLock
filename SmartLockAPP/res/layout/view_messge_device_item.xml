@@ -41,25 +41,40 @@
 	        
 		        <TextView
 		            android:id="@+id/tv_message_no"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-		        	android:layout_alignParentLeft="true"
-			        android:layout_marginLeft="@dimen/list_item_left_padding"
-			        android:layout_marginRight="@dimen/list_item_right_padding" 
-			        android:textColor="@color/black"
-			        android:textSize="20dp"
-			        android:text="@null"/> 
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentLeft="true"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="@dimen/list_item_left_padding"
+		            android:layout_marginRight="@dimen/list_item_right_padding"
+		            android:text="@null"
+		            android:textColor="@color/black"
+		            android:textSize="20dp"
+		            android:visibility="gone" />
+			        
+		        <TextView
+		            android:id="@+id/tv_message_time"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="@dimen/list_item_left_padding"
+		            android:layout_marginRight="@dimen/list_item_right_padding"
+		            android:layout_toRightOf="@id/tv_message_no"
+		            android:text="@null"
+		            android:textColor="@color/black"
+		            android:textSize="15dp" />
 			        
 		        <TextView
 		            android:id="@+id/tv_message_devicename"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-		        	android:layout_toRightOf="@id/tv_message_no"
-			        android:layout_marginLeft="@dimen/list_item_left_padding"
-			        android:layout_marginRight="@dimen/list_item_right_padding" 
-			        android:textColor="@color/black"
-			        android:textSize="20dp"
-			        android:text="@null"/> 
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="@dimen/list_item_left_padding"
+		            android:layout_marginRight="@dimen/list_item_right_padding"
+		            android:layout_toRightOf="@id/tv_message_time"
+		            android:text="@null"
+		            android:textColor="@color/black"
+		            android:textSize="20dp" />
 	
 		    </RelativeLayout>
 		    
@@ -83,20 +98,26 @@
 	
 		        <TextView
 		            android:id="@+id/tv_message_data"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-		        	android:layout_toRightOf="@id/iv_message_type"
-			        android:layout_marginLeft="@dimen/list_item_left_padding"
-			        android:layout_marginRight="@dimen/list_item_right_padding"
-			        android:text="@null" /> 
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="@dimen/list_item_left_padding"
+		            android:layout_marginRight="@dimen/list_item_right_padding"
+		            android:layout_toRightOf="@id/iv_message_type"
+		            android:textColor="@color/black"
+		            android:text="@null" />
+ 
 				<TextView
-		            android:id="@+id/tv_message_usertype"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-		        	android:layout_toRightOf="@id/tv_message_data"
-			        android:layout_marginLeft="@dimen/list_item_left_padding"
-			        android:layout_marginRight="@dimen/list_item_right_padding"
-			        android:text="@null" />
+				    android:id="@+id/tv_message_usertype"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:layout_centerVertical="true"
+				    android:layout_marginLeft="@dimen/list_item_left_padding"
+				    android:layout_marginRight="@dimen/list_item_right_padding"
+				    android:layout_toRightOf="@id/tv_message_data"
+		            android:textColor="@color/black"
+				    android:text="@null" />
+
 		    </RelativeLayout>
 		    
 		    <RelativeLayout
@@ -110,11 +131,13 @@
 	        
 		        <TextView
 		            android:id="@+id/tv_message_detail"
-			        android:layout_width="match_parent"
-			        android:layout_height="wrap_content"
-			        android:layout_marginLeft="@dimen/list_item_left_padding"
-			        android:layout_marginRight="@dimen/list_item_right_padding"
-			        android:text="@null" />
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="@dimen/list_item_left_padding"
+		            android:layout_marginRight="@dimen/list_item_right_padding"
+		            android:textColor="@color/black"
+		            android:text="@null" />
 		         
 		    </RelativeLayout>
 		    

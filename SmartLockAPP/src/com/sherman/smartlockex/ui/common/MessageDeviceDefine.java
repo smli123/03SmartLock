@@ -14,5 +14,6 @@ public class MessageDeviceDefine {
     public int  	mUserType;
     public String 	mDetail;
     public boolean  mMarked;
+    public String   mMessageTime;
 
 }

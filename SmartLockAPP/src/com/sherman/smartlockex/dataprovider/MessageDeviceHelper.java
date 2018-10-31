@@ -53,6 +53,8 @@ public class MessageDeviceHelper {
 					.getInt(SmartLockExContentDefine.MessageDevice.MARKED_COLUMN) == 0 ? false : true;
 			item.mDetail = cur
 					.getString(SmartLockExContentDefine.MessageDevice.DETAIL_COLUMN);
+			item.mMessageTime = cur
+					.getString(SmartLockExContentDefine.MessageDevice.MESSAGE_TIME_COLUMN);
 
 			devs.add(item);
 		}
@@ -83,7 +85,9 @@ public class MessageDeviceHelper {
 					.getInt(SmartLockExContentDefine.MessageDevice.MARKED_COLUMN) == 0 ? false : true;
 			item.mDetail = cur
 					.getString(SmartLockExContentDefine.MessageDevice.DETAIL_COLUMN);
-			
+			item.mMessageTime = cur
+					.getString(SmartLockExContentDefine.MessageDevice.MESSAGE_TIME_COLUMN);
+
 			return item;
 
 		}
@@ -170,6 +174,8 @@ public class MessageDeviceHelper {
 						.getInt(SmartLockExContentDefine.MessageDevice.MARKED_COLUMN) == 0 ? false : true;
 				item.mDetail = cur
 						.getString(SmartLockExContentDefine.MessageDevice.DETAIL_COLUMN);
+				item.mMessageTime = cur
+						.getString(SmartLockExContentDefine.MessageDevice.MESSAGE_TIME_COLUMN);
 
 				break;
 			}
@@ -208,6 +214,8 @@ public class MessageDeviceHelper {
 				item.mMarked == true ? 1 : 0);
 		values.put(SmartLockExContentDefine.MessageDevice.DETAIL,
 				item.mDetail);
+		values.put(SmartLockExContentDefine.MessageDevice.MESSAGE_TIME,
+				item.mMessageTime);
 
 		Uri uri = mContentResolver
 				.insert(SmartLockExContentDefine.MessageDevice.ALL_CONTENT_URI,

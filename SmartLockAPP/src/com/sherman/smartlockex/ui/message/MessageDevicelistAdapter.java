@@ -48,6 +48,7 @@ public class MessageDevicelistAdapter extends BaseAdapter {
 
 	private class ViewHolder {
 		public TextView tv_message_no;
+		public TextView tv_message_time;
 		public TextView tv_message_devicename;
 		public ImageView iv_message_type;
 		public TextView tv_message_data;
@@ -64,6 +65,7 @@ public class MessageDevicelistAdapter extends BaseAdapter {
 
 				if (!TextUtils.isEmpty(device.mMessageID)) {
 					tv_message_no.setText(device.mMessageID);
+					tv_message_time.setText(device.mMessageTime);
 					tv_message_devicename.setText(device.mDeviceName);
 
 					iv_message_type.setImageResource(R.drawable.smp_message_type);
@@ -97,6 +99,8 @@ public class MessageDevicelistAdapter extends BaseAdapter {
 
 			holder.tv_message_no = (TextView) convertView
 					.findViewById(R.id.tv_message_no);
+			holder.tv_message_time = (TextView) convertView
+					.findViewById(R.id.tv_message_time);
 			holder.tv_message_devicename = (TextView) convertView
 					.findViewById(R.id.tv_message_devicename);
 			holder.iv_message_type = (ImageView) convertView

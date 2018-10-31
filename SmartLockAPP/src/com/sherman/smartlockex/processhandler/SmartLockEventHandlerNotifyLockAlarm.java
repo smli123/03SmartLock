@@ -45,10 +45,11 @@ public class SmartLockEventHandlerNotifyLockAlarm extends SmartLockEventHandler 
 				SmartLockExLockHelper  helper = new SmartLockExLockHelper(SmartLockApplication.getContext());
 				item.mDeviceName = helper.getSmartLock(moduleID).mName;
 				
-				item.mMessageType = Integer.valueOf(buffer[6]);
-				item.mMessageData = Integer.valueOf(buffer[7]);
-				item.mUserType = Integer.valueOf(buffer[8]);
-				item.mDetail = buffer[9];
+				item.mMessageTime = buffer[6];
+				item.mMessageType = Integer.valueOf(buffer[7]);
+				item.mMessageData = Integer.valueOf(buffer[8]);
+				item.mUserType = Integer.valueOf(buffer[9]);
+				item.mDetail = buffer[10];
 				item.mMarked = false;
 				
 				addMessage(item);

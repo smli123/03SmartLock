@@ -1,4 +1,7 @@
 package com.smartlock.udpserver.db;
+
+import java.sql.Timestamp;
+
 /**TIMER_INFO(String strTimerId,String strModuleId,String strPeroid,byte TimeOn,byte TimeOff,byte bEnable)*/
 public class MESSAGE_DEVICE {
 	public final static String 	TABLE_NAME = "message_device";	//数据库表名
@@ -9,6 +12,7 @@ public class MESSAGE_DEVICE {
 	public final static String	MESSAGE_DATA	= "message_data";	//类型    0：智能锁被撬   1：斜坡开锁报警
 	public final static String 	USER_TYPE		= "user_type";		//用户操作类型 0：默认用户，1：指纹用户，2：密码用户，3：卡用户，4：钥匙用户，5，手机用户
 	public final static String	USER_MEMO		= "user_memo";		//用户备注
+	public final static String	MESSAGE_TIME	= "message_time";	//告警发生时间
 	
 	private int 	m_messageId;
 	private String	m_strModuleId;
@@ -17,8 +21,9 @@ public class MESSAGE_DEVICE {
 	private int		m_messageData;
 	private int		m_userType;
 	private String  m_strUserMemo;
+	private Timestamp  m_dtmessageTime;
 	
-	public MESSAGE_DEVICE(int messageId, String strModuleId, String strUserName, int messageType, int messageData, int userType, String strUserMemo)
+	public MESSAGE_DEVICE(int messageId, String strModuleId, String strUserName, int messageType, int messageData, int userType, String strUserMemo, Timestamp dtMessageTime)
 	{
 		this.setMessageId(messageId);
 		this.setModuleId(strModuleId);
@@ -27,6 +32,7 @@ public class MESSAGE_DEVICE {
 		this.setMessageData(messageData);
 		this.setUserType(userType);
 		this.setUserMemo(strUserMemo);
+		this.setMessageTime(dtMessageTime);
 	}
 	public boolean equal(MESSAGE_DEVICE info)
 	{
@@ -93,5 +99,11 @@ public class MESSAGE_DEVICE {
 	}
 	public void setUserMemo(String userMemo) {
 		this.m_strUserMemo = userMemo;
+	}
+	public Timestamp getMessageTime() {
+		return m_dtmessageTime;
+	}
+	public void setMessageTime(Timestamp dtMessageTime) {
+		this.m_dtmessageTime = dtMessageTime;
 	}
 }

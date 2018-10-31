@@ -1159,7 +1159,8 @@ public class ServerDBMgr {
 						rs.getInt(MESSAGE_DEVICE.MESSAGE_TYPE),
 						rs.getInt(MESSAGE_DEVICE.MESSAGE_DATA),
 						rs.getInt(MESSAGE_DEVICE.USER_TYPE),
-						rs.getString(MESSAGE_DEVICE.USER_MEMO)));
+						rs.getString(MESSAGE_DEVICE.USER_MEMO),
+						rs.getTimestamp(MESSAGE_DEVICE.MESSAGE_TIME)));
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -1190,7 +1191,8 @@ public class ServerDBMgr {
 						rs.getInt(MESSAGE_DEVICE.MESSAGE_TYPE),
 						rs.getInt(MESSAGE_DEVICE.MESSAGE_DATA),
 						rs.getInt(MESSAGE_DEVICE.USER_TYPE),
-						rs.getString(MESSAGE_DEVICE.USER_MEMO)));
+						rs.getString(MESSAGE_DEVICE.USER_MEMO),
+						rs.getTimestamp(MESSAGE_DEVICE.MESSAGE_TIME)));
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -1221,7 +1223,8 @@ public class ServerDBMgr {
 						rs.getInt(MESSAGE_DEVICE.MESSAGE_TYPE),
 						rs.getInt(MESSAGE_DEVICE.MESSAGE_DATA),
 						rs.getInt(MESSAGE_DEVICE.USER_TYPE),
-						rs.getString(MESSAGE_DEVICE.USER_MEMO));
+						rs.getString(MESSAGE_DEVICE.USER_MEMO),
+						rs.getTimestamp(MESSAGE_DEVICE.MESSAGE_TIME));
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -1272,6 +1275,7 @@ public class ServerDBMgr {
 		content.put(MESSAGE_DEVICE.MESSAGE_DATA, String.valueOf(message.getMessageData()));
 		content.put(MESSAGE_DEVICE.USER_TYPE, String.valueOf(message.getUserType()));
 		content.put(MESSAGE_DEVICE.USER_MEMO, message.getUserMemo());
+		content.put(MESSAGE_DEVICE.MESSAGE_TIME, String.valueOf(message.getMessageTime()));
 		
 		try {
 			return m_dbTool.insert(MESSAGE_DEVICE.TABLE_NAME, content);

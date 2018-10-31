@@ -97,6 +97,7 @@ public class SmartLockExContentDefine {
 	    public int  	mUserType;
 	    public int  	mMarked;
 	    public String 	mDetail;
+	    public String 	mMessageTime;
 		
 		// 列名属性
 		public static final String MESSAGE_ID = "MessageID";
@@ -108,6 +109,7 @@ public class SmartLockExContentDefine {
 		public static final String USER_TYPE = "UserType";
 		public static final String MARKED = "Marked";
 		public static final String DETAIL = "Detail";
+		public static final String MESSAGE_TIME = "MessageTime";
 
 		// 列数
 		public static final int ID_COLUMN = 0;
@@ -120,7 +122,8 @@ public class SmartLockExContentDefine {
 		public static final int USER_TYPE_COLUMN = 7;
 		public static final int MARKED_COLUMN = 8;
 		public static final int DETAIL_COLUMN = 9;
-
+		public static final int MESSAGE_TIME_COLUMN = 10;
+		
 		// create table
 		public final static String TABLE_CREATE = "CREATE TABLE IF NOT EXISTS "
 				+ TABLE_NAME + " (" 
@@ -133,7 +136,8 @@ public class SmartLockExContentDefine {
 				+ OPER_DATA + " integer default 0, "
 				+ USER_TYPE + " integer default 0, "
 				+ MARKED + " integer default 0, "
-				+ DETAIL + " text default '');";
+				+ DETAIL + " text default '', "
+				+ MESSAGE_TIME + " text default '');";
 
 		public final static String DEFAULT_SORT_ORDER = _ID + " desc";
 	}
