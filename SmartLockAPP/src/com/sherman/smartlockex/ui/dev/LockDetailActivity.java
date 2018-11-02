@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.sherman.smartlockex.R;
@@ -28,17 +29,24 @@ import com.sherman.smartlockex.ui.common.TitledActivity;
 import com.sherman.smartlockex.ui.login.LoginActivity;
 import com.sherman.smartlockex.ui.smartlockex.SmartLockActivity;
 import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
+import com.sherman.smartlockex.ui.util.MyAlertDialog;
 
 public class LockDetailActivity extends TitledActivity implements OnClickListener {
 	private Context mContext = null;
 	private SmartLockExLockHelper mLockHelper = null;
 	
-	private LinearLayout ll_authorize_area;
+	private LinearLayout ll_administrator_area;
 	private TextView tv_status;
 	private TextView tv_log;
 	
 	private TextView tv_lock_open;
 	private TextView tv_lock_close;
+	
+	private ImageView iv_authorize_add;
+	private ImageView iv_password_management_add;
+	
+	private ListView lv_authorize;
+	private ListView lv_password_management;
 	
 	private String mLockID = "";
 	private SmartLockDefine mLock = null;
@@ -157,23 +165,88 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 		tv_log = (TextView) findViewById(R.id.tv_log);
 		tv_lock_open = (TextView) findViewById(R.id.tv_lock_open);
 		tv_lock_close = (TextView) findViewById(R.id.tv_lock_close);
-		ll_authorize_area = (LinearLayout) findViewById(R.id.ll_authorize_area);
+		ll_administrator_area = (LinearLayout) findViewById(R.id.ll_administrator_area);
 		
 		if (mLock.mRelation == 0) {
-			ll_authorize_area.setVisibility(View.VISIBLE);
+			ll_administrator_area.setVisibility(View.VISIBLE);
 		} else {
-			ll_authorize_area.setVisibility(View.GONE);
+			ll_administrator_area.setVisibility(View.GONE);
 		}
 		
 		tv_lock_open.setOnClickListener(this);
 		tv_lock_close.setOnClickListener(this);
 		
-
+		lv_authorize = (ListView) findViewById(R.id.lv_authorize);
+		lv_password_management= (ListView) findViewById(R.id.lv_password_management);
+		
 		Message msg = new Message();
 		msg.what = 0;
 		msg.arg1 = mLock.mStatus;
 		updateHandler.sendMessage(msg);
 	}
+	
+//	private void updateAuthorize() {
+//		AdapterDevlist adapter = new AdapterDevlist(mContext,
+//				result, mPressHandler);
+//		lv_authorize.setAdapter(adapter);
+//	}
+//	
+//	private Handler mPressHandler = new Handler() {
+//		public void handleMessage(Message msg) {
+//			mFocusLockId = (String) msg.obj;
+//			SmartLockDefine plug = mLockHelper.getSmartLock(mFocusLockId);
+//			PubFunc.log("mFocusLockId=" + mFocusLockId);
+//			if (1 == msg.what) { 		// 删除授权用户
+//				if (null != plug) {
+//					String str_delete = SmartLockApplication.getContext().getString(R.string.smartlock_ctrl_delete);
+//					String str_ok = SmartLockApplication.getContext().getString(R.string.smartlock_confirm);
+//					String str_cancel = SmartLockApplication.getContext().getString(R.string.smartlock_cancel);
+//					final MyAlertDialog dialog = new MyAlertDialog(mContext)
+//							.builder().setTitle(str_delete)
+//							.setNegativeButton(str_cancel, new OnClickListener() {
+//								@Override
+//								public void onClick(View v) {
+//
+//								}
+//							});
+//					dialog.setPositiveButton(str_ok, new OnClickListener() {
+//						@Override
+//						public void onClick(View v) {
+//							deletePlug(mFocusLockId);
+//						}
+//					});
+//					dialog.show();
+//
+//				}
+//			}
+//			
+//			if (2 == msg.what) { 		// 删除临时密码
+//				if (null != plug) {
+//					String str_delete = SmartLockApplication.getContext().getString(R.string.smartlock_ctrl_delete);
+//					String str_ok = SmartLockApplication.getContext().getString(R.string.smartlock_confirm);
+//					String str_cancel = SmartLockApplication.getContext().getString(R.string.smartlock_cancel);
+//					final MyAlertDialog dialog = new MyAlertDialog(mContext)
+//							.builder().setTitle(str_delete)
+//							.setNegativeButton(str_cancel, new OnClickListener() {
+//								@Override
+//								public void onClick(View v) {
+//
+//								}
+//							});
+//					dialog.setPositiveButton(str_ok, new OnClickListener() {
+//						@Override
+//						public void onClick(View v) {
+//							deletePlug(mFocusLockId);
+//						}
+//					});
+//					dialog.show();
+//
+//				}
+//			}
+//			
+//			
+//		};
+//	};
 
 	private void setLock(int i_status) {
 		StringBuffer sb = new StringBuffer();

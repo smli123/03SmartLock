@@ -301,7 +301,7 @@ public class DeviceFragment extends SmartLockFragment
 			protected void onPostExecute(ArrayList<SmartLockDefine> result) {
 				super.onPostExecute(result);
 				if (null != result) {
-					DevlistAdapter adapter = new DevlistAdapter(mContext,
+					AdapterDevlist adapter = new AdapterDevlist(mContext,
 							result, mPressHandler);
 					mDevList.setAdapter(adapter);
 				}

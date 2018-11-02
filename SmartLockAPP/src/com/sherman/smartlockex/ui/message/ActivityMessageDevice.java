@@ -24,7 +24,7 @@ import com.sherman.smartlockex.ui.common.PubStatus;
 import com.sherman.smartlockex.ui.common.SmartLockDefine;
 import com.sherman.smartlockex.ui.common.StringUtils;
 import com.sherman.smartlockex.ui.common.TitledActivity;
-import com.sherman.smartlockex.ui.dev.DevlistAdapter;
+import com.sherman.smartlockex.ui.dev.AdapterDevlist;
 import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
 import com.sherman.smartlockex.ui.util.MyAlertDialog;
 

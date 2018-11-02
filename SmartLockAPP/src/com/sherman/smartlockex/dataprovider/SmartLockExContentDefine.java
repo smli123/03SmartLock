@@ -194,5 +194,106 @@ public class SmartLockExContentDefine {
 		public final static String DEFAULT_SORT_ORDER = _ID + " desc";
 	}
 
+	public final static class AuthorizeUser implements BaseColumns {
+		public static final String AUTHORITY = "com.sherman.dataprovider.authorizeuserprovider";
+
+		public static final String ALL_RECORD = "smartlockexauthorizes";
+		public static final String ONE_RECORD = "smartlockexauthorize";
+
+		public static final Uri ALL_CONTENT_URI = Uri.parse("content://"
+				+ AUTHORITY + "/" + ALL_RECORD);
+		public static final Uri ONE_CONTENT_URI = Uri.parse("content://"
+				+ AUTHORITY + "/" + ONE_RECORD);
+
+		public static final String TABLE_NAME = "AuthorizeUser";
+		
+		// 列名属性
+		public static final String AUTHORIZE_ID = "AuthorizeID";
+		public static final String LOCK_ID = "LockID";
+		public static final String USER_NAME = "UserName";
+		public static final String USER_STATUS = "UserStatus";
+
+		// 列数
+		public static final int ID_COLUMN = 0;
+		public static final int AUTHORIZE_ID_COLUMN = 1;
+		public static final int LOCK_ID_COLUMN = 2;
+		public static final int USER_NAME_COLUMN = 3;
+		public static final int USER_STATUS_COLUMN = 4;
+		
+		// create table
+		public final static String TABLE_CREATE = "CREATE TABLE IF NOT EXISTS "
+				+ TABLE_NAME + " (" 
+				+ _ID + " integer primary key autoincrement, " 
+				+ AUTHORIZE_ID + " integer default 0, "
+				+ LOCK_ID + " text default '', "  
+				+ USER_NAME + " text default '', " 
+				+ USER_STATUS + " integer default 0);";
+
+		public static final String TRIGGER_LOCK_DELETE = "Trigger_Locks";
+		public final static String SQL_TRIGER_LOCK_DELETE = " CREATE TRIGGER ["
+				+ TRIGGER_LOCK_DELETE + "]" + " AFTER DELETE ON [" + TABLE_NAME
+				+ "]" + " BEGIN" + " delete from "
+				+ AuthorizeUser.TABLE_NAME + " where "
+				+ AuthorizeUser.USER_STATUS + " = old." + USER_STATUS + ";"
+				+ " END;";
+		
+		public final static String DEFAULT_SORT_ORDER = _ID + " desc";
+	}
+
+	public final static class Password implements BaseColumns {
+		public static final String AUTHORITY = "com.sherman.dataprovider.passwordprovider";
+
+		public static final String ALL_RECORD = "smartlockexpasswords";
+		public static final String ONE_RECORD = "smartlockexpassword";
+
+		public static final Uri ALL_CONTENT_URI = Uri.parse("content://"
+				+ AUTHORITY + "/" + ALL_RECORD);
+		public static final Uri ONE_CONTENT_URI = Uri.parse("content://"
+				+ AUTHORITY + "/" + ONE_RECORD);
+
+		public static final String TABLE_NAME = "Password";
+		
+		// 列名属性
+		public static final String PASSWORD_ID = "PasswordID";
+		public static final String LOCK_ID = "LockID";
+		public static final String USER_NAME = "UserName";
+		public static final String PASSWORD_TYPE = "Password_Type";
+		public static final String BEGIN_TIIME = "Begin_Time";
+		public static final String END_TIIME = "End_Time";
+		public static final String MEMO = "Memo";
+
+		// 列数
+		public static final int ID_COLUMN = 0;
+		public static final int PASSWORD_ID_COLUMN = 1;
+		public static final int LOCK_ID_COLUMN = 2;
+		public static final int USER_NAME_COLUMN = 3;
+		public static final int PASSWORD_TYPE_COLUMN = 4;
+		public static final int BEGIN_TIIME_COLUMN = 5;
+		public static final int END_TIIME_COLUMN = 6;
+		public static final int MEMO_COLUMN = 7;
+
+		// create table
+		public final static String TABLE_CREATE = "CREATE TABLE IF NOT EXISTS "
+				+ TABLE_NAME + " (" 
+				+ _ID + " integer primary key autoincrement, " 
+				+ PASSWORD_ID + " integer default 0, "
+				+ LOCK_ID + " text default '', "  
+				+ USER_NAME + " text default '', " 
+				+ PASSWORD_TYPE + " integer default 0, "
+				+ BEGIN_TIIME + " text default '', "
+				+ END_TIIME + " text default '', "
+				+ MEMO + " text default '' );";
+
+		public static final String TRIGGER_LOCK_DELETE = "Trigger_Locks";
+		public final static String SQL_TRIGER_LOCK_DELETE = " CREATE TRIGGER ["
+				+ TRIGGER_LOCK_DELETE + "]" + " AFTER DELETE ON [" + TABLE_NAME
+				+ "]" + " BEGIN" + " delete from "
+				+ Password.TABLE_NAME + " where "
+				+ Password.PASSWORD_ID + " = old." + PASSWORD_ID + ";"
+				+ " END;";
+		
+		public final static String DEFAULT_SORT_ORDER = _ID + " desc";
+	}
+
 	
 }

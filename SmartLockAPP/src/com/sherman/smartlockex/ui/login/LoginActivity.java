@@ -18,6 +18,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
@@ -55,6 +56,9 @@ public class LoginActivity extends TitledActivity implements OnClickListener {
 	
 	private static UDPReceiver mUDPServer = null;
 	
+	private SharedPreferences mSharedPreferences;
+	private SharedPreferences.Editor editor;
+	private String mUserName = "";
 
 	private BroadcastReceiver mLoginRev = new BroadcastReceiver() {
 
@@ -108,6 +112,8 @@ public class LoginActivity extends TitledActivity implements OnClickListener {
 	
 	private Handler updateHandler = new Handler() {
 		public void handleMessage(Message msg) {
+			saveData();
+			
 			Intent act = new Intent();
 			act.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			act.setClass(LoginActivity.this, SmartLockActivity.class);
@@ -127,6 +133,10 @@ public class LoginActivity extends TitledActivity implements OnClickListener {
  			mUDPServer = new UDPReceiver(connectHandler);
  			new Thread(mUDPServer).start();
  		}
+ 		
+		mSharedPreferences = getSharedPreferences("SmartLock",
+				Activity.MODE_PRIVATE);
+        loadData();
         
         initview();
         
@@ -134,6 +144,21 @@ public class LoginActivity extends TitledActivity implements OnClickListener {
 		filter.addAction(PubDefine.LOGIN_BROADCAST);
 		registerReceiver(mLoginRev, filter);
     }
+    
+    private void saveData() {
+    	mUserName = et_username.getText().toString();
+    	
+		editor = mSharedPreferences.edit();
+		editor.putString("username", mUserName);
+		editor.commit();
+		
+		PubStatus.g_CurUserName = mUserName;
+	}
+
+	private void loadData() {
+		mUserName = mSharedPreferences.getString("username",
+				"");
+	}
     
 	private Runnable login_runnable = new Runnable() {
 		@Override
@@ -218,6 +243,9 @@ public class LoginActivity extends TitledActivity implements OnClickListener {
     	tv_forget_password.setOnClickListener(this);
     	iv_delete_username.setOnClickListener(this);
     	iv_delete_password.setOnClickListener(this);
+    	
+    	et_username.setText(mUserName);
+    	et_password.setText("");
     }
     
 	@Override

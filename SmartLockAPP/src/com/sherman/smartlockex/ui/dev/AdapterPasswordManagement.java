@@ -28,14 +28,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class DevlistAdapter extends BaseAdapter {
+public class AdapterPasswordManagement extends BaseAdapter {
 
 	private ArrayList<SmartLockDefine> mDevlist = null;
 	private LayoutInflater mInflater = null;
 	private Context mContext = null;
 	private Handler mHandler = null;
 
-	public DevlistAdapter(Context context,
+	public AdapterPasswordManagement(Context context,
 			ArrayList<SmartLockDefine> devList, Handler handler) {
 		mContext = context;
 		mInflater = LayoutInflater.from(context);
