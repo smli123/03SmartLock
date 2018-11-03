@@ -111,6 +111,10 @@ public class APPAddModuleMsgHandle implements ICallFunction{
 						ResponseToAPP(strMsgHeader, strUserName, strDevId, ServerRetCodeMgr.ERROR_CODE_FAILED_DB_OPERATION);
 						return ServerRetCodeMgr.ERROR_CODE_FAILED_DB_OPERATION;		
 					}
+
+					//提交事务
+					dbMgr.Commit();
+					dbMgr.EndTansacion();
 				}
 				
 			} else {

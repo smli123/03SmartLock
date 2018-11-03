@@ -17,7 +17,9 @@ import java.util.Set;
 import java.util.Timer;
 
 import com.smartlock.platform.LogTool.LogWriter;
+import com.smartlock.udpserver.Function.APPAddAuthorizeUserMsgHandle;
 import com.smartlock.udpserver.Function.APPAddModuleMsgHandle;
+import com.smartlock.udpserver.Function.APPDeleteAuthorizeUserMsgHandle;
 import com.smartlock.udpserver.Function.AppLogOutMsgHandle;
 import com.smartlock.udpserver.Function.AppLoginMsgHandle;
 import com.smartlock.udpserver.Function.AppPassThroughMsgHandle;
@@ -35,6 +37,7 @@ import com.smartlock.udpserver.Function.NofityAlarmMsgHandle;
 import com.smartlock.udpserver.Function.ModuleLockCtrlMsgHandle;
 import com.smartlock.udpserver.Function.NotifyLockStatusHandle;
 import com.smartlock.udpserver.Function.APPQueryAllModuleInfoHandle;
+import com.smartlock.udpserver.Function.APPQueryAuthorizeUserHandle;
 import com.smartlock.udpserver.Function.TransmitHearBeatMsgHandle;
 import com.smartlock.udpserver.Function.TransmitTransMsgHandle;
 import com.smartlock.udpserver.Function.APPUserRegisterMsgHandle;
@@ -108,6 +111,13 @@ public class ServerWorkThread  implements Runnable{
 		m_SendFuncMap.put(ServerCommDefine.APP_ADD_PLUG_MSG_HEADER, new APPAddModuleMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_DEL_PLUG_MSG_HEADER, new APPDeleteModuleMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_MOD_PLUG_MSG_HEADER, new APPModifyPlugNameHandle());
+		
+		m_SendFuncMap.put(ServerCommDefine.APP_QRY_AUTHORIZEUSER_MSG_HEADER, new APPQueryAuthorizeUserHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_ADD_AUTHORIZEUSER_MSG_HEADER, new APPAddAuthorizeUserMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_DEL_AUTHORIZEUSER_MSG_HEADER, new APPDeleteAuthorizeUserMsgHandle());
+//		m_SendFuncMap.put(ServerCommDefine.APP_QRY_PASSWORD_MSG_HEADER, new APPQueryPasswordHandle());
+//		m_SendFuncMap.put(ServerCommDefine.APP_ADD_PASSWORD_MSG_HEADER, new APPAddPasswordHandle());
+//		m_SendFuncMap.put(ServerCommDefine.APP_DEL_PASSWORD_MSG_HEADER, new APPDelPasswordHandle());
 		
 		/* APP和模块命令*/
 		m_SendFuncMap.put(ServerCommDefine.APP_LOCK_CTRL_MSG_HEADER, new ModuleLockCtrlMsgHandle());

@@ -602,20 +602,22 @@ public class ServerDBMgr {
 		return null;
 	}
 	
-	public USER_MODULE QueryUserModuleByDevId(String strDevId, int type)
+	public Vector<USER_MODULE> QueryUserModuleByDevId(String strDevId, int type)
 	{
+		Vector<USER_MODULE> vecUserModuleList = new Vector<USER_MODULE>();
 		Map<String,String> selection = new HashMap<String,String>();
 		selection.put(USER_MODULE.MODULE_ID, strDevId);
 		selection.put(USER_MODULE.CTRL_MODE, String.valueOf(type));
 		ResultSet rs;
 		try {
 			rs = m_dbTool.query(USER_MODULE.TABLE_NAME, selection);
-			if(rs.next())
+			while(rs.next())
 			{
-				return new USER_MODULE(rs.getString(USER_MODULE.USER_NAME),
+				vecUserModuleList.add(new USER_MODULE(rs.getString(USER_MODULE.USER_NAME),
 						rs.getString(USER_MODULE.MODULE_ID),
-						rs.getByte(USER_MODULE.CTRL_MODE));
+						rs.getByte(USER_MODULE.CTRL_MODE)));
 			}
+			return vecUserModuleList;
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

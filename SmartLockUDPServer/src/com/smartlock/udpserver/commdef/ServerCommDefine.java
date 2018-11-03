@@ -16,6 +16,13 @@ public class ServerCommDefine {
 	public final static String APP_MOD_PLUG_MSG_HEADER		= "APPMODLOCK";
 	public final static String APP_QRY_PLUG_MSG_HEADER		= "APPQRYLOCK";
 	
+	public final static String APP_QRY_AUTHORIZEUSER_MSG_HEADER		= "APPQRYAUTHORIZEUSER";
+	public final static String APP_ADD_AUTHORIZEUSER_MSG_HEADER		= "APPADDAUTHORIZEUSER";
+	public final static String APP_DEL_AUTHORIZEUSER_MSG_HEADER		= "APPDELAUTHORIZEUSER";
+	public final static String APP_QRY_PASSWORD_MSG_HEADER			= "APPQRYPASSWORD";
+	public final static String APP_ADD_PASSWORD_MSG_HEADER			= "APPADDPASSWORD";
+	public final static String APP_DEL_PASSWORD_MSG_HEADER			= "APPDELPASSWORD";
+	
 	/* APP智能门锁 */
 	public final static String APP_BACK2AP_CTRL_MSG_HEADER	= "APPBACK2AP";			//设备初始化
 	public final static String APP_LOCK_CTRL_MSG_HEADER		= "APPLOCK_OPEN";		//开锁关锁操作
