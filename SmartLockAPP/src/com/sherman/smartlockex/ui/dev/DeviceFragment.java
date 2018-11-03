@@ -72,10 +72,10 @@ public class DeviceFragment extends SmartLockFragment
 				switch (code) {
 					case 0 :
 						SmartLockDefine lock = mLockHelper
-								.getSmartLock(mFocusLockId);
+								.get(mFocusLockId);
 						if (null != lock) {
 							lock.mStatus = status;
-							if (0 < mLockHelper.modifySmartLock(lock)) {
+							if (0 < mLockHelper.modify(lock)) {
 								doBackgroundLoad();
 							}
 						}
@@ -101,7 +101,7 @@ public class DeviceFragment extends SmartLockFragment
 				int ret = intent.getIntExtra("RESULT", 0);
 				String message = intent.getStringExtra("MESSAGE");
 				if (0 == ret) {
-					mLockHelper.clearSmartLock();
+					mLockHelper.clear();
 				}
 				if (null != message && !message.isEmpty()) {
 					PubFunc.thinzdoToast(mContext, message);
@@ -132,11 +132,11 @@ public class DeviceFragment extends SmartLockFragment
 				int ret = intent.getIntExtra("RESULT", 0);
 				String message = intent.getStringExtra("MESSAGE");
 				timeoutHandler.removeCallbacks(timeoutProcess);
-				SmartLockDefine item = mLockHelper.getSmartLock(mFocusLockId);
+				SmartLockDefine item = mLockHelper.get(mFocusLockId);
 				switch (ret) {
 					case 0 :
 						item.mName = mNewPlugName;
-						if (0 < mLockHelper.modifySmartLock(item)) {
+						if (0 < mLockHelper.modify(item)) {
 							doBackgroundLoad();
 						}
 
@@ -154,12 +154,12 @@ public class DeviceFragment extends SmartLockFragment
 				int charge = intent.getIntExtra("CHARGE", 0);
 				int userType = intent.getIntExtra("USERTYPE", 0);
 				String memo = intent.getStringExtra("USERMEMO");
-				SmartLockDefine item = mLockHelper.getSmartLock(moduleID);
+				SmartLockDefine item = mLockHelper.get(moduleID);
 				switch (ret) {
 				case 0 :
 					item.mStatus = status;
 					item.mCharge = charge;
-					if (0 < mLockHelper.modifySmartLock(item)) {
+					if (0 < mLockHelper.modify(item)) {
 						doBackgroundLoad();
 					}
 					break;
@@ -260,7 +260,7 @@ public class DeviceFragment extends SmartLockFragment
 		item.mType = "1";
 		item.mCharge = 81;
 		item.mRelation = 0;
-		mLockHelper.addSmartLock(item);
+		mLockHelper.add(item);
 	}
 
 	@Override
@@ -292,7 +292,7 @@ public class DeviceFragment extends SmartLockFragment
 			@Override
 			protected ArrayList<SmartLockDefine> doInBackground(Void... arg0) {
 				ArrayList<SmartLockDefine> locks = mLockHelper
-						.getAllSmartLock(PubStatus.g_CurUserName);
+						.getAll(PubStatus.g_CurUserName);
 
 				return locks;
 			}
@@ -324,7 +324,7 @@ public class DeviceFragment extends SmartLockFragment
 	private Handler mPressHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			mFocusLockId = (String) msg.obj;
-			SmartLockDefine plug = mLockHelper.getSmartLock(mFocusLockId);
+			SmartLockDefine plug = mLockHelper.get(mFocusLockId);
 			PubFunc.log("mFocusLockId=" + mFocusLockId);
 			if (0 == msg.what) { 		// 修改模块名字
 				if (null != plug) {

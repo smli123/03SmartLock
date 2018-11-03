@@ -176,7 +176,7 @@ public class AdapterDevlist extends BaseAdapter {
 
 			SmartLockExLockHelper mPlugHelper = new SmartLockExLockHelper(
 					SmartLockApplication.getContext());
-			SmartLockDefine mPlug = mPlugHelper.getSmartLock(lockId);
+			SmartLockDefine mPlug = mPlugHelper.get(lockId);
 			if (null == mPlug) {
 				return;
 			}

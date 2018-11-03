@@ -40,6 +40,14 @@ public class PubDefine {
 	public static final String LOCK_DELETELOCK_BROADCAST = "com.sherman.smartlock.delete";
 	public static final String LOCK_MODIFY_LOCKNAME_BROADCAST = "com.sherman.smartlock.modifyname";
 
+	public static final String LOCK_QRYAUTHORIZEUSER_BROADCAST = "com.sherman.smartlock.qryauthorizeuser";
+	public static final String LOCK_ADDAUTHORIZEUSER_BROADCAST = "com.sherman.smartlock.addauthorizeuser";
+	public static final String LOCK_DELAUTHORIZEUSER_BROADCAST = "com.sherman.smartlock.delauthorizeuser";
+	
+	public static final String LOCK_QRYPASSWORD_BROADCAST = "com.sherman.smartlock.qrypassword";
+	public static final String LOCK_ADDPASSWORD_BROADCAST = "com.sherman.smartlock.addpassword";
+	public static final String LOCK_DELPASSWORD_BROADCAST = "com.sherman.smartlock.delpassword";
+	
 	public static final String USER_MODIFY_PASSWORD_BROADCAST = "com.sherman.smartlock.modifypassword";
 	public static final String USER_MODIFY_EMAIL_BROADCAST = "com.sherman.smartlock.modifyemail";
 

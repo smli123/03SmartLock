@@ -2,6 +2,7 @@ package com.sherman.smartlockex.ui.common;
 
 public class PasswordDefine {
 	public int    	mID;
+	public int	 	mIndex;
 	public int	 	mPasswordID;
 	public String 	mLockID;
 	public String 	mUserName;

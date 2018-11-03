@@ -209,21 +209,24 @@ public class SmartLockExContentDefine {
 		
 		// 列名属性
 		public static final String AUTHORIZE_ID = "AuthorizeID";
+		public static final String INDEX_ID = "IndexID";
 		public static final String LOCK_ID = "LockID";
 		public static final String USER_NAME = "UserName";
 		public static final String USER_STATUS = "UserStatus";
 
 		// 列数
 		public static final int ID_COLUMN = 0;
-		public static final int AUTHORIZE_ID_COLUMN = 1;
-		public static final int LOCK_ID_COLUMN = 2;
-		public static final int USER_NAME_COLUMN = 3;
-		public static final int USER_STATUS_COLUMN = 4;
+		public static final int INDEX_ID_COLUMN = 1;
+		public static final int AUTHORIZE_ID_COLUMN = 2;
+		public static final int LOCK_ID_COLUMN = 3;
+		public static final int USER_NAME_COLUMN = 4;
+		public static final int USER_STATUS_COLUMN = 5;
 		
 		// create table
 		public final static String TABLE_CREATE = "CREATE TABLE IF NOT EXISTS "
 				+ TABLE_NAME + " (" 
 				+ _ID + " integer primary key autoincrement, " 
+				+ INDEX_ID + " integer default 0, "
 				+ AUTHORIZE_ID + " integer default 0, "
 				+ LOCK_ID + " text default '', "  
 				+ USER_NAME + " text default '', " 
@@ -255,6 +258,7 @@ public class SmartLockExContentDefine {
 		
 		// 列名属性
 		public static final String PASSWORD_ID = "PasswordID";
+		public static final String INDEX_ID = "IndexID";
 		public static final String LOCK_ID = "LockID";
 		public static final String USER_NAME = "UserName";
 		public static final String PASSWORD_TYPE = "Password_Type";
@@ -264,18 +268,20 @@ public class SmartLockExContentDefine {
 
 		// 列数
 		public static final int ID_COLUMN = 0;
-		public static final int PASSWORD_ID_COLUMN = 1;
-		public static final int LOCK_ID_COLUMN = 2;
-		public static final int USER_NAME_COLUMN = 3;
-		public static final int PASSWORD_TYPE_COLUMN = 4;
-		public static final int BEGIN_TIIME_COLUMN = 5;
-		public static final int END_TIIME_COLUMN = 6;
-		public static final int MEMO_COLUMN = 7;
+		public static final int INDEX_ID_COLUMN = 1;
+		public static final int PASSWORD_ID_COLUMN = 2;
+		public static final int LOCK_ID_COLUMN = 3;
+		public static final int USER_NAME_COLUMN = 4;
+		public static final int PASSWORD_TYPE_COLUMN = 5;
+		public static final int BEGIN_TIIME_COLUMN = 6;
+		public static final int END_TIIME_COLUMN = 7;
+		public static final int MEMO_COLUMN = 8;
 
 		// create table
 		public final static String TABLE_CREATE = "CREATE TABLE IF NOT EXISTS "
 				+ TABLE_NAME + " (" 
 				+ _ID + " integer primary key autoincrement, " 
+				+ INDEX_ID + " integer default 0, "
 				+ PASSWORD_ID + " integer default 0, "
 				+ LOCK_ID + " text default '', "  
 				+ USER_NAME + " text default '', " 

@@ -100,15 +100,28 @@ public class SmartLockEventHandler extends Handler {
 
 		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
 				SmartLockMessage.EVT_SP_QRYLOCK,
-				new SmartLockEventHandlerQueryLock()));
+				new SmartLockEventHandlerLockQuery()));
+
+		// AuthorizeUser
+		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
+				SmartLockMessage.EVT_SP_QRYAUTHORIZEUSER,
+				new SmartLockEventHandlerAuthorizeUserQuery()));
+
+		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
+				SmartLockMessage.EVT_SP_ADDAUTHORIZEUSER,
+				new SmartLockEventHandlerAuthorizeUserAdd()));
+
+		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
+				SmartLockMessage.EVT_SP_DELAUTHORIZEUSER,
+				new SmartLockEventHandlerAuthorizeUserDelete()));
 		
 		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
 				SmartLockMessage.EVT_SP_ADDLOCK,
-				new SmartLockEventHandlerAddLock()));
+				new SmartLockEventHandlerLockAdd()));
 
 		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
 				SmartLockMessage.EVT_SP_DELLOCK,
-				new SmartLockEventHandlerDeleteLock()));
+				new SmartLockEventHandlerLockDelete()));
 
 		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
 				SmartLockMessage.EVT_SP_MODLOCK,
@@ -116,11 +129,11 @@ public class SmartLockEventHandler extends Handler {
 
 		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
 				SmartLockMessage.EVT_SP_OPEN_LOCK,
-				new SmartLockEventHandlerOpenLock()));
+				new SmartLockEventHandlerLockOpen()));
 		
 		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
 				SmartLockMessage.EVT_SP_BACK2AP,
-				new SmartLockEventHandlerBack2AP()));
+				new SmartLockEventHandlerLockBack2AP()));
 
 
 		mEventHandlerMaps.add(new SmartLockEventHandlerMap(

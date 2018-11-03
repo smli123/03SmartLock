@@ -36,6 +36,8 @@ public class SmartLockExAuthorizeUserHelper {
 			AuthorizeUserDefine item = new AuthorizeUserDefine();
 			item.mID = cur
 					.getInt(SmartLockExContentDefine.AuthorizeUser.ID_COLUMN);
+			item.mIndex = cur
+					.getInt(SmartLockExContentDefine.AuthorizeUser.INDEX_ID_COLUMN);
 			item.mAuthorizeID = cur
 					.getInt(SmartLockExContentDefine.AuthorizeUser.AUTHORIZE_ID_COLUMN);
 			item.mLockID = cur
@@ -91,6 +93,8 @@ public class SmartLockExAuthorizeUserHelper {
 				
 				item.mID = cur
 						.getInt(SmartLockExContentDefine.AuthorizeUser.ID_COLUMN);
+				item.mIndex = cur
+						.getInt(SmartLockExContentDefine.AuthorizeUser.INDEX_ID_COLUMN);
 				item.mAuthorizeID = cur
 						.getInt(SmartLockExContentDefine.AuthorizeUser.AUTHORIZE_ID_COLUMN);
 				item.mLockID = cur
@@ -119,6 +123,8 @@ public class SmartLockExAuthorizeUserHelper {
 		}
 
 		ContentValues values = new ContentValues();
+		values.put(SmartLockExContentDefine.AuthorizeUser.INDEX_ID,
+				item.mIndex);
 		values.put(SmartLockExContentDefine.AuthorizeUser.AUTHORIZE_ID,
 				item.mAuthorizeID);
 		values.put(SmartLockExContentDefine.AuthorizeUser.LOCK_ID,
@@ -179,6 +185,8 @@ public class SmartLockExAuthorizeUserHelper {
 		}
 
 		ContentValues values = new ContentValues();
+		values.put(SmartLockExContentDefine.AuthorizeUser.INDEX_ID,
+				item.mIndex);
 		values.put(SmartLockExContentDefine.AuthorizeUser.AUTHORIZE_ID,
 				item.mAuthorizeID);
 		values.put(SmartLockExContentDefine.AuthorizeUser.LOCK_ID,

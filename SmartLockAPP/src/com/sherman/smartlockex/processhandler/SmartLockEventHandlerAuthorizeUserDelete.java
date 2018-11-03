@@ -10,8 +10,8 @@ import com.sherman.smartlockex.ui.common.PubFunc;
 import com.sherman.smartlockex.ui.smartlockex.AppServerReposeDefine;
 import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
 
-public class SmartLockEventHandlerDeleteLock extends SmartLockEventHandler {
-	Intent mIntent = new Intent(PubDefine.LOCK_DELETELOCK_BROADCAST);
+public class SmartLockEventHandlerAuthorizeUserDelete extends SmartLockEventHandler {
+	Intent mIntent = new Intent(PubDefine.LOCK_DELAUTHORIZEUSER_BROADCAST);
 	
 	@Override
 	public void handleMessage(Message msg) {
@@ -21,18 +21,13 @@ public class SmartLockEventHandlerDeleteLock extends SmartLockEventHandler {
 		
 		if (0 == ret) {
 	    	mIntent.putExtra("RESULT", 0);
-
-	    	SmartLockExLockHelper mLockHelper = new SmartLockExLockHelper(SmartLockApplication.getContext());
-	    	String moduleID = buffer[3];
-	    	boolean result = mLockHelper.deleteSmartLock(moduleID);
-	    	
 	    	SmartLockApplication.getContext().sendBroadcast(mIntent);
 		} else {
 	    	mIntent.putExtra("RESULT", 1);
 	    	int resid = AppServerReposeDefine.getServerResponse(ret);
 	    	if (0 == resid) {
 	    		mIntent.putExtra("MESSAGE", 
-	    				SmartLockApplication.getContext().getString(R.string.smartlock_ctrl_delete_fail));
+	    				SmartLockApplication.getContext().getString(R.string.smartlock_ctrl_delete_authorize_fail));
 	    	} else {
 	    		mIntent.putExtra("MESSAGE", 
 	    				SmartLockApplication.getContext().getString(resid));

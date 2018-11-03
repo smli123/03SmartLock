@@ -122,14 +122,14 @@ public class ModuleLoginHandle implements ICallFunction {
 							// 把USER_MODULE 中user和Mac的对应改为user和strDevId的对应关系
 							Vector<USER_MODULE> infos = dbMgr.QueryUserModuleByDevId(strMac);
 							if (infos == null) {
-								LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Failed to QueryUserModuleByDevId. (DevID or Mac:%s)", 
+								LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Failed to QueryUserModuleByDevId. (Mac:%s)", 
 										strMac));
 							} else {
 								if (infos.size() == 0) {
-									LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Find 0 UserModule in QueryUserModuleByDevId. (DevID or Mac:%s)", 
+									LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Find 0 UserModule in QueryUserModuleByDevId. (Mac:%s)", 
 											strMac));
 								} else {
-									LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Find %d UserModule in QueryUserModuleByDevId. (DevID or Mac:%s)", 
+									LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Find %d UserModule in QueryUserModuleByDevId. (Mac:%s)", 
 												infos.size(), strMac));
 									for (i = 0; i < infos.size(); i++) {
 										USER_MODULE user = infos.get(i);
@@ -182,7 +182,7 @@ public class ModuleLoginHandle implements ICallFunction {
 			LogWriter.WriteTraceLog(LogWriter.SELF, String.format("Login: Send UserName to Module [%s:%s]", strNewAppUserName, strDevId));
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 			String newDate = df.format(new Date());
-			if (strNewAppUserName.isEmpty() == true) {
+			if (strAppUserName.equalsIgnoreCase(PubDefine.DEFAULT_USERNAME) == true) {
 				ResponseToModule(strDevId, String.format("%s,%s,%s,%s,%d,%s#", strCookie, ServerCommDefine.MODULE_LOGIN_MSG_HEADER, strNewAppUserName, strDevId, 1, newDate));
 			} else {
 				ResponseToModule(strDevId, String.format("%s,%s,%s,%s,%d,%s#", strCookie, ServerCommDefine.MODULE_LOGIN_MSG_HEADER, strNewAppUserName, strDevId, 0, newDate));

@@ -1,5 +1,7 @@
 package com.sherman.smartlockex.ui.dev;
 
+import java.util.ArrayList;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -17,9 +19,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.sherman.smartlockex.R;
+import com.sherman.smartlockex.dataprovider.SmartLockExAuthorizeUserHelper;
 import com.sherman.smartlockex.dataprovider.SmartLockExLockHelper;
+import com.sherman.smartlockex.dataprovider.SmartLockExPasswordHelper;
 import com.sherman.smartlockex.internet.UDPReceiver;
 import com.sherman.smartlockex.processhandler.SmartLockMessage;
+import com.sherman.smartlockex.ui.common.AuthorizeUserDefine;
+import com.sherman.smartlockex.ui.common.PasswordDefine;
 import com.sherman.smartlockex.ui.common.PubDefine;
 import com.sherman.smartlockex.ui.common.PubFunc;
 import com.sherman.smartlockex.ui.common.PubStatus;
@@ -34,6 +40,8 @@ import com.sherman.smartlockex.ui.util.MyAlertDialog;
 public class LockDetailActivity extends TitledActivity implements OnClickListener {
 	private Context mContext = null;
 	private SmartLockExLockHelper mLockHelper = null;
+	private SmartLockExAuthorizeUserHelper mAuthorizeHelper = null;
+	private SmartLockExPasswordHelper mPasswordHelper = null;
 	
 	private LinearLayout ll_administrator_area;
 	private TextView tv_status;
@@ -112,12 +120,14 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 				R.drawable.title_btn_selector, this);
         
         mLockHelper = new SmartLockExLockHelper(mContext);
+        mAuthorizeHelper = new SmartLockExAuthorizeUserHelper(mContext);
+        mPasswordHelper = new SmartLockExPasswordHelper(mContext);
         
         Intent intent = getIntent();
         mLockID = intent.getStringExtra("LOCKID");
         
         if(mLockID.isEmpty() == false) {
-        	mLock = mLockHelper.getSmartLock(mLockID);
+        	mLock = mLockHelper.get(mLockID);
         }
         
         initView();
@@ -179,74 +189,111 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 		lv_authorize = (ListView) findViewById(R.id.lv_authorize);
 		lv_password_management= (ListView) findViewById(R.id.lv_password_management);
 		
+		updateAuthorize();
+		updatePassword();
+		
 		Message msg = new Message();
 		msg.what = 0;
 		msg.arg1 = mLock.mStatus;
 		updateHandler.sendMessage(msg);
 	}
+
+	private void updateAuthorize() {
+		ArrayList<AuthorizeUserDefine> items = mAuthorizeHelper
+				.getAll(mLockID);
+		AdapterAuthorizeList adapter = new AdapterAuthorizeList(mContext,
+				items, mPressHandler);
+		lv_authorize.setAdapter(adapter);
+	}
+
+	private void updatePassword() {
+		ArrayList<PasswordDefine> items = mPasswordHelper
+				.getAll(mLockID);
+		AdapterPasswordManagement adapter = new AdapterPasswordManagement(mContext,
+				items, mPressHandler);
+		lv_authorize.setAdapter(adapter);
+	}
 	
-//	private void updateAuthorize() {
-//		AdapterDevlist adapter = new AdapterDevlist(mContext,
-//				result, mPressHandler);
-//		lv_authorize.setAdapter(adapter);
-//	}
-//	
-//	private Handler mPressHandler = new Handler() {
-//		public void handleMessage(Message msg) {
-//			mFocusLockId = (String) msg.obj;
-//			SmartLockDefine plug = mLockHelper.getSmartLock(mFocusLockId);
-//			PubFunc.log("mFocusLockId=" + mFocusLockId);
-//			if (1 == msg.what) { 		// 删除授权用户
-//				if (null != plug) {
-//					String str_delete = SmartLockApplication.getContext().getString(R.string.smartlock_ctrl_delete);
-//					String str_ok = SmartLockApplication.getContext().getString(R.string.smartlock_confirm);
-//					String str_cancel = SmartLockApplication.getContext().getString(R.string.smartlock_cancel);
-//					final MyAlertDialog dialog = new MyAlertDialog(mContext)
-//							.builder().setTitle(str_delete)
-//							.setNegativeButton(str_cancel, new OnClickListener() {
-//								@Override
-//								public void onClick(View v) {
-//
-//								}
-//							});
-//					dialog.setPositiveButton(str_ok, new OnClickListener() {
-//						@Override
-//						public void onClick(View v) {
-//							deletePlug(mFocusLockId);
-//						}
-//					});
-//					dialog.show();
-//
-//				}
-//			}
-//			
-//			if (2 == msg.what) { 		// 删除临时密码
-//				if (null != plug) {
-//					String str_delete = SmartLockApplication.getContext().getString(R.string.smartlock_ctrl_delete);
-//					String str_ok = SmartLockApplication.getContext().getString(R.string.smartlock_confirm);
-//					String str_cancel = SmartLockApplication.getContext().getString(R.string.smartlock_cancel);
-//					final MyAlertDialog dialog = new MyAlertDialog(mContext)
-//							.builder().setTitle(str_delete)
-//							.setNegativeButton(str_cancel, new OnClickListener() {
-//								@Override
-//								public void onClick(View v) {
-//
-//								}
-//							});
-//					dialog.setPositiveButton(str_ok, new OnClickListener() {
-//						@Override
-//						public void onClick(View v) {
-//							deletePlug(mFocusLockId);
-//						}
-//					});
-//					dialog.show();
-//
-//				}
-//			}
-//			
-//			
-//		};
-//	};
+	private Handler mPressHandler = new Handler() {
+		public void handleMessage(Message msg) {
+			final String id = (String)msg.obj;
+			
+			if (1 == msg.what) { 		// 删除授权用户
+				AuthorizeUserDefine item = mAuthorizeHelper.get(mLockID, id);
+				
+				if (null != item) {
+					String str_delete = SmartLockApplication.getContext().getString(R.string.smartlock_ctrl_delete_authorize);
+					String str_ok = SmartLockApplication.getContext().getString(R.string.smartlock_confirm);
+					String str_cancel = SmartLockApplication.getContext().getString(R.string.smartlock_cancel);
+					final MyAlertDialog dialog = new MyAlertDialog(mContext)
+							.builder().setTitle(str_delete)
+							.setNegativeButton(str_cancel, new OnClickListener() {
+								@Override
+								public void onClick(View v) {
+
+								}
+							});
+					dialog.setPositiveButton(str_ok, new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							deleteAuthorize(mLockID, id);
+						}
+					});
+					dialog.show();
+				}
+			}
+			
+			if (2 == msg.what) { 		// 删除临时密码
+				PasswordDefine item = mPasswordHelper.get(mLockID, id);
+				if (null != item) {
+					String str_delete = SmartLockApplication.getContext().getString(R.string.smartlock_ctrl_delete_password);
+					String str_ok = SmartLockApplication.getContext().getString(R.string.smartlock_confirm);
+					String str_cancel = SmartLockApplication.getContext().getString(R.string.smartlock_cancel);
+					final MyAlertDialog dialog = new MyAlertDialog(mContext)
+							.builder().setTitle(str_delete)
+							.setNegativeButton(str_cancel, new OnClickListener() {
+								@Override
+								public void onClick(View v) {
+
+								}
+							});
+					dialog.setPositiveButton(str_ok, new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							deletePassword(mLockID, id);
+						}
+					});
+					dialog.show();
+				}
+			}
+		};
+	};
+
+	private void deleteAuthorize(String moduleID, String id) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(SmartLockMessage.CMD_SP_OPEN_LOCK)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(PubStatus.getUserName())
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(mLockID)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(String.valueOf(id));
+
+		sendMsg(true, sb.toString(), true);
+	}
+
+	private void deletePassword(String moduleID, String id) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(SmartLockMessage.CMD_SP_OPEN_LOCK)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(PubStatus.getUserName())
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(mLockID)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(String.valueOf(id));
+
+		sendMsg(true, sb.toString(), true);
+	}
 
 	private void setLock(int i_status) {
 		StringBuffer sb = new StringBuffer();

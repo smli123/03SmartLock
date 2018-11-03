@@ -163,6 +163,7 @@
     
     <string name="common_timeout">时间超时</string>
 	<string name="smartlock_add_fail">"增加门锁失败"</string>
+	<string name="smartlock_add_authorize_fail">"增加授权用户失败"</string>
 	<string name="smartlock_add_success">"增加门锁成功"</string>
 	<string name="add_lock_name">门锁名称</string>
     <string name="add_lock_mac">门锁MAC</string>
@@ -215,9 +216,13 @@
 
 	<string name="smartlock_ctrl_delete">"删除门锁"</string>
 	
+	<string name="smartlock_ctrl_delete_authorize">"删除授权用户"</string>
+	<string name="smartlock_ctrl_delete_password">"删除密码"</string>
+	
 	<string name="smartlock_ctrl_modifyplugname_fail">"修改门锁名称失败"</string>
 	<string name="smartlock_ctrl_modifypwd_fail">"修改密码失败"</string>
 	<string name="smartlock_ctrl_delete_fail">"删除门锁失败"</string>
+	<string name="smartlock_ctrl_delete_authorize_fail">"删除授权用户失败"</string>
 	<string name="smartlock_oper_lock_fail">"操作门锁失败"</string>
 	
     <string name="smartlock_ctrl_userregister_fail">"用户注册失败"</string>

@@ -22,6 +22,13 @@ public class SmartLockMessage {
 	public static final String CMD_SP_MODYLOCK 		= "APPMODLOCK";
 	public static final String CMD_SP_QRYLOCK 		= "APPQRYLOCK";
 	
+	public static final String CMD_SP_QRYAUTHORIZEUSER 	= "APPQRYAUTHORIZEUSER";
+	public static final String CMD_SP_ADDAUTHORIZEUSER 	= "APPADDAUTHORIZEUSER";
+	public static final String CMD_SP_DELAUTHORIZEUSER 	= "APPDELAUTHORIZEUSER";
+	public static final String CMD_SP_QRYPASSWORD 		= "APPQRYPASSWORD";
+	public static final String CMD_SP_ADDPASSWORD 		= "APPADDPASSWORD";
+	public static final String CMD_SP_DELPASSWORD 		= "APPDELPASSWORD";
+	
 	// 模块交互命令
 	public static final String CMD_SP_LOGIN_MODULE = "LOGIN"; // 登录模块的命令，用于直连方式登录
 
@@ -47,7 +54,14 @@ public class SmartLockMessage {
 	public static final int EVT_SP_DELLOCK = 101;
 	public static final int EVT_SP_MODLOCK = 102;
 	public static final int EVT_SP_QRYLOCK = 106;
-
+	
+	public static final int EVT_SP_QRYAUTHORIZEUSER = 107;
+	public static final int EVT_SP_ADDAUTHORIZEUSER = 108;
+	public static final int EVT_SP_DELAUTHORIZEUSER = 109;
+	public static final int EVT_SP_QRYPASSWORD = 110;
+	public static final int EVT_SP_ADDPASSWORD = 111;
+	public static final int EVT_SP_DELPASSWORD = 112;
+	
 	public static final int EVT_SP_BACK2AP = 150;
 	public static final int EVT_SP_OPEN_LOCK = 151;
 
@@ -69,6 +83,13 @@ public class SmartLockMessage {
 		mEventCommand.put(CMD_SP_DELLOCK, EVT_SP_DELLOCK);
 		mEventCommand.put(CMD_SP_MODYLOCK, EVT_SP_MODLOCK);
 		mEventCommand.put(CMD_SP_QRYLOCK, EVT_SP_QRYLOCK);
+		
+		mEventCommand.put(CMD_SP_QRYAUTHORIZEUSER, EVT_SP_QRYAUTHORIZEUSER);
+		mEventCommand.put(CMD_SP_ADDAUTHORIZEUSER, EVT_SP_ADDAUTHORIZEUSER);
+		mEventCommand.put(CMD_SP_DELAUTHORIZEUSER, EVT_SP_DELAUTHORIZEUSER);
+		mEventCommand.put(CMD_SP_QRYPASSWORD, EVT_SP_QRYPASSWORD);
+		mEventCommand.put(CMD_SP_ADDPASSWORD, EVT_SP_ADDPASSWORD);
+		mEventCommand.put(CMD_SP_DELPASSWORD, EVT_SP_DELPASSWORD);
 		
 		mEventCommand.put(CMD_SP_BACK2AP, EVT_SP_BACK2AP);
 		mEventCommand.put(CMD_SP_OPEN_LOCK, EVT_SP_OPEN_LOCK);
@@ -115,6 +136,14 @@ public class SmartLockMessage {
 		mCommandAction.put(CMD_SP_DELLOCK, PubDefine.LOCK_DELETELOCK_BROADCAST);
 		mCommandAction.put(CMD_SP_MODYLOCK, PubDefine.LOCK_MODIFY_LOCKNAME_BROADCAST);
 		mCommandAction.put(CMD_SP_QRYLOCK, PubDefine.LOCK_QRYLOCK_BROADCAST);
+		
+		mCommandAction.put(CMD_SP_QRYAUTHORIZEUSER, PubDefine.LOCK_QRYAUTHORIZEUSER_BROADCAST);
+		mCommandAction.put(CMD_SP_ADDAUTHORIZEUSER, PubDefine.LOCK_ADDAUTHORIZEUSER_BROADCAST);
+		mCommandAction.put(CMD_SP_DELAUTHORIZEUSER, PubDefine.LOCK_DELAUTHORIZEUSER_BROADCAST);
+		
+		mCommandAction.put(CMD_SP_QRYPASSWORD, PubDefine.LOCK_QRYPASSWORD_BROADCAST);
+		mCommandAction.put(CMD_SP_ADDPASSWORD, PubDefine.LOCK_ADDPASSWORD_BROADCAST);
+		mCommandAction.put(CMD_SP_DELPASSWORD, PubDefine.LOCK_DELPASSWORD_BROADCAST);
 		
 		mCommandAction.put(CMD_SP_BACK2AP, PubDefine.LOCK_BACK2AP_BROADCAST);
 		mCommandAction.put(CMD_SP_OPEN_LOCK, PubDefine.LOCK_OPENLOCK_BROADCAST);

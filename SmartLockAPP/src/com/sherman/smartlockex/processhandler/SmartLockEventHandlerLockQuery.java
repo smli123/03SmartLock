@@ -12,7 +12,7 @@ import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
 import android.content.Intent;
 import android.os.Message;
 
-public class SmartLockEventHandlerQueryLock extends SmartLockEventHandler {
+public class SmartLockEventHandlerLockQuery extends SmartLockEventHandler {
 	private Intent mIntent = new Intent(PubDefine.LOCK_QRYLOCK_BROADCAST);
 	
 	private ArrayList<SmartLockDefine> locks  = new ArrayList<SmartLockDefine>();
@@ -29,7 +29,7 @@ public class SmartLockEventHandlerQueryLock extends SmartLockEventHandler {
 		int lockCount = Integer.parseInt(buffer[EVENT_MESSAGE_HEADER+1]);
 		if (0 == lockCount) {
 			SmartLockExLockHelper mLockHelper = new SmartLockExLockHelper(SmartLockApplication.getContext());
-			mLockHelper.clearSmartLock();
+			mLockHelper.clear();
 			
 			mIntent.putExtra("RESULT", 1);
 			mIntent.putExtra("MESSAGE", "");
@@ -70,11 +70,11 @@ public class SmartLockEventHandlerQueryLock extends SmartLockEventHandler {
 	
 	private void add2DB(ArrayList<SmartLockDefine> locks) {
 		SmartLockExLockHelper mLockHelper = new SmartLockExLockHelper(SmartLockApplication.getContext());
-		mLockHelper.clearSmartLock();
+		mLockHelper.clear();
 
 		int i = 0, j = 0;
 		for (i = 0; i < locks.size(); i++) {
-			long id = mLockHelper.addSmartLock(locks.get(i));
+			long id = mLockHelper.add(locks.get(i));
 		}
 		
 		mLockHelper = null;

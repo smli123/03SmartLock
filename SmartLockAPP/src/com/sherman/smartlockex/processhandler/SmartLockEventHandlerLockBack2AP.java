@@ -9,7 +9,7 @@ import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
 import android.content.Intent;
 import android.os.Message;
 
-public class SmartLockEventHandlerBack2AP extends SmartLockEventHandler {
+public class SmartLockEventHandlerLockBack2AP extends SmartLockEventHandler {
 	Intent mIntent = new Intent(PubDefine.LOCK_BACK2AP_BROADCAST);
 	@Override
 	public void handleMessage(Message msg) {

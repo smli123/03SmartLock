@@ -36,6 +36,8 @@ public class SmartLockExPasswordHelper {
 			PasswordDefine item = new PasswordDefine();
 			item.mID = cur
 					.getInt(SmartLockExContentDefine.Password.ID_COLUMN);
+			item.mIndex = cur
+					.getInt(SmartLockExContentDefine.Password.INDEX_ID_COLUMN);
 			item.mPasswordID = cur
 					.getInt(SmartLockExContentDefine.Password.PASSWORD_ID_COLUMN);
 			item.mLockID = cur
@@ -97,6 +99,8 @@ public class SmartLockExPasswordHelper {
 				
 				item.mID = cur
 						.getInt(SmartLockExContentDefine.Password.ID_COLUMN);
+				item.mIndex = cur
+						.getInt(SmartLockExContentDefine.Password.INDEX_ID_COLUMN);
 				item.mPasswordID = cur
 						.getInt(SmartLockExContentDefine.Password.PASSWORD_ID_COLUMN);
 				item.mLockID = cur
@@ -132,6 +136,8 @@ public class SmartLockExPasswordHelper {
 		ContentValues values = new ContentValues();
 		values.put(SmartLockExContentDefine.Password.PASSWORD_ID,
 				item.mPasswordID);
+		values.put(SmartLockExContentDefine.Password.INDEX_ID,
+				item.mIndex);
 		values.put(SmartLockExContentDefine.Password.LOCK_ID,
 				item.mLockID);
 		values.put(SmartLockExContentDefine.Password.USER_NAME,
@@ -198,6 +204,8 @@ public class SmartLockExPasswordHelper {
 		ContentValues values = new ContentValues();
 		values.put(SmartLockExContentDefine.Password.PASSWORD_ID,
 				item.mPasswordID);
+		values.put(SmartLockExContentDefine.Password.INDEX_ID,
+				item.mIndex);
 		values.put(SmartLockExContentDefine.Password.LOCK_ID,
 				item.mLockID);
 		values.put(SmartLockExContentDefine.Password.USER_NAME,

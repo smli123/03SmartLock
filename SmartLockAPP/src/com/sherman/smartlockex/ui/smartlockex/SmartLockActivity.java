@@ -112,7 +112,7 @@ public class SmartLockActivity extends FragmentActivity
 			case 0:
 				status = msg.arg1;
 				moduleID = (String) msg.obj;
-				lock = mLockHelper.getSmartLock(moduleID);
+				lock = mLockHelper.get(moduleID);
 				lockName = lock.mName;
 				
 				str_status = SmartLockApplication.getInstance().getString(R.string.lock_detail_lockstatus_unknown);
@@ -145,7 +145,7 @@ public class SmartLockActivity extends FragmentActivity
 		case 1:
 			status = msg.arg1;
 			moduleID = (String) msg.obj;
-			lock = mLockHelper.getSmartLock(moduleID);
+			lock = mLockHelper.get(moduleID);
 			lockName = lock.mName;
 			
 			str_status = SmartLockApplication.getInstance().getString(R.string.lock_detail_lockstatus_unknown);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.sherman.smartlockex.R;
 import com.sherman.smartlockex.dataprovider.SmartLockExLockHelper;
+import com.sherman.smartlockex.ui.common.PasswordDefine;
 import com.sherman.smartlockex.ui.common.SmartLockDefine;
 import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
 import com.sherman.smartlockex.ui.wheelutils.ActionSheetDialog;
@@ -30,27 +31,27 @@ import android.widget.TextView;
 
 public class AdapterPasswordManagement extends BaseAdapter {
 
-	private ArrayList<SmartLockDefine> mDevlist = null;
+	private ArrayList<PasswordDefine> mItemList = null;
 	private LayoutInflater mInflater = null;
 	private Context mContext = null;
 	private Handler mHandler = null;
 
 	public AdapterPasswordManagement(Context context,
-			ArrayList<SmartLockDefine> devList, Handler handler) {
+			ArrayList<PasswordDefine> devList, Handler handler) {
 		mContext = context;
 		mInflater = LayoutInflater.from(context);
-		mDevlist = devList;
+		mItemList = devList;
 		mHandler = handler;
 	}
 
 	@Override
 	public int getCount() {
-		return mDevlist.size();
+		return mItemList.size();
 	}
 
 	@Override
 	public Object getItem(int pos) {
-		return mDevlist.get(pos);
+		return mItemList.get(pos);
 	}
 
 	@Override
@@ -59,63 +60,50 @@ public class AdapterPasswordManagement extends BaseAdapter {
 	}
 
 	private class ViewHolder {
-		public RelativeLayout rl_lock_item;
-		public ImageView iv_lock_icon;
-		public TextView tv_lock_name;
-		public ImageView iv_lock_online;
-		public ImageView iv_lock_status;
-		public ImageView iv_lock_charge;
-		public TextView tv_lock_charge;
-		public ImageView iv_lock_open;
-		public ImageView iv_lock_close;
-		public ImageView iv_lock_authorize;
+		public RelativeLayout rl_item;
+		public TextView tv_no;
+		public TextView tv_name;
+		public TextView tv_password;
+		public ImageView iv_type;
+		public TextView tv_time_start;
+		public TextView tv_time_stop;
+		public TextView tv_memo;
 
 		private void setImageRes(ImageView view, int resId) {
 			view.setImageResource(resId);
 		}
 
 		@SuppressLint("ResourceAsColor") 
-		public void ViewData(SmartLockDefine device, int position) {
-			if (device != null) {
-				tv_lock_name.setSingleLine(true);
+		public void ViewData(PasswordDefine item, int position) {
+			if (item != null) {
+				tv_no.setSingleLine(true);
+				tv_name.setSingleLine(true);
 
-				if (!TextUtils.isEmpty(device.mLockID)) {
-					tv_lock_name.setText(device.mName);
-
-					if (device.mOnline == true) {
-						rl_lock_item.setBackgroundColor(Color.TRANSPARENT);
-						iv_lock_online.setImageResource(R.drawable.smp_online);
-					} else {
-						rl_lock_item.setBackgroundColor(Color.LTGRAY);
-						iv_lock_online.setImageResource(R.drawable.smp_offline);
-					}
-					
-					if (device.mRelation == 0) {
-						iv_lock_authorize.setVisibility(View.VISIBLE);
-						rl_lock_item.setOnLongClickListener(deletePlug);
-					} else {
-						iv_lock_authorize.setVisibility(View.GONE);
-						rl_lock_item.setOnLongClickListener(null);
-					}
-						
-					rl_lock_item.setOnClickListener(selectPlugClick);					
-					iv_lock_icon.setImageResource(R.drawable.smp_lock_big);
-					iv_lock_status.setImageResource(device.mStatus == 0 ? R.drawable.smp_lock_close : R.drawable.smp_lock_open);
-					tv_lock_charge.setText(String.valueOf(device.mCharge));
-					
-					rl_lock_item.setContentDescription(String
-							.valueOf(device.mLockID));
+				tv_no.setText(String.valueOf(item.mIndex));
+				tv_password.setText(item.mPassword);
+				tv_name.setText(String.valueOf(item.mUserName));
+				if (item.mType == 0) { 	// 0: 永久密码，
+					iv_type.setBackgroundResource(R.drawable.smp_password_type_forever);
+				} else if  (item.mType == 1) { 	// 1： 临时密码
+					iv_type.setBackgroundResource(R.drawable.smp_password_type_temp);
 				}
+				tv_time_start.setText(String.valueOf(item.mBeginTime));
+				tv_time_stop.setText(String.valueOf(item.mEndTime));
+				tv_memo.setText(String.valueOf(item.mMemo));
+				
+				rl_item.setContentDescription(String
+						.valueOf(item.mPasswordID));
+				rl_item.setOnLongClickListener(deleteItemClick);
 			}
 		}
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		if ((mDevlist == null) || (mDevlist.size() == 0)) {
+		if ((mItemList == null) || (mItemList.size() == 0)) {
 			return convertView;
 		}
-		if ((position < 0) || (position > mDevlist.size())) {
+		if ((position < 0) || (position > mItemList.size())) {
 			return convertView;
 		}
 		if (mInflater == null) {
@@ -125,47 +113,40 @@ public class AdapterPasswordManagement extends BaseAdapter {
 		ViewHolder holder = null;
 		if (convertView == null) {
 			holder = new ViewHolder();
-			convertView = mInflater.inflate(R.layout.view_lock_item, null);
+			convertView = mInflater.inflate(R.layout.view_password_item, null);
 			
-			holder.rl_lock_item = (RelativeLayout) convertView
-					.findViewById(R.id.rl_lock_item);
-			holder.iv_lock_icon = (ImageView) convertView
-					.findViewById(R.id.iv_lock_icon);
-			holder.tv_lock_name = (TextView) convertView
-					.findViewById(R.id.tv_lock_name);
-			holder.iv_lock_online = (ImageView) convertView
-					.findViewById(R.id.iv_lock_online);
-			holder.iv_lock_status = (ImageView) convertView
-					.findViewById(R.id.iv_lock_status);
-			holder.iv_lock_charge = (ImageView) convertView
-					.findViewById(R.id.iv_lock_charge);
-			holder.tv_lock_charge = (TextView) convertView
-					.findViewById(R.id.tv_lock_charge);
-			holder.iv_lock_open = (ImageView) convertView
-					.findViewById(R.id.iv_lock_open);
-			holder.iv_lock_close = (ImageView) convertView
-					.findViewById(R.id.iv_lock_close);
-			holder.iv_lock_authorize = (ImageView) convertView
-					.findViewById(R.id.iv_lock_authorize);
+			holder.rl_item =(RelativeLayout) convertView
+					.findViewById(R.id.rl_item); 
+			holder.tv_no = (TextView) convertView
+					.findViewById(R.id.tv_no);
+			holder.tv_name = (TextView) convertView
+					.findViewById(R.id.tv_name);
+			holder.tv_password = (TextView) convertView
+					.findViewById(R.id.tv_password);
+			holder.iv_type = (ImageView) convertView
+					.findViewById(R.id.iv_type);
+			holder.tv_time_start = (TextView) convertView
+					.findViewById(R.id.tv_time_start);
+			holder.tv_time_stop = (TextView) convertView
+					.findViewById(R.id.tv_time_stop);
+			holder.tv_memo = (TextView) convertView
+					.findViewById(R.id.tv_memo);
 			
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		if (holder != null && mDevlist != null && position < mDevlist.size()) {
-			SmartLockDefine FavoriteItem = mDevlist.get(position);
+		if (holder != null && mItemList != null && position < mItemList.size()) {
+			PasswordDefine FavoriteItem = mItemList.get(position);
 			convertView.setBackgroundColor(Color.TRANSPARENT);
 			holder.ViewData(FavoriteItem, position);
 
-			if (FavoriteItem.mType.equals("") == true) {
-				// do nothing...
-			}
 		}
 		return convertView;
 	}
 
-	View.OnClickListener selectPlugClick = new View.OnClickListener() {
+	View.OnClickListener selectItemClick = new View.OnClickListener() {
 
 		@SuppressWarnings("null")
 		@Override
@@ -176,7 +157,7 @@ public class AdapterPasswordManagement extends BaseAdapter {
 
 			SmartLockExLockHelper mPlugHelper = new SmartLockExLockHelper(
 					SmartLockApplication.getContext());
-			SmartLockDefine mPlug = mPlugHelper.getSmartLock(lockId);
+			SmartLockDefine mPlug = mPlugHelper.get(lockId);
 			if (null == mPlug) {
 				return;
 			}
@@ -192,7 +173,7 @@ public class AdapterPasswordManagement extends BaseAdapter {
 		}
 	};
 
-	View.OnLongClickListener deletePlug = new View.OnLongClickListener() {
+	View.OnLongClickListener deleteItemClick = new View.OnLongClickListener() {
 
 		@Override
 		public boolean onLongClick(final View v) {
@@ -201,19 +182,6 @@ public class AdapterPasswordManagement extends BaseAdapter {
 					.setCancelable(true)
 					.setCanceledOnTouchOutside(true)
 					.addSheetItem(
-							v.getContext().getString(R.string.smartlock_modify_name),
-							SheetItemColor.Blue,
-							new OnSheetItemClickListener() {
-								@Override
-								public void onClick(int which) {
-									Message msg = new Message();
-									msg.what = 0; 		// modify name
-									msg.obj = v.getContentDescription()
-											.toString();
-									mHandler.sendMessage(msg);
-								}
-							})
-					.addSheetItem(
 							v.getContext().getString(
 									R.string.register_info_delete),
 							SheetItemColor.Blue,
@@ -221,7 +189,7 @@ public class AdapterPasswordManagement extends BaseAdapter {
 								@Override
 								public void onClick(int which) {
 									Message msg = new Message();
-									msg.what = 1; 		// delete
+									msg.what = 2; 		// delete
 									msg.obj = v.getContentDescription()
 											.toString();
 									mHandler.sendMessage(msg);

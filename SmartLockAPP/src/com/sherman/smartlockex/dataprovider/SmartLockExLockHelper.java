@@ -62,7 +62,7 @@ public class SmartLockExLockHelper {
 	}
 
 	// 获得指定用户名下所有插座
-	public ArrayList<SmartLockDefine> getAllSmartLock(String user) {
+	public ArrayList<SmartLockDefine> getAll(String user) {
 		ArrayList<SmartLockDefine> devs = new ArrayList<SmartLockDefine>();
 		if (null == mContentResolver) {
 			return null;
@@ -83,7 +83,7 @@ public class SmartLockExLockHelper {
 	}
 
 	// 获得指定插座信息
-	public SmartLockDefine getSmartLock(String id) {
+	public SmartLockDefine get(String id) {
 		SmartLockDefine device = null;
 		if (null == mContentResolver) {
 			return null;
@@ -130,7 +130,7 @@ public class SmartLockExLockHelper {
 	}
 
 	// 增加新插座
-	public long addSmartLock(SmartLockDefine device) {
+	public long add(SmartLockDefine device) {
 		if (null == mContentResolver) {
 			return 0;
 		}
@@ -178,7 +178,7 @@ public class SmartLockExLockHelper {
 	}
 
 	// 删除指定的插座
-	public boolean deleteSmartLock(String id) {
+	public boolean delete(String id) {
 		if (null == mContentResolver) {
 			return false;
 		}
@@ -191,7 +191,7 @@ public class SmartLockExLockHelper {
 	}
 
 	// 删除所有插座
-	public void clearSmartLock() {
+	public void clear() {
 		if (null != mContentResolver) {
 			PubFunc.log(TAG, "Clear call lock");
 			mContentResolver.delete(
@@ -201,7 +201,7 @@ public class SmartLockExLockHelper {
 	}
 
 	// 修改插座
-	public int modifySmartLock(SmartLockDefine device) {
+	public int modify(SmartLockDefine device) {
 		if (null == mContentResolver) {
 			return -1;
 		}

@@ -10,7 +10,7 @@ import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
 import android.content.Intent;
 import android.os.Message;
 
-public class SmartLockEventHandlerAddLock extends SmartLockEventHandler {
+public class SmartLockEventHandlerLockAdd extends SmartLockEventHandler {
 	Intent mIntent = new Intent(PubDefine.LOCK_ADDLOCK_BROADCAST);
 	@Override
 	public void handleMessage(Message msg) {
