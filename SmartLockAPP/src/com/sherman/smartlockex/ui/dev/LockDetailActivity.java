@@ -58,11 +58,16 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 	
 	private String mLockID = "";
 	private SmartLockDefine mLock = null;
+	
+	private MyAlertDialog mAddUserDlg = null;
 
 	private BroadcastReceiver mLoginRev = new BroadcastReceiver() {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
+			if (null != mProgress) {
+				mProgress.dismiss();
+			}
 			if (intent.getAction().equals(PubDefine.LOCK_NOTIFY_STATUS_BROADCAST)) {
 					String moduleID = intent.getStringExtra("LOCKID");
 					int status = intent.getIntExtra("STATUS", -1);
@@ -76,7 +81,7 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 						updateHandler.sendMessage(msg);
 					}
 				}
-			
+
 			if (intent.getAction().equals(PubDefine.LOCK_OPENLOCK_BROADCAST)) {
 				String moduleID = intent.getStringExtra("LOCKID");
 				int status = intent.getIntExtra("STATUS", -1);
@@ -85,6 +90,97 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 					msg.what = 0;
 					msg.arg1 = status;
 					updateHandler.sendMessage(msg);
+				}
+			}
+
+			if (intent.getAction().equals(PubDefine.LOCK_QRYAUTHORIZEUSER_BROADCAST)) {
+				String moduleID = intent.getStringExtra("LOCKID");
+				int status = intent.getIntExtra("RESULT", -1);
+				if (status == 0) {
+					if (moduleID.equals(mLockID) == true) {
+						Message msg = new Message();
+						msg.what = 1;
+						msg.arg1 = status;
+						updateHandler.sendMessage(msg);
+					}
+				} else {
+					String message = intent.getStringExtra("MESSAGE");
+					PubFunc.thinzdoToast(mContext, message);
+				}
+			}
+			if (intent.getAction().equals(PubDefine.LOCK_ADDAUTHORIZEUSER_BROADCAST)) {
+				String moduleID = intent.getStringExtra("LOCKID");
+				int status = intent.getIntExtra("RESULT", -1);
+				if (status == 0) {
+					if (moduleID.equals(mLockID) == true) {
+						Message msg = new Message();
+						msg.what = 2;
+						msg.arg1 = status;
+						updateHandler.sendMessage(msg);
+					}
+				} else {
+					String message = intent.getStringExtra("MESSAGE");
+					PubFunc.thinzdoToast(mContext, message);
+				}
+			}
+			if (intent.getAction().equals(PubDefine.LOCK_DELAUTHORIZEUSER_BROADCAST)) {
+				String moduleID = intent.getStringExtra("LOCKID");
+				int status = intent.getIntExtra("RESULT", -1);
+				if (status == 0) {
+					if (moduleID.equals(mLockID) == true) {
+						Message msg = new Message();
+						msg.what = 3;
+						msg.arg1 = status;
+						updateHandler.sendMessage(msg);
+					}
+				} else {
+					String message = intent.getStringExtra("MESSAGE");
+					PubFunc.thinzdoToast(mContext, message);
+				}
+			}
+			if (intent.getAction().equals(PubDefine.LOCK_QRYPASSWORD_BROADCAST)) {
+				String moduleID = intent.getStringExtra("LOCKID");
+				int status = intent.getIntExtra("RESULT", -1);
+				if (status == 0) {
+					if (moduleID.equals(mLockID) == true) {
+						Message msg = new Message();
+						msg.what = 4;
+						msg.arg1 = status;
+						updateHandler.sendMessage(msg);
+					}
+				} else {
+					String message = intent.getStringExtra("MESSAGE");
+					PubFunc.thinzdoToast(mContext, message);
+				}
+			}
+			if (intent.getAction().equals(PubDefine.LOCK_ADDPASSWORD_BROADCAST)) {
+				String moduleID = intent.getStringExtra("LOCKID");
+				int status = intent.getIntExtra("RESULT", -1);
+				if (status == 0) {
+					if (moduleID.equals(mLockID) == true) {
+						Message msg = new Message();
+						msg.what = 5;
+						msg.arg1 = status;
+						updateHandler.sendMessage(msg);
+					}
+				} else {
+					String message = intent.getStringExtra("MESSAGE");
+					PubFunc.thinzdoToast(mContext, message);
+				}
+			}
+			if (intent.getAction().equals(PubDefine.LOCK_DELPASSWORD_BROADCAST)) {
+				String moduleID = intent.getStringExtra("LOCKID");
+				int status = intent.getIntExtra("RESULT", -1);
+				if (status == 0) {
+					if (moduleID.equals(mLockID) == true) {
+						Message msg = new Message();
+						msg.what = 6;
+						msg.arg1 = status;
+						updateHandler.sendMessage(msg);
+					}
+				} else {
+					String message = intent.getStringExtra("MESSAGE");
+					PubFunc.thinzdoToast(mContext, message);
 				}
 			}
 		}
@@ -104,6 +200,25 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 				 
 				tv_status.setText(str_status);
 				break;
+			case 1:		// Query AuthorizeUser
+				updateAuthorize();
+				break;
+			case 2:		// ADD AuthorizeUser
+				queryAuthorize(mLockID);
+				break;
+			case 3:		// DEL AuthorizeUser
+				queryAuthorize(mLockID);
+				break;
+			case 4:		// Query Password
+				updatePassword();
+				break;
+			case 5:		// ADD Password
+				queryPassword(mLockID);
+				break;
+			case 6:		// DEL Password
+				queryPassword(mLockID);
+				break;
+			
 			}
 		}
 	};
@@ -135,7 +250,29 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
         IntentFilter filter = new IntentFilter();
 		filter.addAction(PubDefine.LOCK_NOTIFY_STATUS_BROADCAST);
 		filter.addAction(PubDefine.LOCK_OPENLOCK_BROADCAST);
+		filter.addAction(PubDefine.LOCK_QRYAUTHORIZEUSER_BROADCAST);
+		filter.addAction(PubDefine.LOCK_ADDAUTHORIZEUSER_BROADCAST);
+		filter.addAction(PubDefine.LOCK_DELAUTHORIZEUSER_BROADCAST);
+		filter.addAction(PubDefine.LOCK_QRYPASSWORD_BROADCAST);
+		filter.addAction(PubDefine.LOCK_ADDPASSWORD_BROADCAST);
+		filter.addAction(PubDefine.LOCK_DELPASSWORD_BROADCAST);
 		registerReceiver(mLoginRev, filter);
+		
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				queryAuthorize(mLockID);
+			}
+		}, 500);
+
+//		new Handler().postDelayed(new Runnable() {
+//			@Override
+//			public void run() {
+//				queryPassword(mLockID);
+//			}
+//		}, 1000);
+		
+		
     }
     
     @Override
@@ -162,6 +299,9 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 		case R.id.tv_lock_close:	// Close Lock
 			setLock(0);
 			break;
+		case R.id.iv_authorize_add:
+			addAuthorizeUserName("");
+			break;
 		}
 	}
 	
@@ -183,8 +323,11 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 			ll_administrator_area.setVisibility(View.GONE);
 		}
 		
+		iv_authorize_add = (ImageView) findViewById(R.id.iv_authorize_add);
+		
 		tv_lock_open.setOnClickListener(this);
 		tv_lock_close.setOnClickListener(this);
+		iv_authorize_add.setOnClickListener(this);
 		
 		lv_authorize = (ListView) findViewById(R.id.lv_authorize);
 		lv_password_management= (ListView) findViewById(R.id.lv_password_management);
@@ -197,6 +340,71 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 		msg.arg1 = mLock.mStatus;
 		updateHandler.sendMessage(msg);
 	}
+	
+	private void addAuthorizeUserName(String name) {
+		mAddUserDlg = new MyAlertDialog(mContext);
+		mAddUserDlg
+				.builder()
+				.setCancelable(true)
+				.setTitle(getString(R.string.smartlock_add_authorize_user))
+				.setEditText(name)
+				.setPositiveButton(mContext.getString(R.string.smartlock_ok),
+						addAuthorizeUserClick)
+				.setNegativeButton(
+						mContext.getString(R.string.smartlock_cancel),
+						new View.OnClickListener() {
+							@Override
+							public void onClick(View arg0) {
+
+							}
+
+						}).show();
+	}
+	
+	View.OnClickListener addAuthorizeUserClick = new View.OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+			if (null == mAddUserDlg) {
+				return;
+			}
+			String text = mAddUserDlg.getResult();
+			if (!text.isEmpty()) {
+				String shareUserName = mAddUserDlg.getResult();
+
+				// 校验 NewPlugName：中英文占用的字节数必须小于20（最大20个byte）
+				if (shareUserName.getBytes().length > 20) {
+					PubFunc.thinzdoToast(
+							mContext,
+							getString(R.string.smartlock_ctrl_mod_plugname_length_too_long));
+					return;
+				}
+
+				if (true == mAuthorizeHelper.isExist(mLockID, shareUserName)) {
+					PubFunc.thinzdoToast(mContext,
+							getString(R.string.smartlock_ctrl_samename_exist));
+					return;
+				}
+
+				mProgress = PubFunc.createProgressDialog(mContext,
+						getString(R.string.smartlock_add_authorize_user), false);
+				mProgress.show();
+
+				StringBuffer sb = new StringBuffer();
+				sb.append(SmartLockMessage.CMD_SP_ADDAUTHORIZEUSER)
+						.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+						.append(PubStatus.g_CurUserName)
+						.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+						.append(mLockID)
+						.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+						.append(shareUserName)
+						.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+						.append("0");		// 预留位，暂时为0
+				sendMsg(true, sb.toString(), true);
+			}
+		}
+	};
+
 
 	private void updateAuthorize() {
 		ArrayList<AuthorizeUserDefine> items = mAuthorizeHelper
@@ -219,7 +427,7 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 			final String id = (String)msg.obj;
 			
 			if (1 == msg.what) { 		// 删除授权用户
-				AuthorizeUserDefine item = mAuthorizeHelper.get(mLockID, id);
+				AuthorizeUserDefine item = mAuthorizeHelper.getByUserName(mLockID, id);
 				
 				if (null != item) {
 					String str_delete = SmartLockApplication.getContext().getString(R.string.smartlock_ctrl_delete_authorize);
@@ -269,22 +477,44 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 		};
 	};
 
-	private void deleteAuthorize(String moduleID, String id) {
+	private void queryAuthorize(String moduleID) {
 		StringBuffer sb = new StringBuffer();
-		sb.append(SmartLockMessage.CMD_SP_OPEN_LOCK)
+		sb.append(SmartLockMessage.CMD_SP_QRYAUTHORIZEUSER)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(PubStatus.getUserName())
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(mLockID);
+
+		sendMsg(true, sb.toString(), true);
+	}
+	
+	private void deleteAuthorize(String moduleID, String shareusername) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(SmartLockMessage.CMD_SP_DELAUTHORIZEUSER)
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 				.append(PubStatus.getUserName())
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 				.append(mLockID)
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
-				.append(String.valueOf(id));
+				.append(String.valueOf(shareusername));
 
 		sendMsg(true, sb.toString(), true);
 	}
 
+	private void queryPassword(String moduleID) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(SmartLockMessage.CMD_SP_QRYPASSWORD)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(PubStatus.getUserName())
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(mLockID);
+
+		sendMsg(true, sb.toString(), true);
+	}
+	
 	private void deletePassword(String moduleID, String id) {
 		StringBuffer sb = new StringBuffer();
-		sb.append(SmartLockMessage.CMD_SP_OPEN_LOCK)
+		sb.append(SmartLockMessage.CMD_SP_DELPASSWORD)
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 				.append(PubStatus.getUserName())
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)

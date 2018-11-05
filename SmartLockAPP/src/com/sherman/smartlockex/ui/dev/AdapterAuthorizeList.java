@@ -79,7 +79,7 @@ public class AdapterAuthorizeList extends BaseAdapter {
 				tv_name.setText(String.valueOf(item.mUserName));
 				
 				rl_item.setContentDescription(String
-						.valueOf(item.mAuthorizeID));
+						.valueOf(item.mUserName));
 				rl_item.setOnLongClickListener(deleteItemClick);
 				
 			}

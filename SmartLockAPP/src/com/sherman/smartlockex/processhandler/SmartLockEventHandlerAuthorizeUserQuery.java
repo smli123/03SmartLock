@@ -28,12 +28,16 @@ public class SmartLockEventHandlerAuthorizeUserQuery extends SmartLockEventHandl
 		if (0 != code) {
 	    	return;
 		}
+		
+		String devID = buffer[3];
+		mIntent.putExtra("LOCKID", devID);
+		
 		int lockCount = Integer.parseInt(buffer[EVENT_MESSAGE_HEADER+1]);
 		if (0 == lockCount) {
 			SmartLockExAuthorizeUserHelper mHelper = new SmartLockExAuthorizeUserHelper(SmartLockApplication.getContext());
 			mHelper.clear();
 			
-			mIntent.putExtra("RESULT", 1);
+			mIntent.putExtra("RESULT", 0);
 			mIntent.putExtra("MESSAGE", "");
 			SmartLockApplication.getContext().sendBroadcast(mIntent);
 			return;
@@ -48,29 +52,27 @@ public class SmartLockEventHandlerAuthorizeUserQuery extends SmartLockEventHandl
 		int baseIdx = 0;
 		for (int i = 0; i < lockCount; i++) {
 			AuthorizeUserDefine item = new AuthorizeUserDefine();
-		    item.mUserName = PubStatus.g_CurUserName;
-		    
 		    item.mIndex 		= i + 1;
-		    item.mAuthorizeID   = Integer.valueOf(infors[baseIdx + 0]);
-		    item.mLockID   		= infors[baseIdx + 1];
-		    item.mUserName  	= infors[baseIdx + 2];
-		    item.mUserStatus 	= Integer.valueOf(infors[baseIdx + 3]);
+		    item.mAuthorizeID   = 0;	//Integer.valueOf(infors[baseIdx + 0]);
+		    item.mLockID   		= infors[baseIdx + 0];
+		    item.mUserName  	= infors[baseIdx + 1];
+		    item.mUserStatus 	= Integer.valueOf(infors[baseIdx + 2]);
 		    
 		    items.add(item);
 		    
-		    baseIdx = baseIdx + 4;
+		    baseIdx = baseIdx + 3;
 		}
 		
-		add2DB(items);
+		add2DB(items, devID);
 		
-		mIntent.putExtra("RESULT", 1);
+		mIntent.putExtra("RESULT", 0);
 		mIntent.putExtra("MESSAGE", "");
 		SmartLockApplication.getContext().sendBroadcast(mIntent);
 	}
 	
-	private void add2DB(ArrayList<AuthorizeUserDefine> locks) {
+	private void add2DB(ArrayList<AuthorizeUserDefine> locks, String devID) {
 		SmartLockExAuthorizeUserHelper mHelper = new SmartLockExAuthorizeUserHelper(SmartLockApplication.getContext());
-		mHelper.clear();
+		mHelper.clear(devID);
 
 		int i = 0, j = 0;
 		for (i = 0; i < locks.size(); i++) {

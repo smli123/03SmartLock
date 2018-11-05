@@ -25,6 +25,9 @@ public class SmartLockEventHandlerPasswordQuery extends SmartLockEventHandler {
 		items.clear();
 		String[] buffer = (String[]) msg.obj;
 		
+		String devID = buffer[3];
+		mIntent.putExtra("LOCKID", devID);
+		
 		int code = PubFunc.hexStringToAlgorism(buffer[EVENT_MESSAGE_HEADER+0]); 
 		if (0 != code) {
 	    	return;

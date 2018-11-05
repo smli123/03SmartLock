@@ -18,6 +18,8 @@ public class SmartLockEventHandlerAuthorizeUserDelete extends SmartLockEventHand
 		String[] buffer = (String[]) msg.obj;
 		
 		int ret = PubFunc.hexStringToAlgorism(buffer[EVENT_MESSAGE_HEADER+0]);
+		String devID = buffer[3];
+		mIntent.putExtra("LOCKID", devID);
 		
 		if (0 == ret) {
 	    	mIntent.putExtra("RESULT", 0);

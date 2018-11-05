@@ -17,13 +17,13 @@ import java.util.Set;
 import java.util.Timer;
 
 import com.smartlock.platform.LogTool.LogWriter;
-import com.smartlock.udpserver.Function.APPAddAuthorizeUserMsgHandle;
-import com.smartlock.udpserver.Function.APPAddModuleMsgHandle;
-import com.smartlock.udpserver.Function.APPDeleteAuthorizeUserMsgHandle;
+import com.smartlock.udpserver.Function.APPAuthorizeUserAddMsgHandle;
+import com.smartlock.udpserver.Function.APPModuleAddMsgHandle;
+import com.smartlock.udpserver.Function.APPAuthorizeUserDeleteMsgHandle;
 import com.smartlock.udpserver.Function.AppLogOutMsgHandle;
 import com.smartlock.udpserver.Function.AppLoginMsgHandle;
 import com.smartlock.udpserver.Function.AppPassThroughMsgHandle;
-import com.smartlock.udpserver.Function.APPDeleteModuleMsgHandle;
+import com.smartlock.udpserver.Function.APPModuleDeleteMsgHandle;
 import com.smartlock.udpserver.Function.APPFindPwdHandle;
 import com.smartlock.udpserver.Function.APPModEmailMsgHandle;
 import com.smartlock.udpserver.Function.APPModPwdMsgHandle;
@@ -37,7 +37,7 @@ import com.smartlock.udpserver.Function.NofityAlarmMsgHandle;
 import com.smartlock.udpserver.Function.ModuleLockCtrlMsgHandle;
 import com.smartlock.udpserver.Function.NotifyLockStatusHandle;
 import com.smartlock.udpserver.Function.APPQueryAllModuleInfoHandle;
-import com.smartlock.udpserver.Function.APPQueryAuthorizeUserHandle;
+import com.smartlock.udpserver.Function.APPAuthorizeUserQueryHandle;
 import com.smartlock.udpserver.Function.TransmitHearBeatMsgHandle;
 import com.smartlock.udpserver.Function.TransmitTransMsgHandle;
 import com.smartlock.udpserver.Function.APPUserRegisterMsgHandle;
@@ -108,13 +108,13 @@ public class ServerWorkThread  implements Runnable{
 		m_SendFuncMap.put(ServerCommDefine.APP_LOGOUT_MSG_HEADER, new AppLogOutMsgHandle());
 		
 		m_SendFuncMap.put(ServerCommDefine.APP_QRY_PLUG_MSG_HEADER, new APPQueryAllModuleInfoHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_ADD_PLUG_MSG_HEADER, new APPAddModuleMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_DEL_PLUG_MSG_HEADER, new APPDeleteModuleMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_ADD_PLUG_MSG_HEADER, new APPModuleAddMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_DEL_PLUG_MSG_HEADER, new APPModuleDeleteMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_MOD_PLUG_MSG_HEADER, new APPModifyPlugNameHandle());
 		
-		m_SendFuncMap.put(ServerCommDefine.APP_QRY_AUTHORIZEUSER_MSG_HEADER, new APPQueryAuthorizeUserHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_ADD_AUTHORIZEUSER_MSG_HEADER, new APPAddAuthorizeUserMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_DEL_AUTHORIZEUSER_MSG_HEADER, new APPDeleteAuthorizeUserMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_QRY_AUTHORIZEUSER_MSG_HEADER, new APPAuthorizeUserQueryHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_ADD_AUTHORIZEUSER_MSG_HEADER, new APPAuthorizeUserAddMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_DEL_AUTHORIZEUSER_MSG_HEADER, new APPAuthorizeUserDeleteMsgHandle());
 //		m_SendFuncMap.put(ServerCommDefine.APP_QRY_PASSWORD_MSG_HEADER, new APPQueryPasswordHandle());
 //		m_SendFuncMap.put(ServerCommDefine.APP_ADD_PASSWORD_MSG_HEADER, new APPAddPasswordHandle());
 //		m_SendFuncMap.put(ServerCommDefine.APP_DEL_PASSWORD_MSG_HEADER, new APPDelPasswordHandle());

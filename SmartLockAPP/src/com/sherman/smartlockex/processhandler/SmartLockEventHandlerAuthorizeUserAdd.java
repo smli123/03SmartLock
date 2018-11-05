@@ -17,12 +17,15 @@ public class SmartLockEventHandlerAuthorizeUserAdd extends SmartLockEventHandler
 	public void handleMessage(Message msg) {
 		String[] buffer = (String[]) msg.obj;
 		try{
+			String devID = buffer[3];
+			mIntent.putExtra("LOCKID", devID);
+			
 			int ret = PubFunc.hexStringToAlgorism(buffer[EVENT_MESSAGE_HEADER+0]);		
 			if (0 == ret) {
 		    	mIntent.putExtra("RESULT", 0);
 		    	SmartLockApplication.getContext().sendBroadcast(mIntent);
 			} else {
-				PubFunc.log("add plug fail,ret=" + String.valueOf(ret));
+				PubFunc.log("add share user name fail,ret=" + String.valueOf(ret));
 		    	mIntent.putExtra("RESULT", 1);
 		    	int resid = AppServerReposeDefine.getServerResponse(ret);
 		    	if (0  != resid) {

@@ -11,7 +11,7 @@ import com.smartlock.udpserver.db.MODULE_INFO;
 import com.smartlock.udpserver.db.ServerDBMgr;
 import com.smartlock.udpserver.db.USER_MODULE;
 
-public class APPQueryAuthorizeUserHandle implements ICallFunction{
+public class APPAuthorizeUserQueryHandle implements ICallFunction{
 	private String GenInfo(USER_MODULE info)
 	{
 		//信息
@@ -70,7 +70,8 @@ public class APPQueryAuthorizeUserHandle implements ICallFunction{
 			}
 			
 			//返回信息给APP
-			ResponseToAPP(strMsgHeader, strUserName, ServerRetCodeMgr.SUCCESS_CODE, strModuleInfoList);
+			NotifyToAPP(strUserName,strDevID, strMsgHeader, ServerRetCodeMgr.SUCCESS_CODE, strModuleInfoList);
+			
 			return ServerRetCodeMgr.SUCCESS_CODE;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

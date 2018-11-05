@@ -208,8 +208,8 @@ public class SmartLockExContentDefine {
 		public static final String TABLE_NAME = "AuthorizeUser";
 		
 		// 列名属性
-		public static final String AUTHORIZE_ID = "AuthorizeID";
 		public static final String INDEX_ID = "IndexID";
+		public static final String AUTHORIZE_ID = "AuthorizeID";
 		public static final String LOCK_ID = "LockID";
 		public static final String USER_NAME = "UserName";
 		public static final String USER_STATUS = "UserStatus";
@@ -228,7 +228,7 @@ public class SmartLockExContentDefine {
 				+ _ID + " integer primary key autoincrement, " 
 				+ INDEX_ID + " integer default 0, "
 				+ AUTHORIZE_ID + " integer default 0, "
-				+ LOCK_ID + " text default '', "  
+				+ LOCK_ID + " text default '', "
 				+ USER_NAME + " text default '', " 
 				+ USER_STATUS + " integer default 0);";
 
@@ -257,8 +257,8 @@ public class SmartLockExContentDefine {
 		public static final String TABLE_NAME = "Password";
 		
 		// 列名属性
-		public static final String PASSWORD_ID = "PasswordID";
 		public static final String INDEX_ID = "IndexID";
+		public static final String PASSWORD_ID = "PasswordID";
 		public static final String LOCK_ID = "LockID";
 		public static final String USER_NAME = "UserName";
 		public static final String PASSWORD_TYPE = "Password_Type";

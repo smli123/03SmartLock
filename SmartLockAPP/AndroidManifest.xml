@@ -45,6 +45,16 @@
 			android:authorities="com.sherman.dataprovider.messagesystemprovider">
         </provider>
         
+         <provider
+			android:name="com.sherman.smartlockex.dataprovider.SmartLockExAuthorizeUserProvider" 
+			android:authorities="com.sherman.dataprovider.authorizeuserprovider">
+        </provider>
+        
+         <provider
+			android:name="com.sherman.smartlockex.dataprovider.SmartLockExPasswordProvider" 
+			android:authorities="com.sherman.dataprovider.passwordprovider">
+        </provider>
+        
         <activity
             android:name="com.sherman.smartlockex.ui.login.WelcomeActivity"
             android:theme="@android:style/Theme.Holo.NoActionBar"

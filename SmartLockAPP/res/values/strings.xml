@@ -120,9 +120,9 @@
     <string name="login_info_no_internet">没有数据网络</string>
     <string name="login_info_no_email">没有邮件地址</string>    
     <string name="login_info_no_phone">没有电话号码</string>
-    <string name="login_timeout_devices">连接智能插座超时</string>
+    <string name="login_timeout_devices">连接智能门锁超时</string>
     <string name="login_cmd_socket_timeout">连接智慧家居中心失败，请确认已经连接上互联网</string>
-    <string name="login_cmd_socket_timeout_devices">连接智能插座超时</string>
+    <string name="login_cmd_socket_timeout_devices">连接智能门锁超时</string>
     <string name="login_input_email">请填写您注册时使用的邮箱</string>
     <string name="login_pwd_send_email_ok">密码已发送到邮件</string>
     <string name="login_logout">退出登录</string>
@@ -157,6 +157,7 @@
     <string name="register_register_now">正在注册...</string>
     
     <string name="smartlock_modify_name">"修改名字"</string>
+    <string name="smartlock_add_authorize_user">"增加授权用户名字"</string>
     
     <string name="smartlock_login_findpwd">"找回密码..."</string>
     <string name="smartlock_login_getpwd">"请到邮箱查看密码"</string>
@@ -175,7 +176,7 @@
     <string name="str_wifi_pwd">路由器密码</string>
     <string name="str_wifi_ssid">SSID</string>
     <string name="str_passwd_visible">显示密码</string>
-    <string name="str_info_plugname_empty_error">请给插座命名</string>
+    <string name="str_info_plugname_empty_error">请给门锁命名</string>
     <string name="str_info_pwd_empty_error">请输入密码</string>
     <string name="str_aboutus">关于我们</string>
     <string name="str_cleartimer">清除定时任务</string>
@@ -228,8 +229,8 @@
     <string name="smartlock_ctrl_userregister_fail">"用户注册失败"</string>
     <string name="smartlock_ctrl_resetpwd_fail">"重置密码失败"</string>
     
-    <string name="smartlock_ctrl_samename_exist">"同名插座已经存在"</string>
-    <string name="smartlock_ctrl_mod_plugname_length_too_long">"插座名字长度超过20，请减少名字长度。1个汉字会占用多个字节"</string>
+    <string name="smartlock_ctrl_samename_exist">"此用户已经授权"</string>
+    <string name="smartlock_ctrl_mod_plugname_length_too_long">"门锁名字长度超过20，请减少名字长度。1个汉字会占用多个字节"</string>
 	    
     <string name="smartlock_oper_lock_open_fail">"开锁失败"</string>
     <string name="smartlock_oper_lock_close_fail">"关锁失败"</string>

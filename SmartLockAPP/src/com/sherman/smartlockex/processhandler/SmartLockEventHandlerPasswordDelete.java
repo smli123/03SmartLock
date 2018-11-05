@@ -16,9 +16,11 @@ public class SmartLockEventHandlerPasswordDelete extends SmartLockEventHandler {
 	@Override
 	public void handleMessage(Message msg) {
 		String[] buffer = (String[]) msg.obj;
+
+		String devID = buffer[3];
+		mIntent.putExtra("LOCKID", devID);
 		
 		int ret = PubFunc.hexStringToAlgorism(buffer[EVENT_MESSAGE_HEADER+0]);
-		
 		if (0 == ret) {
 	    	mIntent.putExtra("RESULT", 0);
 	    	SmartLockApplication.getContext().sendBroadcast(mIntent);

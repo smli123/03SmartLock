@@ -24,6 +24,8 @@ public class DBHelper  extends SQLiteOpenHelper{
 		mTableList.add(SmartLockExContentDefine.Lock.TABLE_NAME);
 		mTableList.add(SmartLockExContentDefine.MessageDevice.TABLE_NAME);
 		mTableList.add(SmartLockExContentDefine.MessageSystem.TABLE_NAME);
+		mTableList.add(SmartLockExContentDefine.AuthorizeUser.TABLE_NAME);
+		mTableList.add(SmartLockExContentDefine.Password.TABLE_NAME);
 	}
 
 	@Override
@@ -35,6 +37,8 @@ public class DBHelper  extends SQLiteOpenHelper{
 		db.execSQL(SmartLockExContentDefine.Lock.TABLE_CREATE);
 		db.execSQL(SmartLockExContentDefine.MessageDevice.TABLE_CREATE);
 		db.execSQL(SmartLockExContentDefine.MessageSystem.TABLE_CREATE);
+		db.execSQL(SmartLockExContentDefine.AuthorizeUser.TABLE_CREATE);
+		db.execSQL(SmartLockExContentDefine.Password.TABLE_CREATE);
 	}
 
 	@Override

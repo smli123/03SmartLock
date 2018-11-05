@@ -11,7 +11,7 @@ import com.smartlock.udpserver.db.MODULE_INFO;
 import com.smartlock.udpserver.db.ServerDBMgr;
 import com.smartlock.udpserver.db.USER_MODULE;
 
-public class APPAddModuleMsgHandle implements ICallFunction{
+public class APPModuleAddMsgHandle implements ICallFunction{
 	/**********************************************************************************************************
 	 * @name AddModuleHandle 填加新模块
 	 * @param 	strMsg: 命令字符串 格式：<cookie>,ADDPLUG,< username>,<devname>,<module_id>,<module_mac>

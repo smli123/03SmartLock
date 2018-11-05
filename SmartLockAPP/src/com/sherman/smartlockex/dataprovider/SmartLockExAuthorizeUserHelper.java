@@ -112,6 +112,45 @@ public class SmartLockExAuthorizeUserHelper {
 			return null;
 		}
 	}
+	
+	public AuthorizeUserDefine getByUserName(String devID, String id) {
+		AuthorizeUserDefine item = null;
+		if (null == mContentResolver) {
+			return null;
+		}
+
+		String where = SmartLockExContentDefine.AuthorizeUser.LOCK_ID + "='"
+				+ devID + "' AND " + SmartLockExContentDefine.AuthorizeUser.USER_NAME + "='"
+				+ id + "'";
+
+		Cursor cur = mContentResolver.query(
+				SmartLockExContentDefine.AuthorizeUser.ALL_CONTENT_URI, null,
+				where, null, null);
+		if (null != cur) {
+			while (cur.moveToNext()) {
+				item = new AuthorizeUserDefine();
+				
+				item.mID = cur
+						.getInt(SmartLockExContentDefine.AuthorizeUser.ID_COLUMN);
+				item.mIndex = cur
+						.getInt(SmartLockExContentDefine.AuthorizeUser.INDEX_ID_COLUMN);
+				item.mAuthorizeID = cur
+						.getInt(SmartLockExContentDefine.AuthorizeUser.AUTHORIZE_ID_COLUMN);
+				item.mLockID = cur
+						.getString(SmartLockExContentDefine.AuthorizeUser.LOCK_ID_COLUMN);
+				item.mUserName = cur
+						.getString(SmartLockExContentDefine.AuthorizeUser.USER_NAME_COLUMN);
+				item.mUserStatus = cur
+						.getInt(SmartLockExContentDefine.AuthorizeUser.USER_STATUS_COLUMN);
+
+				break;
+			}
+			cur.close();
+			return item;
+		} else {
+			return null;
+		}
+	}
 
 	// 增加新插座
 	public long add(AuthorizeUserDefine item) {
@@ -151,13 +190,25 @@ public class SmartLockExAuthorizeUserHelper {
 		}
 	}
 
-	// 删除指定的插座
+	// 删除指定的插座的某个授权用户
 	public boolean delete(String devID, String id) {
 		if (null == mContentResolver) {
 			return false;
 		}
 		String where = SmartLockExContentDefine.AuthorizeUser.LOCK_ID + "='"
 				+ devID + "' AND " + SmartLockExContentDefine.AuthorizeUser.AUTHORIZE_ID + "='"
+				+ id + "'";
+		int count = mContentResolver.delete(
+				SmartLockExContentDefine.AuthorizeUser.ALL_CONTENT_URI, where,
+				null);
+		return count > 0 ? true : false;
+	}
+	
+	public boolean clear(String id) {
+		if (null == mContentResolver) {
+			return false;
+		}
+		String where = SmartLockExContentDefine.AuthorizeUser.LOCK_ID + "='"
 				+ id + "'";
 		int count = mContentResolver.delete(
 				SmartLockExContentDefine.AuthorizeUser.ALL_CONTENT_URI, where,
@@ -209,5 +260,28 @@ public class SmartLockExAuthorizeUserHelper {
 		PubFunc.log(TAG, "Update a lock");
 		return index;
 	}
+	
+	public boolean isExist(final String devID, final String username) {
+		if (null == mContentResolver) {
+			Log.e(TAG, "mContentResolver=null");
+			return true;
+		}
+
+		String where = SmartLockExContentDefine.AuthorizeUser.USER_NAME + "='"
+				+ username + "' AND "
+				+ SmartLockExContentDefine.AuthorizeUser.LOCK_ID + "='"
+				+ devID + "'";
+		Cursor cur = mContentResolver.query(
+				SmartLockExContentDefine.AuthorizeUser.ALL_CONTENT_URI, null,
+				where, null, null);
+		if (null == cur || 0 == cur.getCount()) {
+			cur.close();
+			return false;
+		}
+
+		cur.close();
+		return true;
+	}
+
 	
 }
