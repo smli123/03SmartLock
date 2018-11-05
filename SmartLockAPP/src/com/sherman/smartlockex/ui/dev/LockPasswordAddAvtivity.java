@@ -198,12 +198,12 @@ public class LockPasswordAddAvtivity extends TitledActivity implements OnClickLi
 			break;
 		case R.id.tv_endtime:
 			break;
-		case R.id.rb_type_temp:
-			i_password_type = 0;
-			updateTypeRadio();
-			break;
 		case R.id.rb_type_forever:
 			i_password_type = 1;
+			updateTypeRadio();
+			break;
+		case R.id.rb_type_temp:
+			i_password_type = 2;
 			updateTypeRadio();
 			break;
 		}
@@ -211,11 +211,11 @@ public class LockPasswordAddAvtivity extends TitledActivity implements OnClickLi
 	
 	private void updateTypeRadio() {
 		 if (i_password_type == 1) {		// 永久密码
-			rb_type_temp.setChecked(false);
 			rb_type_forever.setChecked(true);
+			rb_type_temp.setChecked(false);
 		} else if (i_password_type == 2) {	// 临时密码
-			rb_type_temp.setChecked(true);
 			rb_type_forever.setChecked(false);
+			rb_type_temp.setChecked(true);
 		}
 	}
 

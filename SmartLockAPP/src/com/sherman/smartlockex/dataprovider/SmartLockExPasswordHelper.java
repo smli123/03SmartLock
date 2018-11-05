@@ -46,10 +46,12 @@ public class SmartLockExPasswordHelper {
 					.getString(SmartLockExContentDefine.Password.USER_NAME_COLUMN);
 			item.mType = cur
 					.getInt(SmartLockExContentDefine.Password.PASSWORD_TYPE_COLUMN);
+			item.mPassword = cur
+					.getString(SmartLockExContentDefine.Password.PASSWORD_TEXT_COLUMN);
 			item.mBeginTime = cur
-					.getString(SmartLockExContentDefine.Password.BEGIN_TIIME_COLUMN);
+					.getString(SmartLockExContentDefine.Password.BEGIN_TIME_COLUMN);
 			item.mEndTime = cur
-					.getString(SmartLockExContentDefine.Password.END_TIIME_COLUMN);
+					.getString(SmartLockExContentDefine.Password.END_TIME_COLUMN);
 			item.mMemo = cur
 					.getString(SmartLockExContentDefine.Password.MEMO_COLUMN);
 
@@ -109,10 +111,12 @@ public class SmartLockExPasswordHelper {
 						.getString(SmartLockExContentDefine.Password.USER_NAME_COLUMN);
 				item.mType = cur
 						.getInt(SmartLockExContentDefine.Password.PASSWORD_TYPE_COLUMN);
+				item.mPassword = cur
+						.getString(SmartLockExContentDefine.Password.PASSWORD_TEXT_COLUMN);
 				item.mBeginTime = cur
-						.getString(SmartLockExContentDefine.Password.BEGIN_TIIME_COLUMN);
+						.getString(SmartLockExContentDefine.Password.BEGIN_TIME_COLUMN);
 				item.mEndTime = cur
-						.getString(SmartLockExContentDefine.Password.END_TIIME_COLUMN);
+						.getString(SmartLockExContentDefine.Password.END_TIME_COLUMN);
 				item.mMemo = cur
 						.getString(SmartLockExContentDefine.Password.MEMO_COLUMN);
 				break;
@@ -144,6 +148,8 @@ public class SmartLockExPasswordHelper {
 				item.mUserName);
 		values.put(SmartLockExContentDefine.Password.PASSWORD_TYPE,
 				item.mType);
+		values.put(SmartLockExContentDefine.Password.PASSWORD_TEXT,
+				item.mPassword);
 		values.put(SmartLockExContentDefine.Password.BEGIN_TIIME,
 				item.mBeginTime);
 		values.put(SmartLockExContentDefine.Password.END_TIIME,
@@ -224,6 +230,8 @@ public class SmartLockExPasswordHelper {
 				item.mUserName);
 		values.put(SmartLockExContentDefine.Password.PASSWORD_TYPE,
 				item.mType);
+		values.put(SmartLockExContentDefine.Password.PASSWORD_TEXT,
+				item.mPassword);
 		values.put(SmartLockExContentDefine.Password.BEGIN_TIIME,
 				item.mBeginTime);
 		values.put(SmartLockExContentDefine.Password.END_TIIME,

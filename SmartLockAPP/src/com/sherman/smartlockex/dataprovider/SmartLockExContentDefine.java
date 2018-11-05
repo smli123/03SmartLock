@@ -262,6 +262,7 @@ public class SmartLockExContentDefine {
 		public static final String LOCK_ID = "LockID";
 		public static final String USER_NAME = "UserName";
 		public static final String PASSWORD_TYPE = "Password_Type";
+		public static final String PASSWORD_TEXT = "Password_Text";
 		public static final String BEGIN_TIIME = "Begin_Time";
 		public static final String END_TIIME = "End_Time";
 		public static final String MEMO = "Memo";
@@ -273,9 +274,10 @@ public class SmartLockExContentDefine {
 		public static final int LOCK_ID_COLUMN = 3;
 		public static final int USER_NAME_COLUMN = 4;
 		public static final int PASSWORD_TYPE_COLUMN = 5;
-		public static final int BEGIN_TIIME_COLUMN = 6;
-		public static final int END_TIIME_COLUMN = 7;
-		public static final int MEMO_COLUMN = 8;
+		public static final int PASSWORD_TEXT_COLUMN = 6;
+		public static final int BEGIN_TIME_COLUMN = 7;
+		public static final int END_TIME_COLUMN = 8;
+		public static final int MEMO_COLUMN = 9;
 
 		// create table
 		public final static String TABLE_CREATE = "CREATE TABLE IF NOT EXISTS "
@@ -286,6 +288,7 @@ public class SmartLockExContentDefine {
 				+ LOCK_ID + " text default '', "  
 				+ USER_NAME + " text default '', " 
 				+ PASSWORD_TYPE + " integer default 0, "
+				+ PASSWORD_TEXT + " text default '', "
 				+ BEGIN_TIIME + " text default '', "
 				+ END_TIIME + " text default '', "
 				+ MEMO + " text default '' );";
