@@ -114,6 +114,18 @@ public class SmartLockEventHandler extends Handler {
 		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
 				SmartLockMessage.EVT_SP_DELAUTHORIZEUSER,
 				new SmartLockEventHandlerAuthorizeUserDelete()));
+
+		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
+				SmartLockMessage.EVT_SP_QRYPASSWORD,
+				new SmartLockEventHandlerPasswordQuery()));
+
+		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
+				SmartLockMessage.EVT_SP_ADDPASSWORD,
+				new SmartLockEventHandlerPasswordAdd()));
+
+		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
+				SmartLockMessage.EVT_SP_DELPASSWORD,
+				new SmartLockEventHandlerPasswordDelete()));
 		
 		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
 				SmartLockMessage.EVT_SP_ADDLOCK,

@@ -204,6 +204,16 @@ public class SmartLockExAuthorizeUserHelper {
 		return count > 0 ? true : false;
 	}
 	
+	// 删除所有插座
+	public void clear() {
+		if (null != mContentResolver) {
+			PubFunc.log(TAG, "Clear call lock");
+			mContentResolver.delete(
+					SmartLockExContentDefine.AuthorizeUser.ALL_CONTENT_URI,
+					null, null);
+		}
+	}
+
 	public boolean clear(String id) {
 		if (null == mContentResolver) {
 			return false;
@@ -214,16 +224,6 @@ public class SmartLockExAuthorizeUserHelper {
 				SmartLockExContentDefine.AuthorizeUser.ALL_CONTENT_URI, where,
 				null);
 		return count > 0 ? true : false;
-	}
-
-	// 删除所有插座
-	public void clear() {
-		if (null != mContentResolver) {
-			PubFunc.log(TAG, "Clear call lock");
-			mContentResolver.delete(
-					SmartLockExContentDefine.AuthorizeUser.ALL_CONTENT_URI,
-					null, null);
-		}
 	}
 
 	// 修改插座

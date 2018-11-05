@@ -99,6 +99,11 @@
             android:label="@string/app_name" />
             
         <activity 
+            android:name="com.sherman.smartlockex.ui.dev.LockPasswordAddAvtivity"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:label="@string/app_name" />
+        
+        <activity 
             android:name="com.sherman.smartlockex.ui.message.ActivityMessageDevice"
             android:theme="@android:style/Theme.Holo.NoActionBar"
             android:label="@string/app_name" />

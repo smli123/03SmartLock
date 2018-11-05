@@ -24,6 +24,9 @@ import com.smartlock.udpserver.Function.AppLogOutMsgHandle;
 import com.smartlock.udpserver.Function.AppLoginMsgHandle;
 import com.smartlock.udpserver.Function.AppPassThroughMsgHandle;
 import com.smartlock.udpserver.Function.APPModuleDeleteMsgHandle;
+import com.smartlock.udpserver.Function.APPPasswordAddMsgHandle;
+import com.smartlock.udpserver.Function.APPPasswordDelMsgHandle;
+import com.smartlock.udpserver.Function.APPPasswordQueryMsgHandle;
 import com.smartlock.udpserver.Function.APPFindPwdHandle;
 import com.smartlock.udpserver.Function.APPModEmailMsgHandle;
 import com.smartlock.udpserver.Function.APPModPwdMsgHandle;
@@ -115,9 +118,9 @@ public class ServerWorkThread  implements Runnable{
 		m_SendFuncMap.put(ServerCommDefine.APP_QRY_AUTHORIZEUSER_MSG_HEADER, new APPAuthorizeUserQueryHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_ADD_AUTHORIZEUSER_MSG_HEADER, new APPAuthorizeUserAddMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_DEL_AUTHORIZEUSER_MSG_HEADER, new APPAuthorizeUserDeleteMsgHandle());
-//		m_SendFuncMap.put(ServerCommDefine.APP_QRY_PASSWORD_MSG_HEADER, new APPQueryPasswordHandle());
-//		m_SendFuncMap.put(ServerCommDefine.APP_ADD_PASSWORD_MSG_HEADER, new APPAddPasswordHandle());
-//		m_SendFuncMap.put(ServerCommDefine.APP_DEL_PASSWORD_MSG_HEADER, new APPDelPasswordHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_QRY_PASSWORD_MSG_HEADER, new APPPasswordQueryMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_ADD_PASSWORD_MSG_HEADER, new APPPasswordAddMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_DEL_PASSWORD_MSG_HEADER, new APPPasswordDelMsgHandle());
 		
 		/* APP和模块命令*/
 		m_SendFuncMap.put(ServerCommDefine.APP_LOCK_CTRL_MSG_HEADER, new ModuleLockCtrlMsgHandle());
@@ -125,6 +128,9 @@ public class ServerWorkThread  implements Runnable{
 		
 		/* 模块命令 */
 		m_SendFuncMap.put(ServerCommDefine.LOCK_CTRL_MSG_HEADER, new ModuleLockCtrlMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.QRY_PASSWORD_MSG_HEADER, new APPPasswordQueryMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.ADD_PASSWORD_MSG_HEADER, new APPPasswordAddMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.DEL_PASSWORD_MSG_HEADER, new APPPasswordDelMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.MODULE_HEART_MSG_HEADER, new ModuleHeartMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.MODULE_LOGIN_MSG_HEADER, new ModuleLoginHandle());
 		m_SendFuncMap.put(ServerCommDefine.NOTIFY_BELL_MSG_HEADER, new NofityBellMsgHandle());

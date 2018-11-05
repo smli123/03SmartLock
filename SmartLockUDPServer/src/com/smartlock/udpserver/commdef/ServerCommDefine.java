@@ -19,9 +19,9 @@ public class ServerCommDefine {
 	public final static String APP_QRY_AUTHORIZEUSER_MSG_HEADER		= "APPQRYAUTHORIZEUSER";
 	public final static String APP_ADD_AUTHORIZEUSER_MSG_HEADER		= "APPADDAUTHORIZEUSER";
 	public final static String APP_DEL_AUTHORIZEUSER_MSG_HEADER		= "APPDELAUTHORIZEUSER";
-	public final static String APP_QRY_PASSWORD_MSG_HEADER			= "APPQRYPASSWORD";
-	public final static String APP_ADD_PASSWORD_MSG_HEADER			= "APPADDPASSWORD";
-	public final static String APP_DEL_PASSWORD_MSG_HEADER			= "APPDELPASSWORD";
+	public final static String APP_QRY_PASSWORD_MSG_HEADER			= "APPQUERY_PASSWORD";
+	public final static String APP_ADD_PASSWORD_MSG_HEADER			= "APPCREATE_PASSWORD";
+	public final static String APP_DEL_PASSWORD_MSG_HEADER			= "APPDELETE_PASSWORD";
 	
 	/* APP智能门锁 */
 	public final static String APP_BACK2AP_CTRL_MSG_HEADER	= "APPBACK2AP";			//设备初始化
@@ -39,6 +39,9 @@ public class ServerCommDefine {
 	public final static String MODULE_HEART_MSG_HEADER			= "HEART";			//设备心跳包消息
 	public final static String LOCK_CTRL_MSG_HEADER				= "LOCK_OPEN";		//门锁打开关闭操作
 	public final static String BACK2AP_CTRL_MSG_HEADER			= "BACK2AP";		//设备初始化
+	public final static String QRY_PASSWORD_MSG_HEADER			= "QUERY_PASSWORD";
+	public final static String ADD_PASSWORD_MSG_HEADER			= "CREATE_PASSWORD";
+	public final static String DEL_PASSWORD_MSG_HEADER			= "DELETE_PASSWORD";
 	
 	public final static String MOD_PLUG_MSG_HEADER		= "MODLOCK";
 	

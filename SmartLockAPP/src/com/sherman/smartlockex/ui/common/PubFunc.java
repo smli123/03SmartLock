@@ -502,6 +502,13 @@ public class PubFunc {
 		String str = formatter.format(curDate);
 		return str;
 	}
+
+	public static String getTimeString(String format) {
+		SimpleDateFormat formatter = new SimpleDateFormat(format);
+		Date curDate = new Date(System.currentTimeMillis());
+		String str = formatter.format(curDate);
+		return str;
+	}
 	
 	public static String getTimeHMSString() {
 		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");

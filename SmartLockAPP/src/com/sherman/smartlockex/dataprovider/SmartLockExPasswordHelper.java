@@ -191,6 +191,18 @@ public class SmartLockExPasswordHelper {
 					null, null);
 		}
 	}
+	// 删除指定的插座
+	public boolean clear(String devID) {
+		if (null == mContentResolver) {
+			return false;
+		}
+		String where = SmartLockExContentDefine.Password.LOCK_ID + "='"
+				+ devID + "'";
+		int count = mContentResolver.delete(
+				SmartLockExContentDefine.Password.ALL_CONTENT_URI, where,
+				null);
+		return count > 0 ? true : false;
+	}
 
 	// 修改插座
 	public int modify(PasswordDefine item) {
@@ -229,4 +241,27 @@ public class SmartLockExPasswordHelper {
 		return index;
 	}
 	
+    public int getMaxID(String devID) {
+		if (null == mContentResolver) {
+			return 0; 
+		}
+		
+		int maxid = 0;
+		String[] fields = {"max(" + SmartLockExContentDefine.Password.PASSWORD_ID + ") as maxid"};
+		String sWhere = SmartLockExContentDefine.Password.LOCK_ID + "='" + devID + "'";
+    	Cursor cur = mContentResolver.query(SmartLockExContentDefine.Password.ALL_CONTENT_URI, 
+    										fields, 
+    										sWhere, 
+				                            null, 
+				                            null);
+    	
+    	
+    	if (null != cur) {
+    		while (cur.moveToNext()){
+    			maxid = cur.getInt(0);
+    		}
+    		cur.close();
+    	}
+		return maxid;    	
+    }
 }

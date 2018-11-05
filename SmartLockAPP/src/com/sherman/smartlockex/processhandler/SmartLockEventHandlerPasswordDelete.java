@@ -11,7 +11,7 @@ import com.sherman.smartlockex.ui.smartlockex.AppServerReposeDefine;
 import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
 
 public class SmartLockEventHandlerPasswordDelete extends SmartLockEventHandler {
-	Intent mIntent = new Intent(PubDefine.LOCK_DELAUTHORIZEUSER_BROADCAST);
+	Intent mIntent = new Intent(PubDefine.LOCK_DELPASSWORD_BROADCAST);
 	
 	@Override
 	public void handleMessage(Message msg) {

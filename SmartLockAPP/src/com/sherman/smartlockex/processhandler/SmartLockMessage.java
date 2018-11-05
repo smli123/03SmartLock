@@ -25,9 +25,9 @@ public class SmartLockMessage {
 	public static final String CMD_SP_QRYAUTHORIZEUSER 	= "APPQRYAUTHORIZEUSER";
 	public static final String CMD_SP_ADDAUTHORIZEUSER 	= "APPADDAUTHORIZEUSER";
 	public static final String CMD_SP_DELAUTHORIZEUSER 	= "APPDELAUTHORIZEUSER";
-	public static final String CMD_SP_QRYPASSWORD 		= "APPQRYPASSWORD";
-	public static final String CMD_SP_ADDPASSWORD 		= "APPADDPASSWORD";
-	public static final String CMD_SP_DELPASSWORD 		= "APPDELPASSWORD";
+	public static final String CMD_SP_QRYPASSWORD 		= "APPQUERY_PASSWORD";
+	public static final String CMD_SP_ADDPASSWORD 		= "APPCREATE_PASSWORD";
+	public static final String CMD_SP_DELPASSWORD 		= "APPDELETE_PASSWORD";
 	
 	// 模块交互命令
 	public static final String CMD_SP_LOGIN_MODULE = "LOGIN"; // 登录模块的命令，用于直连方式登录

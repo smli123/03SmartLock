@@ -265,13 +265,12 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 			}
 		}, 500);
 
-//		new Handler().postDelayed(new Runnable() {
-//			@Override
-//			public void run() {
-//				queryPassword(mLockID);
-//			}
-//		}, 1000);
-		
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				queryPassword(mLockID);
+			}
+		}, 1000);
 		
     }
     
@@ -302,6 +301,9 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 		case R.id.iv_authorize_add:
 			addAuthorizeUserName("");
 			break;
+		case R.id.iv_password_management_add:
+			addPassword();
+			break;
 		}
 	}
 	
@@ -324,10 +326,12 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 		}
 		
 		iv_authorize_add = (ImageView) findViewById(R.id.iv_authorize_add);
+		iv_password_management_add = (ImageView) findViewById(R.id.iv_password_management_add);
 		
 		tv_lock_open.setOnClickListener(this);
 		tv_lock_close.setOnClickListener(this);
 		iv_authorize_add.setOnClickListener(this);
+		iv_password_management_add.setOnClickListener(this);
 		
 		lv_authorize = (ListView) findViewById(R.id.lv_authorize);
 		lv_password_management= (ListView) findViewById(R.id.lv_password_management);
@@ -359,6 +363,13 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 							}
 
 						}).show();
+	}
+	
+	private void addPassword() {
+		Intent intent = new Intent();
+		intent.setClass(LockDetailActivity.this, LockPasswordAddAvtivity.class);
+		intent.putExtra("LOCKID", mLockID);
+		mContext.startActivity(intent);
 	}
 	
 	View.OnClickListener addAuthorizeUserClick = new View.OnClickListener() {
@@ -419,7 +430,7 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 				.getAll(mLockID);
 		AdapterPasswordManagement adapter = new AdapterPasswordManagement(mContext,
 				items, mPressHandler);
-		lv_authorize.setAdapter(adapter);
+		lv_password_management.setAdapter(adapter);
 	}
 	
 	private Handler mPressHandler = new Handler() {
@@ -507,7 +518,9 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
 				.append(PubStatus.getUserName())
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
-				.append(mLockID);
+				.append(mLockID)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append("0");
 
 		sendMsg(true, sb.toString(), true);
 	}

@@ -12,15 +12,11 @@
           layout="@layout/view_common_titlebar"
           android:layout_alignParentTop="true" />
     
-    <ScrollView 
-        android:layout_width="match_parent"
-	    android:layout_height="match_parent"
-		android:layout_below="@id/commontitlebar" >
-		
 		<RelativeLayout
 		    android:id="@+id/rl_whole"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
+			android:layout_below="@id/commontitlebar"
 		    android:layout_marginTop="10dp"
 		    android:layout_marginBottom="10dp"
 		    android:layout_marginLeft="20dp"
@@ -61,7 +57,7 @@
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_below="@id/rl_status"
-		        android:layout_marginTop="20dp"
+		        android:layout_marginTop="10dp"
 		        android:background="@color/white"
 		        android:orientation="horizontal"
 		        android:padding="5dp" >
@@ -92,17 +88,18 @@
 		    <LinearLayout 
 		        android:id="@+id/ll_administrator_area"
 		        android:layout_width="match_parent"
-		    	android:layout_height="wrap_content" 
-		        android:layout_below="@id/ll_control_area"
-		        android:layout_marginTop="20dp"
+		    	android:layout_height="match_parent" 
+		        android:layout_below="@+id/ll_control_area"
+		        android:layout_above="@+id/rl_log"
+		        android:layout_marginTop="10dp"
 		    	android:orientation="horizontal"
 		    	android:background="@color/commom_bg_color">
 		        
-		        <RelativeLayout
+		        <LinearLayout
 		            android:layout_width="match_parent"
-		            android:layout_height="wrap_content"
+		            android:layout_height="match_parent"
 		            android:background="@color/commom_bg_color"
-		            android:orientation="horizontal"
+		            android:orientation="vertical"
 		            android:padding="0dp" >
 		            
 			        <RelativeLayout
@@ -111,6 +108,7 @@
 			            android:layout_height="wrap_content"
 			            android:background="@color/white"
 			            android:orientation="horizontal"
+			            android:layout_weight="1"
 			            android:padding="0dp" >
 				    	
 				        <RelativeLayout
@@ -176,9 +174,10 @@
 			            android:layout_width="match_parent"
 			            android:layout_height="wrap_content"
 			            android:layout_below="@id/rl_authorize"
-		        		android:layout_marginTop="20dp"
+		        		android:layout_marginTop="10dp"
 			            android:background="@color/white"
 			            android:orientation="horizontal"
+			            android:layout_weight="1"
 			            android:padding="0dp" >
 				    	
 				        <RelativeLayout
@@ -239,13 +238,13 @@
 						</RelativeLayout> 
 				        
 				    </RelativeLayout>
-			    </RelativeLayout>
+			    </LinearLayout>
 		    </LinearLayout>
 		
 		    <RelativeLayout
 		        android:id="@+id/rl_log"
 		        android:layout_width="match_parent"
-		        android:layout_height="20dp"
+		        android:layout_height="10dp"
 		        android:layout_alignParentBottom="true"
 		        android:orientation="horizontal" >
 		    	
@@ -258,5 +257,4 @@
 		            android:textSize="@dimen/version_font_size" />
 		    </RelativeLayout>
 		</RelativeLayout>	    
-	</ScrollView>    
 </RelativeLayout>

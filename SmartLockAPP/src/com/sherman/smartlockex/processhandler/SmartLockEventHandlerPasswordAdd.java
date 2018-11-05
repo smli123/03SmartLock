@@ -11,7 +11,7 @@ import android.content.Intent;
 import android.os.Message;
 
 public class SmartLockEventHandlerPasswordAdd extends SmartLockEventHandler {
-	Intent mIntent = new Intent(PubDefine.LOCK_ADDAUTHORIZEUSER_BROADCAST);
+	Intent mIntent = new Intent(PubDefine.LOCK_ADDPASSWORD_BROADCAST);
 	
 	@Override
 	public void handleMessage(Message msg) {

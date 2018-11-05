@@ -56,29 +56,29 @@ public class SmartLockEventHandlerPasswordQuery extends SmartLockEventHandler {
 		    
 		    item.mIndex 		= i + 1;
 		    item.mPasswordID   	= Integer.valueOf(infors[baseIdx + 0]);
-		    item.mLockID   		= infors[baseIdx + 1];
-		    item.mUserName  	= infors[baseIdx + 2];
-		    item.mType 			= Integer.valueOf(infors[baseIdx + 3]);
-		    item.mPassword  	= infors[baseIdx + 4];
-		    item.mBeginTime  	= infors[baseIdx + 5];
-		    item.mEndTime  		= infors[baseIdx + 6];
-		    item.mMemo  		= infors[baseIdx + 7];
+		    item.mLockID   		= devID;
+		    item.mUserName  	= infors[baseIdx + 1];
+		    item.mType 			= Integer.valueOf(infors[baseIdx + 2]);
+		    item.mPassword  	= infors[baseIdx + 3];
+		    item.mBeginTime  	= infors[baseIdx + 4];
+		    item.mEndTime  		= infors[baseIdx + 5];
+		    item.mMemo  		= infors[baseIdx + 6];
 		    
 		    items.add(item);
 		    
-		    baseIdx = baseIdx + 8;
+		    baseIdx = baseIdx + 7;
 		}
 		
-		add2DB(items);
+		add2DB(items, devID);
 		
 		mIntent.putExtra("RESULT", 0);
 		mIntent.putExtra("MESSAGE", "");
 		SmartLockApplication.getContext().sendBroadcast(mIntent);
 	}
 	
-	private void add2DB(ArrayList<PasswordDefine> locks) {
+	private void add2DB(ArrayList<PasswordDefine> locks, String devID) {
 		SmartLockExPasswordHelper mHelper = new SmartLockExPasswordHelper(SmartLockApplication.getContext());
-		mHelper.clear();
+		mHelper.clear(devID);
 
 		int i = 0, j = 0;
 		for (i = 0; i < locks.size(); i++) {
