@@ -199,13 +199,13 @@ public class SettingFragment extends SmartLockFragment
 	}
 	
 	private void startWeixinApp() {
-//		String appId = "wxbb28efa2d55a7d4d"; 	// 填应用AppId
+//		String appId = "wx150b36fc8176f4fb"; 	// 填应用AppId， zms智能门锁
 		String appId = "wx150b36fc8176f4fb"; 	// 填应用AppId, 每日财经
 		IWXAPI api = WXAPIFactory.createWXAPI(mContext, appId);
 		 
 		WXLaunchMiniProgram.Req req = new WXLaunchMiniProgram.Req();
-//		req.userName = "gh_62774c35b1d9"; 		// 小程序原始id， 李氏草堂
-		req.userName = "gh_62774c35b1d9"; 		// 小程序原始id， 李氏草堂
+		req.userName = "gh_ca77143033e5"; 		// 小程序原始id， zmsopen appid: wxc3a2e042a2f043e0
+//		req.userName = "gh_62774c35b1d9"; 		// 小程序原始id， 李氏草堂          appid: wxbb28efa2d55a7d4d
 		req.path = "";                  		//拉起小程序页面的可带参路径，不填默认拉起小程序首页
 //		req.miniprogramType = WXLaunchMiniProgram.Req.MINIPTOGRAM_TYPE_RELEASE;	// 发布版本
 		req.miniprogramType = WXLaunchMiniProgram.Req.MINIPROGRAM_TYPE_PREVIEW;	// 体验版本
