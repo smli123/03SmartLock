@@ -362,7 +362,7 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 	}
 	
 	private void setOnline(boolean bOnline) {
-		iv_lock_online.setBackgroundResource(bOnline == true ? R.drawable.smp_online : R.drawable.smp_offline);
+		iv_lock_online.setImageResource(bOnline == true ? R.drawable.smp_online : R.drawable.smp_offline);
 	}
 	
 	private void addAuthorizeUserName(String name) {
