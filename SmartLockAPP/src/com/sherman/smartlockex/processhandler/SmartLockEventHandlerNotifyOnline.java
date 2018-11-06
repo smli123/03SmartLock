@@ -2,6 +2,7 @@ package com.sherman.smartlockex.processhandler;
 
 import android.content.Intent;
 import android.os.Message;
+import android.util.Log;
 
 import com.sherman.smartlockex.R;
 import com.sherman.smartlockex.dataprovider.SmartLockExLockHelper;
@@ -33,7 +34,11 @@ public class SmartLockEventHandlerNotifyOnline extends SmartLockEventHandler {
 		SmartLockDefine item = helper.get(devID);
 		item.mOnline = (online == 1) ? true : false;
 		helper.modify(item);
-		
 		helper = null;
+		
+		String info_online = SmartLockApplication.getInstance().getString(R.string.app_response_device_online);
+		String info_offline = SmartLockApplication.getInstance().getString(R.string.app_response_device_offline);
+		String info = String.format("%s: %s", item.mName, (online == 1) ? info_online : info_offline);
+		PubFunc.thinzdoToast(SmartLockApplication.getContext(), info);
 	}
 }
