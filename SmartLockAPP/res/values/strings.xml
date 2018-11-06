@@ -206,8 +206,8 @@
 	<string name="app_response_email_registered">邮箱已注册过</string>
 	<string name="app_response_unknown_error">未知错误</string>
 	<string name="app_response_login_fail_devices">"登录智能门锁失败了"</string>
-	<string name="app_response_device_online">"门锁上线"</string>
-	<string name="app_response_device_offline">"门锁离线"</string>
+	<string name="app_response_device_online">"在线"</string>
+	<string name="app_response_device_offline">"离线"</string>
 	
 	<string name="server_response_fail_to_insert_db">服务器写数据库失败</string>	
 	<string name="server_response_fail_to_update_db">服务器更新数据库失败</string>		

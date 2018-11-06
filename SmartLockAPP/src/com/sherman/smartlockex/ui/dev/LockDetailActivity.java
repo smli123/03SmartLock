@@ -45,6 +45,7 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 	
 	private LinearLayout ll_administrator_area;
 	private ImageView iv_lock_online;
+	private TextView tv_online;
 	private TextView tv_status;
 	private TextView tv_log;
 	
@@ -325,6 +326,7 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 	
 	private void initView() {
 		iv_lock_online = (ImageView) findViewById(R.id.iv_lock_online);
+		tv_online = (TextView) findViewById(R.id.tv_online);
 		tv_status = (TextView) findViewById(R.id.tv_status);
 		tv_log = (TextView) findViewById(R.id.tv_log);
 		tv_lock_open = (TextView) findViewById(R.id.tv_lock_open);
@@ -363,6 +365,7 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 	
 	private void setOnline(boolean bOnline) {
 		iv_lock_online.setImageResource(bOnline == true ? R.drawable.smp_online : R.drawable.smp_offline);
+		tv_online.setText(SmartLockApplication.getInstance().getString(bOnline == true ? R.string.app_response_device_online : R.string.app_response_device_offline));
 	}
 	
 	private void addAuthorizeUserName(String name) {

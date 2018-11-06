@@ -48,11 +48,9 @@ public class MyAlertDialog {
 	}
 
 	public MyAlertDialog builder() {
-		// ��ȡDialog����
 		View view = LayoutInflater.from(context).inflate(
 				R.layout.toast_view_alertdialog, null);
 
-		// ��ȡ�Զ���Dialog�����еĿؼ�
 		lLayout_bg = (LinearLayout) view.findViewById(R.id.lLayout_bg);
 		txt_title = (TextView) view.findViewById(R.id.txt_title);
 		txt_title.setVisibility(View.GONE);
@@ -73,11 +71,9 @@ public class MyAlertDialog {
 		img_inputline = (ImageView) view.findViewById(R.id.dialog_marinput);
 		img_inputline.setVisibility(View.GONE);
 
-		// ����Dialog���ֺͲ���
 		dialog = new Dialog(context, R.style.AlertDialogStyle);
 		dialog.setContentView(view);
 
-		// ����dialog������С
 		lLayout_bg.setLayoutParams(new FrameLayout.LayoutParams((int) (display
 				.getWidth() * 0.85), LayoutParams.WRAP_CONTENT));
 
@@ -87,7 +83,7 @@ public class MyAlertDialog {
 	public MyAlertDialog setTitle(String title) {
 		showTitle = true;
 		if ("".equals(title)) {
-			txt_title.setText("����");
+			txt_title.setText("No Title");
 		} else {
 			txt_title.setText(title);
 		}
@@ -97,7 +93,7 @@ public class MyAlertDialog {
 	public MyAlertDialog setEditText(String msg) {
 		showEditText = true;
 		if ("".equals(msg)) {
-			edittxt_result.setHint("����");
+			edittxt_result.setHint("App User Name");
 		} else {
 			edittxt_result.setText(msg);
 		}
@@ -111,7 +107,7 @@ public class MyAlertDialog {
 	public MyAlertDialog setMsg(String msg) {
 		showMsg = true;
 		if ("".equals(msg)) {
-			txt_msg.setText("����");
+			txt_msg.setText("No Msg");
 		} else {
 			txt_msg.setText(msg);
 		}
@@ -138,7 +134,7 @@ public class MyAlertDialog {
 			final OnClickListener listener) {
 		showPosBtn = true;
 		if ("".equals(text)) {
-			btn_pos.setText("ȷ��");
+			btn_pos.setText("Cancel");
 		} else {
 			btn_pos.setText(text);
 		}
@@ -156,7 +152,7 @@ public class MyAlertDialog {
 			final OnClickListener listener) {
 		showNegBtn = true;
 		if ("".equals(text)) {
-			btn_neg.setText("ȡ��");
+			btn_neg.setText("OK");
 		} else {
 			btn_neg.setText(text);
 		}
@@ -172,7 +168,7 @@ public class MyAlertDialog {
 
 	private void setLayout() {
 		if (!showTitle && !showMsg) {
-			txt_title.setText("��ʾ");
+			txt_title.setText("");
 			txt_title.setVisibility(View.VISIBLE);
 		}
 
@@ -197,7 +193,7 @@ public class MyAlertDialog {
 		}
 
 		if (!showPosBtn && !showNegBtn) {
-			btn_pos.setText("ȷ��");
+			btn_pos.setText("");
 			btn_pos.setVisibility(View.VISIBLE);
 			btn_pos.setBackgroundResource(R.drawable.alertdialog_single_selector);
 			btn_pos.setOnClickListener(new OnClickListener() {

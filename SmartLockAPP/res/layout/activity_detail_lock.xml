@@ -43,10 +43,21 @@
 		            android:src="@drawable/smp_offline" />
 		
 		        <TextView
+		            android:id="@+id/tv_online"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_toRightOf="@id/iv_lock_online"
+		            android:layout_marginRight="@dimen/list_item_right_padding"
+		            android:gravity="center"
+		            android:text="@null"
+		            android:textColor="@color/black"
+		            android:textSize="@dimen/version_font_size" />
+		
+		        <TextView
 		            android:id="@+id/tv_status"
 		            android:layout_width="match_parent"
 		            android:layout_height="wrap_content"
-		            android:layout_toRightOf="@id/iv_lock_online"
+		            android:layout_toRightOf="@id/tv_online"
 		            android:gravity="center"
 		            android:text="@null"
 		            android:textColor="@color/black"
