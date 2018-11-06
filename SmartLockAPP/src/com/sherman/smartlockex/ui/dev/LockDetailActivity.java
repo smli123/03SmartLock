@@ -44,6 +44,7 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 	private SmartLockExPasswordHelper mPasswordHelper = null;
 	
 	private LinearLayout ll_administrator_area;
+	private ImageView iv_lock_online;
 	private TextView tv_status;
 	private TextView tv_log;
 	
@@ -65,6 +66,15 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
+			if (intent.getAction().equals(PubDefine.LOCK_NOTIFY_ONLINE_BROADCAST)) {
+				String moduleID = intent.getStringExtra("LOCKID");
+				int online = intent.getIntExtra("ONLINE", 0);
+				if (moduleID.equals(mLockID) == true) {
+					setOnline(online == 1 ? true : false);
+				}
+				return;
+			}
+			
 			if (null != mProgress) {
 				mProgress.dismiss();
 			}
@@ -248,6 +258,7 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
         initView();
         
         IntentFilter filter = new IntentFilter();
+        filter.addAction(PubDefine.LOCK_NOTIFY_ONLINE_BROADCAST);
 		filter.addAction(PubDefine.LOCK_NOTIFY_STATUS_BROADCAST);
 		filter.addAction(PubDefine.LOCK_OPENLOCK_BROADCAST);
 		filter.addAction(PubDefine.LOCK_QRYAUTHORIZEUSER_BROADCAST);
@@ -313,6 +324,7 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 	}
 	
 	private void initView() {
+		iv_lock_online = (ImageView) findViewById(R.id.iv_lock_online);
 		tv_status = (TextView) findViewById(R.id.tv_status);
 		tv_log = (TextView) findViewById(R.id.tv_log);
 		tv_lock_open = (TextView) findViewById(R.id.tv_lock_open);
@@ -339,10 +351,18 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 		updateAuthorize();
 		updatePassword();
 		
+		// 设置门锁的当前状态
 		Message msg = new Message();
 		msg.what = 0;
 		msg.arg1 = mLock.mStatus;
 		updateHandler.sendMessage(msg);
+		
+		// 设置门锁的当前状态
+		setOnline(mLock.mOnline);
+	}
+	
+	private void setOnline(boolean bOnline) {
+		iv_lock_online.setBackgroundResource(bOnline == true ? R.drawable.smp_online : R.drawable.smp_offline);
 	}
 	
 	private void addAuthorizeUserName(String name) {

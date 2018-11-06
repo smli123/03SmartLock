@@ -68,7 +68,7 @@ public class ModuleHeartBeatTask  extends TimerTask implements ICallFunction{
 			
 			try
 			{
-				//通知APP模块已上线
+				//通知APP模块已下线
 				Vector<USER_MODULE> user_info = dbMgr.QueryUserModuleByDevId(m_strModuleID);
 				if (user_info == null) {
 					LogWriter.WriteErrorLog(LogWriter.SELF, String.format("\t Failed to QueryUserModuleByDevId. (DevID:%s)", 
@@ -79,7 +79,7 @@ public class ModuleHeartBeatTask  extends TimerTask implements ICallFunction{
 						NotifyToAPP(user.getUserName(), m_strModuleID, 
 								ServerCommDefine.APP_NOTIFY_ONLINE_MSG_HEADER, 
 								ServerRetCodeMgr.SUCCESS_CODE,
-								String.valueOf(ServerCommDefine.MODULE_ON_LINE)) ;		
+								String.valueOf(ServerCommDefine.MODULE_OFF_LINE)) ;		
 					}
 				}
 	
@@ -90,29 +90,29 @@ public class ModuleHeartBeatTask  extends TimerTask implements ICallFunction{
 				LogWriter.WriteDebugLog(LogWriter.SELF, String.format("Stop Heart Timer:%s, timer info:%s", m_strModuleID, info.getHeartTimer().toString()));
 				info.getHeartTimer().cancel();
 				
-				// 更新模块上线日志信息 lishimin -- MODULE_DATA
-				if (ServerParamConfiger.getRecordModuleData() == true) {
-					dbMgr.BeginTansacion();
-					MODULE_DATA data = dbMgr.QueryModuleDataByModuleId(m_strModuleID);
-					Timestamp dtLogoutTime = dbMgr.getCurrentTime();
-					data.setLogoutTime(dtLogoutTime);
-					long ionlineTime = (dtLogoutTime.getTime() - data.getLoginTime().getTime())/1000;
-					data.setOnlineTime(ionlineTime);
-					
-					boolean bRet = dbMgr.UpdateModuleData(data);
-					if(!bRet)
-					{
-						LogWriter.WriteErrorLog(LogWriter.SELF, String.format("(%s)\t Failed to UpdateModuleData:[%s - %s]", 
-								m_strModuleID,data.getLoginTime(),data.getLogoutTime()));
-						dbMgr.Rollback();
-						dbMgr.EndTansacion();
-					} else {
-						LogWriter.WriteErrorLog(LogWriter.SELF, String.format("(%s)\t Succeed to UpdateModuleData:[%s - %s]", 
-								m_strModuleID,data.getLoginTime(),data.getLogoutTime()));
-					}
-					dbMgr.Commit();
-					dbMgr.EndTansacion();
-				}
+//				// 更新模块上线日志信息 lishimin -- MODULE_DATA
+//				if (ServerParamConfiger.getRecordModuleData() == true) {
+//					dbMgr.BeginTansacion();
+//					MODULE_DATA data = dbMgr.QueryModuleDataByModuleId(m_strModuleID);
+//					Timestamp dtLogoutTime = dbMgr.getCurrentTime();
+//					data.setLogoutTime(dtLogoutTime);
+//					long ionlineTime = (dtLogoutTime.getTime() - data.getLoginTime().getTime())/1000;
+//					data.setOnlineTime(ionlineTime);
+//					
+//					boolean bRet = dbMgr.UpdateModuleData(data);
+//					if(!bRet)
+//					{
+//						LogWriter.WriteErrorLog(LogWriter.SELF, String.format("(%s)\t Failed to UpdateModuleData:[%s - %s]", 
+//								m_strModuleID,data.getLoginTime(),data.getLogoutTime()));
+//						dbMgr.Rollback();
+//						dbMgr.EndTansacion();
+//					} else {
+//						LogWriter.WriteErrorLog(LogWriter.SELF, String.format("(%s)\t Succeed to UpdateModuleData:[%s - %s]", 
+//								m_strModuleID,data.getLoginTime(),data.getLogoutTime()));
+//					}
+//					dbMgr.Commit();
+//					dbMgr.EndTansacion();
+//				}
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

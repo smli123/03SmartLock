@@ -61,6 +61,12 @@ public class DeviceFragment extends SmartLockFragment
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
+			if (intent.getAction().equals(PubDefine.LOCK_NOTIFY_ONLINE_BROADCAST)) {
+				// 得到通知消息，重新加载数据；
+				doBackgroundLoad();
+				return;
+			}
+			
 			if (null != mProgress) {
 				mProgress.dismiss();
 			}

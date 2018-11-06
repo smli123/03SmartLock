@@ -32,21 +32,22 @@
 		        android:orientation="horizontal"
 		        android:padding="5dp" >
 		    	
-		        <TextView
-		            android:id="@+id/tv_status_memo"
+		        <ImageView
+		            android:id="@+id/iv_lock_online"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
-		            android:text="@string/lock_detail_current_lockstatus"
-		            android:textColor="@color/black"
-		            android:textSize="@dimen/version_font_size" 
-		            android:visibility="gone"/>
+		            android:layout_alignParentLeft="true"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="@dimen/list_item_left_padding"
+		            android:layout_marginRight="@dimen/list_item_right_padding"
+		            android:src="@drawable/smp_offline" />
 		
 		        <TextView
 		            android:id="@+id/tv_status"
 		            android:layout_width="match_parent"
 		            android:layout_height="wrap_content"
-		            android:layout_toRightOf="@id/tv_status_memo"
-		            android:text="yijingdakail"
+		            android:layout_toRightOf="@id/iv_lock_online"
+		            android:text="@null"
 		            android:textColor="@color/black"
 		            android:textSize="@dimen/version_font_size" />
 		
