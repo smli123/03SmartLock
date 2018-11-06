@@ -265,12 +265,12 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 			}
 		}, 500);
 
-		new Handler().postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				queryPassword(mLockID);
-			}
-		}, 1000);
+//		new Handler().postDelayed(new Runnable() {
+//			@Override
+//			public void run() {
+//				queryPassword(mLockID);
+//			}
+//		}, 1000);
 		
     }
     

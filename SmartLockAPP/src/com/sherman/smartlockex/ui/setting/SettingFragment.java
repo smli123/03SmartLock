@@ -30,6 +30,9 @@ import com.sherman.smartlockex.ui.util.MyAlertDialog;
 import com.sherman.smartlockex.ui.util.RefreshableView;
 import com.sherman.smartlockex.ui.util.RefreshableView.PullToRefreshListener;
 import com.sherman.smartlockex.R;
+import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 public class SettingFragment extends SmartLockFragment
 		implements
@@ -39,6 +42,7 @@ public class SettingFragment extends SmartLockFragment
 	
 	private RelativeLayout rl_person_info;
 	private RelativeLayout rl_mgr_update;
+	private RelativeLayout rl_mgr_weixinapp;
 	private RelativeLayout rl_mgr_feedback;
 	private RelativeLayout rl_mgr_help;
 	private RelativeLayout rl_mgr_about;
@@ -121,6 +125,8 @@ public class SettingFragment extends SmartLockFragment
 				.findViewById(R.id.rl_mgr_update);
 		// lishin Code is not run
 		rl_mgr_update.setVisibility(View.GONE);
+		rl_mgr_weixinapp = (RelativeLayout) mFragmentView
+				.findViewById(R.id.rl_mgr_weixinapp);
 		rl_mgr_feedback = (RelativeLayout) mFragmentView
 				.findViewById(R.id.rl_mgr_feedback);
 		rl_mgr_help = (RelativeLayout) mFragmentView
@@ -133,6 +139,7 @@ public class SettingFragment extends SmartLockFragment
 
 		rl_person_info.setOnClickListener(this);
 		rl_mgr_update.setOnClickListener(this);
+		rl_mgr_weixinapp.setOnClickListener(this);
 		rl_mgr_feedback.setOnClickListener(this);
 		rl_mgr_help.setOnClickListener(this);
 		rl_mgr_about.setOnClickListener(this);
@@ -164,6 +171,9 @@ public class SettingFragment extends SmartLockFragment
 		case R.id.rl_mgr_update:
 			this.update(0);
 			break;
+		case R.id.rl_mgr_weixinapp:
+			startWeixinApp();
+			break;
 		case R.id.rl_mgr_feedback:
 			intent = new Intent();
 			intent.setClass(this.getActivity(),
@@ -186,6 +196,20 @@ public class SettingFragment extends SmartLockFragment
 			logout();
 			break;
 		}
+	}
+	
+	private void startWeixinApp() {
+//		String appId = "wxbb28efa2d55a7d4d"; 	// 填应用AppId
+		String appId = "wx150b36fc8176f4fb"; 	// 填应用AppId, 每日财经
+		IWXAPI api = WXAPIFactory.createWXAPI(mContext, appId);
+		 
+		WXLaunchMiniProgram.Req req = new WXLaunchMiniProgram.Req();
+//		req.userName = "gh_62774c35b1d9"; 		// 小程序原始id， 李氏草堂
+		req.userName = "gh_62774c35b1d9"; 		// 小程序原始id， 李氏草堂
+		req.path = "";                  		//拉起小程序页面的可带参路径，不填默认拉起小程序首页
+//		req.miniprogramType = WXLaunchMiniProgram.Req.MINIPTOGRAM_TYPE_RELEASE;	// 发布版本
+		req.miniprogramType = WXLaunchMiniProgram.Req.MINIPROGRAM_TYPE_PREVIEW;	// 体验版本
+		api.sendReq(req);
 	}
 	
 	public void update(int verType) {

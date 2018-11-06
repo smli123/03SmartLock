@@ -238,6 +238,7 @@
     <string name="smartlock_oper_lock_close">"关锁"</string>
 
     <string name="app_update">"检查更新"</string>
+    <string name="app_weixinapp">"我的微信小程序"</string>
     <string name="app_feedback">"意见反馈"</string>
     <string name="app_help">"帮助中心"</string>
     <string name="app_about">"关于"</string>
