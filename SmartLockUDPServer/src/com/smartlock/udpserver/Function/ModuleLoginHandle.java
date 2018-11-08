@@ -182,11 +182,13 @@ public class ModuleLoginHandle implements ICallFunction {
 			LogWriter.WriteTraceLog(LogWriter.SELF, String.format("Login: Send UserName to Module [%s:%s]", strNewAppUserName, strDevId));
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 			String newDate = df.format(new Date());
-			if (strAppUserName.equalsIgnoreCase(PubDefine.DEFAULT_USERNAME) == true) {
-				ResponseToModule(strDevId, String.format("%s,%s,%s,%s,%d,%s#", strCookie, ServerCommDefine.MODULE_LOGIN_MSG_HEADER, strNewAppUserName, strDevId, 1, newDate));
-			} else {
-				ResponseToModule(strDevId, String.format("%s,%s,%s,%s,%d,%s#", strCookie, ServerCommDefine.MODULE_LOGIN_MSG_HEADER, strNewAppUserName, strDevId, 0, newDate));
-			}
+//			if (strAppUserName.equalsIgnoreCase(PubDefine.DEFAULT_USERNAME) == true) {
+//				ResponseToModule(strDevId, String.format("%s,%s,%s,%s,%d,%s#", strCookie, ServerCommDefine.MODULE_LOGIN_MSG_HEADER, strNewAppUserName, strDevId, 1, newDate));
+//			} else {
+//				ResponseToModule(strDevId, String.format("%s,%s,%s,%s,%d,%s#", strCookie, ServerCommDefine.MODULE_LOGIN_MSG_HEADER, strNewAppUserName, strDevId, 0, newDate));
+//			}
+			
+			ResponseToModule(strDevId, String.format("%s,%s,%s,%s,%d,%s#", strCookie, ServerCommDefine.MODULE_LOGIN_MSG_HEADER, strNewAppUserName, strDevId, 0, newDate));
 			
 			// 刷新Coolie
 			ServerWorkThread.RefreshModuleCookie(strDevId, strCookie);
