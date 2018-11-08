@@ -42,7 +42,6 @@ import java.util.concurrent.Executors;
 
 public class NewTest {
 	public static DatagramSocket dataSocket = null;
-	private static Map<String, String> cmdMap = new HashMap<String, String>();
 	
 	private static int lockstatus = 0;
 	private static int lockcharge = 100;
@@ -52,8 +51,6 @@ public class NewTest {
 	public static void main(String[] args) throws Exception{
 		dataSocket = new DatagramSocket(PubDefine.LOCAL_PORT);
 		dataSocket.setSoTimeout(5000);
-		
-		read_config();
 		
 		Thread app_server = new NewTest().new ServerMainThread();
 		Thread heart_server = new NewTest().new HeartBeatThread();
@@ -312,60 +309,5 @@ public class ServerMainThread extends Thread {
 		}
 	}
 }
-	
-	public static boolean read_config()
-	{
-		String strFilePath = String.format("%s/command_config.ini", "C:/Users/Administrator/smarthome/SimulatorDevice");
-		File file = new File(strFilePath);
-		if(file.isFile() && file.exists())
-		{
-			try {
-				InputStreamReader read = new InputStreamReader(new FileInputStream(file));
-				BufferedReader buffer_reader = new BufferedReader(read);
-				String strLineText = null;
-				while( (strLineText = buffer_reader.readLine()) != null)
-				{
-					strLineText = strLineText.trim();
-					if(strLineText.startsWith("#"))
-					{
-						//#: note, discard
-						continue;
-					}
-					String strRet[] = strLineText.split("[=]");
-					if(strRet.length == 2) {
-						cmdMap.put(strRet[0], strRet[1]);
-					}
-				}
-				System.out.println("Succeed to load server parameter.");
-				read.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		else
-		{
-			System.out.println("Failed to load server parameter.");
-		}
-
-		for (String key : cmdMap.keySet()) {
-			System.out.println(String.format("[%s]:\t%s", key, cmdMap.get(key)));
-		}
-			
-		return true;
-	}
-	
-	private String getCmdResonse(String command) {
-		String result = null;
-		for (String key : cmdMap.keySet()) {
-			if (key.equals(command) == true) {
-				result = cmdMap.get(key);
-			}
-		}
-		return result;			
-	}
     
 }
