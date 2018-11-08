@@ -11,6 +11,7 @@ import com.sherman.smartlockex.processhandler.SmartLockMessage;
 import com.sherman.smartlockex.ui.common.PubDefine;
 import com.sherman.smartlockex.ui.common.PubFunc;
 import com.sherman.smartlockex.ui.common.PubStatus;
+import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
 
 import android.os.Handler;
 
@@ -95,7 +96,7 @@ public class UDPReceiver implements Runnable {
 		        String[] cmds = receiveData.split(",");
 		        
 		        // 检查返回的命令字格式是否正确；
-		        if(cmds == null || cmds.length < 5){
+		        if(cmds == null || cmds.length < 3){
 		        	buf = null;
 					continue;
 				}
@@ -111,8 +112,8 @@ public class UDPReceiver implements Runnable {
 		        PubStatus.g_userCookie  = cmds[0];
 				String cmd              = cmds[1];
 				PubStatus.g_CurUserName = cmds[2];
-				PubStatus.g_moduleId    = cmds[3];	
-
+//				PubStatus.g_moduleId    = cmds[3];
+				
 		        handler = SmartLockEventHandler.getInstance()
                          .getTheEventHandler(SmartLockMessage.getEvent(cmd));
 				if (null != handler) {

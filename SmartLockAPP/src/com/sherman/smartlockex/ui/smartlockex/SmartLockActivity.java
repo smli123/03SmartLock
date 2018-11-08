@@ -1,6 +1,9 @@
 package com.sherman.smartlockex.ui.smartlockex;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -17,6 +20,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,11 +34,16 @@ import android.widget.TextView;
 
 import com.sherman.smartlockex.R;
 import com.sherman.smartlockex.dataprovider.SmartLockExLockHelper;
+import com.sherman.smartlockex.internet.AsyncResult;
+import com.sherman.smartlockex.internet.SendMsgProxy;
+import com.sherman.smartlockex.processhandler.SmartLockMessage;
 import com.sherman.smartlockex.ui.common.PubDefine;
 import com.sherman.smartlockex.ui.common.PubFunc;
 import com.sherman.smartlockex.ui.common.PubStatus;
 import com.sherman.smartlockex.ui.common.SmartLockDefine;
 import com.sherman.smartlockex.ui.common.SmartLockFragmentPagerAdapter;
+import com.sherman.smartlockex.ui.common.SmartLockProgressDlg;
+import com.sherman.smartlockex.ui.common.StringUtils;
 import com.sherman.smartlockex.ui.dev.AddDeviceActivity;
 import com.sherman.smartlockex.ui.dev.DeviceFragment;
 import com.sherman.smartlockex.ui.login.LoginActivity;
@@ -70,7 +79,11 @@ public class SmartLockActivity extends FragmentActivity
 	private Resources resources;
 	private Context mContext;
 	private SmartLockExLockHelper mLockHelper = null;
-
+	
+	Timer heartTime = null;
+	TimerTask heartTask = null;
+	protected SmartLockProgressDlg mProgress = null;
+	
 	private SharedPreferences mSharedPreferences;
 	
 	private BroadcastReceiver mReveiver = new BroadcastReceiver() {
@@ -210,6 +223,21 @@ public class SmartLockActivity extends FragmentActivity
 		filter.addAction(PubDefine.LOCK_NOTIFY_STATUS_BROADCAST);
 		
 		mContext.registerReceiver(mReveiver, filter);
+		
+		// 启动心跳程序（APP 和  Server)
+		reset_heartTimer();
+	}
+	
+	private void reset_heartTimer() {
+		heartTime = new Timer();
+		heartTask = new TimerTask() {
+			@Override
+			public void run() {
+				sendHeart();
+			}
+		};
+		// 每60秒执行一次
+		heartTime.schedule(heartTask, 100, 15*1000);
 	}
 
 
@@ -486,6 +514,15 @@ public class SmartLockActivity extends FragmentActivity
 		fragmentsList.clear();
 		unregisterReceiver(mReveiver);
 
+		if (heartTask != null) {
+			heartTask.cancel();
+			heartTask = null;
+		}
+		if (heartTime != null) {
+			heartTime.cancel();
+			heartTime = null;
+		}
+
 		super.onDestroy();
 	};
 
@@ -532,5 +569,92 @@ public class SmartLockActivity extends FragmentActivity
 					break;
 			}
 		};
+	};
+	
+	private void sendHeart() {
+		PubStatus.g_heartSendCount += 1;
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append(SmartLockMessage.CMD_SP_HEART)
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append(PubStatus.getUserName())
+				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
+				.append("0");
+
+		sendMsg(true, sb.toString(), false);
+	}
+	
+    private void sendMsg(boolean containCookie, String msg, boolean needDelay) {
+    	SendMsgProxy.sendCtrlMsg(containCookie, msg,  timeoutHandler);
+    };
+    
+
+	protected Handler timeoutHandler = new Handler() {
+	    public void handleMessage(Message msg) {
+	    	// 统一处理，首先去掉进度条
+	    	if (null != mProgress) {
+				mProgress.dismiss();
+			}
+    		this.removeCallbacks(timeoutProcess);
+    		
+	    	if (msg.what == AppServerReposeDefine.Socket_Connect_FAIL) {
+	    		AsyncResult ret = (AsyncResult)msg.obj;
+	    		Log.e("socketExceptionHandler", ret.mMessage);
+//	    		SmartLockApplication.getContext().sendBroadcast(new Intent(PubDefine.SOCKET_CONNECT_FAIL_BROADCAST));
+//	    		String error = ret.mMessage;
+	    		String error = SmartLockApplication.getContext().getString(R.string.login_timeout);
+	    		if (PubDefine.g_Connect_Mode != PubDefine.SmartLock_Connect_Mode.Internet) {
+	    			error = SmartLockApplication.getContext().getString(R.string.oper_error);
+	    		}
+	    		PubFunc.thinzdoToast(SmartLockApplication.getContext(), error);
+	    		
+	    	} else if (msg.what == AppServerReposeDefine.Socket_Send_Fail) {
+	    		AsyncResult ret = (AsyncResult)msg.obj;
+	    		Log.e("socketExceptionHandler", ret.mMessage);
+//	    		SmartLockApplication.getContext().sendBroadcast(new Intent(PubDefine.SOCKET_CONNECT_FAIL_BROADCAST));
+//	    		String error = ret.mMessage;
+	    		String error = SmartLockApplication.getContext().getString(R.string.login_timeout);
+	    		if (PubDefine.g_Connect_Mode != PubDefine.SmartLock_Connect_Mode.Internet) {
+	    			error = SmartLockApplication.getContext().getString(R.string.oper_error);
+	    		}
+	    		PubFunc.thinzdoToast(SmartLockApplication.getContext(), error);
+	    		
+	    	} else if (msg.what == AppServerReposeDefine.Socket_Send_OK) {
+//	    		if (null != mProgress) {
+//					mProgress.dismiss();
+//				}
+//	    		this.removeCallbacks(timeoutProcess);
+//	    		PubFunc.thinzdoToast(SmartLockApplication.getContext(), "Send OK");
+	    		
+	    	} else if (msg.what == AppServerReposeDefine.Socket_TCP_TIMEOUT) {
+//	    		if (null != mProgress) {
+//					mProgress.dismiss();
+//				}
+//	    		this.removeCallbacks(timeoutProcess);
+	    		String error = SmartLockApplication.getContext().getString(R.string.login_cmd_socket_timeout_devices);
+	    		PubFunc.thinzdoToast(SmartLockApplication.getContext(), error);
+	    		
+	    	} else {
+	    		//do nothing...
+	    	}
+	    	
+	    };	
+	}; 
+	
+
+	protected Runnable timeoutProcess = new Runnable() {
+
+		@Override
+		public void run() {
+			if (null != mProgress) {
+				mProgress.dismiss();
+			}	
+    		String error = SmartLockApplication.getContext().getString(R.string.login_timeout);
+    		if (PubDefine.g_Connect_Mode != PubDefine.SmartLock_Connect_Mode.Internet) {
+    			error = SmartLockApplication.getContext().getString(R.string.oper_error);
+    		}
+    		PubFunc.thinzdoToast(SmartLockApplication.getContext(), error);
+		}
+		
 	};
 }

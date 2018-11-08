@@ -30,9 +30,10 @@ public class PubDefine {
 	// Broadcast Info
 	public static final String SOCKET_CONNECT_FAIL_BROADCAST = "com.sherman.socket.connect.fail";
 	public static final String LOGIN_BROADCAST = "com.sherman.login.broadcast";
+	public static final String LOGOUT_BROADCAST = "com.sherman.logout.broadcast";
+	public static final String HEART_BROADCAST = "com.sherman.heart.broadcast";
 	
 	public static final String REGISTER_BROADCAST = "com.sherman.register.broadcast";
-	public static final String LOGOUT_BROADCAST = "com.sherman.logout.broadcast";
 	public static final String FINDPWD_BROADCAST = "com.sherman.findpwd.broadcast";
 
 	public static final String LOCK_QRYLOCK_BROADCAST = "com.sherman.smartlock.update";

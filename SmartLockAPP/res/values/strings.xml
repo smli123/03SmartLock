@@ -242,6 +242,7 @@
     <string name="app_feedback">"意见反馈"</string>
     <string name="app_help">"帮助中心"</string>
     <string name="app_about">"关于"</string>
+    <string name="app_hear_count">"心跳统计[发送：接收]"</string>
     
     <string name="smartlock_logo">"智能门锁"</string>
     <string name="smartlock_company_web">"公司网址"</string>

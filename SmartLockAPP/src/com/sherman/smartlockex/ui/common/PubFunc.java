@@ -681,12 +681,16 @@ public class PubFunc {
     		break;
     	case 2:
     		result = app.getString(R.string.smartlock_message_lock_is_open_by_passwroduser);
+    		break;
     	case 3:
     		result = app.getString(R.string.smartlock_message_lock_is_open_by_carduser);
+    		break;
     	case 4:
     		result = app.getString(R.string.smartlock_message_lock_is_open_by_keyuser);
+    		break;
     	case 5:
     		result = app.getString(R.string.smartlock_message_lock_is_open_by_appuser);
+    		break;
     	}
     	
     	return result;

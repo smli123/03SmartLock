@@ -1,6 +1,8 @@
 package com.sherman.smartlockex.ui.setting;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -46,6 +48,9 @@ public class SettingFragment extends SmartLockFragment
 	private RelativeLayout rl_mgr_feedback;
 	private RelativeLayout rl_mgr_help;
 	private RelativeLayout rl_mgr_about;
+	
+	private RelativeLayout rl_item_03;
+	private TextView tv_heart_send_recv;
 	
 	private Button btn_logout = null;
 
@@ -133,6 +138,11 @@ public class SettingFragment extends SmartLockFragment
 				.findViewById(R.id.rl_mgr_help);
 		rl_mgr_about = (RelativeLayout) mFragmentView
 				.findViewById(R.id.rl_mgr_about);
+
+		rl_item_03 = (RelativeLayout) mFragmentView
+				.findViewById(R.id.rl_item_03);
+		tv_heart_send_recv = (TextView) mFragmentView
+				.findViewById(R.id.tv_heart_send_recv);
 		
 		btn_logout = (Button) mFragmentView
 				.findViewById(R.id.btn_logout);
@@ -145,10 +155,26 @@ public class SettingFragment extends SmartLockFragment
 		rl_mgr_about.setOnClickListener(this);
 
 		btn_logout.setOnClickListener(this);
+		
+		Timer heartTimer = new Timer();
+		TimerTask heartTask = new TimerTask(){
+			@Override
+			public void run() {
+				updateHandler.sendEmptyMessage(0);
+			}
+		};
+		// 每60秒执行一次
+		heartTimer.schedule(heartTask, 100, 15*1000);
 	}
 
 	private Handler updateHandler = new Handler() {
 		public void handleMessage(Message msg) {
+			switch(msg.what) {
+			case 0:
+				String temp = String.format("%d:%d", PubStatus.g_heartSendCount, PubStatus.g_heartRecvCount);
+				tv_heart_send_recv.setText(temp);
+				break;
+			}
 		};
 	};
 
@@ -202,13 +228,14 @@ public class SettingFragment extends SmartLockFragment
 //		String appId = "wx150b36fc8176f4fb"; 	// 填应用AppId， zms智能门锁
 		String appId = "wx150b36fc8176f4fb"; 	// 填应用AppId, 每日财经
 		IWXAPI api = WXAPIFactory.createWXAPI(mContext, appId);
-		 
+		
 		WXLaunchMiniProgram.Req req = new WXLaunchMiniProgram.Req();
 		req.userName = "gh_ca77143033e5"; 		// 小程序原始id， zmsopen appid: wxc3a2e042a2f043e0
 //		req.userName = "gh_62774c35b1d9"; 		// 小程序原始id， 李氏草堂          appid: wxbb28efa2d55a7d4d
 		req.path = "";                  		//拉起小程序页面的可带参路径，不填默认拉起小程序首页
-//		req.miniprogramType = WXLaunchMiniProgram.Req.MINIPTOGRAM_TYPE_RELEASE;	// 发布版本
-		req.miniprogramType = WXLaunchMiniProgram.Req.MINIPROGRAM_TYPE_PREVIEW;	// 体验版本
+//		req.miniprogramType = WXLaunchMiniProgram.Req.MINIPROGRAM_TYPE_TEST;	// 测试版本
+//		req.miniprogramType = WXLaunchMiniProgram.Req.MINIPROGRAM_TYPE_PREVIEW;	// 体验版本
+		req.miniprogramType = WXLaunchMiniProgram.Req.MINIPTOGRAM_TYPE_RELEASE;	// 发布版本
 		api.sendReq(req);
 	}
 	

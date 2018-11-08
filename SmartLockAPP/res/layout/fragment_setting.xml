@@ -348,6 +348,74 @@
 		    </RelativeLayout>		    
 		</RelativeLayout>
 					    
+	    <RelativeLayout
+	        android:id="@+id/rl_item_03"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/rl_item_02"
+	        android:layout_marginLeft="@dimen/margin_10dip"
+	        android:layout_marginRight="@dimen/margin_10dip"
+	        android:layout_marginTop="@dimen/margin_10dip"
+	        android:background="@color/white">
+ 
+			<RelativeLayout
+		        android:id="@+id/rl_mgr_heart"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:paddingTop="@dimen/margin_10dip"
+		        android:paddingBottom="@dimen/margin_10dip"	
+		        android:layout_marginLeft="@dimen/margin_10dip"
+		        android:layout_marginRight="@dimen/margin_10dip"
+		        android:layout_centerVertical="true"		        
+		        android:background="@drawable/common_list_selector" >
+		
+		        <ImageView
+		            android:id="@+id/iv_heart_send_recv_icon"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            
+		            android:contentDescription="@null"
+		            android:scaleType="centerCrop"
+		            android:src="@drawable/smp_mgr_about" />
+		
+		        <TextView
+		            android:id="@+id/iv_heart_send_recv"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:layout_marginLeft="@dimen/margin_5dip"
+		            android:layout_toLeftOf="@+id/tv_heart_send_recv"
+		            android:layout_toRightOf="@+id/iv_heart_send_recv_icon"
+		            android:singleLine="true"
+		            android:text="@string/app_hear_count"
+		            android:textColor="@color/listitem_name_text_color"
+		            android:textSize="@dimen/text_size_midsamll" />
+		
+		        <TextView
+		            android:id="@+id/tv_heart_send_recv"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentRight="true"
+		            android:layout_centerVertical="true"
+		            android:singleLine="true"
+		            android:text="12: 34"
+		            android:textColor="@color/listitem_name_text_color"
+		            android:textSize="@dimen/text_size_midsamll" />
+		    </RelativeLayout>		
+		    
+		    <ImageView
+		        android:id="@+id/image_sep_3"
+		        android:layout_width="match_parent"
+		        android:layout_height="0.5dp"
+		        android:layout_marginLeft="@dimen/margin_10dip"
+		        android:layout_marginRight="@dimen/margin_10dip"		               
+		        android:layout_below="@+id/rl_mgr_help"
+		        android:background="@color/lightwhite"        
+		        android:contentDescription="@null" />				
+					   
+		</RelativeLayout>
+					    
 	    
 	    <Button
 	        android:id="@+id/btn_logout"

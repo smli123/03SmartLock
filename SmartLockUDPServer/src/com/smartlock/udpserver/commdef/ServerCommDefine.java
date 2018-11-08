@@ -11,6 +11,7 @@ public class ServerCommDefine {
 	public final static String APP_RSTPWD_MSG_HEADER		= "APPFINDPWD";			//重置用户密码
 	public final static String APP_LOGIN_MSG_HEADER 		= "APPLOGIN";			//LOGIN
 	public final static String APP_LOGOUT_MSG_HEADER		= "APPLOGOUT";			//LOGOUT
+	public final static String APP_HEART_MSG_HEADER			= "APPHEART";			//APP心跳包消息
 	public final static String APP_ADD_PLUG_MSG_HEADER		= "APPADDLOCK";
 	public final static String APP_DEL_PLUG_MSG_HEADER		= "APPDELLOCK";
 	public final static String APP_MOD_PLUG_MSG_HEADER		= "APPMODLOCK";

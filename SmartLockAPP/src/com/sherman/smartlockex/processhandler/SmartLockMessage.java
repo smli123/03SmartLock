@@ -17,6 +17,7 @@ public class SmartLockMessage {
 	public static final String CMD_SP_FINDPWD 		= "APPFINDPWD";
 	public static final String CMD_SP_LOGIN_SERVER 	= "APPLOGIN";
 	public static final String CMD_SP_LOGINOUT 		= "APPLOGOUT";
+	public static final String CMD_SP_HEART			= "APPHEART";
 	public static final String CMD_SP_ADDLOCK 		= "APPADDLOCK";
 	public static final String CMD_SP_DELLOCK 		= "APPDELLOCK";
 	public static final String CMD_SP_MODYLOCK 		= "APPMODLOCK";
@@ -54,6 +55,7 @@ public class SmartLockMessage {
 	public static final int EVT_SP_DELLOCK = 101;
 	public static final int EVT_SP_MODLOCK = 102;
 	public static final int EVT_SP_QRYLOCK = 106;
+	public static final int EVT_SP_HEART = 107;
 	
 	public static final int EVT_SP_QRYAUTHORIZEUSER = 107;
 	public static final int EVT_SP_ADDAUTHORIZEUSER = 108;
@@ -72,12 +74,13 @@ public class SmartLockMessage {
 
 	public static Map<String, Integer> mEventCommand = new HashMap<String, Integer>();
 	static {
+		mEventCommand.put(CMD_SP_LOGIN_SERVER, EVT_SP_LOGIN);
+		mEventCommand.put(CMD_SP_LOGINOUT, EVT_SP_LOGINOUT);
+		mEventCommand.put(CMD_SP_HEART, EVT_SP_HEART);
 		mEventCommand.put(CMD_SP_REGISTER, EVT_SP_REGISTER);
 		mEventCommand.put(CMD_SP_MODPWD, EVT_SP_MODPWD);
 		mEventCommand.put(CMD_SP_MODEMAIL, EVT_SP_MODEMAIL);
 		mEventCommand.put(CMD_SP_FINDPWD, EVT_SP_FINDPWD);
-		mEventCommand.put(CMD_SP_LOGIN_SERVER, EVT_SP_LOGIN);
-		mEventCommand.put(CMD_SP_LOGINOUT, EVT_SP_LOGINOUT);
 		
 		mEventCommand.put(CMD_SP_ADDLOCK, EVT_SP_ADDLOCK);
 		mEventCommand.put(CMD_SP_DELLOCK, EVT_SP_DELLOCK);
@@ -131,6 +134,7 @@ public class SmartLockMessage {
 		mCommandAction.put(CMD_SP_FINDPWD, PubDefine.FINDPWD_BROADCAST);
 		mCommandAction.put(CMD_SP_LOGIN_SERVER, PubDefine.LOGIN_BROADCAST);
 		mCommandAction.put(CMD_SP_LOGINOUT, PubDefine.LOGOUT_BROADCAST);
+		mCommandAction.put(CMD_SP_HEART, PubDefine.HEART_BROADCAST);
 		
 		mCommandAction.put(CMD_SP_ADDLOCK, PubDefine.LOCK_ADDLOCK_BROADCAST);
 		mCommandAction.put(CMD_SP_DELLOCK, PubDefine.LOCK_DELETELOCK_BROADCAST);

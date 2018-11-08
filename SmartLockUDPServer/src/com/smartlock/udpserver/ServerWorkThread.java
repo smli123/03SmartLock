@@ -5,15 +5,10 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.Timer;
 
 import com.smartlock.platform.LogTool.LogWriter;
@@ -28,6 +23,7 @@ import com.smartlock.udpserver.Function.APPPasswordAddMsgHandle;
 import com.smartlock.udpserver.Function.APPPasswordDelMsgHandle;
 import com.smartlock.udpserver.Function.APPPasswordQueryMsgHandle;
 import com.smartlock.udpserver.Function.APPFindPwdHandle;
+import com.smartlock.udpserver.Function.APPHeartMsgHandle;
 import com.smartlock.udpserver.Function.APPModEmailMsgHandle;
 import com.smartlock.udpserver.Function.APPModPwdMsgHandle;
 import com.smartlock.udpserver.Function.APPModifyPlugNameHandle;
@@ -109,6 +105,7 @@ public class ServerWorkThread  implements Runnable{
 		m_SendFuncMap.put(ServerCommDefine.APP_MOD_PWD_MSG_HEADER, new APPModPwdMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_LOGIN_MSG_HEADER, new AppLoginMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_LOGOUT_MSG_HEADER, new AppLogOutMsgHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_HEART_MSG_HEADER, new APPHeartMsgHandle());
 		
 		m_SendFuncMap.put(ServerCommDefine.APP_QRY_PLUG_MSG_HEADER, new APPQueryAllModuleInfoHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_ADD_PLUG_MSG_HEADER, new APPModuleAddMsgHandle());

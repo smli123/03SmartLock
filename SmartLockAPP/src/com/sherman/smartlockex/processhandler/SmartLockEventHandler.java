@@ -83,6 +83,10 @@ public class SmartLockEventHandler extends Handler {
 				new SmartLockEventHandlerLogout()));
 
 		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
+				SmartLockMessage.EVT_SP_HEART,
+				new SmartLockEventHandlerHeart()));
+		
+		mEventHandlerMaps.add(new SmartLockEventHandlerMap(
 				SmartLockMessage.EVT_SP_REGISTER,
 				new SmartLockEventHandlerRegister()));
 

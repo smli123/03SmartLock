@@ -15,6 +15,9 @@ public class PubStatus {
 	public static String g_moduleId;
 	public static String g_moduleType;
 	
+	public static int g_heartSendCount = 0;
+	public static int g_heartRecvCount = 0;
+	
 	public static void setLoginState(LoginState state) {
 		mLoginState = state;	
 	}
