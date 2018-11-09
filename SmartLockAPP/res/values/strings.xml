@@ -16,6 +16,8 @@
     <string name="smartlock_login_login">"登 录"</string>
     <string name="smartlock_login_register">"新用户注册"</string>
     <string name="smartlock_login_forget_password">"忘记密码"</string>
+    <string name="user_force_logout">"用户同时在其它APP上登录，强制退出"</string>
+    <string name="app_disconnect_with_server">"程序与服务器已经断开连接，请重新登录"</string>
     
     <!-- Add Lock -->
     <string name="smartlock_add_lock">"增加门锁"</string>
@@ -75,6 +77,8 @@
     <string name="smartlock_message_alarm">报警</string>
     <string name="smartlock_message_lock_is_prized">智能锁被撬</string>
     <string name="smartlock_message_lock_is_open_by_xiepo">斜坡开锁报警</string>
+    <string name="smartlock_message_lock_is_opened">开锁成功</string>
+    <string name="smartlock_message_lock_is_closed">关锁关闭</string>
     <string name="smartlock_message_lock_is_open_by_defaultuser">默认用户</string>
     <string name="smartlock_message_lock_is_open_by_fingeruser">指纹用户</string>
     <string name="smartlock_message_lock_is_open_by_passwroduser">密码用户</string>

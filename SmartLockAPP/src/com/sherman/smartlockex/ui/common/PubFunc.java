@@ -663,6 +663,12 @@ public class PubFunc {
     	case 1:
     		result = app.getString(R.string.smartlock_message_lock_is_open_by_xiepo);
     		break;
+    	case 2:
+    		result = app.getString(R.string.smartlock_message_lock_is_opened);
+    		break;
+    	case 3:
+    		result = app.getString(R.string.smartlock_message_lock_is_closed);
+    		break;
     	}
     	
     	return result;

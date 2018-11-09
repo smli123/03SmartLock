@@ -31,7 +31,7 @@ public class SmartLockEventHandlerLockQuery extends SmartLockEventHandler {
 			SmartLockExLockHelper mLockHelper = new SmartLockExLockHelper(SmartLockApplication.getContext());
 			mLockHelper.clear();
 			
-			mIntent.putExtra("RESULT", 1);
+			mIntent.putExtra("RESULT", 0);
 			mIntent.putExtra("MESSAGE", "");
 			SmartLockApplication.getContext().sendBroadcast(mIntent);
 			return;
@@ -63,7 +63,7 @@ public class SmartLockEventHandlerLockQuery extends SmartLockEventHandler {
 		
 		add2DB(locks);
 		
-		mIntent.putExtra("RESULT", 1);
+		mIntent.putExtra("RESULT", 0);
 		mIntent.putExtra("MESSAGE", "");
 		SmartLockApplication.getContext().sendBroadcast(mIntent);
 	}

@@ -106,9 +106,6 @@ public class DeviceFragment extends SmartLockFragment
 				timeoutHandler.removeCallbacks(timeoutProcess);
 				int ret = intent.getIntExtra("RESULT", 0);
 				String message = intent.getStringExtra("MESSAGE");
-				if (0 == ret) {
-					mLockHelper.clear();
-				}
 				if (null != message && !message.isEmpty()) {
 					PubFunc.thinzdoToast(mContext, message);
 				}
@@ -316,7 +313,6 @@ public class DeviceFragment extends SmartLockFragment
 					mRefreshableView.finishRefreshing();
 				}
 			}
-
 		};
 		loadData.execute();
 	}

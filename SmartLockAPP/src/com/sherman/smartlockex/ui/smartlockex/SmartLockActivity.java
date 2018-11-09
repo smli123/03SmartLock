@@ -89,6 +89,39 @@ public class SmartLockActivity extends FragmentActivity
 	private BroadcastReceiver mReveiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
+			if (intent.getAction().equals(PubDefine.LOGOUT_BROADCAST)) {
+				mLogouthandler.sendEmptyMessage(0);		// LOGOUT
+				
+				int ret = intent.getIntExtra("LOGOUT", 0);
+				if ((1 == ret) || (2 == ret)) { // ret 为 1： 表示被其他用户登陆而退出； 2：表示
+												// APP用户与服务器断开；
+
+					DeviceFragment.delete();
+					MessageFragment.delete();
+					SettingFragment.delete();
+					fragmentsList.clear();
+
+					String tmp_str = "";
+					if (ret == 1) {
+						tmp_str = SmartLockApplication.getContext().getString(
+								R.string.user_force_logout);
+					} else if (ret == 2) {
+						tmp_str = SmartLockApplication.getContext().getString(
+								R.string.app_disconnect_with_server);
+					}
+
+					PubFunc.thinzdoToast(SmartLockApplication.getContext(),
+							tmp_str);
+
+					Intent mIntent = new Intent();
+					mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					mIntent.setClass(SmartLockApplication.getContext(),
+							LoginActivity.class);
+					mIntent.putExtra("FORCE_LOGOUT", ret);
+					SmartLockApplication.getContext().startActivity(mIntent);
+				}
+			}
+			
 			if (intent.getAction().equals(PubDefine.LOCK_NOTIFY_STATUS_BROADCAST)) {
 					String moduleID = intent.getStringExtra("LOCKID");
 					int status = intent.getIntExtra("STATUS", -1);
@@ -221,6 +254,7 @@ public class SmartLockActivity extends FragmentActivity
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(PubDefine.LOCK_NOTIFY_BELL_BROADCAST);
 		filter.addAction(PubDefine.LOCK_NOTIFY_STATUS_BROADCAST);
+		filter.addAction(PubDefine.LOGOUT_BROADCAST);
 		
 		mContext.registerReceiver(mReveiver, filter);
 		
@@ -237,7 +271,7 @@ public class SmartLockActivity extends FragmentActivity
 			}
 		};
 		// 每60秒执行一次
-		heartTime.schedule(heartTask, 100, 15*1000);
+		heartTime.schedule(heartTask, 100, 90*1000);
 	}
 
 
@@ -545,11 +579,7 @@ public class SmartLockActivity extends FragmentActivity
 
 	@Override
 	protected void onNewIntent(Intent intent) {
-//		String plugId = intent.getStringExtra("new_plug");
-//		Log.i(TAG, "new plug id is: " + plugId);
-
 		super.onNewIntent(intent);
-
 	}
 	
 
