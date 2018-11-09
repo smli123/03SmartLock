@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2018 年 10 月 30 日 14:55
+-- 生成日期: 2018 年 11 月 09 日 16:44
 -- 服务器版本: 5.1.69
 -- PHP 版本: 5.2.17p1
 
@@ -33,7 +33,8 @@ CREATE TABLE IF NOT EXISTS `message_device` (
   `message_type` int(11) NOT NULL,
   `message_data` int(11) NOT NULL,
   `user_type` int(11) NOT NULL,
-  `user_memo` varchar(32) NOT NULL
+  `user_memo` varchar(32) NOT NULL,
+  `message_time` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -84,14 +85,6 @@ CREATE TABLE IF NOT EXISTS `module_info` (
   PRIMARY KEY (`module_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- 转存表中的数据 `module_info`
---
-
-INSERT INTO `module_info` (`module_id`, `module_name`, `module_mac`, `module_version`, `module_type`, `module_status`, `module_charge`, `cookie`) VALUES
-('651001', '651001Name', '60:01:94:09:df:31', 'V1R1C00', '1', 1, 30, '20181025171553'),
-('651002', '651002', '60:01:94:09:df:32', '20171219A1V2.E', '1', 1, 82, '20180123151000');
-
 -- --------------------------------------------------------
 
 --
@@ -106,13 +99,6 @@ CREATE TABLE IF NOT EXISTS `user_info` (
   PRIMARY KEY (`user_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- 转存表中的数据 `user_info`
---
-
-INSERT INTO `user_info` (`user_name`, `password`, `email`, `cookie`) VALUES
-('lishimin', 'E10ADC3949BA59ABBE56E057F20F883E', 'smli123@163.com', '0');
-
 -- --------------------------------------------------------
 
 --
@@ -125,14 +111,6 @@ CREATE TABLE IF NOT EXISTS `user_module` (
   `ctrl_mode` tinyint(1) NOT NULL,
   PRIMARY KEY (`user_name`,`module_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `user_module`
---
-
-INSERT INTO `user_module` (`user_name`, `module_id`, `ctrl_mode`) VALUES
-('lishimin', '651001', 0),
-('lishimin', '651002', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
