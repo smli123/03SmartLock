@@ -2,6 +2,7 @@ package com.smartlock.udpserver;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.SocketException;
 import java.util.Timer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -33,6 +34,15 @@ public class ServerMainThread extends Thread {
 			try {
 				/*STEP1 查询模块IP地址*/
 				dataSocket = new DatagramSocket(ServerPortDefine.SMART_LOCK_UDP_SERVER_PORT);
+				
+				// 设置dataSocket的发送和接收缓冲区大小； 512
+		        try {		
+		        	dataSocket.setReceiveBufferSize(512);
+		        	dataSocket.setSendBufferSize(512);
+		        } catch (SocketException e) {
+		            e.printStackTrace();
+		        }
+		        
 				/*STEP2 监听*/
 				while(true)
 				{

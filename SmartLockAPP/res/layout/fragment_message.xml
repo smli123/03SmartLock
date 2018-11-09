@@ -52,7 +52,7 @@
 		        android:layout_marginRight="@dimen/list_item_right_padding" 
 		        android:textColor="@color/black"
 		        android:textSize="20dp"
-		        android:text="设备消息"/>
+		        android:text="@string/smartlock_message_device"/>
             
             <TextView 
                 android:id="@+id/tv_message_device_new_info"
@@ -64,7 +64,7 @@
 		        android:layout_marginRight="@dimen/list_item_right_padding" 
 		        android:textColor="@color/gray"
 		        android:textSize="15dp"
-		        android:text="门锁[门锁状态]-关锁成功"/>
+		        android:text="@string/smartlock_no_message_device"/>
             
         </RelativeLayout>
         
@@ -126,7 +126,7 @@
 		        android:layout_marginRight="@dimen/list_item_right_padding" 
 		        android:textColor="@color/black"
 		        android:textSize="20dp"
-		        android:text="系统消息"/>
+		        android:text="@string/smartlock_message_system"/>
             
             <TextView 
                 android:id="@+id/tv_message_system_new_info"
@@ -138,7 +138,7 @@
 		        android:layout_marginRight="@dimen/list_item_right_padding" 
 		        android:textColor="@color/gray"
 		        android:textSize="15dp"
-		        android:text="[暂无系统消息]"/>
+		        android:text="@string/smartlock_no_message_system"/>
             
         </RelativeLayout>
         

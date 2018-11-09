@@ -42,7 +42,7 @@ public class ActivityMessageDevice extends TitledActivity implements OnClickList
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			if (intent.getAction().equals(PubDefine.LOCK_NOTIFY_ALARM_BROADCAST)) {
-				initView();
+					initView();
 				}
 			}
 	};

@@ -122,8 +122,10 @@ public class NofityAlarmMsgHandle implements ICallFunction{
 			String strResult = strRet[4].trim() + "," + strRet[5].trim() + "," + strRet[6].trim() + "," + strRet[7].trim() + "," + strRet[8].trim() + "," + strRet[9].trim();
 			for (int i = 0; i < info.size(); i++) {
 				String username = info.get(i).getUserName();
-				NotifyToAPP(username,strDevId, ServerCommDefine.NOTIFY_NOTIFY_ALARM, 
-						ServerRetCodeMgr.SUCCESS_CODE, strResult);
+				if (info.get(i).getCtrlMode() == USER_MODULE.PRIMARY) {	// 只推送管理用户
+					NotifyToAPP(username,strDevId, ServerCommDefine.NOTIFY_NOTIFY_ALARM, 
+							ServerRetCodeMgr.SUCCESS_CODE, strResult);
+				}
 			}
 			
 			//通知模块通知已收到

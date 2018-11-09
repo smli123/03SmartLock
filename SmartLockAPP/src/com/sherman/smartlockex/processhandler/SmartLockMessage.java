@@ -57,12 +57,12 @@ public class SmartLockMessage {
 	public static final int EVT_SP_QRYLOCK = 106;
 	public static final int EVT_SP_HEART = 107;
 	
-	public static final int EVT_SP_QRYAUTHORIZEUSER = 107;
-	public static final int EVT_SP_ADDAUTHORIZEUSER = 108;
-	public static final int EVT_SP_DELAUTHORIZEUSER = 109;
-	public static final int EVT_SP_QRYPASSWORD = 110;
-	public static final int EVT_SP_ADDPASSWORD = 111;
-	public static final int EVT_SP_DELPASSWORD = 112;
+	public static final int EVT_SP_QRYAUTHORIZEUSER = 120;
+	public static final int EVT_SP_ADDAUTHORIZEUSER = 121;
+	public static final int EVT_SP_DELAUTHORIZEUSER = 122;
+	public static final int EVT_SP_QRYPASSWORD = 123;
+	public static final int EVT_SP_ADDPASSWORD = 124;
+	public static final int EVT_SP_DELPASSWORD = 125;
 	
 	public static final int EVT_SP_BACK2AP = 150;
 	public static final int EVT_SP_OPEN_LOCK = 151;

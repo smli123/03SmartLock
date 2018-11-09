@@ -30,13 +30,8 @@ public class SmartLockEventHandlerNotifyLockAlarm extends SmartLockEventHandler 
 			}
 			
 			String moduleID = buffer[3];
-			int status = Integer.parseInt(buffer[EVENT_MESSAGE_HEADER+1]);
 			
 			if (0 == code) {
-				mIntent.putExtra("RESULT", 0);
-				mIntent.putExtra("LOCKID", moduleID);
-				mIntent.putExtra("STATUS", status);
-		    	
 				MessageDeviceDefine item = new MessageDeviceDefine();
 				item.mMessageID = buffer[5];
 				item.mUserName = buffer[2];
@@ -53,9 +48,12 @@ public class SmartLockEventHandlerNotifyLockAlarm extends SmartLockEventHandler 
 				item.mMarked = false;
 				
 				addMessage(item);
+
+				mIntent.putExtra("RESULT", 0);
+				mIntent.putExtra("LOCKNAME", item.mDeviceName);
+				mIntent.putExtra("ALARMDATA", item.mMessageData);
 			} else {
 		    	mIntent.putExtra("RESULT", code);
-		    	mIntent.putExtra("STATUS", status);
 		    	int resid = AppServerReposeDefine.getServerResponse(code);
 		    	if (0 != resid) {
 		    		mIntent.putExtra("MESSAGE", SmartLockApplication.getContext().getString(resid));

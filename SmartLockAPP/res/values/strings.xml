@@ -73,12 +73,14 @@
     <!-- Message -->
     <string name="smartlock_message_device">设备消息</string>
     <string name="smartlock_message_system">系统消息</string>
+    <string name="smartlock_no_message_device">[暂无系统消息]</string>
+    <string name="smartlock_no_message_system">[暂无系统消息]</string>
     
     <string name="smartlock_message_alarm">报警</string>
     <string name="smartlock_message_lock_is_prized">智能锁被撬</string>
     <string name="smartlock_message_lock_is_open_by_xiepo">斜坡开锁报警</string>
     <string name="smartlock_message_lock_is_opened">开锁成功</string>
-    <string name="smartlock_message_lock_is_closed">关锁关闭</string>
+    <string name="smartlock_message_lock_is_closed">关锁成功</string>
     <string name="smartlock_message_lock_is_open_by_defaultuser">默认用户</string>
     <string name="smartlock_message_lock_is_open_by_fingeruser">指纹用户</string>
     <string name="smartlock_message_lock_is_open_by_passwroduser">密码用户</string>

@@ -74,6 +74,8 @@ public class APPAuthorizeUserAddMsgHandle implements ICallFunction{
 			
 			//通知 APP，加模块成功
 			ResponseToAPP(strMsgHeader, strUserName, strDevId, ServerRetCodeMgr.SUCCESS_CODE);
+			//通知分享用户，增加模块成功
+			ResponseToAPP(ServerCommDefine.APP_ADD_PLUG_MSG_HEADER, strAuthorizeUser, strDevId, ServerRetCodeMgr.SUCCESS_CODE);
 			
 			return ServerRetCodeMgr.SUCCESS_CODE;
 		} catch (Exception e) {

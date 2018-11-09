@@ -611,6 +611,8 @@ public class ServerWorkThread  implements Runnable{
 //				return;
 //			}
 			
+			LogWriter.WriteTraceLog(LogWriter.SELF, "thread:" + Thread.currentThread().getName());
+			
 			int iRet = ServerMsgHandle(receiveStr, m_packet.getData());
 			LogWriter.WriteTraceLog(LogWriter.SELF, 
 					String.format("(%s:%d)\t Completed to Excute Command(Ret:0x%08x).", m_packet.getAddress().toString(),m_packet.getPort(), iRet));	

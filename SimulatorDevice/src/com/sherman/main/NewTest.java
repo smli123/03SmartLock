@@ -42,7 +42,8 @@ import java.util.concurrent.Executors;
 
 public class NewTest {
 	public static DatagramSocket dataSocket = null;
-	
+
+	private static boolean bModuleLogin = false;
 	private static int lockstatus = 0;
 	private static int lockcharge = 100;
 	
@@ -110,11 +111,18 @@ public class NewTest {
     	@Override
     	public void run()
     	{
-    		login_server();
-    		
-    		while(true) {
-    			hear_beat();
-    		}
+    		try {
+	    		while(bModuleLogin == false) {
+	    			login_server();
+	    			Thread.sleep(3* 1000);
+	    		}
+	    		
+	    		while(true) {
+	    			hear_beat();
+	    		}
+    		} catch (Exception e) {
+        		e.printStackTrace();
+        	}
     	}
     }
 
@@ -158,8 +166,8 @@ public class NewTest {
     	{
     		while(true) {
     			try {
-    				notify_status();
-					Thread.sleep(1000);
+//    				notify_status();
+					Thread.sleep(10 * 1000);
 	    			notify_alarm();
     			} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -188,15 +196,15 @@ public class NewTest {
     	try {
     		String strTime = PubFunc.genCurTime();
     		int alarmType = 0;
-    		int alarmData = PubFunc.genRandom(2);
+    		int alarmData = PubFunc.genRandom(4);
     		int usertype = PubFunc.genRandom(6);
-    		String memo = "simulatorAlarm";
+    		String memo = "simulatorAlarm_" + alarm_no;
     		
 			String cmd_string = PubFunc.genNewCookie() + ",NOTIFY_ALARM," + PubDefine.USER_NAME + "," + PubDefine.DEFAULT_MODULEID + "," + alarm_no + "," + strTime + "," + alarmType + "," + alarmData + "," + usertype + "," + memo + "#";
 			
 			new NewTest().new SendMsgUDP(cmd_string).run();
 			System.out.println(String.format("nofity alarm OK."));
-			Thread.sleep(10 * 1000);
+//			Thread.sleep(10 * 1000);
 			
 			alarm_no++;
 		} catch (Exception e) {
@@ -248,6 +256,7 @@ public class ServerMainThread extends Thread {
 							int retcode = Integer.valueOf(recStrs[4]);
 							if (retcode == 0) {
 								PubDefine.USER_NAME = recStrs[2];
+								bModuleLogin = true;
 							}
 						} else if (recStrs[1].equals("LOCK_OPEN") == true) {
 							lockstatus = Integer.valueOf(recStrs[4]);

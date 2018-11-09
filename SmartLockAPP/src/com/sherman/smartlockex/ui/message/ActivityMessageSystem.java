@@ -22,6 +22,7 @@ import com.sherman.smartlockex.ui.common.PubStatus;
 import com.sherman.smartlockex.ui.common.SmartLockDefine;
 import com.sherman.smartlockex.ui.common.TitledActivity;
 import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
+import com.sherman.smartlockex.ui.util.MyAlertDialog;
 
 public class ActivityMessageSystem extends TitledActivity implements OnClickListener {
 	private Context mContext = null;
@@ -72,11 +73,13 @@ public class ActivityMessageSystem extends TitledActivity implements OnClickList
         
 		setTitleLeftButton(R.string.smartlock_goback,
 				R.drawable.title_btn_selector, this);
-        
+		setTitleRightButton(R.string.smartlock_clear_message,
+				R.drawable.title_btn_selector, this);
+		
         mMessageHelper = new MessageSystemHelper(mContext);
 
         // test
-        testInsertInfo();
+//        testInsertInfo();
         
         initView();
         
@@ -115,6 +118,27 @@ public class ActivityMessageSystem extends TitledActivity implements OnClickList
 		case R.id.titlebar_leftbutton :
 			disconnectSocket();
 			finish();
+			break;
+		case R.id.titlebar_rightbutton :
+			new MyAlertDialog(mContext)
+			.builder()
+			.setMsg(this.getString(R.string.smartlock_clear_message_confirm))
+			.setPositiveButton(this.getString(R.string.smartlock_ok),
+					new View.OnClickListener() {
+				@Override
+				public void onClick(View arg0) {
+					mMessageHelper.clearMessage();
+					initView();
+				}
+			})
+			.setNegativeButton(
+					this.getString(R.string.smartlock_cancel),
+					new View.OnClickListener() {
+						@Override
+						public void onClick(View arg0) {
+
+						}
+					}).setCancelable(true).show();
 			break;
 		}
 	}
