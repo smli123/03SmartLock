@@ -28,6 +28,7 @@ public class ActivityFeedback extends TitledActivity
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState, R.layout.activity_setting_feedback, false);
+		SmartLockApplication.resetTask();
 		SmartLockApplication.getInstance().addActivity(this);
 		
 		mEdtContent = (EditText) findViewById(R.id.edt_content);

@@ -90,17 +90,6 @@ public class SettingFragment extends SmartLockFragment
 		}
 	};
 
-	private void qryPlugsFromServer() {
-		registerTimeoutHandler(mTimeoutHandler);
-//
-//		StringBuffer sb = new StringBuffer();
-//		sb.append(SmartLockMessage.CMD_SP_QRYPLUG)
-//				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)
-//				.append(PubStatus.g_CurUserName);
-//
-//		sendMsg(true, sb.toString(), true);
-	}
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -225,12 +214,12 @@ public class SettingFragment extends SmartLockFragment
 	}
 	
 	private void startWeixinApp() {
-//		String appId = "wx150b36fc8176f4fb"; 	// 填应用AppId， zms智能门锁
-		String appId = "wx150b36fc8176f4fb"; 	// 填应用AppId, 每日财经
+		String appId = "wx7b2c71024e94bdcc"; 	// 填应用AppId， zms智能门锁
+//		String appId = "wx150b36fc8176f4fb"; 	// 填应用AppId, 每日财经
 		IWXAPI api = WXAPIFactory.createWXAPI(mContext, appId);
 		
 		WXLaunchMiniProgram.Req req = new WXLaunchMiniProgram.Req();
-		req.userName = "gh_ca77143033e5"; 		// 小程序原始id， zmsopen appid: wxc3a2e042a2f043e0
+		req.userName = "gh_52182127d314"; 		// 小程序原始id， zmsopen appid: wxc3a2e042a2f043e0
 //		req.userName = "gh_62774c35b1d9"; 		// 小程序原始id， 李氏草堂          appid: wxbb28efa2d55a7d4d
 		req.path = "";                  		//拉起小程序页面的可带参路径，不填默认拉起小程序首页
 //		req.miniprogramType = WXLaunchMiniProgram.Req.MINIPROGRAM_TYPE_TEST;	// 测试版本

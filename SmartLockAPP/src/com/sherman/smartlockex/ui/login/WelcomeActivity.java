@@ -3,6 +3,8 @@ package com.sherman.smartlockex.ui.login;
 import com.sherman.smartlockex.R;
 import com.sherman.smartlockex.R.id;
 import com.sherman.smartlockex.R.layout;
+import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +22,8 @@ public class WelcomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+		SmartLockApplication.resetTask();
+		SmartLockApplication.getInstance().addActivity(this);
         
         mHandler = new Handler();
         

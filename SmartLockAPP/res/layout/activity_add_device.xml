@@ -92,7 +92,9 @@
 	            android:textColor="@color/black"
 	            android:textSize="@dimen/text_size_norsamll"
 	            android:layout_marginLeft="5dp"
-	            android:singleLine="true" />
+	            android:singleLine="true"
+				android:cursorVisible="true"
+				android:textCursorDrawable="@drawable/edittext_cursor" />
 	    </LinearLayout>
 	
 	    <LinearLayout
@@ -132,14 +134,16 @@
 	            android:id="@+id/package_broadcast"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:checked="true"
+	            android:textColor="@color/black"
 	            android:text="@string/package_broadcast" />
 	
 	        <RadioButton
 	            android:id="@+id/package_multicast"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
+	            android:checked="true"
 	            android:layout_marginLeft="20dp"
+	            android:textColor="@color/black"
 	            android:text="@string/package_multicast" />
 	    </RadioGroup>
 	

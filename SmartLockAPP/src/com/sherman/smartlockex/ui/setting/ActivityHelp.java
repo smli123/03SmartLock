@@ -16,6 +16,7 @@ public class ActivityHelp extends TitledActivity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState, R.layout.activity_help, false);
+		SmartLockApplication.resetTask();
 		SmartLockApplication.getInstance().addActivity(this);
 		
 		setTitleLeftButton(R.string.smartlock_goback, R.drawable.title_btn_selector, this);

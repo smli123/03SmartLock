@@ -90,7 +90,7 @@ public class SmartLockActivity extends FragmentActivity
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			if (intent.getAction().equals(PubDefine.LOGOUT_BROADCAST)) {
-				mLogouthandler.sendEmptyMessage(0);		// LOGOUT
+//				mLogouthandler.sendEmptyMessage(0);		// LOGOUT
 				
 				int ret = intent.getIntExtra("LOGOUT", 0);
 				if ((1 == ret) || (2 == ret)) { // ret 为 1： 表示被其他用户登陆而退出； 2：表示
@@ -113,12 +113,13 @@ public class SmartLockActivity extends FragmentActivity
 					PubFunc.thinzdoToast(SmartLockApplication.getContext(),
 							tmp_str);
 
-					Intent mIntent = new Intent();
-					mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					mIntent.setClass(SmartLockApplication.getContext(),
-							LoginActivity.class);
-					mIntent.putExtra("FORCE_LOGOUT", ret);
-					SmartLockApplication.getContext().startActivity(mIntent);
+					// 	mLogoutHandler已经startActivity, 这里不需要了。
+//					Intent mIntent = new Intent();
+//					mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//					mIntent.setClass(SmartLockApplication.getContext(),
+//							LoginActivity.class);
+//					mIntent.putExtra("FORCE_LOGOUT", ret);
+//					SmartLockApplication.getContext().startActivity(mIntent);
 				}
 			}
 			
@@ -353,13 +354,13 @@ public class SmartLockActivity extends FragmentActivity
 		btnLoginout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				SmartLockApplication.setLogined(false);
-
-				Intent intent = new Intent(Intent.ACTION_MAIN);
-				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				intent.setClass(SmartLockApplication.getInstance(),
-						LoginActivity.class);
-				SmartLockApplication.getInstance().startActivity(intent);
+//				SmartLockApplication.setLogined(false);
+//
+//				Intent intent = new Intent(Intent.ACTION_MAIN);
+//				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//				intent.setClass(SmartLockApplication.getInstance(),
+//						LoginActivity.class);
+//				SmartLockApplication.getInstance().startActivity(intent);
 			}
 		});
 

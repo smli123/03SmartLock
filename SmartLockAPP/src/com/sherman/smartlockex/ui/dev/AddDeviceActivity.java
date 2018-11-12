@@ -134,7 +134,7 @@ public class AddDeviceActivity extends TitledActivity implements OnClickListener
         mConfirmBtn = (Button) findViewById(R.id.confirm_btn);
         mConfirmBtn.setEnabled(false);
         mConfirmBtn.setOnClickListener(this);
-
+        
         TextView versionTV = (TextView) findViewById(R.id.version_tv);
         versionTV.setText(IEsptouchTask.ESPTOUCH_VERSION);
 

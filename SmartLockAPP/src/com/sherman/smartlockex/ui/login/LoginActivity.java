@@ -78,10 +78,10 @@ public class LoginActivity extends TitledActivity implements OnClickListener {
 				switch (ret) {
 					case 0 :
 						mEmail = message;
+						PubStatus.g_userEmail = mEmail;
 						SmartLockApplication.setLogined(true);
 
 						updateHandler.sendEmptyMessage(0);
-
 						break;
 					default :
 						SmartLockApplication.setLogined(false);
@@ -114,10 +114,10 @@ public class LoginActivity extends TitledActivity implements OnClickListener {
 		public void handleMessage(Message msg) {
 			saveData();
 			
-			Intent act = new Intent();
-			act.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			act.setClass(LoginActivity.this, SmartLockActivity.class);
-			mContext.startActivity(act);
+			Intent intent = new Intent();
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			intent.setClass(LoginActivity.this, SmartLockActivity.class);
+			startActivity(intent);
 			finish();
 		};
 	};
@@ -126,6 +126,8 @@ public class LoginActivity extends TitledActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+		SmartLockApplication.resetTask();
+		SmartLockApplication.getInstance().addActivity(this);
         mContext = this;
         
         // 启动UDP端口监听线程
@@ -202,9 +204,6 @@ public class LoginActivity extends TitledActivity implements OnClickListener {
 
 			PubStatus.g_userPwd = password;
 			sendMsg(true, sb.toString(), true);
-			
-			// Only For Test, it must delete
-			PubStatus.g_userEmail = "smli123@163.com";
 		}
 	}
     
@@ -279,11 +278,6 @@ public class LoginActivity extends TitledActivity implements OnClickListener {
 	private void net_login() {
 		new Thread(login_runnable).start();
 		
-//		Intent act = new Intent();
-//		act.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//		act.setClass(LoginActivity.this, SmartLockActivity.class);
-//		mContext.startActivity(act);
-//		finish();
 	}
 	
 	private void net_register() {
