@@ -123,7 +123,8 @@
 		            android:layout_centerVertical="true"
 		            android:layout_marginLeft="@dimen/list_item_left_padding"
 		            android:layout_marginRight="@dimen/list_item_right_padding"
-		            android:src="@drawable/smp_lock_open" />
+		            android:src="@drawable/smp_lock_open" 
+		            android:visibility="gone"/>
 	
 		        <ImageView
 		            android:id="@+id/iv_lock_close"
@@ -133,7 +134,8 @@
 		            android:layout_marginLeft="@dimen/list_item_left_padding"
 		            android:layout_marginRight="@dimen/list_item_right_padding"
 		            android:layout_toRightOf="@id/iv_lock_open"
-		            android:src="@drawable/smp_lock_close" />
+		            android:src="@drawable/smp_lock_close" 
+					android:visibility="gone"/>
 	
 		        <ImageView
 		            android:id="@+id/iv_lock_authorize"

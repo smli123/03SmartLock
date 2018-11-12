@@ -124,8 +124,20 @@ public class ModuleLockCtrlMsgHandle implements ICallFunction{
 		{
 			dbMgr.UpdateModuleInfo_Status(strModuleID, Integer.valueOf(strStatus));
 			
-			//给APP回复成功
-			ResponseToAPP(ServerCommDefine.LOCK_CTRL_MSG_HEADER, strUserName, strModuleID, ServerRetCodeMgr.SUCCESS_CODE, strStatus);
+//			//给APP回复成功： 只返回给发送者，不对。
+//			ResponseToAPP(ServerCommDefine.LOCK_CTRL_MSG_HEADER, strUserName, strModuleID, ServerRetCodeMgr.SUCCESS_CODE, strStatus);
+			
+			// 给所有APP用户返回信息
+			Vector<USER_MODULE> info = dbMgr.QueryUserModuleByDevId(strModuleID);
+			
+			if (info != null) {
+				for (int i = 0; i < info.size(); i++) {
+					String username = info.get(i).getUserName();
+					NotifyToAPP(username, strModuleID, ServerCommDefine.LOCK_CTRL_MSG_HEADER, 
+							ServerRetCodeMgr.SUCCESS_CODE, strStatus);
+				}
+			}
+			
 			return ServerRetCodeMgr.SUCCESS_CODE;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

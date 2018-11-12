@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sherman.smartlockex"
     android:versionCode="1"
-    android:versionName="v1.0.1" >
+    android:versionName="V0.1.10" >
 
     <uses-sdk
         android:minSdkVersion="19"

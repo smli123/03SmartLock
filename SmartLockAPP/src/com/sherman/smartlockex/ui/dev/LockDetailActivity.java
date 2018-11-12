@@ -46,6 +46,7 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 	private LinearLayout ll_administrator_area;
 	private ImageView iv_lock_online;
 	private TextView tv_online;
+	private TextView tv_charge;
 	private TextView tv_status;
 	private TextView tv_log;
 	
@@ -90,6 +91,11 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 						msg.what = 0;
 						msg.arg1 = status;
 						updateHandler.sendMessage(msg);
+
+						Message msg_charge = new Message();
+						msg_charge.what = 7;
+						msg_charge.arg1 = charge;
+						updateHandler.sendMessage(msg_charge);
 					}
 				}
 
@@ -229,7 +235,10 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 			case 6:		// DEL Password
 				queryPassword(mLockID);
 				break;
-			
+			case 7:
+				int charge = msg.arg1;
+				tv_charge.setText(String.valueOf(charge));
+				break;
 			}
 		}
 	};
@@ -327,6 +336,7 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 	private void initView() {
 		iv_lock_online = (ImageView) findViewById(R.id.iv_lock_online);
 		tv_online = (TextView) findViewById(R.id.tv_online);
+		tv_charge = (TextView) findViewById(R.id.tv_charge);
 		tv_status = (TextView) findViewById(R.id.tv_status);
 		tv_log = (TextView) findViewById(R.id.tv_log);
 		tv_lock_open = (TextView) findViewById(R.id.tv_lock_open);
@@ -358,6 +368,11 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 		msg.what = 0;
 		msg.arg1 = mLock.mStatus;
 		updateHandler.sendMessage(msg);
+
+		Message msg_charge = new Message();
+		msg_charge.what = 7;
+		msg_charge.arg1 = mLock.mCharge;
+		updateHandler.sendMessage(msg_charge);
 		
 		// 设置门锁的当前状态
 		setOnline(mLock.mOnline);

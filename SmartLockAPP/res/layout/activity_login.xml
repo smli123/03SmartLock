@@ -47,7 +47,8 @@
 	        android:layout_height="wrap_content"
 	        android:layout_centerHorizontal="true"
 	        android:layout_marginTop="0dp"
-	        android:src="@drawable/smp_head_pic_default" />
+	        android:src="@drawable/smp_head_pic_default"
+	        android:visibility="visible" />
         
     </RelativeLayout>
     

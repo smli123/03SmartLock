@@ -92,6 +92,7 @@
 	            android:textColor="@color/black"
 	            android:textSize="@dimen/text_size_norsamll"
 	            android:layout_marginLeft="5dp"
+	            android:inputType="textPassword"
 	            android:singleLine="true"
 				android:cursorVisible="true"
 				android:textCursorDrawable="@drawable/edittext_cursor" />

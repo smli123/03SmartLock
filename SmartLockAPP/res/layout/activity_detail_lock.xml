@@ -19,15 +19,53 @@
 			android:layout_below="@id/commontitlebar"
 		    android:layout_marginTop="10dp"
 		    android:layout_marginBottom="10dp"
-		    android:layout_marginLeft="20dp"
-		    android:layout_marginRight="20dp"
+		    android:layout_marginLeft="10dp"
+		    android:layout_marginRight="10dp"
 		    android:background="@color/commom_bg_color"
 		    android:orientation="horizontal" >
 		        
 		    <RelativeLayout
+	            android:id="@+id/iv_status_header"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:background="@color/white"
+	            android:orientation="horizontal"
+	            android:padding="5dp" >
+	            
+				<ImageView
+				    android:id="@+id/iv_status"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:layout_centerVertical="true"
+				    android:layout_marginLeft="@dimen/list_item_left_padding_middle"
+				    android:layout_marginRight="@dimen/list_item_right_padding_middle"
+				    android:src="@drawable/smp_information" />
+
+		        <TextView
+		            android:id="@+id/tv_status_memo"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:layout_toRightOf="@id/iv_status"
+		            android:padding="0dp"
+		            android:text="@string/lock_detail_status"
+		            android:textColor="@color/black"
+		            android:textSize="@dimen/version_font_size" />
+		    </RelativeLayout>
+		    
+		    <ImageView
+		        android:id="@+id/image_sep_1"
+		        android:layout_width="match_parent"
+		        android:layout_height="0.5dp"		               
+		        android:layout_below="@id/iv_status_header"
+		        android:background="@color/lightwhite"        
+		        android:contentDescription="@null" />
+		    
+		    <RelativeLayout
 		        android:id="@+id/rl_status"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
+		        android:layout_below="@id/image_sep_1"
 		        android:background="@color/white"
 		        android:orientation="horizontal"
 		        android:padding="5dp" >
@@ -52,25 +90,93 @@
 		            android:text="@null"
 		            android:textColor="@color/black"
 		            android:textSize="@dimen/version_font_size" />
-		
+		        
 		        <TextView
-		            android:id="@+id/tv_status"
-		            android:layout_width="match_parent"
+		            android:id="@+id/tv_charge"
+		            android:layout_width="30dp"
 		            android:layout_height="wrap_content"
-		            android:layout_toRightOf="@id/tv_online"
+		            android:layout_alignParentRight="true"
 		            android:gravity="center"
 		            android:text="@null"
 		            android:textColor="@color/black"
 		            android:textSize="@dimen/version_font_size" />
 		
+		        <ImageView
+		            android:id="@+id/iv_lock_charge"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:layout_toLeftOf="@id/tv_charge"
+		            android:layout_marginLeft="@dimen/list_item_left_padding"
+		            android:layout_marginRight="@dimen/list_item_right_padding"
+		            android:src="@drawable/smp_lock_charge" />
+		
 		    </RelativeLayout>
+		    
+		    <RelativeLayout
+		        android:id="@+id/rl_lock_status"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@id/rl_status"
+		        android:background="@color/white"
+		        android:orientation="horizontal"
+		        android:padding="5dp" >
+		    	
+		        <TextView
+		            android:id="@+id/tv_status"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:gravity="center"
+		            android:text="@null"
+		            android:textColor="@color/black"
+		            android:textSize="@dimen/version_font_size" />
+		    </RelativeLayout>
+		    
+		    <RelativeLayout
+	            android:id="@+id/iv_control_header"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"      
+		        android:layout_below="@id/rl_lock_status"
+		        android:layout_marginTop="10dp"
+	            android:background="@color/white"
+	            android:orientation="horizontal"
+	            android:padding="5dp" >
+	            
+				<ImageView
+				    android:id="@+id/iv_control"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:layout_centerVertical="true"
+				    android:layout_marginLeft="@dimen/list_item_left_padding_middle"
+				    android:layout_marginRight="@dimen/list_item_right_padding_middle"
+				    android:src="@drawable/smp_operator" />
+
+		        <TextView
+		            android:id="@+id/tv_control_memo"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:layout_toRightOf="@id/iv_control"
+		            android:padding="0dp"
+		            android:text="@string/lock_detail_lock_unlock"
+		            android:textColor="@color/black"
+		            android:textSize="@dimen/version_font_size" />
+		    </RelativeLayout>
+		    
+		    <ImageView
+		        android:id="@+id/image_sep_2"
+		        android:layout_width="match_parent"
+		        android:layout_height="0.5dp"		               
+		        android:layout_below="@id/iv_control_header"
+		        android:background="@color/lightwhite"        
+		        android:contentDescription="@null" />
+		    
 		    
 		    <LinearLayout
 		        android:id="@+id/ll_control_area"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
-		        android:layout_below="@id/rl_status"
-		        android:layout_marginTop="10dp"
+		        android:layout_below="@id/image_sep_2"
 		        android:background="@color/white"
 		        android:orientation="horizontal"
 		        android:padding="5dp" >
@@ -131,13 +237,25 @@
 				            android:background="@color/white"
 				            android:orientation="horizontal"
 				            android:padding="0dp" >
+				            
+							<ImageView
+							    android:id="@+id/iv_authorize"
+							    android:layout_width="wrap_content"
+							    android:layout_height="wrap_content"
+							    android:layout_centerVertical="true"
+							    android:layout_marginLeft="@dimen/list_item_left_padding_middle"
+							    android:layout_marginRight="@dimen/list_item_right_padding_middle"
+							    android:src="@drawable/smp_lock_authorize" />
+
 					        <TextView
 					            android:id="@+id/tv_authorize_memo"
 					            android:layout_width="wrap_content"
 					            android:layout_height="wrap_content"
+					            android:layout_centerVertical="true"
+					            android:layout_toRightOf="@id/iv_authorize"
+					            android:padding="0dp"
 					            android:text="@string/lock_detail_authorize"
 					            android:textColor="@color/black"
-					            android:padding="5dp"
 					            android:textSize="@dimen/version_font_size" />
 				
 					        <ImageView
@@ -154,7 +272,7 @@
 				    	</RelativeLayout>
 			        
 				        <ImageView
-					        android:id="@+id/image_sep_1"
+					        android:id="@+id/image_sep_3"
 					        android:layout_width="match_parent"
 					        android:layout_height="0.5dp"		               
 					        android:layout_below="@id/rl_authorize_header"
@@ -164,7 +282,7 @@
 					    <RelativeLayout
 					        android:layout_width="match_parent"
 					        android:layout_height="wrap_content"
-					        android:layout_below="@id/image_sep_1" 
+					        android:layout_below="@id/image_sep_3" 
 					        android:background="@color/white">
 					        
 							<ListView  
@@ -224,7 +342,7 @@
 				    	</RelativeLayout>
 			        
 				        <ImageView
-					        android:id="@+id/image_sep_2"
+					        android:id="@+id/image_sep_4"
 					        android:layout_width="match_parent"
 					        android:layout_height="0.5dp"		               
 					        android:layout_below="@id/rl_password_management_header"
@@ -234,7 +352,7 @@
 					    <RelativeLayout
 					        android:layout_width="match_parent"
 					        android:layout_height="wrap_content"
-					        android:layout_below="@id/image_sep_2" 
+					        android:layout_below="@id/image_sep_4" 
 					        android:background="@color/white">
 					        
 							<ListView  

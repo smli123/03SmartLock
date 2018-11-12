@@ -69,7 +69,8 @@
 			   	    android:layout_width="match_parent"
 			   	    android:layout_height="wrap_content" 
 			        android:layout_marginTop="5dp"
-			        android:layout_marginBottom="5dp">
+			        android:layout_marginBottom="5dp"
+			        android:visibility="gone">
                
 				       	<TextView
 				       	    android:layout_width="wrap_content"
@@ -100,14 +101,16 @@
 			        android:layout_marginRight="@dimen/margin_10dip"
 			        android:layout_below="@+id/layout_light_header"
 			        android:background="@color/lightwhite"        
-			        android:contentDescription="@null" />
+			        android:contentDescription="@null" 
+			        android:visibility="gone"/>
 			    
 			   	<RelativeLayout
 		        	android:id="@+id/rl_company_web"
 			   	    android:layout_width="match_parent"
 			   	    android:layout_height="wrap_content"
 			        android:layout_marginTop="5dp"
-			        android:layout_marginBottom="5dp" >
+			        android:layout_marginBottom="5dp" 
+			        android:visibility="gone">
                
 				       	<TextView
 				       	    android:layout_width="wrap_content"
@@ -138,14 +141,16 @@
 			        android:layout_marginRight="@dimen/margin_10dip"
 			        android:layout_below="@+id/layout_light_header"
 			        android:background="@color/lightwhite"        
-			        android:contentDescription="@null" />
+			        android:contentDescription="@null"
+			        android:visibility="gone" />
 			    
 			   	<RelativeLayout
 		        	android:id="@+id/rl_service_phone"
 			   	    android:layout_width="match_parent"
 			   	    android:layout_height="wrap_content"
 			        android:layout_marginTop="5dp"
-			        android:layout_marginBottom="5dp" >
+			        android:layout_marginBottom="5dp" 
+			        android:visibility="gone">
                
 				       	<TextView
 				       	    android:layout_width="wrap_content"
@@ -175,7 +180,8 @@
 			        android:layout_marginRight="@dimen/margin_10dip"
 			        android:layout_below="@+id/layout_light_header"
 			        android:background="@color/lightwhite"        
-			        android:contentDescription="@null" />
+			        android:contentDescription="@null" 
+			        android:visibility="gone"/>
 			    
 			   	<RelativeLayout
 		        	android:id="@+id/rl_app_version"
@@ -204,9 +210,18 @@
 				       	    android:textSize="@dimen/text_size_midsamll" />
 	
 				   </RelativeLayout>
+				   
+				   <ImageView
+				        android:id="@+id/image_sep_5"
+				        android:layout_width="match_parent"
+				        android:layout_height="0.5dp"
+				        android:layout_marginLeft="@dimen/margin_10dip"
+				        android:layout_marginRight="@dimen/margin_10dip"
+				        android:layout_below="@+id/layout_light_header"
+				        android:background="@color/lightwhite"        
+				        android:contentDescription="@null" 
+				        android:visibility="visible"/>
 		    </LinearLayout>
-		    
-		    
 		    
 		</RelativeLayout>	    
 	</RelativeLayout>    

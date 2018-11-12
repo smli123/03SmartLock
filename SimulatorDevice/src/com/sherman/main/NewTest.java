@@ -166,8 +166,8 @@ public class NewTest {
     	{
     		while(true) {
     			try {
-//    				notify_status();
-					Thread.sleep(10 * 1000);
+    				notify_status();
+					Thread.sleep(30 * 1000);
 	    			notify_alarm();
     			} catch (InterruptedException e) {
 					e.printStackTrace();
