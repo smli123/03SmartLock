@@ -17,6 +17,12 @@
 	<!-- 绿色 -->
     <color name="green">#4cbc60</color>   
     
+    <color name="login_bg">#f9fbe7</color>
+    <color name="main_ui_bg">#f9fbe7</color>
+    <color name="device_ui_bg">#f9fbe7</color>
+    <color name="message_ui_bg">#f9fbe7</color>
+    <color name="setting_ui_bg">#f9fbe7</color>
+    
     <!-- Listview 分割线颜色 -->
     <color name="listview_seperator_color">#CCCCCCAA</color>
     

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
+    android:background="@color/device_ui_bg"
     android:orientation="vertical"> 
     
      
@@ -15,7 +16,6 @@
 	          android:id="@+id/dev_list"
 	          android:layout_width="match_parent"
 	          android:layout_height="match_parent"
-
 	          android:divider="@drawable/list_item_diliver_left10_right0"
 	          android:dividerHeight="1px">
 	    </ListView>    

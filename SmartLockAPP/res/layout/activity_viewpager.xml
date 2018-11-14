@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/main_ui_bg"
     android:orientation="vertical" >
     
     <include
@@ -33,7 +33,7 @@
         android:id="@+id/ll_bottom_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/main_ui_bg"
         android:gravity="center"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="2dp"

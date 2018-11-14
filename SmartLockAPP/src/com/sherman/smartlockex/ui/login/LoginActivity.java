@@ -35,27 +35,26 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 public class LoginActivity extends TitledActivity implements OnClickListener {
 	private Handler mHandler = null;
 	private Context mContext = null;
-	
+
 	private TextView tv_version;
 	private ImageView iv_delete_username;
 	private ImageView iv_delete_password;
-	
+
 	private EditText et_username;
 	private EditText et_password;
-	
+
 	private Button btn_login;
-	
+
 	private TextView tv_register;
 	private TextView tv_forget_password;
-	
+
 	private String mEmail = "";
-	
+
 	private static UDPReceiver mUDPServer = null;
-	
+
 	private SharedPreferences mSharedPreferences;
 	private SharedPreferences.Editor editor;
 	private String mUserName = "";
@@ -76,44 +75,44 @@ public class LoginActivity extends TitledActivity implements OnClickListener {
 				PubFunc.log("Message: app login. ret:=" + String.valueOf(ret));
 				String message = intent.getStringExtra("MESSAGE");
 				switch (ret) {
-					case 0 :
-						mEmail = message;
-						PubStatus.g_userEmail = mEmail;
-						SmartLockApplication.setLogined(true);
+				case 0:
+					mEmail = message;
+					PubStatus.g_userEmail = mEmail;
+					SmartLockApplication.setLogined(true);
 
-						updateHandler.sendEmptyMessage(0);
-						break;
-					default :
-						SmartLockApplication.setLogined(false);
-						PubFunc.thinzdoToast(LoginActivity.this, message);
-						break;
+					updateHandler.sendEmptyMessage(0);
+					break;
+				default:
+					SmartLockApplication.setLogined(false);
+					PubFunc.thinzdoToast(LoginActivity.this, message);
+					break;
 				}
 			}
 
-//			if (intent.getAction().equals(PubDefine.LOGOUT_BROADCAST)) {
-//				int ret = intent.getIntExtra("LOGOUT", 0);
-//				PubFunc.log("Message: app logout. ret:=" + String.valueOf(ret));
-//
-//				if (1 == ret) {
-//					new MyAlertDialog(SmartPlugApplication.getContext())
-//							.builder()
-//							.setMsg("Forced to Quit")
-//							.setPositiveButton(
-//									mContext.getString(R.string.smartplug_ok),
-//									new View.OnClickListener() {
-//										@Override
-//										public void onClick(View arg0) {
-//
-//										}
-//									}).setCancelable(false).show();
-//				}
-			}
+			// if (intent.getAction().equals(PubDefine.LOGOUT_BROADCAST)) {
+			// int ret = intent.getIntExtra("LOGOUT", 0);
+			// PubFunc.log("Message: app logout. ret:=" + String.valueOf(ret));
+			//
+			// if (1 == ret) {
+			// new MyAlertDialog(SmartPlugApplication.getContext())
+			// .builder()
+			// .setMsg("Forced to Quit")
+			// .setPositiveButton(
+			// mContext.getString(R.string.smartplug_ok),
+			// new View.OnClickListener() {
+			// @Override
+			// public void onClick(View arg0) {
+			//
+			// }
+			// }).setCancelable(false).show();
+			// }
+		}
 	};
-	
+
 	private Handler updateHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			saveData();
-			
+
 			Intent intent = new Intent();
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			intent.setClass(LoginActivity.this, SmartLockActivity.class);
@@ -121,47 +120,46 @@ public class LoginActivity extends TitledActivity implements OnClickListener {
 			finish();
 		};
 	};
-	
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_login);
 		SmartLockApplication.resetTask();
 		SmartLockApplication.getInstance().addActivity(this);
-        mContext = this;
-        
-        // 启动UDP端口监听线程
- 		if (null == mUDPServer) {
- 			mUDPServer = new UDPReceiver(connectHandler);
- 			new Thread(mUDPServer).start();
- 		}
- 		
+		mContext = this;
+
+		// 启动UDP端口监听线程
+		if (null == mUDPServer) {
+			mUDPServer = new UDPReceiver(connectHandler);
+			new Thread(mUDPServer).start();
+		}
+
 		mSharedPreferences = getSharedPreferences("SmartLock",
 				Activity.MODE_PRIVATE);
-        loadData();
-        
-        initview();
-        
-        IntentFilter filter = new IntentFilter();
+		loadData();
+
+		initview();
+
+		IntentFilter filter = new IntentFilter();
 		filter.addAction(PubDefine.LOGIN_BROADCAST);
 		registerReceiver(mLoginRev, filter);
-    }
-    
-    private void saveData() {
-    	mUserName = et_username.getText().toString();
-    	
+	}
+
+	private void saveData() {
+		mUserName = et_username.getText().toString();
+
 		editor = mSharedPreferences.edit();
 		editor.putString("username", mUserName);
 		editor.commit();
-		
+
 		PubStatus.g_CurUserName = mUserName;
 	}
 
 	private void loadData() {
-		mUserName = mSharedPreferences.getString("username",
-				"");
+		mUserName = mSharedPreferences.getString("username", "");
 	}
-    
+
 	private Runnable login_runnable = new Runnable() {
 		@Override
 		public void run() {
@@ -206,11 +204,11 @@ public class LoginActivity extends TitledActivity implements OnClickListener {
 			sendMsg(true, sb.toString(), true);
 		}
 	}
-    
-    @Override
+
+	@Override
 	protected void onResume() {
 		super.onResume();
-		
+
 		initview();
 	}
 
@@ -219,73 +217,73 @@ public class LoginActivity extends TitledActivity implements OnClickListener {
 		super.onDestroy();
 		unregisterReceiver(mLoginRev);
 	}
-    
-    private void initview() {
-    	tv_version = (TextView)findViewById(R.id.tv_version);
-    	tv_version.setText(getVersion(mContext));
-    	
-    	tv_version = (TextView)findViewById(R.id.tv_version);
-    	iv_delete_username = (ImageView)findViewById(R.id.iv_delete_username);
-    	iv_delete_password = (ImageView)findViewById(R.id.iv_delete_password);
-    	
-    	et_username = (EditText)findViewById(R.id.et_username);
-    	et_password = (EditText)findViewById(R.id.et_password);
-    	
-    	btn_login = (Button)findViewById(R.id.btn_login);
-    	
-    	tv_register = (TextView)findViewById(R.id.tv_register);
-    	tv_forget_password = (TextView)findViewById(R.id.tv_forget_password);
-    	
-    	tv_version.setOnClickListener(this);
-    	btn_login.setOnClickListener(this);
-    	tv_register.setOnClickListener(this);
-    	tv_forget_password.setOnClickListener(this);
-    	iv_delete_username.setOnClickListener(this);
-    	iv_delete_password.setOnClickListener(this);
-    	
-    	et_username.setText(mUserName);
-    	et_password.setText("");
-    }
-    
+
+	private void initview() {
+		tv_version = (TextView) findViewById(R.id.tv_version);
+		tv_version.setText(getVersion(mContext));
+
+		tv_version = (TextView) findViewById(R.id.tv_version);
+		iv_delete_username = (ImageView) findViewById(R.id.iv_delete_username);
+		iv_delete_password = (ImageView) findViewById(R.id.iv_delete_password);
+
+		et_username = (EditText) findViewById(R.id.et_username);
+		et_password = (EditText) findViewById(R.id.et_password);
+
+		btn_login = (Button) findViewById(R.id.btn_login);
+
+		tv_register = (TextView) findViewById(R.id.tv_register);
+		tv_forget_password = (TextView) findViewById(R.id.tv_forget_password);
+
+		tv_version.setOnClickListener(this);
+		btn_login.setOnClickListener(this);
+		tv_register.setOnClickListener(this);
+		tv_forget_password.setOnClickListener(this);
+		iv_delete_username.setOnClickListener(this);
+		iv_delete_password.setOnClickListener(this);
+
+		et_username.setText(mUserName);
+		et_password.setText("");
+	}
+
 	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
-			case R.id.tv_version :
-				net_version();
-				break;
-			case R.id.btn_login :
-				net_login();
-				break;
-			case R.id.tv_register :
-				net_register();
-				break;
-			case R.id.tv_forget_password :
-				net_forget_password();
-				break;
-			case R.id.iv_delete_username :
-				delete_username();
-				break;
-			case R.id.iv_delete_password :
-				delete_password();
-				break;
+		case R.id.tv_version:
+			net_version();
+			break;
+		case R.id.btn_login:
+			net_login();
+			break;
+		case R.id.tv_register:
+			net_register();
+			break;
+		case R.id.tv_forget_password:
+			net_forget_password();
+			break;
+		case R.id.iv_delete_username:
+			delete_username();
+			break;
+		case R.id.iv_delete_password:
+			delete_password();
+			break;
 		}
 	}
-	
+
 	private void net_version() {
-		
+
 	}
-	
+
 	private void net_login() {
 		new Thread(login_runnable).start();
-		
+
 	}
-	
+
 	private void net_register() {
 		Intent act = new Intent();
 		act.setClass(LoginActivity.this, RegisterActivity.class);
 		mContext.startActivity(act);
 	}
-	
+
 	private void net_forget_password() {
 		Intent act = new Intent();
 		act.setClass(LoginActivity.this, FindPwdActivity.class);
@@ -295,14 +293,13 @@ public class LoginActivity extends TitledActivity implements OnClickListener {
 	private void delete_username() {
 		et_username.setText("");
 	}
-	
+
 	private void delete_password() {
 		et_password.setText("");
 	}
-    
-    // ��ȡ�汾��
-	public static String getVersion(Context context)
-	{
+
+	// ��ȡ�汾��
+	public static String getVersion(Context context) {
 		try {
 			PackageInfo pi = context.getPackageManager().getPackageInfo(
 					context.getPackageName(), 0);
@@ -310,11 +307,7 @@ public class LoginActivity extends TitledActivity implements OnClickListener {
 		} catch (NameNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return context
-					.getString(R.string.app_version_unknown);
+			return context.getString(R.string.app_version_unknown);
 		}
 	}
 }
-	
-	
-	

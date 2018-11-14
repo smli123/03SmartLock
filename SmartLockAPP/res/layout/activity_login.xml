@@ -8,12 +8,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.sherman.smartlockex.ui.login.WelcomeActivity" 
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/login_bg">
 
     <RelativeLayout 
         android:id="@+id/rl_col_1"
         android:layout_width="match_parent"
     	android:layout_height="wrap_content" 
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" 
     	android:orientation="horizontal">
     	
         <TextView
@@ -30,6 +32,8 @@
         android:id="@+id/rl_col_2"
         android:layout_width="match_parent"
     	android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" 
     	android:layout_below="@id/rl_col_1"
     	android:orientation="horizontal">
     	
@@ -38,18 +42,47 @@
     <RelativeLayout 
         android:id="@+id/rl_col_3"
         android:layout_width="match_parent"
-    	android:layout_height="wrap_content" 
+    	android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" 
     	android:layout_below="@id/rl_col_2">
     	
+        <TextView
+            android:id="@+id/tv_hello"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="@string/app_login_hello"
+            android:textColor="@color/black"
+            android:textSize="@dimen/version_font_size_large" />
+        
+        <TextView
+            android:id="@+id/tv_welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/tv_hello"
+            android:gravity="left"
+            android:text="@string/app_login_welcome"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/version_font_size" />
+        
+	    <RelativeLayout 
+	        android:id="@+id/rl_seperator_01"
+	        android:layout_width="match_parent"
+	    	android:layout_height="150dp" 
+            android:layout_below="@id/tv_welcome"/>
+	    
 	    <ImageView
 	        android:id="@+id/iv_head_pic"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
+            android:layout_below="@id/rl_seperator_01"
 	        android:layout_centerHorizontal="true"
 	        android:layout_marginTop="0dp"
 	        android:src="@drawable/smp_head_pic_default"
-	        android:visibility="visible" />
-        
+	        android:visibility="gone" />
+	    
     </RelativeLayout>
     
     <RelativeLayout
@@ -195,33 +228,49 @@
     <RelativeLayout 
         android:id="@+id/rl_col_6"
         android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
+    	android:layout_height="match_parent"
     	android:layout_marginTop="10dp"
     	android:layout_marginLeft="5dp"
     	android:layout_marginRight="5dp"
-    	android:layout_below="@id/rl_col_5">
+    	android:layout_below="@id/rl_col_5" >
         
-        <TextView 
-            android:id="@+id/tv_register"
-	        android:layout_width="wrap_content"
-	    	android:layout_height="wrap_content"
-	    	android:layout_alignParentLeft="true"
-	    	android:textColor="@color/text_selector"
-        	android:clickable="true"
-        	android:focusable="true"
-	    	android:textSize="15dp"
-	    	android:text="@string/smartlock_login_register"/>
-    	
-        <TextView 
+        <TextView
+            android:id="@+id/tv_separator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/smartlock_login_separator"
+            android:textColor="@color/text_selector"
+            android:textSize="15dp" />
+        
+        <TextView
             android:id="@+id/tv_forget_password"
-	        android:layout_width="wrap_content"
-	    	android:layout_height="wrap_content"
-	    	android:layout_alignParentRight="true"
-	    	android:textColor="@color/text_selector"
-        	android:clickable="true"
-        	android:focusable="true"
-	    	android:textSize="15dp"
-	    	android:text="@string/smartlock_login_forget_password"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/tv_separator"
+            android:layout_marginRight="7dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/smartlock_login_forget_password"
+            android:textColor="@color/text_selector"
+            android:textSize="15dp" />
+    	
+        <TextView
+            android:id="@+id/tv_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_separator"
+            android:layout_marginLeft="7dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/smartlock_login_register"
+            android:textColor="@color/text_selector"
+            android:textSize="15dp" />
     	
     </RelativeLayout>
     

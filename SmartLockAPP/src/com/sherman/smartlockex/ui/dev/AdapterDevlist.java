@@ -85,11 +85,17 @@ public class AdapterDevlist extends BaseAdapter {
 					if (device.mOnline == true) {
 						rl_lock_item.setBackgroundColor(Color.TRANSPARENT);
 						iv_lock_online.setImageResource(R.drawable.smp_online);
+						iv_lock_status.setImageResource(device.mStatus == 0 ? R.drawable.smp_lock_close : R.drawable.smp_lock_open);
+						iv_lock_charge.setImageResource(R.drawable.smp_lock_charge);
+						iv_lock_authorize.setImageResource(R.drawable.smp_lock_authorize);
 					} else {
 						rl_lock_item.setBackgroundColor(Color.LTGRAY);
 						iv_lock_online.setImageResource(R.drawable.smp_offline);
+						iv_lock_status.setImageResource(device.mStatus == 0 ? R.drawable.smp_lock_close_offline : R.drawable.smp_lock_open_offline);					
+						iv_lock_charge.setImageResource(R.drawable.smp_lock_charge_offline);
+						iv_lock_authorize.setImageResource(R.drawable.smp_lock_authorize_offline);
 					}
-					
+			
 					if (device.mRelation == 0) {
 						iv_lock_authorize.setVisibility(View.VISIBLE);
 						rl_lock_item.setOnLongClickListener(deletePlug);
@@ -98,9 +104,8 @@ public class AdapterDevlist extends BaseAdapter {
 						rl_lock_item.setOnLongClickListener(null);
 					}
 						
-					rl_lock_item.setOnClickListener(selectPlugClick);					
+					rl_lock_item.setOnClickListener(selectPlugClick);		
 					iv_lock_icon.setImageResource(R.drawable.smp_lock_big);
-					iv_lock_status.setImageResource(device.mStatus == 0 ? R.drawable.smp_lock_close : R.drawable.smp_lock_open);
 					tv_lock_charge.setText(String.valueOf(device.mCharge));
 					
 					rl_lock_item.setContentDescription(String
@@ -109,7 +114,7 @@ public class AdapterDevlist extends BaseAdapter {
 			}
 		}
 	}
-
+	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if ((mDevlist == null) || (mDevlist.size() == 0)) {
