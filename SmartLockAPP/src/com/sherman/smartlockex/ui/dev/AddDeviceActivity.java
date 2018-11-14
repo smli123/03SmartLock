@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -66,6 +67,11 @@ public class AddDeviceActivity extends TitledActivity implements OnClickListener
     private TextView mMessageTV;
     private Button mConfirmBtn;
 
+	private SharedPreferences mSharedPreferences;
+	private SharedPreferences.Editor editor;
+	private String mWIFIName = "";
+	private String mWIFIPassword = "";
+
     private IEsptouchListener myListener = new IEsptouchListener() {
 
         @Override
@@ -122,6 +128,9 @@ public class AddDeviceActivity extends TitledActivity implements OnClickListener
 				R.drawable.title_btn_selector, this);
         setTitle(SmartLockApplication.getInstance().getString(R.string.smartlock_add_lock));
         
+        mSharedPreferences = getSharedPreferences("Activity_AddLock_" + PubStatus.getUserName(),
+				Activity.MODE_PRIVATE);
+        
 //        super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_add_device);
 
@@ -156,6 +165,32 @@ public class AddDeviceActivity extends TitledActivity implements OnClickListener
         
 //        addLock("b4:e6:2d:0b:dd:20");
     }
+    
+	private void saveData() {
+		mWIFIName = mApSsidTV.getText().toString();
+		mWIFIPassword = mApPasswordET.getText().toString();
+
+		editor = mSharedPreferences.edit();
+		editor.putString(mWIFIName, mWIFIPassword);
+		editor.commit();
+	}
+
+	private void loadData() {
+		mWIFIName = mApSsidTV.getText().toString();
+		mWIFIPassword = mSharedPreferences.getString(mWIFIName, "");
+	}
+	
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        
+        saveData();
+
+        mDestroyed = true;
+        if (mReceiverRegistered) {
+            unregisterReceiver(mReceiver);
+        }
+    }
 
     @SuppressLint("NewApi") 
     @Override
@@ -173,15 +208,6 @@ public class AddDeviceActivity extends TitledActivity implements OnClickListener
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        mDestroyed = true;
-        if (mReceiverRegistered) {
-            unregisterReceiver(mReceiver);
-        }
-    }
 
     private boolean isSDKAtLeastP() {
         return Build.VERSION.SDK_INT >= 28;
@@ -226,6 +252,10 @@ public class AddDeviceActivity extends TitledActivity implements OnClickListener
 
             String bssid = info.getBSSID();
             mApBssidTV.setText(bssid);
+            
+            // 加载WIFI路由器的密码
+            loadData();
+            mApPasswordET.setText(mWIFIPassword);
 
             mConfirmBtn.setEnabled(true);
             mMessageTV.setText("");
@@ -271,6 +301,8 @@ public class AddDeviceActivity extends TitledActivity implements OnClickListener
             }
             mTask = new EsptouchAsyncTask4(this);
             mTask.execute(ssid, bssid, password, deviceCount, broadcast);
+        } else if (v.getId() == R.id.titlebar_leftbutton) {
+        	finish();
         }
     }
 
