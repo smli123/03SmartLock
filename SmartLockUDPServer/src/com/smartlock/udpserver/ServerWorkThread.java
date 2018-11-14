@@ -26,7 +26,7 @@ import com.smartlock.udpserver.Function.APPFindPwdHandle;
 import com.smartlock.udpserver.Function.APPHeartMsgHandle;
 import com.smartlock.udpserver.Function.APPModEmailMsgHandle;
 import com.smartlock.udpserver.Function.APPModPwdMsgHandle;
-import com.smartlock.udpserver.Function.APPModifyPlugNameHandle;
+import com.smartlock.udpserver.Function.APPModuleModifyPlugNameHandle;
 import com.smartlock.udpserver.Function.ModuleBack2APCtrlMsgHandle;
 import com.smartlock.udpserver.Function.NofityBellMsgHandle;
 import com.smartlock.udpserver.Function.ModuleHeartBeatTask;
@@ -110,7 +110,7 @@ public class ServerWorkThread  implements Runnable{
 		m_SendFuncMap.put(ServerCommDefine.APP_QRY_PLUG_MSG_HEADER, new APPQueryAllModuleInfoHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_ADD_PLUG_MSG_HEADER, new APPModuleAddMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_DEL_PLUG_MSG_HEADER, new APPModuleDeleteMsgHandle());
-		m_SendFuncMap.put(ServerCommDefine.APP_MOD_PLUG_MSG_HEADER, new APPModifyPlugNameHandle());
+		m_SendFuncMap.put(ServerCommDefine.APP_MOD_PLUG_MSG_HEADER, new APPModuleModifyPlugNameHandle());
 		
 		m_SendFuncMap.put(ServerCommDefine.APP_QRY_AUTHORIZEUSER_MSG_HEADER, new APPAuthorizeUserQueryHandle());
 		m_SendFuncMap.put(ServerCommDefine.APP_ADD_AUTHORIZEUSER_MSG_HEADER, new APPAuthorizeUserAddMsgHandle());
@@ -133,7 +133,7 @@ public class ServerWorkThread  implements Runnable{
 		m_SendFuncMap.put(ServerCommDefine.NOTIFY_BELL_MSG_HEADER, new NofityBellMsgHandle());
 		m_SendFuncMap.put(ServerCommDefine.NOTIFY_NOTIFY_ALARM, new NofityAlarmMsgHandle());
 
-		m_SendFuncMap.put(ServerCommDefine.MOD_PLUG_MSG_HEADER, new APPModifyPlugNameHandle());
+		m_SendFuncMap.put(ServerCommDefine.MOD_PLUG_MSG_HEADER, new APPModuleModifyPlugNameHandle());
 		m_SendFuncMap.put(ServerCommDefine.BACK2AP_CTRL_MSG_HEADER, new ModuleBack2APCtrlMsgHandle());
 		
 		/* 模板上报消息 */

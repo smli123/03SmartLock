@@ -719,6 +719,28 @@ public class ServerDBMgr {
 		return null;
 	}
 	/**
+	 * @name DeleteUserModule 删除模块有关系的所有关系
+	 * @param strUserName 	用户名
+	 * 					strDevId			模块ID
+	 * @return boolean 是否成功
+	 * @throws SQLException ClassNotFoundException
+	 * @author zxluan
+	 * @date 2015/03/28
+	 */
+	public boolean DeleteUserModule(String strDevId)
+	{
+		Map<String,String> selection = new HashMap<String,String>();
+		selection.put(USER_MODULE.MODULE_ID, strDevId);
+		try {
+			return m_dbTool.delete(USER_MODULE.TABLE_NAME, selection);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			LogWriter.WriteExceptionLog(LogWriter.SRV_SELF_LOG,e,"");
+		}
+		return false;
+	}
+	/**
 	 * @name DeleteUserModule 删除指定用户拥有的模块列表
 	 * @param strUserName 	用户名
 	 * 					strDevId			模块ID

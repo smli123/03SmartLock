@@ -59,7 +59,7 @@ public class APPModuleDeleteMsgHandle implements ICallFunction{
 			dbMgr.BeginTansacion();
 			
 			//删除用户与模块关联关系 user_module
-			if(!dbMgr.DeleteUserModule(strUserName, strModuleId))
+			if(!dbMgr.DeleteUserModule(strModuleId))
 			{
 				dbMgr.Rollback();
 				//关闭事务机制

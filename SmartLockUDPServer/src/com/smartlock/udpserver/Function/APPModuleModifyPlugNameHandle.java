@@ -11,7 +11,7 @@ import com.smartlock.udpserver.db.MODULE_INFO;
 import com.smartlock.udpserver.db.ServerDBMgr;
 import com.smartlock.udpserver.db.USER_MODULE;
 
-public class APPModifyPlugNameHandle implements ICallFunction{
+public class APPModuleModifyPlugNameHandle implements ICallFunction{
 	
 
 	/**********************************************************************************************************
