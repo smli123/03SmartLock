@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.sherman.smartlockex.ui.login.WelcomeActivity" 
-    android:background="@color/login_bg">
+    android:background="@color/welcome_bg">
 
     <ImageView
         android:layout_width="wrap_content"
