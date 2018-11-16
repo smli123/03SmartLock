@@ -303,7 +303,7 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
     }
     
     private void updateUI() {
-    	setTitle(mLock.mName);
+    	setTitle(mLock.mName + " [" + mLock.mLockID + "]");
     }
 
 	@Override

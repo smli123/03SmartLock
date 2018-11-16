@@ -422,7 +422,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentBottom="true"
 	        android:layout_alignParentLeft="true"
-	        android:background="@drawable/btn_selector"
+	        android:background="@drawable/button_selector"
 	        android:text="@string/login_logout"
 	        android:textColor="@color/white"
 	        android:layout_marginLeft="@dimen/margin_10dip"

@@ -18,12 +18,19 @@
     <color name="green">#4cbc60</color>   
     
     <!-- #0facf3 -->
-    <color name="welcome_bg">#0facf3</color>
+    <color name="welcome_bg">#40c4ff</color>
     <color name="login_bg">#f9fbe7</color>
     <color name="main_ui_bg">#f9fbe7</color>
     <color name="device_ui_bg">#f9fbe7</color>
     <color name="message_ui_bg">#f9fbe7</color>
     <color name="setting_ui_bg">#f9fbe7</color>
+    
+    <!-- Common TitleBar -->
+    <!-- #378dda -->
+    <color name="title_bar_bg">#40c4ff</color>
+    
+    <color name="button_color_normal">#40c4ff</color>
+    <color name="button_color_pressed">#ff0000</color>
     
     <!-- Listview 分割线颜色 -->
     <color name="listview_seperator_color">#CCCCCCAA</color>

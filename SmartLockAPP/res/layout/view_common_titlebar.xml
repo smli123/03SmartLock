@@ -6,10 +6,10 @@
     <RelativeLayout
         android:id="@+id/layout_commonbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_centerVertical="true"
-        android:background="@drawable/smp_common_toolbar"
         android:layout_alignParentTop="true"
+        android:background="@color/title_bar_bg"
         android:gravity="center_vertical" >
         
     	<Button

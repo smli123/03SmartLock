@@ -109,45 +109,49 @@ public class ModuleLockCtrlMsgHandle implements ICallFunction{
 		String strMsgHeader = strRet[1].trim();
 		String strUserName 	= strRet[2].trim();
 		String strModuleID	= strRet[3].trim();
-		String strStatus 	= strRet[4].trim();
+		int iRetCode 	= Integer.valueOf(strRet[4].trim());
+		String strLockStatus	= strRet[5].trim();
 
 		/* 更新COOKIE */
 		ServerWorkThread.RefreshModuleCookie(strModuleID, strNewCookie);
 		/* 刷新心跳状态 */
 		ServerWorkThread.RefreshModuleAliveFlag(strModuleID, true);
 		ServerWorkThread.RefreshModuleIP(strModuleID, thread.getSrcIP(), thread.getSrcPort());
-		
-		//更新数据库
-		ServerDBMgr dbMgr = new ServerDBMgr();
-		
-		try
-		{
-			dbMgr.UpdateModuleInfo_Status(strModuleID, Integer.valueOf(strStatus));
+
+		if (iRetCode == 0) {
+			//更新数据库
+			ServerDBMgr dbMgr = new ServerDBMgr();
 			
-//			//给APP回复成功： 只返回给发送者，不对。
-//			ResponseToAPP(ServerCommDefine.LOCK_CTRL_MSG_HEADER, strUserName, strModuleID, ServerRetCodeMgr.SUCCESS_CODE, strStatus);
-			
-			// 给所有APP用户返回信息
-			Vector<USER_MODULE> info = dbMgr.QueryUserModuleByDevId(strModuleID);
-			
-			if (info != null) {
-				for (int i = 0; i < info.size(); i++) {
-					String username = info.get(i).getUserName();
-					NotifyToAPP(username, strModuleID, ServerCommDefine.LOCK_CTRL_MSG_HEADER, 
-							ServerRetCodeMgr.SUCCESS_CODE, strStatus);
+			try
+			{
+				dbMgr.UpdateModuleInfo_Status(strModuleID, Integer.valueOf(strLockStatus));
+				
+	//			//给APP回复成功： 只返回给发送者，不对。
+	//			ResponseToAPP(ServerCommDefine.LOCK_CTRL_MSG_HEADER, strUserName, strModuleID, ServerRetCodeMgr.SUCCESS_CODE, strLockStatus);
+				
+				// 给所有APP用户返回信息
+				Vector<USER_MODULE> info = dbMgr.QueryUserModuleByDevId(strModuleID);
+				
+				if (info != null) {
+					for (int i = 0; i < info.size(); i++) {
+						String username = info.get(i).getUserName();
+						
+						NotifyToAPP(username, strModuleID, ServerCommDefine.APP_LOCK_CTRL_MSG_HEADER, 
+								ServerRetCodeMgr.SUCCESS_CODE, strLockStatus);
+					}
 				}
+				
+				return ServerRetCodeMgr.SUCCESS_CODE;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return ServerRetCodeMgr.ERROR_COMMON;
 			}
-			
-			return ServerRetCodeMgr.SUCCESS_CODE;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return ServerRetCodeMgr.ERROR_COMMON;
+			finally
+			{
+				dbMgr.Destroy();
+			}
 		}
-		finally
-		{
-			dbMgr.Destroy();
-		}
-		
+		return ServerRetCodeMgr.SUCCESS_CODE;
 	}
 }

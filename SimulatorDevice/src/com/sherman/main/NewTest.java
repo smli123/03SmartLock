@@ -260,7 +260,7 @@ public class ServerMainThread extends Thread {
 							}
 						} else if (recStrs[1].equals("LOCK_OPEN") == true) {
 							lockstatus = Integer.valueOf(recStrs[4]);
-							sendStr = PubFunc.genNewCookie() + ",LOCK_OPEN," + PubDefine.USER_NAME + "," + PubDefine.DEFAULT_MODULEID + "0," + lockstatus;
+							sendStr = PubFunc.genNewCookie() + ",LOCK_OPEN," + PubDefine.USER_NAME + "," + PubDefine.DEFAULT_MODULEID + ",0," + lockstatus + "#";
 							response(dataSocket, sendStr, dataPacket.getAddress(), dataPacket.getPort());
 						} else if (recStrs[1].equals("NOTIFY_STASTUS") == true) {
 							System.out.println("NOTIFY_STASTUS");
@@ -309,7 +309,7 @@ public class ServerMainThread extends Thread {
 			DatagramPacket res_dataPacket = new DatagramPacket(info.getBytes(), info.getBytes().length, remoteAddress, remotePort);    
 			try {
 				dataSocket.send(res_dataPacket);
-				System.out.println(String.format("Send:%s", info));
+				System.out.println(String.format("Send[%s:%d]:%s", remoteAddress.getHostAddress(), remotePort, info));
 				System.out.println(String.format("Send Server OK"));
 			} catch (IOException e) {
 				e.printStackTrace();

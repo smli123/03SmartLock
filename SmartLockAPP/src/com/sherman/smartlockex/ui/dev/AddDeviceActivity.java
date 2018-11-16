@@ -24,11 +24,15 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,6 +70,9 @@ public class AddDeviceActivity extends TitledActivity implements OnClickListener
     private RadioGroup mPackageModeGroup;
     private TextView mMessageTV;
     private Button mConfirmBtn;
+    
+    private ImageView iv_show_password;
+    private boolean b_ShowPassword = false;
 
 	private SharedPreferences mSharedPreferences;
 	private SharedPreferences.Editor editor;
@@ -141,8 +148,12 @@ public class AddDeviceActivity extends TitledActivity implements OnClickListener
         mPackageModeGroup = (RadioGroup) findViewById(R.id.package_mode_group);
         mMessageTV = (TextView) findViewById(R.id.message);
         mConfirmBtn = (Button) findViewById(R.id.confirm_btn);
+        
+        iv_show_password = (ImageView) findViewById(R.id.iv_show_password);
+        
         mConfirmBtn.setEnabled(false);
         mConfirmBtn.setOnClickListener(this);
+        iv_show_password.setOnClickListener(this);
         
         TextView versionTV = (TextView) findViewById(R.id.version_tv);
         versionTV.setText(IEsptouchTask.ESPTOUCH_VERSION);
@@ -303,7 +314,30 @@ public class AddDeviceActivity extends TitledActivity implements OnClickListener
             mTask.execute(ssid, bssid, password, deviceCount, broadcast);
         } else if (v.getId() == R.id.titlebar_leftbutton) {
         	finish();
+        } else if (v.getId() == R.id.iv_show_password) {
+        	if (b_ShowPassword == false) {
+        		iv_show_password.setImageResource(R.drawable.smp_password_show);
+        	} else {
+        		iv_show_password.setImageResource(R.drawable.smp_password_hide);
+        	}
+        	b_ShowPassword = ! b_ShowPassword;
+        	setPasswordEye(mApPasswordET);
         }
+    }
+    
+  //设置密码可见和不可见
+    private void setPasswordEye(EditText editText) {
+        if (EditorInfo.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD == editText.getInputType()) {
+            //如果不可见就设置为可见
+            editText.setInputType(EditorInfo.TYPE_TEXT_VARIATION_PASSWORD);
+            editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        } else {
+            //如果可见就设置为不可见
+            editText.setInputType(EditorInfo.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            editText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+        }
+        //执行上面的代码后光标会处于输入框的最前方,所以把光标位置挪到文字的最后面
+        editText.setSelection(editText.getText().toString().length());
     }
 
     private void onEsptoucResultAddedPerform(final IEsptouchResult result) {

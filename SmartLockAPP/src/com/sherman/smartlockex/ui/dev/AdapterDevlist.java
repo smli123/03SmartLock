@@ -80,7 +80,7 @@ public class AdapterDevlist extends BaseAdapter {
 				tv_lock_name.setSingleLine(true);
 
 				if (!TextUtils.isEmpty(device.mLockID)) {
-					tv_lock_name.setText(device.mName);
+					tv_lock_name.setText(device.mName + " [" + device.mLockID + "]");
 
 					if (device.mOnline == true) {
 						rl_lock_item.setBackgroundColor(Color.TRANSPARENT);

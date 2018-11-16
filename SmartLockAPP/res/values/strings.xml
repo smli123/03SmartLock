@@ -7,7 +7,7 @@
     <string name="app_version_unknown">"Unknown version"</string>
     
     <string name="app_login_hello">"你好,"</string>
-    <string name="app_login_welcome">"欢迎使用智能门锁"</string>
+    <string name="app_login_welcome">"欢迎使用智码仕智能门锁"</string>
     
     <string name="smartlock_title_dev">设备</string>
     <string name="smartlock_title_message">消息</string>
