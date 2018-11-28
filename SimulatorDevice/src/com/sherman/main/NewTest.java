@@ -1,52 +1,27 @@
 package com.sherman.main;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import java.nio.channels.FileChannel;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Timer;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import javax.activation.CommandMap;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.util.Timer;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class NewTest {
+//	// PubDefine
+//	public static final String SERVER_IP = "121.41.19.6";
+//	public static final String DEBUG_SERVER_IP = "192.168.3.9";
+//	public static final int SERVER_PORT = 6000;				// SmartLock server:6000 SmartPlug : 5000
+//	public static final int LOCAL_PORT = 8001;
+//	public static String USER_NAME = "defaultusername";
+//	public static final String DEFAULT_MODULEID = "651001";
+//	public static final String DEFAULT_MAC = "60:01:94:09:df:31";
+//	public static final String LOG_FILENAME = "D:\\Test\\LoginLog.txt";
+	
 	public static DatagramSocket dataSocket = null;
-
 	private static boolean bModuleLogin = false;
 	private static int lockstatus = 0;
 	private static int lockcharge = 100;
-	
 	private static int alarm_no = 0;
 	
 	public static void main(String[] args) throws Exception{
@@ -211,112 +186,136 @@ public class NewTest {
 			e.printStackTrace();
 		}
     }
-//-----------------------------------------------------------------------------------
-public class ServerMainThread extends Thread {
-//	public DatagramSocket dataSocket = null;
-	private String ipAddress = "";
-	
-//	private ExecutorService executor = Executors.newCachedThreadPool();
-	
-	public ServerMainThread()
-	{
-		ipAddress = "AA:AA:AA:AA:AA";
+	//-----------------------------------------------------------------------------------
+	public class ServerMainThread extends Thread {
+	//	public DatagramSocket dataSocket = null;
+		private String ipAddress = "";
 		
-		this.start();
-	}
-	
-	@Override
-	public void run()
-	{
-		while(true)
+	//	private ExecutorService executor = Executors.newCachedThreadPool();
+		
+		public ServerMainThread()
 		{
-			try {
-//				dataSocket = new DatagramSocket(PubDefine.RECV_SERVER_PORT);
-				/*STEP2 监听*/
-				while(true)
-				{
-					if (dataSocket.isClosed() == true) {
-				    	dataSocket = new DatagramSocket(PubDefine.LOCAL_PORT);
-						dataSocket.setSoTimeout(5000);
-				    }
-					
-					byte[] receiveByte = new byte[1024];
-					DatagramPacket dataPacket = new DatagramPacket(receiveByte, receiveByte.length);
-					dataSocket.receive(dataPacket);
-					
-					String sendStr = "";
-					String receiveStr = new String(dataPacket.getData());
-
-					System.out.println("Recv Data:" + receiveStr);
-					
-					receiveStr = receiveStr.substring(0, receiveStr.indexOf("#"));
-					String[] recStrs = receiveStr.split(",");
-					if (recStrs.length >= 2) {
-						if (recStrs[1].equals("LOGIN") == true) {
-							int retcode = Integer.valueOf(recStrs[4]);
-							if (retcode == 0) {
-								PubDefine.USER_NAME = recStrs[2];
-								bModuleLogin = true;
+			ipAddress = "AA:AA:AA:AA:AA";
+			
+			this.start();
+		}
+		
+		@Override
+		public void run()
+		{
+			while(true)
+			{
+				try {
+	//				dataSocket = new DatagramSocket(RECV_PubDefine.SERVER_PORT);
+					/*STEP2 监听*/
+					while(true)
+					{
+						if (dataSocket.isClosed() == true) {
+					    	dataSocket = new DatagramSocket(PubDefine.LOCAL_PORT);
+							dataSocket.setSoTimeout(5000);
+					    }
+						
+						byte[] receiveByte = new byte[1024];
+						DatagramPacket dataPacket = new DatagramPacket(receiveByte, receiveByte.length);
+						dataSocket.receive(dataPacket);
+						
+						String sendStr = "";
+						String receiveStr = new String(dataPacket.getData());
+	
+						System.out.println("Recv Data:" + receiveStr);
+						
+						receiveStr = receiveStr.substring(0, receiveStr.indexOf("#"));
+						String[] recStrs = receiveStr.split(",");
+						if (recStrs.length >= 2) {
+							if (recStrs[1].equals("LOGIN") == true) {
+								int retcode = Integer.valueOf(recStrs[4]);
+								if (retcode == 0) {
+									PubDefine.USER_NAME = recStrs[2];
+									bModuleLogin = true;
+								}
+							} else if (recStrs[1].equals("LOCK_OPEN") == true) {
+								lockstatus = Integer.valueOf(recStrs[4]);
+								sendStr = PubFunc.genNewCookie() + ",LOCK_OPEN," + PubDefine.USER_NAME + "," + PubDefine.DEFAULT_MODULEID + ",0," + lockstatus + "#";
+								response(dataSocket, sendStr, dataPacket.getAddress(), dataPacket.getPort());
+							} else if (recStrs[1].equals("NOTIFY_STASTUS") == true) {
+								System.out.println("NOTIFY_STASTUS");
+							} else if (recStrs[1].equals("NOTIFY_ALARM") == true) {
+								System.out.println("NOTIFY_ALARM");
+							} else if (recStrs[1].equals("HEART") == true) {
+								System.out.println("HEART");
+							} else if (recStrs[1].equals("COMMAND") == true) {
+								sendStr = "COMMAND,OK";
+								String command = recStrs[4];
+								my_exec(command);
+								response(dataSocket, sendStr, dataPacket.getAddress(), dataPacket.getPort());
+							}else {
+								System.out.println(String.format("Unknown Command ===:%s", receiveStr));
 							}
-						} else if (recStrs[1].equals("LOCK_OPEN") == true) {
-							lockstatus = Integer.valueOf(recStrs[4]);
-							sendStr = PubFunc.genNewCookie() + ",LOCK_OPEN," + PubDefine.USER_NAME + "," + PubDefine.DEFAULT_MODULEID + ",0," + lockstatus + "#";
-							response(dataSocket, sendStr, dataPacket.getAddress(), dataPacket.getPort());
-						} else if (recStrs[1].equals("NOTIFY_STASTUS") == true) {
-							System.out.println("NOTIFY_STASTUS");
-						} else if (recStrs[1].equals("NOTIFY_ALARM") == true) {
-							System.out.println("NOTIFY_ALARM");
-						} else if (recStrs[1].equals("HEART") == true) {
-							System.out.println("HEART");
-						} else {
-							System.out.println(String.format("Unknown Command:%s", receiveStr));
+							
 						}
 						
+	//					if (recStrs.length >= 2) {
+	//						if (recStrs[1].equals("COMMAND") == true) {
+	//							sendStr = "COMMAND,OK";
+	//							String command = recStrs[4];
+	//							
+	//							response(dataSocket, sendStr, dataPacket.getAddress(), dataPacket.getPort());
+	//						} else {
+	//							// Lishimin Define Command Response
+	//							sendStr = getCmdResonse(recStrs[1]);
+	//							if (sendStr == null) {
+	//								System.out.println(String.format("Unknown Command:%s", receiveStr));
+	//							} else {
+	//								// response Server result
+	//								response(dataSocket, sendStr, dataPacket.getAddress(), dataPacket.getPort());
+	//							}
+	//						}
+	//					}
 					}
-					
-//					if (recStrs.length >= 2) {
-//						if (recStrs[1].equals("COMMAND") == true) {
-//							sendStr = "COMMAND,OK";
-//							String command = recStrs[4];
-//							
-//							response(dataSocket, sendStr, dataPacket.getAddress(), dataPacket.getPort());
-//						} else {
-//							// Lishimin Define Command Response
-//							sendStr = getCmdResonse(recStrs[1]);
-//							if (sendStr == null) {
-//								System.out.println(String.format("Unknown Command:%s", receiveStr));
-//							} else {
-//								// response Server result
-//								response(dataSocket, sendStr, dataPacket.getAddress(), dataPacket.getPort());
-//							}
-//						}
-//					}
+				}catch (Exception e) {
+					// TODO Auto-generated catch block
+	//				e.printStackTrace();
 				}
-			}catch (Exception e) {
-				// TODO Auto-generated catch block
-//				e.printStackTrace();
+				
+				if (null != dataSocket)
+				{
+					dataSocket.close();
+				}
 			}
-			
-			if (null != dataSocket)
+		}
+		
+	    private void my_exec(String command) throws Exception{
+			try
 			{
-				dataSocket.close();
+				Process process = Runtime.getRuntime().exec(command);
+				process.waitFor();
+				
+				InputStreamReader ir = new InputStreamReader(process.getInputStream());
+				LineNumberReader input = new LineNumberReader (ir);
+			
+				String line;
+				while ((line = input.readLine ()) != null){
+					System.out.println(line);
+				}
+			 } catch (java.io.IOException e){
+				 System.err.println ("IOException " + e.getMessage());
 			}
+			return;
 		}
-	}
-	
-	private void response(DatagramSocket dataSocket, String info, InetAddress remoteAddress, int remotePort) {
-		if (info.isEmpty() == false) {
-			DatagramPacket res_dataPacket = new DatagramPacket(info.getBytes(), info.getBytes().length, remoteAddress, remotePort);    
-			try {
-				dataSocket.send(res_dataPacket);
-				System.out.println(String.format("Send[%s:%d]:%s", remoteAddress.getHostAddress(), remotePort, info));
-				System.out.println(String.format("Send Server OK"));
-			} catch (IOException e) {
-				e.printStackTrace();
-				System.out.println("Response Fail.");
+		
+		private void response(DatagramSocket dataSocket, String info, InetAddress remoteAddress, int remotePort) {
+			if (info.isEmpty() == false) {
+				DatagramPacket res_dataPacket = new DatagramPacket(info.getBytes(), info.getBytes().length, remoteAddress, remotePort);    
+				try {
+					dataSocket.send(res_dataPacket);
+					System.out.println(String.format("Send[%s:%d]:%s", remoteAddress.getHostAddress(), remotePort, info));
+					System.out.println(String.format("Send Server OK"));
+				} catch (IOException e) {
+					e.printStackTrace();
+					System.out.println("Response Fail.");
+				}
 			}
 		}
 	}
 }
-    
-}
+

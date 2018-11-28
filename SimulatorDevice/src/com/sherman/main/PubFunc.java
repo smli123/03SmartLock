@@ -8,29 +8,31 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
+import com.sherman.main.PubDefine;
+
 public class PubFunc {
 
+	/* 创建新的COOKIE */
 	public static String genNewCookie() {
-		/* 创建新的COOKIE */
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
 		String strCookie = df.format(new Date());
 		return strCookie;
 	}
 
+	/* 创建新的 当前时间 */
 	public static String genCurTime() {
-		/* 创建新的COOKIE */
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String strTime = df.format(new Date());
 		return strTime;
 	}
 	
-	// 随机数从0开始，最大imax，但不包括imax；即： [0, imax)
+	/* Generater New Random Integer, not include imax, 即：[0, imax) */
 	public static int genRandom(int imax) {
 		Random rand = new Random();
 		int value = rand.nextInt(imax);
 		return value;
 	}
-	
+		
 	public static void DebugLog(String strInfo)
 	{
 		Date date =  new Date();

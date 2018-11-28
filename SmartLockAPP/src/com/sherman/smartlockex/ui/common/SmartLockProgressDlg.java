@@ -54,8 +54,8 @@ public class SmartLockProgressDlg extends Dialog{
   
         mCarGuardProgressDlg.setCancelable(false);
         mCarGuardProgressDlg.setContentView(layout, new LinearLayout.LayoutParams(  
-                LinearLayout.LayoutParams.FILL_PARENT,  
-                LinearLayout.LayoutParams.FILL_PARENT));
+                LinearLayout.LayoutParams.MATCH_PARENT,  
+                LinearLayout.LayoutParams.MATCH_PARENT));
         return mCarGuardProgressDlg;  
     }  
    

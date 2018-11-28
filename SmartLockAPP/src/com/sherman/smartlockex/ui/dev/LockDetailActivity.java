@@ -77,9 +77,6 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 				return;
 			}
 			
-			if (null != mProgress) {
-				mProgress.dismiss();
-			}
 			if (intent.getAction().equals(PubDefine.LOCK_NOTIFY_STATUS_BROADCAST)) {
 					String moduleID = intent.getStringExtra("LOCKID");
 					int status = intent.getIntExtra("STATUS", -1);
@@ -100,6 +97,11 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 				}
 
 			if (intent.getAction().equals(PubDefine.LOCK_OPENLOCK_BROADCAST)) {
+				if (null != mProgress) {
+					mProgress.dismiss();
+				}
+				timeoutHandler.removeCallbacks(timeoutProcess);
+				
 				String moduleID = intent.getStringExtra("LOCKID");
 				int status = intent.getIntExtra("STATUS", -1);
 				if (moduleID.equals(mLockID) == true) {
@@ -577,6 +579,14 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 	}
 
 	private void setLock(int i_status) {
+		String info = (i_status == 1) ? LockDetailActivity.this
+				 .getString(R.string.lock_detail_lockstatus_open) : 
+					 LockDetailActivity.this
+					 .getString(R.string.lock_detail_lockstatus_close);
+		 mProgress = PubFunc.createProgressDialog(
+			 mContext,info,true);
+		 mProgress.show();
+		
 		StringBuffer sb = new StringBuffer();
 		sb.append(SmartLockMessage.CMD_SP_OPEN_LOCK)
 				.append(StringUtils.PACKAGE_RET_SPLIT_SYMBOL)

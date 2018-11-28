@@ -270,13 +270,13 @@ public class AddDeviceActivity extends TitledActivity implements OnClickListener
 
             mConfirmBtn.setEnabled(true);
             mMessageTV.setText("");
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                int frequence = info.getFrequency();
-                if (frequence > 4900 && frequence < 5900) {
-                    // Connected 5G wifi. Device does not support 5G
-                    mMessageTV.setText(R.string.wifi_5g_message);
-                }
-            }
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                int frequence = info.getFrequency();
+//                if (frequence > 4900 && frequence < 5900) {
+//                    // Connected 5G wifi. Device does not support 5G
+//                    mMessageTV.setText(R.string.wifi_5g_message);
+//                }
+//            }
         }
     }
 

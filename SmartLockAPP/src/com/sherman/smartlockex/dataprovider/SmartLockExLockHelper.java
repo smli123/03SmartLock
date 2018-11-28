@@ -83,14 +83,14 @@ public class SmartLockExLockHelper {
 	}
 
 	// 获得指定插座信息
-	public SmartLockDefine get(String id) {
+	public SmartLockDefine get(String lockID) {
 		SmartLockDefine device = null;
 		if (null == mContentResolver) {
 			return null;
 		}
 
 		String where = SmartLockExContentDefine.Lock.LOCK_ID + "='"
-				+ id + "'";
+				+ lockID + "'";
 
 		Cursor cur = mContentResolver.query(
 				SmartLockExContentDefine.Lock.ALL_CONTENT_URI, null,

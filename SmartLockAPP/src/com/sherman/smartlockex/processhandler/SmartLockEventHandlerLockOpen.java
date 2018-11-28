@@ -1,8 +1,12 @@
 package com.sherman.smartlockex.processhandler;
 
+import java.util.ArrayList;
+
 import com.sherman.smartlockex.R;
+import com.sherman.smartlockex.dataprovider.SmartLockExLockHelper;
 import com.sherman.smartlockex.ui.common.PubDefine;
 import com.sherman.smartlockex.ui.common.PubFunc;
+import com.sherman.smartlockex.ui.common.SmartLockDefine;
 import com.sherman.smartlockex.ui.smartlockex.AppServerReposeDefine;
 import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
 
@@ -24,12 +28,14 @@ public class SmartLockEventHandlerLockOpen extends SmartLockEventHandler {
 				return;
 			}			
 			
+			String LockID = buffer[3];
 			mIntent.putExtra("LOCKID", buffer[3]);
 
 			int status = Integer.parseInt(buffer[EVENT_MESSAGE_HEADER+1]);
 			
 			if (0 == code) {
 				//success
+				modifyDB(LockID, status);
 				mIntent.putExtra("RESULT", 0);
 				mIntent.putExtra("STATUS", status);
 				
@@ -44,5 +50,14 @@ public class SmartLockEventHandlerLockOpen extends SmartLockEventHandler {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void modifyDB(String lockID, int status) {
+		SmartLockExLockHelper mLockHelper = new SmartLockExLockHelper(SmartLockApplication.getContext());
+		SmartLockDefine device = mLockHelper.get(lockID);
+		device.mStatus = status;
+		mLockHelper.modify(device);
+		
+		mLockHelper = null;
 	}
 }

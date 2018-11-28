@@ -332,6 +332,8 @@
     <string name="lock_detail_lockstatus_unknown">"未知状态"</string>
     <string name="lock_detail_lockstatus_opened">"门锁已经打开"</string>
     <string name="lock_detail_lockstatus_closed">"门锁已经关闭"</string>
+    <string name="lock_detail_lockstatus_open">"打开门锁"</string>
+    <string name="lock_detail_lockstatus_close">"关闭门锁"</string>
     
     <string name="password_type_temp">"临时密码"</string>
     <string name="password_type_forever">"永久密码"</string>
