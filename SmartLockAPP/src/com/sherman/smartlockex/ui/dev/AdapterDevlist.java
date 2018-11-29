@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.sherman.smartlockex.R;
 import com.sherman.smartlockex.dataprovider.SmartLockExLockHelper;
+import com.sherman.smartlockex.ui.common.PubDefine;
 import com.sherman.smartlockex.ui.common.SmartLockDefine;
 import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
 import com.sherman.smartlockex.ui.wheelutils.ActionSheetDialog;
@@ -86,7 +87,7 @@ public class AdapterDevlist extends BaseAdapter {
 						rl_lock_item.setBackgroundColor(Color.TRANSPARENT);
 						iv_lock_online.setImageResource(R.drawable.smp_online);
 						iv_lock_status.setImageResource(device.mStatus == 0 ? R.drawable.smp_lock_close : R.drawable.smp_lock_open);
-						iv_lock_charge.setImageResource(R.drawable.smp_lock_charge);
+						iv_lock_charge.setImageResource(device.mCharge > PubDefine.CHARGE_WARNING ? R.drawable.smp_lock_charge : R.drawable.smp_lock_charge_warning);
 						iv_lock_authorize.setImageResource(R.drawable.smp_lock_authorize);
 					} else {
 						rl_lock_item.setBackgroundColor(Color.LTGRAY);

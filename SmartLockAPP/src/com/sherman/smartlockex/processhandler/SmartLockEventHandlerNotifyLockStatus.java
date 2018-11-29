@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Message;
 
 import com.sherman.smartlockex.R;
+import com.sherman.smartlockex.dataprovider.SmartLockExLockHelper;
 import com.sherman.smartlockex.ui.common.PubDefine;
 import com.sherman.smartlockex.ui.common.PubFunc;
 import com.sherman.smartlockex.ui.common.PubStatus;
+import com.sherman.smartlockex.ui.common.SmartLockDefine;
 import com.sherman.smartlockex.ui.smartlockex.AppServerReposeDefine;
 import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
 
@@ -33,6 +35,7 @@ public class SmartLockEventHandlerNotifyLockStatus extends SmartLockEventHandler
 			String memo = buffer[EVENT_MESSAGE_HEADER+4];
 			
 			if (0 == code) {
+				modifyDB(moduleID, status, charge);
 				mIntent.putExtra("RESULT", 0);
 				mIntent.putExtra("LOCKID", moduleID);
 				mIntent.putExtra("STATUS", status);
@@ -55,5 +58,15 @@ public class SmartLockEventHandlerNotifyLockStatus extends SmartLockEventHandler
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void modifyDB(String lockID, int status, int charge) {
+		SmartLockExLockHelper mLockHelper = new SmartLockExLockHelper(SmartLockApplication.getContext());
+		SmartLockDefine device = mLockHelper.get(lockID);
+		device.mStatus = status;
+		device.mCharge = charge;
+		mLockHelper.modify(device);
+		
+		mLockHelper = null;
 	}
 }

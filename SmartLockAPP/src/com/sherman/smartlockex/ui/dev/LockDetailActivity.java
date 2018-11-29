@@ -46,6 +46,7 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 	private LinearLayout ll_administrator_area;
 	private ImageView iv_lock_online;
 	private TextView tv_online;
+	private ImageView iv_lock_charge;
 	private TextView tv_charge;
 	private TextView tv_status;
 	private TextView tv_log;
@@ -84,6 +85,8 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 					int userType = intent.getIntExtra("USERTYPE", 0);
 					String memo = intent.getStringExtra("USERMEMO");
 					if (moduleID.equals(mLockID) == true) {
+						setOnline(true);
+						
 						Message msg = new Message();
 						msg.what = 0;
 						msg.arg1 = status;
@@ -338,6 +341,7 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 	private void initView() {
 		iv_lock_online = (ImageView) findViewById(R.id.iv_lock_online);
 		tv_online = (TextView) findViewById(R.id.tv_online);
+		iv_lock_charge = (ImageView) findViewById(R.id.iv_lock_charge);
 		tv_charge = (TextView) findViewById(R.id.tv_charge);
 		tv_status = (TextView) findViewById(R.id.tv_status);
 		tv_log = (TextView) findViewById(R.id.tv_log);
@@ -383,6 +387,12 @@ public class LockDetailActivity extends TitledActivity implements OnClickListene
 	private void setOnline(boolean bOnline) {
 		iv_lock_online.setImageResource(bOnline == true ? R.drawable.smp_online : R.drawable.smp_offline);
 		tv_online.setText(SmartLockApplication.getInstance().getString(bOnline == true ? R.string.app_response_device_online : R.string.app_response_device_offline));
+		if (bOnline == true) {
+			mLock = mLockHelper.get(mLockID);
+			iv_lock_charge.setImageResource(mLock.mCharge > PubDefine.CHARGE_WARNING ? R.drawable.smp_lock_charge : R.drawable.smp_lock_charge_warning);
+		} else {
+			iv_lock_charge.setImageResource(R.drawable.smp_lock_charge_offline);
+		}
 	}
 	
 	private void addAuthorizeUserName(String name) {

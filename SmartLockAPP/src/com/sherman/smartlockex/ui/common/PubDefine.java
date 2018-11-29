@@ -76,5 +76,7 @@ public class PubDefine {
 	public static int MODULE_PORT = 5003;
 	
 	public static boolean g_First_Login = false;
+	
+	public static final int CHARGE_WARNING = 10;
 
 }
