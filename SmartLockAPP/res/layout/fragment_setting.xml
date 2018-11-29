@@ -150,7 +150,7 @@
 		            android:layout_centerVertical="true"
 		            android:contentDescription="@null"
 		            android:scaleType="centerCrop"
-		            android:src="@drawable/smp_mgr_feedback" />
+		            android:src="@drawable/smp_mgr_weixin" />
 		
 		        <TextView
 		            android:id="@+id/img_weixinapp_detail"
