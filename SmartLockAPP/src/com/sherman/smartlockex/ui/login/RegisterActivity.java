@@ -11,10 +11,12 @@ import com.sherman.smartlockex.ui.common.TitledActivity;
 import com.sherman.smartlockex.ui.smartlockex.SmartLockActivity;
 import com.sherman.smartlockex.ui.smartlockex.SmartLockApplication;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -46,6 +48,9 @@ public class RegisterActivity extends TitledActivity
        
     private RegisterInfo mInfo = new RegisterInfo();
     
+    private SharedPreferences mSharedPreferences;
+	private SharedPreferences.Editor editor;
+    
 	private BroadcastReceiver mRegisterRev = new BroadcastReceiver() {
 
 		@Override
@@ -60,10 +65,11 @@ public class RegisterActivity extends TitledActivity
 				switch (ret) {
 				case 0:
 					doBackgroundSave();
-					Intent act = new Intent();
-					act.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					act.setClass(RegisterActivity.this, SmartLockActivity.class);
-					RegisterActivity.this.startActivity(act);					
+//					Intent act = new Intent();
+//					act.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//					act.setClass(RegisterActivity.this, SmartLockActivity.class);
+//					RegisterActivity.this.startActivity(act);
+					finish();
 					break;
 				default:
 					PubFunc.thinzdoToast(RegisterActivity.this, message);					
@@ -83,6 +89,9 @@ public class RegisterActivity extends TitledActivity
     	setTitle(R.string.login_register);
     	setTitleLeftButton(R.string.smartlock_goback, R.drawable.title_btn_selector, this); 
     	//setTitleRightButton(R.string.carguard_ok, R.drawable.title_btn_selector, this);
+    	
+    	mSharedPreferences = getSharedPreferences("SmartLock",
+				Activity.MODE_PRIVATE);
     	 
 		mEdtUserName = (EditText)findViewById(R.id.edtUserName);
 		mEdtPwd = (EditText)findViewById(R.id.edtPwd);
@@ -136,6 +145,14 @@ public class RegisterActivity extends TitledActivity
 		filter.addAction(PubDefine.LOGIN_BROADCAST);
 		registerReceiver(mRegisterRev, filter);		
     }
+	
+	private void saveData() {
+		editor = mSharedPreferences.edit();
+		editor.putString("username", mInfo.mUserName);
+		editor.commit();
+
+		PubStatus.g_CurUserName = mInfo.mUserName;
+	}
 	
 	private TextWatcher nameTxtWatcher = new TextWatcher() {
 
@@ -380,6 +397,7 @@ public class RegisterActivity extends TitledActivity
 			@Override
 			protected Void doInBackground(Void... arg) {
 	    		PubStatus.g_CurUserName = mInfo.mUserName;
+	    		saveData();
 				return null;
 			}
 			

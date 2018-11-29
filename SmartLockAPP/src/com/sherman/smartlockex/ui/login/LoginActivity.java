@@ -209,6 +209,7 @@ public class LoginActivity extends TitledActivity implements OnClickListener {
 	protected void onResume() {
 		super.onResume();
 
+		loadData();
 		initview();
 	}
 
